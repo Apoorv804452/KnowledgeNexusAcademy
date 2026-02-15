@@ -118,6 +118,9 @@ margin-top:20px;
 text-decoration:none;
 white-space: normal; 
 word-wrap: break-word;
+box-sizing: border-box;       /* Includes padding and border in width */
+max-width: 100%;              /* Ensures button doesn't exceed parent width */
+width: auto;  
 }
 
 /* CARDS */
@@ -391,6 +394,7 @@ faders.forEach(f=>observer.observe(f));
 </body>
 
 </html>
+
 
 
 
