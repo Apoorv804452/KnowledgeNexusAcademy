@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 9 | Board Foundation Program</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    padding:20px;
+}
+
+/* Main Container */
+.container{
+    max-width:1100px;
+    margin:auto;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Heading */
+h1{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:40px;
+    font-weight:300;
+    letter-spacing:1px;
+}
+
+/* Subject Grid */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:40px;
+}
+
+.box{
+    background: rgba(255,255,255,0.15);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    transition:0.3s;
+    font-weight:500;
+}
+
+.box:hover{
+    background: rgba(255,255,255,0.30);
+    transform:translateY(-6px);
+}
+
+/* Fee Section */
+.fee{
+    background: linear-gradient(45deg,#ff416c,#ff4b2b);
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    margin:40px 0;
+    font-size:22px;
+    font-weight:600;
+}
+
+/* Features Section */
+.features{
+    margin:40px 0;
+}
+
+.features h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.feature-box{
+    background: rgba(255,255,255,0.12);
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+/* Faculty */
+.teacher{
+    margin:40px 0;
+    text-align:center;
+}
+
+.teacher img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+    margin-bottom:15px;
+}
+
+/* Enroll Button */
+.btn{
+    display:block;
+    width:240px;
+    margin:25px auto;
+    padding:15px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border-radius:50px;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+}
+
+/* Back */
+.back{
+    display:block;
+    text-align:center;
+    margin-top:10px;
+    color:white;
+    text-decoration:none;
+    opacity:0.8;
+}
+
+.back:hover{
+    opacity:1;
+}
+
+/* WhatsApp Button */
+.whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px 20px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:600;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.whatsapp:hover{
+    background:#1ebe5d;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Class 9 Board Foundation Program</h1>
+<p class="subtitle">Strong Concept Base for Class 10 Success</p>
+
+<!-- Subjects -->
+<div class="grid">
+    <div class="box">📘 Mathematics</div>
+    <div class="box">🔬 Science (Physics • Chemistry • Biology)</div>
+    <div class="box">📖 English</div>
+    <div class="box">🌍 Social Science</div>
+    <div class="box">📝 Hindi</div>
+</div>
+
+<!-- Fee -->
+<div class="fee">
+    ₹2200 / Month <br>
+    Board Foundation + Weekly Test Series Included
+</div>
+
+<!-- Features -->
+<div class="features">
+    <h2>Program Highlights</h2>
+    <div class="feature-box">✔ Chapter-Wise Test Series</div>
+    <div class="feature-box">✔ Previous Year Question Practice</div>
+    <div class="feature-box">✔ Doubt Clearing Sessions</div>
+    <div class="feature-box">✔ Academic Performance Tracking</div>
+</div>
+
+<!-- Faculty -->
+<div class="teacher">
+    <h2>Faculty</h2>
+    <img src="https://via.placeholder.com/120" alt="Teacher">
+    <p><strong>Apoorv Sir</strong></p>
+    <p>Board Exam Specialist</p>
+</div>
+
+<!-- Enroll -->
+<a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="btn">
+    Enroll Now
+</a>
+
+<a href="index.html" class="back">⬅ Back to Home</a>
+
+</div>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/7903736302" target="_blank" class="whatsapp">
+    WhatsApp Us
+</a>
+
+</body>
+</html>
