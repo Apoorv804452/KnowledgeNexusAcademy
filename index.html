@@ -139,16 +139,28 @@ border-radius: 8px;
 }
 
 .card{
-background:white;
-padding:25px;
-border-radius:10px;
-width:250px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-transition:0.3s;
+  background:white;
+  padding:25px;
+  border-radius:10px;
+  width:250px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+
+  height: auto;                 /* important */
+  min-height: 230px;            /* optional for equal card size */
+
+  display: flex;                /* important */
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
-.card:hover{
+.card: hover{
 transform:translateY(-10px);
+}
+
+.card p {
+  margin-bottom: 20px;
 }
 
 /* EVENTS */
@@ -400,6 +412,7 @@ faders.forEach(f=>observer.observe(f));
 </body>
 
 </html>
+
 
 
 
