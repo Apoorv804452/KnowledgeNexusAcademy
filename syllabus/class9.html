@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Nexus · Class 9 routine 2026-27 · 45+45 min slots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: #f4f9ff;
+            color: #1a2b3e;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* header & promise */
+        .academy-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #0b2d44 0%, #124c6e 100%);
+            padding: 1.5rem 2.2rem;
+            border-radius: 2rem 2rem 2rem 2rem;
+            box-shadow: 0 15px 25px -8px rgba(0,40,70,0.3);
+            color: white;
+        }
+
+        .brand h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .brand h1 span {
+            font-weight: 300;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .promise-badge {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 0 #b56f1a;
+            transform: rotate(1deg);
+            transition: 0.1s ease;
+            text-align: center;
+        }
+
+        .promise-badge small {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* routine key with 45+45 detail */
+        .routine-key {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0 2rem;
+            box-shadow: 0 8px 18px rgba(0,45,70,0.1);
+            border-left: 8px solid #f3b33d;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+            align-items: center;
+        }
+        .key-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .day-badge {
+            background: #124d73;
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .subj-badge {
+            background: #f3b33d;
+            color: #0a2b3c;
+            border-radius: 30px;
+            padding: 0.3rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .test-badge {
+            background: #c04900;
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.5rem;
+            font-weight: 600;
+        }
+        .timing-note {
+            background: #e5f0f9;
+            border-radius: 40px;
+            padding: 0.5rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #07486e;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .timing-note span {
+            background: #f3b33d;
+            color: #0a2b3c;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* syllabus calendar */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.5rem;
+            color: #0a344f;
+            border-left: 12px solid #f3b33d;
+            padding-left: 1.5rem;
+        }
+
+        .month-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .month-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 12px 28px -12px rgba(0,55,90,0.2);
+            border: 1px solid rgba(0,70,120,0.1);
+            transition: all 0.15s;
+        }
+
+        .month-header {
+            background: #e2edf7;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #c0d8ea;
+        }
+
+        .month-name {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #0a3b57;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .month-stats {
+            background: #0e3f5e;
+            color: white;
+            border-radius: 40px;
+            padding: 0.4rem 1.4rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .holiday-note {
+            background: #fef3e2;
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            color: #a35100;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-block;
+            margin: 0.5rem 2rem 0.5rem 2rem;
+        }
+
+        .week-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .week-table th {
+            background: #f1f7fd;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            font-weight: 600;
+            color: #1d4c6b;
+            border-bottom: 1px solid #cbdae7;
+        }
+
+        .week-table td {
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #e2ecf5;
+            vertical-align: top;
+        }
+
+        .week-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .week-number {
+            font-weight: 700;
+            color: #124d73;
+            width: 70px;
+        }
+
+        .daily-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .day-row {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+            border-bottom: 1px dashed #cde1f0;
+            padding-bottom: 6px;
+        }
+        .day-row:last-child {
+            border-bottom: none;
+        }
+        .day-name {
+            font-weight: 700;
+            color: #073753;
+            min-width: 60px;
+        }
+        .subjects {
+            color: #1d4968;
+        }
+        .subjects strong {
+            font-weight: 600;
+            color: #0b3d5c;
+        }
+        .sat-test {
+            background: #fef1e6;
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-weight: 600;
+            color: #b64900;
+            display: inline-block;
+            margin-left: 4px;
+        }
+        .fortyfive {
+            background: #eaf3fb;
+            border-radius: 16px;
+            padding: 0px 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #094e77;
+            margin-left: 5px;
+            white-space: nowrap;
+        }
+
+        .holiday-indicator {
+            background: #ffecdb;
+            border-radius: 20px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            color: #b34900;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .feature-section {
+            background: #e2f0f9;
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0 2rem;
+            border: 1px solid #b5d1e5;
+        }
+
+        .feature-section h3 {
+            font-size: 1.9rem;
+            margin-bottom: 1rem;
+            color: #052135;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #bed6e9;
+            color: #2d5977;
+        }
+        .footer-note a {
+            color: #0c4f7a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        @media (max-width: 700px) {
+            .academy-header { flex-direction: column; align-items: start; gap: 1rem; }
+            .promise-badge { align-self: flex-start; }
+        }
+        @media (max-width: 550px) {
+            .week-table, .week-table tbody, .week-table tr, .week-table td, .week-table th {
+                display: block;
+            }
+            .week-table thead { display: none; }
+            .week-table tr {
+                margin-bottom: 1rem;
+                border: 1px solid #c0d4e6;
+                border-radius: 1rem;
+                padding: 0.5rem;
+            }
+            .week-table td {
+                display: flex;
+                flex-wrap: wrap;
+                border-bottom: 1px dashed #b0cde0;
+                padding: 0.6rem 0.3rem;
+            }
+            .week-table td:last-child { border-bottom: none; }
+            .week-table td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                width: 90px;
+                color: #124d73;
+            }
+            .week-number { width: auto; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- header with promise -->
+    <div class="academy-header">
+        <div class="brand">
+            <h1>Knowledge Nexus Academy <span>Class 9 · 2026-27</span></h1>
+        </div>
+        <div class="promise-badge">
+            ✅ PROMISE: COMPLETE BY DEC 15
+            <small>full syllabus · revision ready · guaranteed</small>
+        </div>
+    </div>
+
+    <!-- ROUTINE KEY with 45+45 timing -->
+    <div class="routine-key">
+        <div class="key-item"><span class="day-badge">MON / WED / FRI</span> <span class="subj-badge">Science + Maths</span></div>
+        <div class="key-item"><span class="day-badge">TUESDAY</span> <span class="subj-badge">SST + English</span></div>
+        <div class="key-item"><span class="day-badge">THURSDAY</span> <span class="subj-badge">SST + Hindi</span></div>
+        <div class="key-item"><span class="test-badge">SATURDAY · weekly test</span></div>
+        <div class="timing-note">
+            ⏱️ each class = 1.5h <span>45' + 45'</span> (first subject then second)
+        </div>
+    </div>
+
+    <h2 class="section-title">🗓️ date‑wise syllabus · march 15 – december 15, 2026</h2>
+
+    <div class="month-grid">
+        <!-- MARCH 2026 -->
+        <div class="month-card">
+            <div class="month-header">
+                <div class="month-name">🌱 MARCH 2026 <span style="font-size:1rem; font-weight:400;">16 days</span></div>
+                <div class="month-stats">weeks 3–4</div>
+            </div>
+            <div class="holiday-note">🎉 Holiday: Holi (Mar 4-5) – already past, start 15 Mar</div>
+            <table class="week-table">
+                <thead><tr><th>Week</th><th>Dates</th><th>Daily topics (45min + 45min per day)</th></tr></thead>
+                <tbody>
+                    <tr><td data-label="Week" class="week-number">W3</td><td data-label="Dates">Mar 15–21</td><td data-label="Daily topics">
+                        <div class="daily-breakdown">
+                            <div class="day-row"><span class="day-name">Mon/Wed/Fri:</span><span class="subjects"><strong>Science</strong> (45min) + <strong>Maths</strong> (45min): Bridge course, orientation, NEP 2025</span></div>
+                            <div class="day-row"><span class="day-name">Tuesday:</span><span class="subjects"><strong>SST</strong> (45min) + <strong>English</strong> (45min): Intro to SST & English</span></div>
+                            <div class="day-row"><span class="day-name">Thursday:</span><span class="subjects"><strong>SST</strong> (45min) + <strong>Hindi</strong> (45min): Intro to SST & Hindi</span></div>
+                            <div class="day-row"><span class="day-name">Saturday:</span><span class="sat-test">Test: General awareness + syllabus discussion</span></div>
+                        </div>
+                    </td></tr>
+                    <tr><td data-label="Week" class="week-number">W4</td><td data-label="Dates">Mar 22–31</td><td data-label="Daily topics">
+                        <div class="daily-breakdown">
+                            <div class="day-row"><span class="day-name">Mon/Wed/Fri:</span><span class="subjects"><strong>Science</strong> (45min): intro to Motion / <strong>Maths</strong> (45min): Number Systems (irrational numbers, real line)</span></div>
+                            <div class="day-row"><span class="day-name">Tuesday:</span><span class="subjects"><strong>SST</strong> (45min): French Revolution (causes) / <strong>English</strong> (45min): The Fun They Had</span></div>
+                            <div class="day-row"><span class="day-name">Thursday:</span><span class="subjects"><strong>SST</strong> (45min): French Revolution (impact) / <strong>Hindi</strong> (45min): दो बैलों की कथा (intro)</span></div>
+                            <div class="day-row"><span class="day-name">Saturday:</span><span class="sat-test">Test: Number Systems + French Revolution basics</span></div>
+                        </div>
+                    </td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- APRIL 2026 -->
+        <div class="month-card">
+            <div class="month-header"><div class="month-name">🌿 APRIL 2026</div><div class="month-stats">25 days</div></div>
+            <div class="holiday-note">🗓️ Ambedkar Jayanti (Apr 14) · Mahavir Jayanti (Mar 31/Apr 1) optional</div>
+            <table class="week-table">
+                <thead><tr><th>Week</th><th>Dates</th><th>Daily topics (45min + 45min per day)</th></tr></thead>
+                <tbody>
+                    <tr><td>W1</td><td>Apr 1–7</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): Motion (distance, speed) / <strong>Maths</strong> (45min): Polynomials (zeroes, remainder theorem)</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): French Revolution (detailed) / <strong>English</strong> (45min): The Road Not Taken</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): French Revolution (legacy) / <strong>Hindi</strong> (45min): दो बैलों की कथा (analysis)</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Polynomials + English poem</span></div></div></td></tr>
+                    <tr><td>W2</td><td>Apr 8–15</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): Motion (graphs, acceleration) / <strong>Maths</strong> (45min): Linear Equations in Two Variables</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): Socialism in Europe / <strong>English</strong> (45min): The Sound of Music</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): Russian Revolution / <strong>Hindi</strong> (45min): उपभोक्तावाद की संस्कृति</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Motion numericals + SST concepts</span></div></div></td></tr>
+                    <tr><td>W3</td><td>Apr 16–23</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): Matter in Our Surroundings / <strong>Maths</strong> (45min): Coordinate Geometry</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): Russian Revolution (cont.) / <strong>English</strong> (45min): Wind (poem)</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): Physical Features of India / <strong>Hindi</strong> (45min): मेरे संग की औरतें</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Matter + Russian Revolution</span></div></div></td></tr>
+                    <tr><td>W4</td><td>Apr 24–30</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): Cell – fundamental unit / <strong>Maths</strong> (45min): Euclid's Geometry</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): India – Size & Location / <strong>English</strong> (45min): The Little Girl</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): Climate intro / <strong>Hindi</strong> (45min): इस जल प्रलय में</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Cell + Geography basics</span></div></div></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MAY 2026 (sample) -->
+        <div class="month-card">
+            <div class="month-header"><div class="month-name">☀️ MAY 2026</div><div class="month-stats">20 days</div></div>
+            <div class="holiday-note">🌴 Labour Day (May 1) · Summer break from May 20–25</div>
+            <table class="week-table">
+                <thead><tr><th>Week</th><th>Dates</th><th>Daily topics (45min + 45min per day)</th></tr></thead>
+                <tbody>
+                    <tr><td>W1</td><td>May 1–7</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): Tissues (plant) / <strong>Maths</strong> (45min): Lines and Angles</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): Physical Features (cont.) / <strong>English</strong> (45min): A Legend of the Northland</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): Physical Features (completion) / <strong>Hindi</strong> (45min): साखियाँ एवं सबद</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Tissues + map work</span></div></div></td></tr>
+                    <!-- additional weeks would follow same pattern -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- DECEMBER completion -->
+        <div class="month-card">
+            <div class="month-header"><div class="month-name">🎄 DECEMBER 2026</div><div class="month-stats">15 days (until 15 Dec)</div></div>
+            <div class="holiday-note">⛄ Christmas (Dec 25) – after our completion goal</div>
+            <table class="week-table">
+                <tbody>
+                    <tr><td>W1</td><td>Dec 1–7</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): practicals + revision / <strong>Maths</strong> (45min): revision</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min): complete leftovers / <strong>English</strong> (45min): revision</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min): revision / <strong>Hindi</strong> (45min): revision</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Full syllabus mock</span></div></div></td></tr>
+                    <tr><td>W2</td><td>Dec 8–15</td><td><div class="daily-breakdown"><div class="day-row"><span class="day-name">Mon/Wed/Fri:</span> <strong>Science</strong> (45min): combined practice / <strong>Maths</strong> (45min): combined practice</div><div class="day-row"><span class="day-name">Tuesday:</span> <strong>SST</strong> (45min) + <strong>English</strong> (45min): final revision</div><div class="day-row"><span class="day-name">Thursday:</span> <strong>SST</strong> (45min) + <strong>Hindi</strong> (45min): final revision</div><div class="day-row"><span class="day-name">Saturday:</span> <span class="sat-test">Test: Final mock exam</span></div></div></td></tr>
+                </tbody>
+            </table>
+            <div style="padding: 1rem 2rem; background: #dff0d8; border-radius: 0 0 2rem 2rem; font-weight: 600; color: #1d5820;">
+                ✅ SYLLABUS COMPLETE BY DECEMBER 15 – revision & exam readiness assured
+            </div>
+        </div>
+    </div>
+
+    <!-- footer with promise restated -->
+    <div class="footer-note">
+        <p>🏁 Knowledge Nexus Academy · Class 9 · March 15 – December 15, 2026 · <strong>promise: finish full syllabus before winter break</strong></p>
+        <p style="margin-top:1rem;">📞 Mon/Wed/Fri: 45' Science + 45' Maths | Tue: 45' SST + 45' English | Thu: 45' SST + 45' Hindi | Sat: weekly test</p>
+    </div>
+</div>
+</body>
+</html>
