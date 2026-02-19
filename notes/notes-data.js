@@ -15,7 +15,7 @@ const notesData = {
     { title: "Is Matter Around Us Pure?", pdf: "matter-around-us-pure.pdf" },
     { title: "Atoms and Molecules", pdf: "atoms-and-molecules.pdf" },
     { title: "Structure of Atom", pdf: "structure-of-atom.pdf" },
-    { title: "Motion", link: "https://knowledgenexusacademy.in/class9/science/motion.html" },
+    { title: "Motion", link: "https://knowledgenexusacademy.in/class9/science/8.motion.html" },
 
     { title: "Force and Laws of Motion", pdf: "force-laws-motion.pdf" },
     { title: "Gravitation", pdf: "gravitation.pdf" },
