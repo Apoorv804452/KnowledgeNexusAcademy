@@ -390,7 +390,7 @@ padding:18px;
 
 <section class="section">
   <h2>📘 Class 9 Notes Dashboard</h2>
-  <p>Search notes, bookmark chapters, and open PDF notes inside the website.</p>
+  <p>Search notes, bookmark chapters, and open notes directly on click.</p>
 
   <!-- PROGRESS -->
   <div class="progress-box">
@@ -434,15 +434,66 @@ padding:18px;
 
 </section>
 
-<script src="notes-data.js"></script>
-
 <script>
+/* ===========================
+   NOTES DATA (PUT HERE)
+=========================== */
+const notesData = {
+  maths: [
+    { title: "Number Systems", pdf: "number-systems.pdf" },
+    { title: "Polynomials", pdf: "polynomials.pdf" },
+    { title: "Coordinate Geometry", pdf: "coordinate-geometry.pdf" },
+    { title: "Linear Equations in Two Variables", pdf: "linear-equations.pdf" },
+    { title: "Triangles", pdf: "triangles.pdf" },
+    { title: "Circles", pdf: "circles.pdf" },
+    { title: "Statistics", pdf: "statistics.pdf" },
+    { title: "Probability", pdf: "probability.pdf" }
+  ],
+
+  science: [
+    { title: "Matter in Our Surroundings", pdf: "matter-in-our-surroundings.pdf" },
+    { title: "Is Matter Around Us Pure?", pdf: "matter-around-us-pure.pdf" },
+    { title: "Atoms and Molecules", pdf: "atoms-and-molecules.pdf" },
+    { title: "Structure of Atom", pdf: "structure-of-atom.pdf" },
+
+    { title: "Motion", link: "https://knowledgenexusacademy.in/notes/class9/science/8.motion.html" },
+
+    { title: "Force and Laws of Motion", pdf: "force-laws-motion.pdf" },
+    { title: "Gravitation", pdf: "gravitation.pdf" },
+    { title: "Sound", pdf: "sound.pdf" }
+  ],
+
+  sst: [
+    { title: "The French Revolution", pdf: "french-revolution.pdf" },
+    { title: "Socialism in Europe", pdf: "socialism-europe.pdf" },
+    { title: "Nazism and the Rise of Hitler", pdf: "nazism-hitler.pdf" },
+    { title: "India - Size and Location", pdf: "india-size-location.pdf" },
+    { title: "Physical Features of India", pdf: "physical-features.pdf" },
+    { title: "Climate", pdf: "climate.pdf" },
+    { title: "What is Democracy?", pdf: "what-is-democracy.pdf" },
+    { title: "Constitutional Design", pdf: "constitutional-design.pdf" }
+  ],
+
+  english: [
+    { title: "The Fun They Had", pdf: "the-fun-they-had.pdf" },
+    { title: "The Sound of Music", pdf: "sound-of-music.pdf" },
+    { title: "The Little Girl", pdf: "the-little-girl.pdf" },
+    { title: "A Truly Beautiful Mind", pdf: "truly-beautiful-mind.pdf" },
+    { title: "My Childhood", pdf: "my-childhood.pdf" },
+    { title: "If I Were You", pdf: "if-i-were-you.pdf" }
+  ]
+};
+
+/* ===========================
+   WEBSITE FUNCTIONS
+=========================== */
+
 function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active");
+  document.getElementById("navLinks").classList.toggle("active");
 }
 
 function toggleDark(){
-document.body.classList.toggle("dark");
+  document.body.classList.toggle("dark");
 }
 
 /* Subject Full Name */
@@ -493,14 +544,14 @@ function updateProgress(){
 }
 
 /* Bookmark Toggle */
-function toggleBookmark(subject, pdf, title){
+function toggleBookmark(subject, file, title){
   let bookmarks = getBookmarks();
-  let key = subject + "|" + pdf;
+  let key = subject + "|" + file;
 
   if(bookmarks.some(item => item.key === key)){
     bookmarks = bookmarks.filter(item => item.key !== key);
   }else{
-    bookmarks.push({ key, subject, pdf, title });
+    bookmarks.push({ key, subject, file, title });
   }
 
   saveBookmarks(bookmarks);
@@ -509,17 +560,13 @@ function toggleBookmark(subject, pdf, title){
 }
 
 /* Add to Recent */
-function addRecent(subject, pdf, title){
+function addRecent(subject, file, title){
   let recent = getRecent();
-  let key = subject + "|" + pdf;
+  let key = subject + "|" + file;
 
-  // remove if already exists
   recent = recent.filter(item => item.key !== key);
+  recent.unshift({ key, subject, file, title });
 
-  // add at top
-  recent.unshift({ key, subject, pdf, title });
-
-  // keep only 6 recent
   if(recent.length > 6) recent.pop();
 
   saveRecent(recent);
@@ -528,22 +575,21 @@ function addRecent(subject, pdf, title){
 }
 
 /* Create Note Card */
-function createCard(subject, title, pdf, isBookmarked){
+function createCard(subject, title, file, isBookmarked){
   let bookmarkIcon = isBookmarked ? "⭐" : "☆";
 
   return `
     <div class="note-card">
-      <div class="bookmark" onclick="toggleBookmark('${subject}','${pdf}','${title}')">${bookmarkIcon}</div>
+      <div class="bookmark" onclick="toggleBookmark('${subject}','${file}','${title}')">${bookmarkIcon}</div>
 
       <span class="tag">${subjectName(subject)}</span>
       <h4>${title}</h4>
-      <p>PDF Notes by Knowledge Nexus Academy</p>
+      <p>Notes by Knowledge Nexus Academy</p>
 
-      <a class="btn" href="${pdf}" target="_blank"
-   onclick="addRecent('${subject}','${pdf}','${title}')">
-   View Notes
-</a>
-
+      <a class="btn" href="${file}" target="_blank"
+         onclick="addRecent('${subject}','${file}','${title}')">
+         View Notes
+      </a>
     </div>
   `;
 }
@@ -561,7 +607,7 @@ function renderBookmarks(){
   }
 
   bookmarks.forEach(item=>{
-    favGrid.innerHTML += createCard(item.subject, item.title, item.pdf, true);
+    favGrid.innerHTML += createCard(item.subject, item.title, item.file, true);
   });
 }
 
@@ -581,7 +627,7 @@ function renderRecent(){
 
   recent.forEach(item=>{
     let isBookmarked = bookmarks.some(b=>b.key===item.key);
-    recentGrid.innerHTML += createCard(item.subject, item.title, item.pdf, isBookmarked);
+    recentGrid.innerHTML += createCard(item.subject, item.title, item.file, isBookmarked);
   });
 }
 
@@ -592,7 +638,6 @@ function renderNotes(){
   let grid = document.getElementById("notesGrid");
 
   let bookmarks = getBookmarks();
-
   grid.innerHTML = "";
 
   for(let sub in notesData){
@@ -601,12 +646,17 @@ function renderNotes(){
 
     notesData[sub].forEach(chapter => {
 
+      // Support BOTH pdf and link
+      let file = chapter.pdf || chapter.link;
+
+      if(!file) return;
+
       if(chapter.title.toLowerCase().includes(search)){
 
-        let key = sub + "|" + chapter.pdf;
+        let key = sub + "|" + file;
         let isBookmarked = bookmarks.some(item => item.key === key);
 
-        grid.innerHTML += createCard(sub, chapter.title, chapter.pdf, isBookmarked);
+        grid.innerHTML += createCard(sub, chapter.title, file, isBookmarked);
       }
     });
   }
