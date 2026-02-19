@@ -539,10 +539,11 @@ function createCard(subject, title, pdf, isBookmarked){
       <h4>${title}</h4>
       <p>PDF Notes by Knowledge Nexus Academy</p>
 
-      <a class="btn" href="pdfviewer.html?subject=${subject}&file=${pdf}&title=${encodeURIComponent(title)}"
-         onclick="addRecent('${subject}','${pdf}','${title}')">
-         View Notes
-      </a>
+      <a class="btn" href="${pdf}" target="_blank"
+   onclick="addRecent('${subject}','${pdf}','${title}')">
+   View Notes
+</a>
+
     </div>
   `;
 }
