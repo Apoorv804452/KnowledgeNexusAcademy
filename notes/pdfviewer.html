@@ -3,237 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Viewer - Knowledge Nexus Academy</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>PDF Viewer</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins', sans-serif;
-}
-
 body{
+margin:0;
+font-family:Arial;
 background:#f4f7fb;
-transition:0.4s;
-overflow-x:hidden;
 }
 
-/* DARK MODE */
-body.dark{
-background:#111827;
+.header{
+background:#1e40af;
 color:white;
-}
-
-body.dark .navbar{
-background:#1f2937;
-}
-
-body.dark .title{
-color:#60a5fa;
-}
-
-body.dark .pdf-box{
-background:#1f2937;
-}
-
-/* NAVBAR */
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 8%;
-background:white;
-position:fixed;
-width:100%;
-top:0;
-z-index:1000;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
-
-.logo{
-font-weight:600;
-font-size:18px;
-}
-
-.navbar .right{
-display:flex;
-gap:10px;
-align-items:center;
-flex-wrap:wrap;
-}
-
-.navbar a{
-text-decoration:none;
-font-weight:500;
-color:#333;
-}
-
-.navbar a:hover{
-color:#ff9800;
-}
-
-/* BUTTON */
-.btn{
-background:#ff9800;
-color:white;
-padding:10px 16px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-text-decoration:none;
-font-weight:500;
-transition:0.3s;
-display:inline-block;
-}
-
-.btn:hover{
-background:#e68900;
-transform:scale(1.05);
-}
-
-/* PDF VIEWER */
-.container{
-padding-top:100px;
-width:92%;
-margin:auto;
-max-width:1100px;
-}
-
-.title{
-text-align:center;
-font-size:24px;
-font-weight:700;
-margin-bottom:15px;
-color:#1e40af;
-}
-
-.pdf-box{
-background:white;
 padding:15px;
-border-radius:14px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-overflow:hidden;
-position:relative;
-}
-
-iframe{
-width:100%;
-height:82vh;
-border:none;
-border-radius:12px;
-}
-
-/* LOADER */
-.loader{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.85);
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-gap:10px;
-font-weight:600;
-z-index:10;
-}
-
-.spinner{
-width:45px;
-height:45px;
-border:5px solid #ddd;
-border-top:5px solid #ff9800;
-border-radius:50%;
-animation: spin 1s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-body.dark .loader{
-background:rgba(17,24,39,0.85);
-color:white;
-}
-
-/* MOBILE */
-@media(max-width:700px){
-.title{
+text-align:center;
 font-size:18px;
+font-weight:bold;
 }
+
 iframe{
-height:75vh;
-}
+width:100%;
+height:92vh;
+border:none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-  <div class="logo">💡 Knowledge Nexus Academy</div>
+<div class="header" id="pdfTitle">Loading Notes...</div>
 
-  <div class="right">
-    <a href="class9notes.html">⬅ Back</a>
-    <a class="btn" id="downloadBtn" download>⬇ Download</a>
-    <button class="btn" onclick="toggleDark()">🌙 Dark</button>
-  </div>
-</div>
-
-<div class="container">
-  <div class="title" id="pdfTitle">Loading Notes...</div>
-
-  <div class="pdf-box">
-    
-    <div class="loader" id="loader">
-      <div class="spinner"></div>
-      <div>Loading PDF...</div>
-    </div>
-
-    <iframe id="pdfFrame"></iframe>
-  </div>
-</div>
+<iframe id="pdfFrame"></iframe>
 
 <script>
-function toggleDark(){
-document.body.classList.toggle("dark");
-}
+let params = new URLSearchParams(window.location.search);
+let subject = params.get("subject");
+let file = params.get("file");
+let title = params.get("title");
 
-function getQueryParams(){
-  let params = new URLSearchParams(window.location.search);
-  return {
-    subject: params.get("subject"),
-    file: params.get("file"),
-    title: params.get("title")
-  };
-}
+document.getElementById("pdfTitle").innerHTML =
+decodeURIComponent(title || "Notes");
 
-let data = getQueryParams();
+// direct pdf path
+let pdfPath = `https://knowledgenexusacademy.in/notes/${subject}/${file}`;
 
-if(data.subject && data.file){
+// google drive embed viewer
+let googleViewer = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(pdfPath)}`;
 
-  let pdfPath = `notes/class9/${data.subject}/${data.file}`;
-
-  document.getElementById("pdfFrame").src = pdfPath;
-  document.getElementById("downloadBtn").href = pdfPath;
-
-  let showTitle = data.title ? decodeURIComponent(data.title) : data.file;
-  document.getElementById("pdfTitle").innerHTML = "📘 " + showTitle;
-
-  document.getElementById("pdfFrame").onload = function(){
-    document.getElementById("loader").style.display = "none";
-  };
-
-}else{
-  document.getElementById("pdfTitle").innerHTML = "❌ Notes Not Found!";
-  document.getElementById("loader").style.display = "none";
-}
+document.getElementById("pdfFrame").src = googleViewer;
 </script>
 
 </body>
