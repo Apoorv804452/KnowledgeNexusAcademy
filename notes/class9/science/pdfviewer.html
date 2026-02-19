@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Notes Viewer</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #eef3ff;
+    }
+
+    header {
+        background: #0b2d66;
+        color: white;
+        padding: 15px 20px;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        background: rgba(255,255,255,0.2);
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+    iframe {
+        width: 100%;
+        height: calc(100vh - 60px);
+        border: none;
+        background: white;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <span id="pageTitle">Loading Notes...</span>
+    <a href="javascript:history.back()">⬅ Back</a>
+</header>
+
+<iframe id="viewerFrame"></iframe>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const file = params.get("file");
+    const title = params.get("title");
+
+    document.getElementById("pageTitle").innerText = title ? title : "Notes Viewer";
+
+    if (!file) {
+        document.getElementById("viewerFrame").srcdoc =
+            "<h2 style='text-align:center;margin-top:50px;'>❌ File not found</h2>";
+    } else {
+        document.getElementById("viewerFrame").src = file;
+    }
+</script>
+
+</body>
+</html>
