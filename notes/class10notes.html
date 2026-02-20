@@ -436,7 +436,7 @@ padding:18px;
 
 <script>
 /* ===========================
-   NOTES DATA (CLASS 10 UPDATED)
+   NOTES DATA (CLASS 10 WITH MIXED PDF & LINK)
 =========================== */
 const notesData = {
   maths: [
@@ -463,6 +463,7 @@ const notesData = {
     { title: "Metals and Non-metals", pdf: "metals-nonmetals.pdf" },
     { title: "Carbon and its Compounds", pdf: "carbon-compounds.pdf" },
     { title: "Periodic Classification of Elements", pdf: "periodic-classification.pdf" },
+    // This chapter uses a full URL link instead of a PDF file
     { title: "Life Processes", link: "https://knowledgenexusacademy.in/notes/class10/Science/Life-process.html" },
     { title: "Control and Coordination", pdf: "control-coordination.pdf" },
     { title: "How do Organisms Reproduce?", pdf: "reproduction.pdf" },
@@ -692,8 +693,8 @@ function renderNotes(){
 
     notesData[sub].forEach(chapter => {
 
-      // Use pdf field (could also support link if needed)
-      let file = chapter.pdf;
+      // Support BOTH pdf and link (like the Class 9 version)
+      let file = chapter.pdf || chapter.link;
 
       if(!file) return;
 
