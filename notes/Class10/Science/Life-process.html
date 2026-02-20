@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Processes · COMPLETE notes (every detail) | Class 10 Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #f0f7fc;
+            color: #1a2b3e;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+        .page-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .academy-header {
+            background: linear-gradient(135deg, #0b2d44 0%, #124c6e 100%);
+            border-radius: 2rem 2rem 2rem 2rem;
+            padding: 1.5rem 2.2rem;
+            box-shadow: 0 15px 25px -8px rgba(0,40,70,0.3);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .home-link {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: opacity 0.2s;
+        }
+        .home-link:hover { opacity: 0.85; }
+        .brand h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            color: white;
+        }
+        .brand h1 span {
+            font-weight: 300;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            display: block;
+        }
+        .tagline-enroll {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+        }
+        .tagline {
+            color: #f3b33d;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+        .explore-btn {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 0.5rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 0 #b56f1a;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.1s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .explore-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #b56f1a;
+        }
+        .promise-badge {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 0 #b56f1a;
+            transform: rotate(1deg);
+            text-align: center;
+            margin: 2rem 0 1rem;
+        }
+        .promise-badge small {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .key-concepts {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.2rem 2rem;
+            margin: 2rem 0 2rem;
+            box-shadow: 0 8px 18px rgba(0,45,70,0.1);
+            border-left: 8px solid #f3b33d;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            align-items: center;
+        }
+        .key-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .key-badge {
+            background: #124d73;
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .download-pdf {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1rem 0;
+        }
+        .pdf-btn {
+            background: #124d73;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #083044;
+            transition: 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pdf-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #083044;
+        }
+        .notes-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 12px 28px -12px rgba(0,55,90,0.2);
+            border: 1px solid rgba(0,70,120,0.1);
+            margin-bottom: 2.5rem;
+        }
+        .notes-header {
+            background: #e2edf7;
+            padding: 1.2rem 2rem;
+            border-bottom: 2px solid #c0d8ea;
+        }
+        .notes-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0a3b57;
+            margin: 0;
+        }
+        .notes-content {
+            padding: 2rem;
+        }
+        .section-head {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #124d73;
+            margin: 2.5rem 0 1rem 0;
+            border-left: 6px solid #f3b33d;
+            padding-left: 1rem;
+        }
+        .section-head:first-of-type {
+            margin-top: 0;
+        }
+        .subhead {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0a4c6e;
+            margin: 1.5rem 0 0.8rem 0;
+            border-bottom: 1px solid #c0d8ea;
+            padding-bottom: 0.3rem;
+        }
+        .notes-content p {
+            margin-bottom: 1rem;
+        }
+        .notes-content ul, .notes-content ol {
+            margin: 0.8rem 0 1.2rem 2rem;
+        }
+        .notes-content li {
+            margin-bottom: 0.3rem;
+        }
+        .highlight {
+            background: #fef3e2;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .formula-box {
+            background: #e5f0f9;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.2rem 0;
+            border-left: 6px solid #124d73;
+            font-weight: 500;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .definition {
+            font-style: italic;
+            background: #f9f9f9;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .graph-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+            justify-content: center;
+        }
+        .graph-item {
+            background: #fafcff;
+            border: 1px solid #cbdae7;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1 1 300px;
+        }
+        .graph-item svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .graph-caption {
+            margin-top: 0.8rem;
+            font-weight: 600;
+            color: #1d4c6b;
+        }
+        .table-compare, .data-table, .exercise-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .table-compare th, .data-table th, .exercise-table th {
+            background: #124d73;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        .table-compare td, .data-table td, .exercise-table td {
+            border: 1px solid #cbdae7;
+            padding: 0.8rem;
+            vertical-align: top;
+        }
+        .table-compare tr:nth-child(even), .data-table tr:nth-child(even), .exercise-table tr:nth-child(even) {
+            background: #f1f7fd;
+        }
+        .example-box {
+            background: #f0f4fa;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #f3b33d;
+        }
+        .activity-box {
+            background: #e8f0fe;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #2a7f62;
+            font-style: italic;
+        }
+        .question-box {
+            background: #fff3d9;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #c04900;
+        }
+        .intext-answer {
+            background: #def3d9;
+            border-radius: 1rem;
+            padding: 0.8rem 1.5rem;
+            margin: 1rem 0 1.5rem 0;
+            border-left: 6px solid #2a7f62;
+        }
+        .intext-answer p {
+            margin: 0.5rem 0;
+        }
+        .step-list {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #124d73;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 1.8rem;
+            height: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .footer-note {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #bed6e9;
+            color: #2d5977;
+        }
+        .footer-note a {
+            color: #0c4f7a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .enzyme-table td:first-child {
+            font-weight: 600;
+        }
+        @media print {
+            body { background: white; padding: 0.5in; }
+            .academy-header, .key-concepts, .download-pdf, .promise-badge, .footer-note, .explore-btn, .tagline-enroll {
+                display: none !important;
+            }
+            .notes-card { break-inside: avoid; border: 1px solid #ccc; }
+            .notes-header { background: #eee; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- header with Explore button -->
+    <div class="academy-header">
+        <a href="#" class="home-link">
+            <div class="brand">
+                <h1>Knowledge Nexus Academy <span>Class 10 · Science – LIFE PROCESSES (COMPLETE)</span></h1>
+            </div>
+        </a>
+        <div class="tagline-enroll">
+            <div class="tagline">🔬 every single detail </div>
+            <a href="#" class="explore-btn">Explore</a>
+        </div>
+    </div>
+
+    <!-- promise badge -->
+    <div class="promise-badge">
+        🌿 LIFE PROCESSES – full NCERT coverage with all enzymes, steps & Q&A
+        <small>intestine juice, nephron, heart – everything explained</small>
+    </div>
+
+    <!-- download PDF button -->
+    <div class="download-pdf">
+        <button class="pdf-btn" onclick="window.print()">📥 Download notes as PDF</button>
+    </div>
+
+    <!-- key concepts summary -->
+    <div class="key-concepts">
+        <div class="key-item"><span class="key-badge">Nutrition</span> auto/hetero</div>
+        <div class="key-item"><span class="key-badge">Respiration</span> aerobic/anaerobic</div>
+        <div class="key-item"><span class="key-badge">Transport</span> heart, xylem, phloem</div>
+        <div class="key-item"><span class="key-badge">Excretion</span> nephron, dialysis</div>
+        <div class="key-item"><span class="key-badge">ATP</span> energy currency</div>
+    </div>
+
+    <!-- main notes card -->
+    <div class="notes-card">
+        <div class="notes-header">
+            <h2>🧬 Chapter 5: Life Processes (as per NCERT)</h2>
+        </div>
+        <div class="notes-content">
+
+            <!-- 1. Introduction -->
+            <div class="section-head">🔹 1. What are life processes?</div>
+            <p>To be alive, an organism must perform certain maintenance functions. Even when resting or sleeping, the body needs to repair damage and maintain order. These functions are called <span class="highlight">life processes</span>.</p>
+            <ul>
+                <li><strong>Nutrition</strong> – obtaining food and energy.</li>
+                <li><strong>Respiration</strong> – breaking down food to release energy.</li>
+                <li><strong>Transportation</strong> – distributing substances throughout the body.</li>
+                <li><strong>Excretion</strong> – removing metabolic wastes.</li>
+            </ul>
+            <p>In single‑celled organisms, diffusion across the cell surface is enough. But in multicellular organisms, specialized organs are needed because diffusion is too slow to reach all cells.</p>
+
+            <!-- Page 3 intext Q&A (full) -->
+            <div class="intext-answer">
+                <p><strong>📘  In‑text questions</strong></p>
+                <p><strong>Q1. Why is diffusion insufficient to meet the oxygen requirements of multicellular organisms like humans?</strong><br>
+                Ans: In multicellular organisms, all cells are not in direct contact with the environment. Diffusion is a slow process and cannot transport oxygen to distant cells quickly enough.</p>
+                <p><strong>Q2. What criteria do we use to decide whether something is alive?</strong><br>
+                Ans: Visible movement, growth, response to stimuli, and the presence of molecular movements (life processes like nutrition, respiration) indicate life.</p>
+                <p><strong>Q3. What are outside raw materials used for by an organism?</strong><br>
+                Ans: They are used for energy (to power life processes) and for building materials (growth, repair).</p>
+                <p><strong>Q4. What processes would you consider essential for maintaining life?</strong><br>
+                Ans: Nutrition, respiration, transportation, excretion.</p>
+            </div>
+
+            <!-- 2. Nutrition -->
+            <div class="section-head">🔹 2. Nutrition</div>
+            <div class="subhead">2.1 Autotrophic nutrition</div>
+            <p>Organisms that make their own food from inorganic sources (CO₂, water) using light energy are <strong>autotrophs</strong> (green plants, some bacteria).</p>
+            <p><strong>Photosynthesis equation:</strong></p>
+            <div class="formula-box">
+                6CO₂ + 12H₂O  —(sunlight, chlorophyll)→  C₆H₁₂O₆ + 6O₂ + 6H₂O
+            </div>
+            <p><strong>Events of photosynthesis (three steps):</strong></p>
+            <ol class="step-list">
+                <li><strong>Absorption of light energy</strong> by chlorophyll (in chloroplasts).</li>
+                <li><strong>Conversion of light energy to chemical energy</strong> and splitting of water into hydrogen and oxygen (photolysis).</li>
+                <li><strong>Reduction of CO₂</strong> to carbohydrates (glucose).</li>
+            </ol>
+            <p><strong>Raw materials and their sources:</strong></p>
+            <ul>
+                <li>CO₂ – enters leaf through stomata (pores on leaf surface).</li>
+                <li>Water – absorbed by roots from soil.</li>
+                <li>Sunlight – captured by chlorophyll.</li>
+                <li>Minerals (nitrogen, phosphorus, etc.) – taken up from soil by roots; nitrogen in form of nitrates/nitrites or organic compounds from bacteria.</li>
+            </ul>
+            <p><strong>Stomata and guard cells:</strong> Stomata are tiny pores surrounded by guard cells. When guard cells absorb water, they swell and open the pore; when they lose water, they shrink and close the pore. This regulates gas exchange and water loss.</p>
+
+            <div class="activity-box">
+                <strong>Activity 5.1 (Chlorophyll essential):</strong> Take a variegated leaf plant (e.g., money plant). Keep in dark for 3 days to use up starch. Then place in sunlight for 6 hours. Pluck a leaf, trace green areas. Boil leaf in water, then in alcohol (to remove chlorophyll). Dip in iodine solution. Only green parts turn blue‑black, proving chlorophyll is necessary for photosynthesis.
+            </div>
+            <div class="activity-box">
+                <strong>Activity 5.2 (CO₂ essential):</strong> Take two potted plants. Keep in dark for 3 days. Place each on a glass plate. Near one plant, keep a watch‑glass with potassium hydroxide (absorbs CO₂). Cover both with bell jars and seal. Keep in sunlight for 2 hours. Test leaves for starch. The plant without CO₂ (with KOH) shows no starch – CO₂ is essential.
+            </div>
+
+            <div class="subhead">2.2 Heterotrophic nutrition</div>
+            <p>Organisms that cannot make their own food and depend on others are <strong>heterotrophs</strong>. Types:</p>
+            <ul>
+                <li><strong>Holozoic nutrition:</strong> ingestion of whole food and internal digestion (humans, animals).</li>
+                <li><strong>Saprophytic nutrition:</strong> feeding on dead/decaying matter (fungi, bread mould). Enzymes are secreted outside to digest food, then absorbed.</li>
+                <li><strong>Parasitic nutrition:</strong> living on or inside a host and deriving food from it (cuscuta, ticks, leeches, tapeworms).</li>
+            </ul>
+
+            <div class="subhead">2.3 How do organisms obtain their nutrition? (unicellular examples)</div>
+            <p><strong>Amoeba:</strong> Uses pseudopodia (false feet) to engulf food – forms a food vacuole. Digestive enzymes break down food, nutrients diffuse into cytoplasm. Undigested residue is expelled.</p>
+            <p><strong>Paramecium:</strong> Has a definite shape with cilia covering the surface. Cilia move food into a specific spot (oral groove) where it is ingested.</p>
+
+            <div class="subhead">2.4 Nutrition in human beings – the digestive system</div>
+            <p>The alimentary canal is a long tube from mouth to anus, with different regions specialized for digestion.</p>
+
+            <h4>Mouth</h4>
+            <ul>
+                <li><strong>Teeth:</strong> cut, grind, and crush food into smaller pieces.</li>
+                <li><strong>Tongue:</strong> helps in mixing food with saliva and moving it toward the pharynx.</li>
+                <li><strong>Saliva:</strong> secreted by salivary glands. Contains <strong>salivary amylase</strong> (breaks down starch into sugar) and mucus (moistens food, makes it slippery).</li>
+            </ul>
+
+            <div class="activity-box">
+                <strong>Activity 5.3 (Saliva digests starch):</strong> Take 1% starch solution in two test tubes (A and B). Add 1 mL saliva to A, leave both for 20–30 min. Add iodine solution. A shows no blue colour (starch digested), B turns blue. Proves saliva breaks starch.
+            </div>
+
+            <h4>Oesophagus (food pipe)</h4>
+            <p>Muscles in the wall contract rhythmically – <strong>peristalsis</strong> – to push food down to stomach.</p>
+
+            <h4>Stomach</h4>
+            <p>A large, muscular organ. Gastric glands in its wall secrete:</p>
+            <ul>
+                <li><strong>Hydrochloric acid (HCl):</strong> creates acidic medium, kills bacteria.</li>
+                <li><strong>Pepsin (enzyme):</strong> digests proteins into peptides.</li>
+                <li><strong>Mucus:</strong> protects the stomach lining from acid.</li>
+            </ul>
+            <p>Food is churned into acidic semi‑fluid called <strong>chyme</strong>.</p>
+
+            <h4>Small intestine</h4>
+            <p>Longest part, highly coiled. Receives secretions from liver and pancreas.</p>
+            <ul>
+                <li><strong>Liver:</strong> produces <strong>bile</strong> (stored in gall bladder). Bile is alkaline, neutralizes acid, and emulsifies fats (breaks large fat globules into smaller droplets) – increases surface area for enzyme action.</li>
+                <li><strong>Pancreas:</strong> secretes <strong>pancreatic juice</strong> containing:
+                    <ul>
+                        <li><strong>Trypsin:</strong> digests proteins.</li>
+                        <li><strong>Lipase:</strong> breaks down emulsified fats into fatty acids and glycerol.</li>
+                    </ul>
+                </li>
+                <li><strong>Intestinal juice (succus entericus):</strong> secreted by glands in intestinal wall. Contains many enzymes:
+                    <ul>
+                        <li><strong>Maltase, lactase, sucrase</strong> – break down disaccharides into monosaccharides (glucose, etc.).</li>
+                        <li><strong>Peptidases</strong> – break peptides into amino acids.</li>
+                        <li><strong>Lipase</strong> (small amount) – further fat digestion.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>After complete digestion, the inner lining of the small intestine has millions of <strong>villi</strong> (finger‑like projections). Each villus contains blood capillaries and a lacteal (lymph vessel). Villi greatly increase surface area for absorption. Nutrients (amino acids, glucose, fatty acids, glycerol) enter blood/lymph and are transported to all cells.</p>
+
+            <h4>Large intestine</h4>
+            <p>Absorbs water and some salts from undigested material. The remaining semi‑solid waste (faeces) passes to rectum and is expelled through anus (regulated by anal sphincter).</p>
+
+            <p><strong>Dental caries:</strong> Bacteria in mouth act on sugars to produce acids that soften enamel. Plaque (bacterial film) covers teeth, preventing saliva from neutralizing acid. Brushing after meals removes plaque.</p>
+
+            <!-- Page 9 intext Q&A -->
+            <div class="intext-answer">
+                <p><strong>📘  In‑text questions</strong></p>
+                <p><strong>Q1. What are the differences between autotrophic nutrition and heterotrophic nutrition?</strong><br>
+                Ans: Autotrophs make their own food using light/CO₂ (plants). Heterotrophs depend on others for food (animals, fungi).</p>
+                <p><strong>Q2. Where do plants get each of the raw materials required for photosynthesis?</strong><br>
+                Ans: CO₂ from air through stomata; water from soil via roots; sunlight; chlorophyll in chloroplasts.</p>
+                <p><strong>Q3. What is the role of the acid in our stomach?</strong><br>
+                Ans: HCl creates acidic medium for pepsin to work and kills bacteria.</p>
+                <p><strong>Q4. What is the function of digestive enzymes?</strong><br>
+                Ans: They break down complex insoluble food into simple soluble molecules that can be absorbed.</p>
+                <p><strong>Q5. How is the small intestine designed to absorb digested food?</strong><br>
+                Ans: It is long, with villi (finger‑like projections) that increase surface area and have rich blood supply.</p>
+            </div>
+
+            <!-- 3. Respiration -->
+            <div class="section-head">🔹 3. Respiration</div>
+            <p>Respiration is the process of breaking down food (glucose) to release energy, which is stored as ATP.</p>
+
+            <div class="subhead">3.1 Breakdown of glucose – different pathways</div>
+            <p>The first step (common to all) occurs in <strong>cytoplasm</strong>: glucose (6‑carbon) → pyruvate (3‑carbon). Then:</p>
+            <ul>
+                <li><strong>Aerobic respiration</strong> (in mitochondria): pyruvate + O₂ → CO₂ + H₂O + <strong>36–38 ATP</strong>.</li>
+                <li><strong>Anaerobic respiration in yeast:</strong> pyruvate → ethanol + CO₂ + <strong>2 ATP</strong> (fermentation).</li>
+                <li><strong>Anaerobic in muscle cells</strong> (oxygen shortage): pyruvate → lactic acid + <strong>2 ATP</strong>. Lactic acid accumulation causes muscle cramps.</li>
+            </ul>
+            <div class="activity-box">
+                <strong>Activity 5.4 (Exhaled air has more CO₂):</strong> Take lime water in two test tubes. Blow air into one (exhaled air) – turns milky quickly. Pass normal air into other using syringe – takes longer. Proves exhaled air contains more CO₂.
+            </div>
+            <div class="activity-box">
+                <strong>Activity 5.5 (Yeast produces CO₂):</strong> Take fruit juice/sugar solution + yeast in a test tube. Fit with cork and bent tube dipping into lime water. After some time, lime water turns milky – CO₂ from fermentation.
+            </div>
+
+            <h4>ATP – the energy currency</h4>
+            <p>ADP + phosphate + energy (from respiration) → ATP. When ATP breaks into ADP and phosphate, energy is released for cellular work (contraction, protein synthesis, nerve impulses, etc.).</p>
+
+            <div class="subhead">3.2 Human respiratory system</div>
+            <p>Air enters through <strong>nostrils</strong> (hairs and mucus filter dust). Passes through <strong>pharynx → larynx → trachea</strong> (supported by cartilage rings to prevent collapse). Trachea divides into <strong>bronchi → bronchioles → alveoli</strong>.</p>
+            <p><strong>Alveoli</strong> are tiny air sacs with extremely thin walls and a rich network of blood capillaries. They provide a huge surface area for gas exchange. Oxygen diffuses into blood, CO₂ diffuses out.</p>
+            <p>Breathing rate: Terrestrial organisms breathe slower because air has high O₂ concentration; aquatic animals (like fish) breathe faster because dissolved O₂ is low. Fish take in water through mouth and force it over gills where O₂ is absorbed.</p>
+            <div class="activity-box">
+                <strong>Activity 5.6 (Fish breathing):</strong> Observe fish in aquarium. Mouth and gill covers open and close in coordination. Count mouth movements per minute – much faster than human breathing rate.
+            </div>
+
+            <div class="subhead">3.3 Transport of gases</h4>
+            <p><strong>Oxygen</strong> is carried by haemoglobin in red blood cells (as oxyhaemoglobin). <strong>Carbon dioxide</strong> is transported mainly as bicarbonate in plasma and also dissolved.</p>
+
+            <!-- Page 13 intext Q&A -->
+            <div class="intext-answer">
+                <p><strong>📘 In‑text questions</strong></p>
+                <p><strong>Q1. What advantage over an aquatic organism does a terrestrial organism have with regard to obtaining oxygen for respiration?</strong><br>
+                Ans: Air contains much more oxygen than water, so terrestrial organisms can obtain oxygen more easily and breathe slower.</p>
+                <p><strong>Q2. What are the different ways in which glucose is oxidised to provide energy in various organisms?</strong><br>
+                Ans: Aerobic (with O₂) → CO₂ + H₂O + 38 ATP; anaerobic (without O₂) → ethanol + CO₂ (yeast) or lactic acid (muscle) + 2 ATP.</p>
+                <p><strong>Q3. How is oxygen and carbon dioxide transported in human beings?</strong><br>
+                Ans: O₂ bound to haemoglobin in RBCs; CO₂ as bicarbonate in plasma.</p>
+                <p><strong>Q4. How are the lungs designed in human beings to maximise the area for exchange of gases?</strong><br>
+                Ans: Millions of alveoli provide huge surface area; thin walls and rich capillaries ensure efficient diffusion.</p>
+            </div>
+
+            <!-- 4. Transportation -->
+            <div class="section-head">🔹 4. Transportation</div>
+            <div class="subhead">4.1 Transportation in human beings</div>
+            <p><strong>Components:</strong> Heart (pump), blood vessels (arteries, veins, capillaries), blood.</p>
+            <p><strong>Heart (double circulation):</strong> Four‑chambered (two atria, two ventricles).</p>
+            <ol class="step-list">
+                <li>Deoxygenated blood from body → right atrium → right ventricle → lungs (pulmonary circulation).</li>
+                <li>Oxygenated blood from lungs → left atrium → left ventricle → body (systemic circulation).</li>
+            </ol>
+            <p><strong>Valves</strong> prevent backflow. Separation of oxygenated and deoxygenated blood ensures efficient oxygen supply – essential for warm‑blooded animals (birds, mammals) that need constant energy to maintain body temperature.</p>
+            <p><strong>Blood vessels:</strong></p>
+            <ul>
+                <li><strong>Arteries:</strong> thick, elastic walls; carry blood away from heart under high pressure.</li>
+                <li><strong>Veins:</strong> thinner, have valves to prevent backflow; carry blood toward heart.</li>
+                <li><strong>Capillaries:</strong> one‑cell thick walls; site of exchange of materials (O₂, CO₂, nutrients, wastes).</li>
+            </ul>
+            <p><strong>Blood pressure:</strong> Force exerted by blood on artery walls. Systolic (during contraction) ~120 mm Hg, diastolic (relaxation) ~80 mm Hg. Measured with sphygmomanometer. High blood pressure (hypertension) can damage arteries.</p>
+            <p><strong>Platelets:</strong> Circulating cell fragments that help clot blood at injury sites, preventing leaks.</p>
+            <p><strong>Lymph:</strong> Some plasma, proteins, and blood cells escape from capillaries into intercellular spaces – forms tissue fluid (lymph). Lymph carries digested fats, drains excess fluid, and returns to blood via lymphatic vessels.</p>
+
+            <div class="subhead">4.2 Transportation in plants</div>
+            <p>Plants have low energy needs, so transport systems are slower. Two main conducting tissues:</p>
+            <ul>
+                <li><strong>Xylem:</strong> transports water and minerals from roots upward. Consists of vessels and tracheids. Movement is driven by <strong>transpiration pull</strong> (evaporation from leaves creates suction) and <strong>root pressure</strong> (at night).</li>
+                <li><strong>Phloem:</strong> transports products of photosynthesis (sucrose, amino acids) from leaves to other parts. Translocation occurs in sieve tubes with help of companion cells, using ATP. Movement can be upward or downward depending on plant's needs (e.g., sugars to roots in winter, to buds in spring).</li>
+            </ul>
+            <div class="activity-box">
+                <strong>Activity 5.8 (Transpiration):</strong> Take two pots – one with plant, one with stick. Cover soil with plastic. Place in sunlight. Water droplets appear inside the cover over the plant (transpiration), but not over the stick.
+            </div>
+
+            <!-- Page 18 intext Q&A -->
+            <div class="intext-answer">
+                <p><strong>📘 In‑text questions</strong></p>
+                <p><strong>Q1. What are the components of the transport system in human beings? What are the functions of these components?</strong><br>
+                Ans: Heart (pump), arteries (carry blood away), veins (bring blood back), capillaries (exchange), blood (carries O₂, food, wastes).</p>
+                <p><strong>Q2. Why is it necessary to separate oxygenated and deoxygenated blood in mammals and birds?</strong><br>
+                Ans: To maintain high oxygen supply for constant body temperature (warm‑blooded animals).</p>
+                <p><strong>Q3. What are the components of the transport system in highly organised plants?</strong><br>
+                Ans: Xylem (water & minerals) and phloem (food).</p>
+                <p><strong>Q4. How are water and minerals transported in plants?</strong><br>
+                Ans: Through xylem by transpiration pull and root pressure.</p>
+                <p><strong>Q5. How is food transported in plants?</strong><br>
+                Ans: Through phloem using energy (ATP) – pressure difference moves sap.</p>
+            </div>
+
+            <!-- 5. Excretion -->
+            <div class="section-head">🔹 5. Excretion</div>
+            <div class="subhead">5.1 Excretion in human beings</div>
+            <p><strong>Excretory system:</strong> Kidneys (pair), ureters, urinary bladder, urethra.</p>
+            <p><strong>Kidney:</strong> Located in abdomen, one on each side of backbone. They filter blood to remove nitrogenous wastes (urea, uric acid) and excess salts/water.</p>
+            <p><strong>Nephron</strong> – functional unit of kidney (about 1 million per kidney).</p>
+            <ul>
+                <li><strong>Glomerulus:</strong> cluster of capillaries inside Bowman's capsule. Blood pressure forces water, urea, glucose, salts into Bowman's capsule – this is <strong>ultrafiltration</strong>.</li>
+                <li><strong>Bowman's capsule:</strong> cup‑shaped structure that collects filtrate.</li>
+                <li><strong>Tubule:</strong> long, coiled tube where <strong>reabsorption</strong> occurs – useful substances (glucose, amino acids, most water, salts) are reabsorbed into blood capillaries.</li>
+                <li><strong>Secretion:</strong> additional wastes (H⁺, K⁺) are secreted into tubule.</li>
+                <li>Final fluid (urine) flows through collecting duct → ureter → bladder → urethra.</li>
+            </ul>
+            <p><strong>Regulation of urine:</strong> The amount of water reabsorbed depends on body's water needs, controlled by hormone ADH (vasopressin). If water is low, more water is reabsorbed; if excess, less reabsorption.</p>
+
+            <p><strong>Artificial kidney (haemodialysis):</strong> Used when kidneys fail. Blood is passed through tubes with semi‑permeable lining, bathed in dialysing fluid (same composition as blood except no wastes). Waste diffuses out; clean blood returned. No reabsorption occurs.</p>
+
+            <div class="subhead">5.2 Excretion in plants</h4>
+            <p>Plants produce less nitrogenous waste. Methods:</p>
+            <ul>
+                <li>Oxygen (waste of photosynthesis) diffuses out through stomata.</li>
+                <li>CO₂ (waste of respiration) diffuses out at night.</li>
+                <li>Excess water removed by transpiration.</li>
+                <li>Wastes stored in vacuoles, old leaves (shed), or as resins and gums in old xylem.</li>
+                <li>Some wastes are excreted into the soil.</li>
+            </ul>
+
+            <!-- Page 20 intext Q&A -->
+            <div class="intext-answer">
+                <p><strong>📘 In‑text questions</strong></p>
+                <p><strong>Q1. Describe the structure and functioning of nephrons.</strong><br>
+                Ans: Nephron has Bowman's capsule, glomerulus, tubule. Blood filtered in glomerulus, reabsorption of useful substances along tubule, secretion of extra wastes, finally urine is formed.</p>
+                <p><strong>Q2. What are the methods used by plants to get rid of excretory products?</strong><br>
+                Ans: Diffusion (O₂, CO₂), transpiration (water), storage in vacuoles/old leaves/resins, shedding leaves.</p>
+                <p><strong>Q3. How is the amount of urine produced regulated?</strong><br>
+                Ans: By reabsorption of water in nephron, controlled by hormones (ADH) according to body's water needs.</p>
+            </div>
+
+            <!-- 6. NCERT Exercise Solutions (full questions) -->
+            <div class="section-head">🔹 6. NCERT Exercise Solutions (full Q&A)</div>
+            <table class="exercise-table">
+                <tr><th>Question</th><th>Answer</th></tr>
+                <tr><td><strong>1. The kidneys in human beings are a part of the system for</strong><br>(a) nutrition. (b) respiration. (c) excretion. (d) transportation.</td><td>(c) excretion.</td></tr>
+                <tr><td><strong>2. The xylem in plants are responsible for</strong><br>(a) transport of water. (b) transport of food. (c) transport of amino acids. (d) transport of oxygen.</td><td>(a) transport of water.</td></tr>
+                <tr><td><strong>3. The autotrophic mode of nutrition requires</strong><br>(a) carbon dioxide and water. (b) chlorophyll. (c) sunlight. (d) all of the above.</td><td>(d) all of the above.</td></tr>
+                <tr><td><strong>4. The breakdown of pyruvate to give carbon dioxide, water and energy takes place in</strong><br>(a) cytoplasm. (b) mitochondria. (c) chloroplast. (d) nucleus.</td><td>(b) mitochondria.</td></tr>
+                <tr><td><strong>5. How are fats digested in our bodies? Where does this process take place?</strong></td><td>Fats are digested in small intestine. Bile (from liver) emulsifies fats (breaks into tiny droplets). Pancreatic lipase breaks them into fatty acids and glycerol. Absorbed by villi.</td></tr>
+                <tr><td><strong>6. What is the role of saliva in the digestion of food?</strong></td><td>Saliva moistens food, contains salivary amylase that breaks down starch into sugar.</td></tr>
+                <tr><td><strong>7. What are the necessary conditions for autotrophic nutrition and what are its byproducts?</strong></td><td>CO₂, water, sunlight, chlorophyll. Byproducts: O₂ (and glucose).</td></tr>
+                <tr><td><strong>8. What are the differences between aerobic and anaerobic respiration? Name some organisms that use the anaerobic mode of respiration.</strong></td><td>Aerobic: uses O₂, in mitochondria, end products CO₂+H₂O, lots of ATP. Anaerobic: no O₂, in cytoplasm, end products ethanol+CO₂ (yeast) or lactic acid (muscle cells), less ATP. Anaerobic organisms: yeast, some bacteria, muscle cells during hard work.</td></tr>
+                <tr><td><strong>9. How are the alveoli designed to maximise the exchange of gases?</strong></td><td>Millions of tiny sacs, thin walls (one‑cell thick), large surface area, rich blood capillaries.</td></tr>
+                <tr><td><strong>10. What would be the consequences of a deficiency of haemoglobin in our bodies?</strong></td><td>Reduced oxygen transport → anaemia, weakness, pale skin, breathlessness.</td></tr>
+                <tr><td><strong>11. Describe double circulation of blood in human beings. Why is it necessary?</strong></td><td>Blood passes through heart twice: pulmonary (heart→lungs→heart) and systemic (heart→body→heart). Separates oxygenated and deoxygenated blood, ensures efficient oxygen supply to body – needed for high energy (warm‑blooded animals).</td></tr>
+                <tr><td><strong>12. What are the differences between the transport of materials in xylem and phloem?</strong></td><td>Xylem: water & minerals, upward only, physical forces (transpiration pull), dead cells. Phloem: food (sucrose), both directions, uses energy (ATP), living cells (sieve tubes).</td></tr>
+                <tr><td><strong>13. Compare the functioning of alveoli in the lungs and nephrons in the kidneys with respect to their structure and functioning.</strong></td><td>Alveoli: thin‑walled sacs for gas exchange (O₂/CO₂) by diffusion. Nephrons: tubules for filtration, reabsorption, secretion to form urine. Both have large surface area and rich blood supply.</td></tr>
+            </table>
+
+            <!-- extra: More to Know / Think it over -->
+            <div class="subhead">🧠 More to Know / Think it over</div>
+            <div class="activity-box" style="background:#fff0e0;">
+                <strong>Tobacco warning:</strong> Using tobacco (cigarettes, gutkha, etc.) is harmful. It causes cancer of tongue, lungs, heart, liver. Smokeless tobacco also increases risk of heart attacks and strokes. Say NO to tobacco.
+            </div>
+            <div class="activity-box" style="background:#fff0e0;">
+                <strong>Organ donation:</strong> Donating organs (kidney, liver, heart, cornea) after death can save lives. Anyone can be a donor with family consent.
+            </div>
+
+            <!-- summary -->
+            <div class="activity-box" style="background:#e6f3ff;">
+                <strong>✨ Life processes at a glance:</strong> Nutrition (intake) → Respiration (energy release) → Transportation (distribution) → Excretion (waste removal). All interconnected to maintain life.
+            </div>
+        </div>
+    </div>
+
+    <!-- footer note -->
+    <div class="footer-note">
+        <p>📚 ultimate notes for Class 10 Science · Chapter 5 Life Processes – every detail covered – Knowledge Nexus Academy</p>
+    </div>
+</div>
+</body>
+</html>
