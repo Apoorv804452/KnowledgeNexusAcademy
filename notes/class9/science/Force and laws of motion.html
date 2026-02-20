@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Nexus · Force & Laws of Motion (Class 9 Science) – Complete Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: #f0f7fc;
+            color: #1a2b3e;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ----- theme header ----- */
+        .academy-header {
+            background: linear-gradient(135deg, #0b2d44 0%, #124c6e 100%);
+            border-radius: 2rem 2rem 2rem 2rem;
+            padding: 1.5rem 2.2rem;
+            box-shadow: 0 15px 25px -8px rgba(0,40,70,0.3);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: opacity 0.2s;
+        }
+        .home-link:hover {
+            opacity: 0.85;
+        }
+
+        .brand h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .brand h1 span {
+            font-weight: 300;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .tagline-enroll {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+        }
+        .tagline {
+            color: #f3b33d;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+        .enroll-now {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 0.5rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 0 #b56f1a;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.1s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .enroll-now:hover {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #b56f1a;
+        }
+
+        /* promise badge */
+        .promise-badge {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 0 #b56f1a;
+            transform: rotate(1deg);
+            text-align: center;
+            margin: 2rem 0 1rem;
+        }
+        .promise-badge small {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* key concepts summary */
+        .key-concepts {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.2rem 2rem;
+            margin: 2rem 0 2rem;
+            box-shadow: 0 8px 18px rgba(0,45,70,0.1);
+            border-left: 8px solid #f3b33d;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            align-items: center;
+        }
+        .key-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .key-badge {
+            background: #124d73;
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* download button */
+        .download-pdf {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1rem 0;
+        }
+        .pdf-btn {
+            background: #124d73;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #083044;
+            transition: 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pdf-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #083044;
+        }
+
+        /* notes card styling */
+        .notes-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 12px 28px -12px rgba(0,55,90,0.2);
+            border: 1px solid rgba(0,70,120,0.1);
+            margin-bottom: 2.5rem;
+        }
+        .notes-header {
+            background: #e2edf7;
+            padding: 1.2rem 2rem;
+            border-bottom: 2px solid #c0d8ea;
+        }
+        .notes-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0a3b57;
+            margin: 0;
+        }
+        .notes-content {
+            padding: 2rem;
+        }
+        .section-head {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #124d73;
+            margin: 2rem 0 1rem 0;
+            border-left: 6px solid #f3b33d;
+            padding-left: 1rem;
+        }
+        .section-head:first-of-type {
+            margin-top: 0;
+        }
+        .notes-content p {
+            margin-bottom: 1rem;
+        }
+        .notes-content ul, .notes-content ol {
+            margin: 0.8rem 0 1.2rem 2rem;
+        }
+        .notes-content li {
+            margin-bottom: 0.3rem;
+        }
+        .highlight {
+            background: #fef3e2;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .formula-box {
+            background: #e5f0f9;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.2rem 0;
+            border-left: 6px solid #124d73;
+            font-weight: 500;
+        }
+        .definition {
+            font-style: italic;
+            background: #f9f9f9;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .graph-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+            justify-content: center;
+        }
+        .graph-item {
+            background: #fafcff;
+            border: 1px solid #cbdae7;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1 1 300px;
+        }
+        .graph-item svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .graph-caption {
+            margin-top: 0.8rem;
+            font-weight: 600;
+            color: #1d4c6b;
+        }
+        .table-compare, .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .table-compare th, .data-table th {
+            background: #124d73;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        .table-compare td, .data-table td {
+            border: 1px solid #cbdae7;
+            padding: 0.8rem;
+        }
+        .table-compare tr:nth-child(even), .data-table tr:nth-child(even) {
+            background: #f1f7fd;
+        }
+        .example-box {
+            background: #f0f4fa;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #f3b33d;
+        }
+        .activity-box {
+            background: #e8f0fe;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #2a7f62;
+            font-style: italic;
+        }
+        .question-box {
+            background: #fff3d9;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #c04900;
+        }
+        .footer-note {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #bed6e9;
+            color: #2d5977;
+        }
+        .footer-note a {
+            color: #0c4f7a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        @media print {
+            body { background: white; padding: 0.5in; }
+            .academy-header, .key-concepts, .download-pdf, .promise-badge, .footer-note, .enroll-now, .tagline-enroll {
+                display: none !important;
+            }
+            .notes-card { break-inside: avoid; border: 1px solid #ccc; }
+            .notes-header { background: #eee; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- header with theme -->
+    <div class="academy-header">
+        <a href="#" class="home-link">
+            <div class="brand">
+                <h1>Knowledge Nexus Academy <span>Class 9 · Science – Force & Laws of Motion</span></h1>
+            </div>
+        </a>
+        <div class="tagline-enroll">
+            <div class="tagline">From Confusion To Clarity</div>
+            <a href="#" class="enroll-now">Enroll Now</a>
+        </div>
+    </div>
+
+    <!-- promise badge -->
+    <div class="promise-badge">
+        ✅ FORCE AND LAWS OF MOTION · COMPLETE NCERT NOTES
+        <small>with graphs, examples & activities</small>
+    </div>
+
+    <!-- download PDF button (prints page) -->
+    <div class="download-pdf">
+        <button class="pdf-btn" onclick="window.print()">📥 Download Notes as PDF</button>
+    </div>
+
+    <!-- key concepts summary (matching "Motion" style) -->
+    <div class="key-concepts">
+        <div class="key-item"><span class="key-badge">Force</span> push/pull</div>
+        <div class="key-item"><span class="key-badge">Balanced</span> Fnet = 0</div>
+        <div class="key-item"><span class="key-badge">Unbalanced</span> causes acceleration</div>
+        <div class="key-item"><span class="key-badge">Momentum</span> p = m × v</div>
+        <div class="key-item"><span class="key-badge">Inertia</span> resistance to change</div>
+        <div class="key-item"><span class="key-badge">1 N</span> 1 kg m/s²</div>
+    </div>
+
+    <!-- main notes card -->
+    <div class="notes-card">
+        <div class="notes-header">
+            <h2>⚡ Chapter 8: Force and Laws of Motion – Complete Notes (NCERT based)</h2>
+        </div>
+        <div class="notes-content">
+
+            <!-- 1. Introduction & Balanced/Unbalanced Forces -->
+            <div class="section-head">🔹 1. Balanced and Unbalanced Forces</div>
+            <p><span class="highlight">Force</span> is a push or pull. It can change speed, direction, or shape of an object. But multiple forces may act together.</p>
+            <ul>
+                <li><strong>Balanced forces:</strong> equal in magnitude, opposite in direction → net force = 0 → no change in state of rest/uniform motion.</li>
+                <li><strong>Unbalanced forces:</strong> net force ≠ 0 → motion changes (accelerates).</li>
+            </ul>
+            <div class="activity-box">
+                <strong>Activity 8.1 (NCERT):</strong> Tie two strings to a wooden block. Pull from both sides equally → block doesn’t move (balanced). Pull harder on one side → block moves towards greater force (unbalanced).
+            </div>
+            <p><em>Example – friction:</em> When children push a box on rough floor:</p>
+            <ul>
+                <li>small push → friction balances → no motion.</li>
+                <li>push harder → still balanced until max friction.</li>
+                <li>push even harder → unbalanced → box moves.</li>
+            </ul>
+            <p>📌 Friction opposes motion, but an object moves with uniform velocity when forces are balanced (no net force).</p>
+
+            <!-- 2. First Law of Motion (Inertia) -->
+            <div class="section-head">🔹 2. First Law of Motion (Law of Inertia)</div>
+            <div class="definition">
+                <strong>Statement:</strong> An object remains in a state of rest or of uniform motion in a straight line unless compelled to change that state by an applied unbalanced force.
+            </div>
+            <p><strong>Inertia:</strong> natural tendency of objects to resist a change in their state of rest or motion.</p>
+
+            <h4>📐 Galileo’s inclined plane thought experiment</h4>
+            <ul>
+                <li>Marble rolling down → speed increases.</li>
+                <li>Marble rolling up → speed decreases.</li>
+                <li>On a frictionless double incline, marble would rise to same height.</li>
+                <li>If second slope is horizontal → marble would keep moving forever (ideal).</li>
+            </ul>
+            <p>➡️ Conclusion: No net force needed to sustain uniform motion; only to <em>change</em> it.</p>
+
+            <div class="activity-box">
+                <strong>Activity 8.2 (NCERT):</strong> Pile of carom coins. Hit the bottom coin hard with striker – bottom coin moves out, rest fall vertically due to inertia of rest.
+            </div>
+            <div class="activity-box">
+                <strong>Activity 8.3 (NCERT):</strong> Coin on card over glass. Flick card sharply – coin drops into glass (inertia of rest).
+            </div>
+
+            <h4>🚗 Real life examples:</h4>
+            <ul>
+                <li>When bus suddenly stops, passengers fall forward (inertia of motion).</li>
+                <li>When bus starts suddenly, passengers fall backward (inertia of rest).</li>
+                <li>Seat belts – provide force to slow down our motion, preventing injury.</li>
+            </ul>
+
+            <!-- 3. Inertia and Mass -->
+            <div class="section-head">🔹 3. Inertia and Mass</div>
+            <p><strong>Inertia is directly related to mass.</strong> Heavier objects have more inertia – they resist change more strongly.</p>
+            <ul>
+                <li>Empty box pushed easily → less inertia.</li>
+                <li>Box full of books harder to push → more inertia.</li>
+                <li>Kicking a football vs kicking a stone of same size – stone has more mass → more inertia.</li>
+            </ul>
+            <p>✅ <strong>Mass is the measure of inertia.</strong> SI unit: <strong>kilogram (kg)</strong>.</p>
+            <div class="question-box">
+                <strong>📝 Question:</strong> Which has more inertia? (a) rubber ball & stone of same size → stone. (b) bicycle & train → train. (c) five‑rupee coin & one‑rupee coin → five‑rupee coin.
+            </div>
+
+            <!-- 4. Momentum and Second Law -->
+            <div class="section-head">🔹 4. Momentum and Second Law of Motion</div>
+            <p><strong>Momentum (p):</strong> product of mass and velocity.  
+            <span class="formula-box">p = m × v</span>  
+            Vector, direction same as velocity. SI unit: <strong>kg m/s</strong>.</p>
+
+            <h4>🚀 Second Law of Motion</h4>
+            <div class="definition">
+                <strong>Statement:</strong> The rate of change of momentum of an object is proportional to the applied unbalanced force in the direction of force.
+            </div>
+
+            <h4>Mathematical formulation</h4>
+            <p>Initial momentum p₁ = mu, final p₂ = mv. Change in momentum ∝ m(v – u).  
+            Force F ∝ m(v–u)/t → F = k m a. With appropriate units, k = 1, so:</p>
+            <div class="formula-box" style="font-size:1.5rem; text-align:center;">F = m a</div>
+            <p>SI unit of force: <strong>newton (N)</strong> = kg m/s². 1 N is force that accelerates 1 kg at 1 m/s².</p>
+
+            <h4>🌍 Real world: catching a ball</h4>
+            <p>Fielder pulls hands backward → increases time → decreases rate of change of momentum → less force on palms.</p>
+
+            <div class="graph-row">
+                <div class="graph-item">
+                    <svg width="250" height="150" viewBox="0 0 250 150">
+                        <line x1="30" y1="120" x2="220" y2="120" stroke="#124d73" stroke-width="2" />
+                        <line x1="30" y1="120" x2="30" y2="20" stroke="#124d73" stroke-width="2" />
+                        <text x="120" y="140" text-anchor="middle" fill="#124d73">time (t) →</text>
+                        <text x="10" y="70" transform="rotate(-90,10,70)" fill="#124d73">velocity →</text>
+                        <line x1="30" y1="100" x2="200" y2="40" stroke="#f3b33d" stroke-width="3" />
+                        <text x="150" y="60" fill="#124d73" font-size="10">uniform accel.</text>
+                    </svg>
+                    <div class="graph-caption">Fig 8.x: Velocity-time graph for constant force</div>
+                </div>
+            </div>
+
+            <h4>NCERT Solved Examples</h4>
+            <table class="data-table">
+                <tr><th>Example</th><th>Situation</th><th>Answer</th></tr>
+                <tr><td>8.1</td><td>5 kg object, 3→7 m/s in 2 s. Find force.</td><td>F = 5×(7-3)/2 = 10 N</td></tr>
+                <tr><td>8.2</td><td>2 kg at 5 m/s² vs 4 kg at 2 m/s²</td><td>10 N > 8 N → first needs greater force</td></tr>
+                <tr><td>8.3</td><td>1000 kg car stops from 30 m/s in 4 s.</td><td>F = –7500 N (opposing)</td></tr>
+                <tr><td>8.4</td><td>5 N on m₁ (a₁=10) & m₂ (a₂=20). Combined a?</td><td>m₁=0.5 kg, m₂=0.25 kg, total 0.75 kg → a = 5/0.75 = 6.67 m/s²</td></tr>
+                <tr><td>8.5</td><td>20 g ball stops from 20 cm/s in 10 s.</td><td>a = –0.02 m/s², F = –0.0004 N</td></tr>
+            </table>
+
+            <!-- 5. Third Law of Motion -->
+            <div class="section-head">🔹 5. Third Law of Motion</div>
+            <div class="definition">
+                <strong>Statement:</strong> To every action, there is an equal and opposite reaction. They act on two different bodies.
+            </div>
+            <ul>
+                <li>Forces always occur in pairs (action–reaction).</li>
+                <li>Equal in magnitude, opposite in direction.</li>
+                <li>Act on <strong>different objects</strong>, so they don’t cancel each other.</li>
+            </ul>
+            <div class="activity-box">
+                <strong>Activity 8.4 (NCERT):</strong> Two spring balances connected. Pull one – both show same reading. Force on A by B = force on B by A.
+            </div>
+            <h4>Examples:</h4>
+            <ul>
+                <li><strong>Walking:</strong> you push ground backward, ground pushes you forward.</li>
+                <li><strong>Gun recoil:</strong> bullet forward force → gun backward (recoil).</li>
+                <li><strong>Rocket propulsion:</strong> exhaust gases downward → rocket upward.</li>
+                <li><strong>Jumping from boat:</strong> you jump forward, boat moves backward.</li>
+            </ul>
+            <p>⚠️ Even though forces are equal, accelerations differ (masses differ).</p>
+
+            <!-- 6. Conservation of Momentum (optional but often included) -->
+            <div class="section-head">🔹 6. Conservation of Momentum</div>
+            <p>When no external force acts, total momentum of a system remains constant.</p>
+            <div class="formula-box">
+                m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂
+            </div>
+            <p><em>Example – recoil of gun:</em> 0 = m₁v₁ + m₂v₂ → v₂ = – (m₁v₁)/m₂</p>
+
+            <!-- 7. Summary of Key Points (like Motion page) -->
+            <div class="section-head">🔹 Summary – Key Points</div>
+            <ul>
+                <li><strong>First law (inertia):</strong> object at rest / uniform motion stays unless unbalanced force acts.</li>
+                <li><strong>Inertia ∝ mass:</strong> mass measures inertia.</li>
+                <li><strong>Momentum:</strong> p = mv (kg m/s).</li>
+                <li><strong>Second law:</strong> F = ma (rate of change of momentum).</li>
+                <li><strong>Third law:</strong> action = –reaction (on different bodies).</li>
+                <li><strong>1 N:</strong> force that accelerates 1 kg by 1 m/s².</li>
+                <li><strong>Conservation of momentum:</strong> in absence of external force, total momentum remains constant.</li>
+            </ul>
+
+            <!-- 8. NCERT Exercise Highlights -->
+            <div class="section-head">🔹 NCERT Exercise Highlights</div>
+            <table class="data-table">
+                <tr><th>Q.No.</th><th>Brief</th><th>Answer / Hint</th></tr>
+                <tr><td>1</td><td>Zero net force but non-zero velocity?</td><td>Yes, if moving with constant velocity.</td></tr>
+                <tr><td>5</td><td>Truck 7 tonne, 400 m in 20 s from rest. Find a and F.</td><td>a = 2 m/s², F = 14000 N</td></tr>
+                <tr><td>10</td><td>Cabinet moved at constant velocity with 200 N.</td><td>Friction = 200 N (balanced).</td></tr>
+                <tr><td>12</td><td>Hockey ball 200 g, 10 m/s → –5 m/s. Δp?</td><td>Δp = –3 kg m/s, magnitude = 3</td></tr>
+                <tr><td>15</td><td>100 kg object 5→8 m/s in 6 s. Force?</td><td>F = 50 N</td></tr>
+                <tr><td>A3</td><td>Hammer 500 g at 50 m/s stopped in 0.01 s.</td><td>F = –2500 N</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- footer note (exactly as in motion page) -->
+    <div class="footer-note">
+        <p>⚡ notes based on NCERT Class 9 Science · Chapter 8 · exactly like <a href="#">knowledge nexus academy</a> format</p>
+    </div>
+</div>
+</body>
+</html>
