@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravitation · detailed notes + all solved exercises | Class 9 Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #f0f7fc;
+            color: #1a2b3e;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+        .page-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .academy-header {
+            background: linear-gradient(135deg, #0b2d44 0%, #124c6e 100%);
+            border-radius: 2rem 2rem 2rem 2rem;
+            padding: 1.5rem 2.2rem;
+            box-shadow: 0 15px 25px -8px rgba(0,40,70,0.3);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .home-link {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: opacity 0.2s;
+        }
+        .home-link:hover { opacity: 0.85; }
+        .brand h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            color: white;
+        }
+        .brand h1 span {
+            font-weight: 300;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            display: block;
+        }
+        .tagline-enroll {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+        }
+        .tagline {
+            color: #f3b33d;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+        .explore-btn {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 0.5rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 0 #b56f1a;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.1s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .explore-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #b56f1a;
+        }
+        .promise-badge {
+            background: #f3b33d;
+            color: #0a2b3c;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 0 #b56f1a;
+            transform: rotate(1deg);
+            text-align: center;
+            margin: 2rem 0 1rem;
+        }
+        .promise-badge small {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .key-concepts {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.2rem 2rem;
+            margin: 2rem 0 2rem;
+            box-shadow: 0 8px 18px rgba(0,45,70,0.1);
+            border-left: 8px solid #f3b33d;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            align-items: center;
+        }
+        .key-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .key-badge {
+            background: #124d73;
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .download-pdf {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1rem 0;
+        }
+        .pdf-btn {
+            background: #124d73;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #083044;
+            transition: 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pdf-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #083044;
+        }
+        .notes-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 12px 28px -12px rgba(0,55,90,0.2);
+            border: 1px solid rgba(0,70,120,0.1);
+            margin-bottom: 2.5rem;
+        }
+        .notes-header {
+            background: #e2edf7;
+            padding: 1.2rem 2rem;
+            border-bottom: 2px solid #c0d8ea;
+        }
+        .notes-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0a3b57;
+            margin: 0;
+        }
+        .notes-content {
+            padding: 2rem;
+        }
+        .section-head {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #124d73;
+            margin: 2rem 0 1rem 0;
+            border-left: 6px solid #f3b33d;
+            padding-left: 1rem;
+        }
+        .section-head:first-of-type {
+            margin-top: 0;
+        }
+        .notes-content p {
+            margin-bottom: 1rem;
+        }
+        .notes-content ul, .notes-content ol {
+            margin: 0.8rem 0 1.2rem 2rem;
+        }
+        .notes-content li {
+            margin-bottom: 0.3rem;
+        }
+        .highlight {
+            background: #fef3e2;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .formula-box {
+            background: #e5f0f9;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.2rem 0;
+            border-left: 6px solid #124d73;
+            font-weight: 500;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        .definition {
+            font-style: italic;
+            background: #f9f9f9;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+        .graph-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+            justify-content: center;
+        }
+        .graph-item {
+            background: #fafcff;
+            border: 1px solid #cbdae7;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1 1 300px;
+        }
+        .graph-item svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .graph-caption {
+            margin-top: 0.8rem;
+            font-weight: 600;
+            color: #1d4c6b;
+        }
+        .table-compare, .data-table, .exercise-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .table-compare th, .data-table th, .exercise-table th {
+            background: #124d73;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        .table-compare td, .data-table td, .exercise-table td {
+            border: 1px solid #cbdae7;
+            padding: 0.8rem;
+        }
+        .table-compare tr:nth-child(even), .data-table tr:nth-child(even), .exercise-table tr:nth-child(even) {
+            background: #f1f7fd;
+        }
+        .example-box {
+            background: #f0f4fa;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #f3b33d;
+        }
+        .activity-box {
+            background: #e8f0fe;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #2a7f62;
+            font-style: italic;
+        }
+        .question-box {
+            background: #fff3d9;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #c04900;
+        }
+        .intext-answer {
+            background: #def3d9;
+            border-radius: 1rem;
+            padding: 0.8rem 1.5rem;
+            margin: 1rem 0 1.5rem 0;
+            border-left: 6px solid #2a7f62;
+        }
+        .intext-answer p {
+            margin: 0.5rem 0;
+        }
+        .footer-note {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #bed6e9;
+            color: #2d5977;
+        }
+        .footer-note a {
+            color: #0c4f7a;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        @media print {
+            body { background: white; padding: 0.5in; }
+            .academy-header, .key-concepts, .download-pdf, .promise-badge, .footer-note, .explore-btn, .tagline-enroll {
+                display: none !important;
+            }
+            .notes-card { break-inside: avoid; border: 1px solid #ccc; }
+            .notes-header { background: #eee; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- header with "Explore" button instead of Enroll -->
+    <div class="academy-header">
+        <a href="#" class="home-link">
+            <div class="brand">
+                <h1>Knowledge Nexus Academy <span>Class 9 · Science – GRAVITATION (detailed)</span></h1>
+            </div>
+        </a>
+        <div class="tagline-enroll">
+            <div class="tagline">⬇️ everything explained simply</div>
+            <a href="#" class="explore-btn">Explore</a>
+        </div>
+    </div>
+
+    <!-- promise badge -->
+    <div class="promise-badge">
+        🌍 GRAVITATION – full detailed notes + ALL intext & exercise solved
+        <small>step‑by‑step answers, easy language</small>
+    </div>
+
+    <!-- download PDF button -->
+    <div class="download-pdf">
+        <button class="pdf-btn" onclick="window.print()">📥 Download notes as PDF</button>
+    </div>
+
+    <!-- key concepts summary (kid-friendly) -->
+    <div class="key-concepts">
+        <div class="key-item"><span class="key-badge">Gravity</span> pulls everything</div>
+        <div class="key-item"><span class="key-badge">F = G·M·m/d²</span> universal law</div>
+        <div class="key-item"><span class="key-badge">g = 9.8 m/s²</span></div>
+        <div class="key-item"><span class="key-badge">Weight</span> changes, mass same</div>
+        <div class="key-item"><span class="key-badge">Moon weight</span> 1/6 of Earth</div>
+        <div class="key-item"><span class="key-badge">Buoyancy</span> upward push</div>
+    </div>
+
+    <!-- main notes card -->
+    <div class="notes-card">
+        <div class="notes-header">
+            <h2>🍎 Chapter 9: Gravitation – everything you need (with solved questions)</h2>
+        </div>
+        <div class="notes-content">
+
+            <!-- ========== SECTION 1: GRAVITATION ========== -->
+            <div class="section-head">🔹 1. Gravitation – the invisible pull</div>
+            <p>Everything in the universe pulls everything else! This pull is called <span class="highlight">gravitational force</span>. It makes apples fall, keeps moon around Earth, and planets around the Sun.</p>
+            <div class="activity-box">
+                <strong>🍎 Newton's apple story:</strong> Isaac Newton saw an apple fall and thought: if Earth pulls the apple, maybe it pulls the moon too? Yes – the same force keeps moon in orbit.
+            </div>
+            <p><strong>Centripetal force:</strong> For circular motion, a force towards the centre is needed. For moon, that centre‑seeking force is gravity.</p>
+
+            <h4>Universal Law of Gravitation (Newton's big formula)</h4>
+            <div class="formula-box">
+                F = G · (M × m) / d²
+            </div>
+            <ul>
+                <li><strong>F</strong> = force of attraction (newton, N)</li>
+                <li><strong>M, m</strong> = masses of two objects (kg)</li>
+                <li><strong>d</strong> = distance between their centres (m)</li>
+                <li><strong>G</strong> = universal constant = 6.673 × 10⁻¹¹ Nm²/kg² (very tiny!)</li>
+            </ul>
+            <p><strong>Importance:</strong> explains why we stay on Earth, moon's motion, tides, planets around Sun.</p>
+
+            <!-- Example 9.1 from PDF -->
+            <div class="example-box">
+                <strong>Example 9.1 (Earth–moon force):</strong> Mass of Earth = 6×10²⁴ kg, moon = 7.4×10²² kg, distance = 3.84×10⁸ m. Find force.<br>
+                F = (6.7×10⁻¹¹) × (6×10²⁴ × 7.4×10²²) / (3.84×10⁸)² = 2.02×10²⁰ N. (Huge force!)
+            </div>
+
+            <!-- In-text questions page 3 -->
+            <div class="intext-answer">
+                <p><strong>📘 In-text questions </strong></p>
+                <p><strong>Q1. State the universal law of gravitation.</strong><br>
+                Ans: Every object in the universe attracts every other object with a force that is proportional to the product of their masses and inversely proportional to the square of the distance between them. The force acts along the line joining their centres.</p>
+                <p><strong>Q2. Write the formula to find the magnitude of the gravitational force between the earth and an object on the surface of the earth.</strong><br>
+                Ans: F = G · (M × m) / R², where M = mass of earth, m = mass of object, R = radius of earth.</p>
+            </div>
+
+            <!-- ========== SECTION 2: FREE FALL & g ========== -->
+            <div class="section-head">🔹 2. Free Fall and Acceleration due to Gravity (g)</div>
+            <p><strong>Free fall</strong> means falling only under gravity – no air resistance, no parachute. In free fall, all objects speed up at the same rate, no matter their mass.</p>
+            <p>This rate is called <strong>acceleration due to gravity</strong>, symbol <strong>g</strong>. On Earth, g = 9.8 m/s² (we often use 10 for easy maths).</p>
+
+            <h4>How to calculate g</h4>
+            <p>From universal law: Force on object of mass m near Earth: F = G·M·m / R². But also F = m·g.<br> So m·g = G·M·m / R²  ⇒  g = G·M / R².</p>
+            <div class="example-box">
+                <strong>Calculation of g:</strong> G = 6.7×10⁻¹¹, M = 6×10²⁴ kg, R = 6.4×10⁶ m.<br>
+                g = (6.7×10⁻¹¹ × 6×10²⁴) / (6.4×10⁶)² = 9.8 m/s².
+            </div>
+
+            <h4>Equations of motion under gravity (near Earth)</h4>
+            <ul>
+                <li>v = u + g t   (if downward positive)</li>
+                <li>s = u t + ½ g t²</li>
+                <li>v² = u² + 2 g s</li>
+            </ul>
+            <p>If object is thrown upward, we take a = –g.</p>
+
+            <!-- Example 9.2 and 9.3 from PDF -->
+            <div class="example-box">
+                <strong>Example 9.2 (car falls off ledge):</strong> t = 0.5 s, u = 0, g = 10 m/s².<br>
+                (i) v = g t = 10×0.5 = 5 m/s.<br>
+                (ii) average speed = (0+5)/2 = 2.5 m/s.<br>
+                (iii) height s = ½ g t² = ½×10×(0.5)² = 1.25 m.
+            </div>
+            <div class="example-box">
+                <strong>Example 9.3 (object thrown up, reaches 10 m):</strong> v=0 at top, a = –9.8 m/s², s=10 m.<br>
+                (i) v² = u² + 2as ⇒ 0 = u² + 2(–9.8)(10) ⇒ u = √196 = 14 m/s.<br>
+                (ii) v = u + a t ⇒ 0 = 14 – 9.8 t ⇒ t = 1.43 s.
+            </div>
+
+            <!-- In-text questions page 5 -->
+            <div class="intext-answer">
+                <p><strong>📘 In-text questions </strong></p>
+                <p><strong>Q1. What do you mean by free fall?</strong><br>
+                Ans: When an object falls towards the earth only under gravitational force (no other force like air resistance), it is called free fall.</p>
+                <p><strong>Q2. What do you mean by acceleration due to gravity?</strong><br>
+                Ans: The acceleration experienced by an object during free fall due to earth's gravitational pull. It is denoted by g and its value on earth is 9.8 m/s².</p>
+            </div>
+
+            <!-- ========== SECTION 3: MASS & WEIGHT ========== -->
+            <div class="section-head">🔹 3. Mass and Weight – what's the difference?</div>
+            <table class="table-compare">
+                <tr><th>Mass</th><th>Weight</th></tr>
+                <tr><td>Amount of matter in an object (kg)</td><td>Force with which earth attracts it (newton)</td></tr>
+                <tr><td>Same everywhere (constant)</td><td>Changes with place (depends on g)</td></tr>
+                <tr><td>Measured by pan balance</td><td>Measured by spring balance</td></tr>
+                <tr><td>Scalar (only magnitude)</td><td>Vector (downwards)</td></tr>
+            </table>
+            <p><span class="highlight">Weight = mass × g</span> (W = m g)</p>
+
+            <h4>Weight on the Moon</h4>
+            <p>Mass of moon M<sub>m</sub> = 7.36×10²² kg, radius R<sub>m</sub> = 1.74×10⁶ m.<br> g on moon = G·M<sub>m</sub>/R<sub>m</sub>² = about 1.6 m/s² (≈ 1/6 of Earth's g).<br> So weight on moon = (1/6) × weight on Earth.</p>
+            <div class="example-box">
+                <strong>Example 9.4:</strong> Mass = 10 kg. Weight on Earth = 10×9.8 = 98 N.<br>
+                <strong>Example 9.5:</strong> Object weighs 10 N on Earth. On moon = 10/6 ≈ 1.67 N.
+            </div>
+
+            <!-- In-text questions page 7 -->
+            <div class="intext-answer">
+                <p><strong>📘 In-text questions </strong></p>
+                <p><strong>Q1. What are the differences between mass and weight?</strong><br>
+                Ans: See table above.</p>
+                <p><strong>Q2. Why is weight on moon 1/6 that on earth?</strong><br>
+                Ans: Because moon's mass is smaller and radius is smaller, so g on moon = G·M<sub>m</sub>/R<sub>m</sub>² ≈ 1.6 m/s², while Earth's g = 9.8 m/s². Ratio ≈ 1/6.</p>
+            </div>
+
+            <!-- ========== SECTION 4: THRUST & PRESSURE ========== -->
+            <div class="section-head">🔹 4. Thrust and Pressure</div>
+            <p><strong>Thrust:</strong> force acting perpendicular to a surface (like when you push a drawing pin).</p>
+            <p><strong>Pressure:</strong> thrust per unit area.   Pressure = Thrust / Area</p>
+            <p>SI unit of pressure: pascal (Pa) = N/m². Smaller area → larger pressure for same force.</p>
+            <div class="example-box">
+                <strong>Example 9.6 (wooden block):</strong> Mass = 5 kg ⇒ thrust = 5×9.8 = 49 N.<br>
+                (a) side 20 cm × 10 cm = 0.02 m² → P = 49/0.02 = 2450 Pa.<br>
+                (b) side 40 cm × 20 cm = 0.08 m² → P = 49/0.08 = 612.5 Pa.<br>
+                ➡️ Larger area gives less pressure.
+            </div>
+
+            <!-- In-text questions page 10 -->
+            <div class="intext-answer">
+                <p><strong>📘 In-text questions </strong></p>
+                <p><strong>Q1. Why is it difficult to hold a school bag with a thin strap?</strong><br>
+                Ans: Thin strap has small area, so pressure (force/area) on shoulder is large, causing pain.</p>
+                <p><strong>Q2. What do you mean by buoyancy?</strong><br>
+                Ans: The upward force exerted by fluids (liquids or gases) on objects immersed in them.</p>
+                <p><strong>Q3. Why does an object float or sink?</strong><br>
+                Ans: If density of object is less than density of liquid → float; if more → sink. (Because buoyant force depends on displaced liquid's weight).</p>
+            </div>
+
+            <!-- ========== SECTION 5: BUOYANCY & ARCHIMEDES ========== -->
+            <div class="section-head">🔹 5. Buoyancy and Archimedes' Principle</div>
+            <p><strong>Buoyant force</strong> (upthrust) is the upward push by fluid. It happens because pressure increases with depth, so bottom of object experiences more upward force than downward force on top.</p>
+            <p><strong>Density = mass/volume.</strong> If object density < fluid density → buoyant force > weight → object floats. If density > fluid density → sinks.</p>
+
+            <h4>Archimedes' Principle</h4>
+            <div class="definition">
+                When a body is immersed fully or partially in a fluid, it experiences an upward force equal to the weight of the fluid displaced by it.
+            </div>
+            <p><strong>Applications:</strong> designing ships, submarines, hydrometers, lactometers.</p>
+            <div class="activity-box">
+                <strong>Activity 9.7 (stone & spring balance):</strong> Suspend a stone from a spring balance. Note reading. Immerse in water – reading decreases. Loss in weight = weight of water displaced.
+            </div>
+
+            <!-- In-text questions page 11 -->
+            <div class="intext-answer">
+                <p><strong>📘 In-text questions </strong></p>
+                <p><strong>Q1. You find your mass to be 42 kg on a weighing machine. Is your mass more or less than 42 kg?</strong><br>
+                Ans: The weighing machine measures weight, but shows mass assuming g=9.8. Actually, due to buoyancy of air, your true mass is slightly more than 42 kg (because air pushes you up a little). But the difference is tiny.</p>
+                <p><strong>Q2. A bag of cotton and an iron bar, each 100 kg on weighing machine. Which is heavier in reality?</strong><br>
+                Ans: Cotton has larger volume, so more air buoyant force acts on it. The weighing machine measures weight – buoyancy. So cotton's true mass is slightly more than iron's to show same reading. So cotton is heavier in reality.</p>
+            </div>
+
+            <!-- ========== SECTION 6: EXERCISE SOLUTIONS (ALL 22) ========== -->
+            <div class="section-head">🔹 6. NCERT Exercise Solutions (Questions 1 to 22)</div>
+            <table class="exercise-table">
+                <tr><th>Q.No.</th><th>Answer / Solution (step by step)</th></tr>
+                <tr><td>1.</td><td><strong>How does force change when distance is halved?</strong> F ∝ 1/d², so if d becomes half, F becomes 1/(½)² = 4 times. Force becomes 4 times.</td></tr>
+                <tr><td>2.</td><td><strong>Why do heavy and light objects fall at same rate?</strong> Because acceleration due to gravity (g) is independent of mass. F = ma and F = GMm/R² ⇒ a = GM/R² = g (same for all).</td></tr>
+                <tr><td>3.</td><td><strong>Gravitational force between Earth and 1 kg object on surface.</strong> F = G·M·m/R². Using M=6×10²⁴ kg, R=6.4×10⁶ m, G=6.67×10⁻¹¹, m=1 kg. Calculate: F = (6.67×10⁻¹¹ × 6×10²⁴ × 1) / (6.4×10⁶)² ≈ 9.8 N.</td></tr>
+                <tr><td>4.</td><td><strong>Does Earth attract moon with greater force than moon attracts Earth?</strong> No, same force (Newton's third law). But accelerations differ due to different masses.</td></tr>
+                <tr><td>5.</td><td><strong>If moon attracts Earth, why doesn't Earth move towards moon?</strong> Earth does move, but very little because its mass is huge. Both move around common centre of mass (inside Earth).</td></tr>
+                <tr><td>6.</td><td><strong>Force between two objects changes if:</strong><br> (i) mass of one doubled → force doubles.<br> (ii) distance doubled → force becomes 1/4; distance tripled → force becomes 1/9.<br> (iii) masses of both doubled → force becomes 4 times.</td></tr>
+                <tr><td>7.</td><td><strong>Importance of universal law of gravitation:</strong> It explains (i) why we stay on Earth, (ii) motion of moon around Earth, (iii) planets around Sun, (iv) tides.</td></tr>
+                <tr><td>8.</td><td><strong>Acceleration of free fall:</strong> It is the acceleration due to gravity, g = 9.8 m/s².</td></tr>
+                <tr><td>9.</td><td><strong>What do we call gravitational force between Earth and an object?</strong> Weight of the object.</td></tr>
+                <tr><td>10.</td><td><strong>Amit buys gold at poles, sells at equator. Will friend agree with weight?</strong> No, because g is greater at poles than equator, so weight at poles > weight at equator. But mass remains same. So at equator weight is less – friend gets less gold (in terms of force), but mass wise it's same. (Hint: g changes).</td></tr>
+                <tr><td>11.</td><td><strong>Why does a sheet of paper fall slower than crumpled ball?</strong> Because flat paper experiences more air resistance (upthrust from air), so net downward force less. Crumpled ball has less air resistance.</td></tr>
+                <tr><td>12.</td><td><strong>Weight on moon of 10 kg object?</strong> On Earth weight = 10×9.8 = 98 N. On moon weight = 98/6 ≈ 16.3 N. (Or using g_moon = 1.63 m/s² ⇒ 10×1.63 = 16.3 N).</td></tr>
+                <tr><td>13.</td><td><strong>Ball thrown up with 49 m/s. (i) max height? (ii) total time to return?</strong><br> (i) v² = u² – 2gh ⇒ 0 = 49² – 2×9.8×h ⇒ h = (2401)/(19.6) = 122.5 m.<br> (ii) time up = u/g = 49/9.8 = 5 s, total time = 10 s.</td></tr>
+                <tr><td>14.</td><td><strong>Stone dropped from 19.6 m. Final velocity?</strong> v² = u² + 2gh = 0 + 2×9.8×19.6 = 384.16 ⇒ v = √384.16 = 19.6 m/s.</td></tr>
+                <tr><td>15.</td><td><strong>Stone thrown up with 40 m/s, g = 10. Max height? Net displacement? Total distance?</strong><br> max height: v² = u² – 2gh ⇒ 0 = 1600 – 20h ⇒ h = 80 m.<br> Net displacement after return = 0. Total distance = 80+80 = 160 m.</td></tr>
+                <tr><td>16.</td><td><strong>Force between Earth and Sun:</strong> M_earth=6×10²⁴ kg, M_sun=2×10³⁰ kg, d=1.5×10¹¹ m, G=6.7×10⁻¹¹.<br> F = (6.7×10⁻¹¹ × 6×10²⁴ × 2×10³⁰)/(1.5×10¹¹)² = (6.7×12×10⁴³)/(2.25×10²²) = (80.4×10⁴³)/(2.25×10²²) = 35.73×10²¹ = 3.57×10²² N.</td></tr>
+                <tr><td>17.</td><td><strong>Stone A dropped from tower 100 m, stone B thrown up at 25 m/s from ground. When and where meet?</strong><br> Let upward positive. For A (from top): position s_A = 100 – ½gt². For B (from ground): s_B = 25t – ½gt². They meet when s_A = s_B ⇒ 100 – ½gt² = 25t – ½gt² ⇒ 100 = 25t ⇒ t = 4 s. Then s_B = 25×4 – ½×10×16 = 100 – 80 = 20 m above ground. So meet at 20 m from ground after 4 s.</td></tr>
+                <tr><td>18.</td><td><strong>Ball thrown up returns after 6 s. (a) velocity thrown? (b) max height? (c) position after 4 s?</strong><br> Total time = 6 s ⇒ time up = 3 s. (a) v = u – gt ⇒ 0 = u – 9.8×3 ⇒ u = 29.4 m/s.<br> (b) max height = u t – ½gt² = 29.4×3 – ½×9.8×9 = 88.2 – 44.1 = 44.1 m.<br> (c) after 4 s (1 s after top): position = max height – ½g(1)² = 44.1 – 4.9 = 39.2 m above ground.</td></tr>
+                <tr><td>19.</td><td><strong>Direction of buoyant force on immersed object?</strong> Upward (opposite to weight).</td></tr>
+                <tr><td>20.</td><td><strong>Why does plastic block come up in water?</strong> Density of plastic < density of water ⇒ buoyant force > weight ⇒ net upward force.</td></tr>
+                <tr><td>21.</td><td><strong>Volume of 50 g substance = 20 cm³. Density = 50/20 = 2.5 g/cm³ > density of water (1 g/cm³). So it will sink.</strong></td></tr>
+                <tr><td>22.</td><td><strong>500 g sealed packet volume 350 cm³. Density = 500/350 ≈ 1.43 g/cm³ > 1 g/cm³ ⇒ sink. Water displaced = volume of packet = 350 cm³ ⇒ mass of displaced water = 350 g.</strong></td></tr>
+            </table>
+
+            <!-- summary reminder -->
+            <div class="activity-box" style="background:#fef7e0;">
+                <strong>🌟 Key point recap:</strong> Gravitational force is universal; g = 9.8 m/s²; weight = mg and changes; pressure = force/area; buoyancy = upward push; Archimedes' principle: displaced fluid weight = buoyant force.
+            </div>
+        </div>
+    </div>
+
+    <!-- footer note -->
+    <div class="footer-note">
+        <p>📚 detailed notes for Class 9 Science · Gravitation · all intext & exercises solved – Knowledge Nexus Academy</p>
+    </div>
+</div>
+</body>
+</html>
