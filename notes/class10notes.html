@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 10 Notes - Knowledge Nexus Academy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#f4f7fb;
+transition:0.4s;
+overflow-x:hidden;
+}
+
+/* PREMIUM GRADIENT BACKGROUND */
+.bg-gradient{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+background:linear-gradient(120deg,#dbeafe,#ffffff,#fef3c7);
+background-size:400% 400%;
+animation: gradientMove 12s infinite ease-in-out;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* FLOATING BUBBLES */
+.bg-animation{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+overflow:hidden;
+}
+
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(30,64,175,0.15);
+animation: float 12s infinite ease-in-out;
+}
+
+.circle:nth-child(1){width:120px;height:120px;top:20%;left:10%;animation-duration:14s;}
+.circle:nth-child(2){width:180px;height:180px;top:60%;left:70%;animation-duration:18s;}
+.circle:nth-child(3){width:80px;height:80px;top:80%;left:20%;animation-duration:10s;}
+.circle:nth-child(4){width:150px;height:150px;top:10%;left:80%;animation-duration:16s;}
+.circle:nth-child(5){width:90px;height:90px;top:45%;left:40%;animation-duration:12s;}
+
+@keyframes float{
+0%{ transform:translateY(0px); }
+50%{ transform:translateY(-70px); }
+100%{ transform:translateY(0px); }
+}
+
+/* DARK MODE */
+body.dark{
+background:#111827;
+color:white;
+}
+
+body.dark .navbar{
+background:#1f2937;
+}
+
+body.dark .note-card,
+body.dark .section-box{
+background:#1f2937;
+color:white;
+}
+
+body.dark .search-box,
+body.dark select{
+background:#111827;
+color:white;
+border:1px solid #444;
+}
+
+body.dark h2{
+color:#60a5fa;
+}
+
+body.dark .circle{
+background:rgba(255,255,255,0.08);
+}
+
+body.dark .bg-gradient{
+background:linear-gradient(120deg,#111827,#1f2937,#0f172a);
+background-size:400% 400%;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:white;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-weight:600;
+font-size:18px;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#ff9800;
+}
+
+.hamburger{
+display:none;
+cursor:pointer;
+font-size:22px;
+}
+
+/* SECTION */
+.section{
+padding:120px 8% 60px;
+text-align:center;
+}
+
+.section h2{
+font-size:36px;
+margin-bottom:10px;
+color:#1e40af;
+}
+
+.section p{
+max-width:750px;
+margin:auto;
+font-size:16px;
+}
+
+/* FILTER BOX */
+.filter-box{
+max-width:900px;
+margin:35px auto 15px;
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+justify-content:center;
+}
+
+.search-box, select{
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+outline:none;
+font-size:15px;
+width:280px;
+}
+
+/* SECTION BOX */
+.section-box{
+max-width:1100px;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:left;
+}
+
+.section-box h3{
+font-size:20px;
+margin-bottom:15px;
+color:#1e40af;
+}
+
+body.dark .section-box h3{
+color:#60a5fa;
+}
+
+/* NOTES GRID */
+.notes-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+gap:25px;
+}
+
+/* NOTE CARD */
+.note-card{
+background:white;
+padding:22px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+text-align:left;
+position:relative;
+overflow:hidden;
+}
+
+.note-card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.note-card h4{
+font-size:17px;
+margin-bottom:10px;
+color:#1e40af;
+}
+
+body.dark .note-card h4{
+color:#60a5fa;
+}
+
+.note-card p{
+font-size:14px;
+opacity:0.8;
+margin-bottom:15px;
+}
+
+/* TAG */
+.tag{
+display:inline-block;
+padding:5px 12px;
+border-radius:50px;
+font-size:12px;
+background:#dbeafe;
+color:#1e40af;
+margin-bottom:12px;
+font-weight:600;
+}
+
+body.dark .tag{
+background:#111827;
+border:1px solid #444;
+color:white;
+}
+
+/* BUTTON */
+.btn{
+background:#ff9800;
+color:white;
+padding:10px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+transition:0.3s;
+font-weight:500;
+}
+
+.btn:hover{
+background:#e68900;
+transform:scale(1.05);
+}
+
+/* BOOKMARK BUTTON */
+.bookmark{
+position:absolute;
+top:15px;
+right:15px;
+font-size:22px;
+cursor:pointer;
+transition:0.3s;
+user-select:none;
+}
+
+.bookmark:hover{
+transform:scale(1.2);
+}
+
+/* PROGRESS BAR */
+.progress-box{
+max-width:900px;
+margin:25px auto;
+text-align:center;
+}
+
+.progress-bar{
+width:100%;
+height:14px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:#ff9800;
+transition:0.5s;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+.nav-links{
+display:none;
+flex-direction:column;
+position:absolute;
+top:60px;
+right:20px;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+body.dark .nav-links{
+background:#1f2937;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.hamburger{
+display:block;
+}
+
+.search-box, select{
+width:100%;
+}
+
+.section-box{
+padding:18px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PREMIUM BACKGROUND -->
+<div class="bg-gradient"></div>
+
+<!-- FLOATING BUBBLES -->
+<div class="bg-animation">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">💡 Knowledge Nexus Academy</div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="index.html#notes">Notes</a>
+    <a href="index.html#footer">Contact</a>
+  </div>
+
+  <div>
+    <span onclick="toggleDark()" style="cursor:pointer; font-size:18px;">🌙</span>
+    <span class="hamburger" onclick="toggleMenu()">☰</span>
+  </div>
+</div>
+
+<section class="section">
+  <h2>📘 Class 10 Notes Dashboard</h2>
+  <p>Search notes, bookmark chapters, and open notes directly on click.</p>
+
+  <!-- PROGRESS -->
+  <div class="progress-box">
+    <b id="progressText">Progress: 0 Notes Viewed</b>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-box">
+    <select id="subjectFilter" onchange="renderNotes()">
+      <option value="all">All Subjects</option>
+      <option value="maths">Mathematics</option>
+      <option value="science">Science</option>
+      <option value="sst">Social Science</option>
+      <option value="english">English</option>
+    </select>
+
+    <input type="text" id="searchInput" class="search-box"
+      placeholder="Search chapter (Real Numbers, Light, Federalism...)" onkeyup="renderNotes()">
+  </div>
+
+  <!-- FAVOURITES -->
+  <div class="section-box">
+    <h3>⭐ Bookmarked Notes</h3>
+    <div class="notes-grid" id="favGrid"></div>
+  </div>
+
+  <!-- RECENT -->
+  <div class="section-box">
+    <h3>🕒 Recently Viewed</h3>
+    <div class="notes-grid" id="recentGrid"></div>
+  </div>
+
+  <!-- ALL NOTES -->
+  <div class="section-box">
+    <h3>📚 All Notes</h3>
+    <div class="notes-grid" id="notesGrid"></div>
+  </div>
+
+</section>
+
+<script>
+/* ===========================
+   NOTES DATA (CLASS 10 UPDATED)
+=========================== */
+const notesData = {
+  maths: [
+    { title: "Real Numbers", pdf: "real-numbers.pdf" },
+    { title: "Polynomials", pdf: "polynomials.pdf" },
+    { title: "Pair of Linear Equations in Two Variables", pdf: "pair-linear-equations.pdf" },
+    { title: "Quadratic Equations", pdf: "quadratic-equations.pdf" },
+    { title: "Arithmetic Progressions", pdf: "arithmetic-progressions.pdf" },
+    { title: "Triangles", pdf: "triangles.pdf" },
+    { title: "Coordinate Geometry", pdf: "coordinate-geometry.pdf" },
+    { title: "Introduction to Trigonometry", pdf: "trigonometry.pdf" },
+    { title: "Some Applications of Trigonometry", pdf: "applications-trigonometry.pdf" },
+    { title: "Circles", pdf: "circles.pdf" },
+    { title: "Constructions", pdf: "constructions.pdf" },
+    { title: "Areas Related to Circles", pdf: "areas-circles.pdf" },
+    { title: "Surface Areas and Volumes", pdf: "surface-volumes.pdf" },
+    { title: "Statistics", pdf: "statistics.pdf" },
+    { title: "Probability", pdf: "probability.pdf" }
+  ],
+
+  science: [
+    { title: "Chemical Reactions and Equations", pdf: "chemical-reactions.pdf" },
+    { title: "Acids, Bases and Salts", pdf: "acids-bases-salts.pdf" },
+    { title: "Metals and Non-metals", pdf: "metals-nonmetals.pdf" },
+    { title: "Carbon and its Compounds", pdf: "carbon-compounds.pdf" },
+    { title: "Periodic Classification of Elements", pdf: "periodic-classification.pdf" },
+    { title: "Life Processes", pdf: "life-processes.pdf" },
+    { title: "Control and Coordination", pdf: "control-coordination.pdf" },
+    { title: "How do Organisms Reproduce?", pdf: "reproduction.pdf" },
+    { title: "Heredity and Evolution", pdf: "heredity-evolution.pdf" },
+    { title: "Light – Reflection and Refraction", pdf: "light.pdf" },
+    { title: "The Human Eye and the Colourful World", pdf: "human-eye.pdf" },
+    { title: "Electricity", pdf: "electricity.pdf" },
+    { title: "Magnetic Effects of Electric Current", pdf: "magnetic-effects.pdf" },
+    { title: "Sources of Energy", pdf: "sources-energy.pdf" },
+    { title: "Our Environment", pdf: "environment.pdf" },
+    { title: "Sustainable Management of Natural Resources", pdf: "sustainable-resources.pdf" }
+  ],
+
+  sst: [
+    { title: "The Rise of Nationalism in Europe", pdf: "nationalism-europe.pdf" },
+    { title: "Nationalism in India", pdf: "nationalism-india.pdf" },
+    { title: "The Making of a Global World", pdf: "global-world.pdf" },
+    { title: "The Age of Industrialization", pdf: "industrialization.pdf" },
+    { title: "Print Culture and the Modern World", pdf: "print-culture.pdf" },
+    { title: "Resources and Development", pdf: "resources-dev.pdf" },
+    { title: "Forest and Wildlife Resources", pdf: "forest-wildlife.pdf" },
+    { title: "Water Resources", pdf: "water-resources.pdf" },
+    { title: "Agriculture", pdf: "agriculture.pdf" },
+    { title: "Minerals and Energy Resources", pdf: "minerals-energy.pdf" },
+    { title: "Manufacturing Industries", pdf: "manufacturing.pdf" },
+    { title: "Lifelines of National Economy", pdf: "lifelines.pdf" },
+    { title: "Power Sharing", pdf: "power-sharing.pdf" },
+    { title: "Federalism", pdf: "federalism.pdf" },
+    { title: "Democracy and Diversity", pdf: "democracy-diversity.pdf" },
+    { title: "Gender, Religion and Caste", pdf: "gender-religion-caste.pdf" },
+    { title: "Popular Struggles and Movements", pdf: "struggles-movements.pdf" },
+    { title: "Political Parties", pdf: "political-parties.pdf" },
+    { title: "Outcomes of Democracy", pdf: "outcomes-democracy.pdf" },
+    { title: "Challenges to Democracy", pdf: "challenges-democracy.pdf" },
+    { title: "Development", pdf: "development.pdf" },
+    { title: "Sectors of the Indian Economy", pdf: "sectors-economy.pdf" },
+    { title: "Money and Credit", pdf: "money-credit.pdf" },
+    { title: "Globalisation and the Indian Economy", pdf: "globalisation.pdf" },
+    { title: "Consumer Rights", pdf: "consumer-rights.pdf" }
+  ],
+
+  english: [
+    { title: "A Letter to God", pdf: "letter-to-god.pdf" },
+    { title: "Nelson Mandela: Long Walk to Freedom", pdf: "nelson-mandela.pdf" },
+    { title: "Two Stories about Flying", pdf: "two-stories-flying.pdf" },
+    { title: "From the Diary of Anne Frank", pdf: "anne-frank.pdf" },
+    { title: "The Hundred Dresses - I", pdf: "hundred-dresses1.pdf" },
+    { title: "The Hundred Dresses - II", pdf: "hundred-dresses2.pdf" },
+    { title: "Glimpses of India", pdf: "glimpses-india.pdf" },
+    { title: "Mijbil the Otter", pdf: "mijbil-otter.pdf" },
+    { title: "Madam Rides the Bus", pdf: "madam-bus.pdf" },
+    { title: "The Sermon at Benares", pdf: "sermon-benares.pdf" },
+    { title: "The Proposal", pdf: "proposal.pdf" },
+    { title: "Dust of Snow (Poem)", pdf: "dust-snow.pdf" },
+    { title: "Fire and Ice (Poem)", pdf: "fire-ice.pdf" },
+    { title: "A Tiger in the Zoo (Poem)", pdf: "tiger-zoo.pdf" },
+    { title: "How to Tell Wild Animals (Poem)", pdf: "wild-animals.pdf" },
+    { title: "The Ball Poem", pdf: "ball-poem.pdf" },
+    { title: "Amanda! (Poem)", pdf: "amanda.pdf" },
+    { title: "Animals (Poem)", pdf: "animals.pdf" },
+    { title: "The Trees (Poem)", pdf: "trees.pdf" },
+    { title: "Fog (Poem)", pdf: "fog.pdf" },
+    { title: "The Tale of Custard the Dragon (Poem)", pdf: "custard-dragon.pdf" },
+    { title: "For Anne Gregory (Poem)", pdf: "anne-gregory.pdf" }
+  ]
+};
+
+/* ===========================
+   WEBSITE FUNCTIONS (CLASS 10 STORAGE KEYS)
+=========================== */
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+/* Subject Full Name */
+function subjectName(key){
+  if(key==="maths") return "Mathematics";
+  if(key==="science") return "Science";
+  if(key==="sst") return "Social Science";
+  if(key==="english") return "English";
+  return key;
+}
+
+/* Local Storage Data (using class10 specific keys) */
+function getBookmarks(){
+  return JSON.parse(localStorage.getItem("bookmarks10")) || [];
+}
+
+function saveBookmarks(data){
+  localStorage.setItem("bookmarks10", JSON.stringify(data));
+}
+
+function getRecent(){
+  return JSON.parse(localStorage.getItem("recent10")) || [];
+}
+
+function saveRecent(data){
+  localStorage.setItem("recent10", JSON.stringify(data));
+}
+
+/* Total Notes Count */
+function totalNotesCount(){
+  let count = 0;
+  for(let sub in notesData){
+    count += notesData[sub].length;
+  }
+  return count;
+}
+
+/* Progress Update */
+function updateProgress(){
+  let recent = getRecent();
+  let total = totalNotesCount();
+
+  document.getElementById("progressText").innerHTML =
+    `Progress: ${recent.length} Notes Viewed out of ${total}`;
+
+  let percent = (recent.length / total) * 100;
+  document.getElementById("progressFill").style.width = percent + "%";
+}
+
+/* Bookmark Toggle */
+function toggleBookmark(subject, file, title){
+  let bookmarks = getBookmarks();
+  let key = subject + "|" + file;
+
+  if(bookmarks.some(item => item.key === key)){
+    bookmarks = bookmarks.filter(item => item.key !== key);
+  }else{
+    bookmarks.push({ key, subject, file, title });
+  }
+
+  saveBookmarks(bookmarks);
+  renderBookmarks();
+  renderNotes(); // refresh all notes to update bookmark icons
+}
+
+/* Add to Recent */
+function addRecent(subject, file, title){
+  let recent = getRecent();
+  let key = subject + "|" + file;
+
+  recent = recent.filter(item => item.key !== key);
+  recent.unshift({ key, subject, file, title });
+
+  if(recent.length > 6) recent.pop();
+
+  saveRecent(recent);
+  renderRecent();
+  updateProgress();
+}
+
+/* Create Note Card */
+function createCard(subject, title, file, isBookmarked){
+  let bookmarkIcon = isBookmarked ? "⭐" : "☆";
+
+  return `
+    <div class="note-card">
+      <div class="bookmark" onclick="toggleBookmark('${subject}','${file}','${title}')">${bookmarkIcon}</div>
+
+      <span class="tag">${subjectName(subject)}</span>
+      <h4>${title}</h4>
+      <p>Notes by Knowledge Nexus Academy</p>
+
+      <a class="btn" href="${file}" target="_blank"
+         onclick="addRecent('${subject}','${file}','${title}')">
+         View Notes
+      </a>
+    </div>
+  `;
+}
+
+/* Render Bookmarks */
+function renderBookmarks(){
+  let favGrid = document.getElementById("favGrid");
+  let bookmarks = getBookmarks();
+
+  favGrid.innerHTML = "";
+
+  if(bookmarks.length === 0){
+    favGrid.innerHTML = `<p style="grid-column:1/-1; font-weight:600;">No Bookmarked Notes ⭐</p>`;
+    return;
+  }
+
+  bookmarks.forEach(item=>{
+    favGrid.innerHTML += createCard(item.subject, item.title, item.file, true);
+  });
+}
+
+/* Render Recent */
+function renderRecent(){
+  let recentGrid = document.getElementById("recentGrid");
+  let recent = getRecent();
+
+  recentGrid.innerHTML = "";
+
+  if(recent.length === 0){
+    recentGrid.innerHTML = `<p style="grid-column:1/-1; font-weight:600;">No Recently Viewed Notes 🕒</p>`;
+    return;
+  }
+
+  let bookmarks = getBookmarks();
+
+  recent.forEach(item=>{
+    let isBookmarked = bookmarks.some(b=>b.key===item.key);
+    recentGrid.innerHTML += createCard(item.subject, item.title, item.file, isBookmarked);
+  });
+}
+
+/* Render All Notes */
+function renderNotes(){
+  let subject = document.getElementById("subjectFilter").value;
+  let search = document.getElementById("searchInput").value.toLowerCase();
+  let grid = document.getElementById("notesGrid");
+
+  let bookmarks = getBookmarks();
+  grid.innerHTML = "";
+
+  for(let sub in notesData){
+
+    if(subject !== "all" && subject !== sub) continue;
+
+    notesData[sub].forEach(chapter => {
+
+      // Use pdf field (could also support link if needed)
+      let file = chapter.pdf;
+
+      if(!file) return;
+
+      if(chapter.title.toLowerCase().includes(search)){
+
+        let key = sub + "|" + file;
+        let isBookmarked = bookmarks.some(item => item.key === key);
+
+        grid.innerHTML += createCard(sub, chapter.title, file, isBookmarked);
+      }
+    });
+  }
+
+  if(grid.innerHTML === ""){
+    grid.innerHTML = `<p style="text-align:center; grid-column:1/-1; font-weight:600;">❌ No Notes Found</p>`;
+  }
+}
+
+/* INIT */
+renderBookmarks();
+renderRecent();
+renderNotes();
+updateProgress();
+</script>
+
+</body>
+</html>
