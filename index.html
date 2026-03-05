@@ -5,564 +5,254 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Knowledge Nexus Academy</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root{
+--accent:#00f5a0;
+}
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins', sans-serif;
-scroll-behavior:smooth;
+font-family:'Inter',sans-serif;
 }
 
 body{
-background:#f4f7fb;
-transition:0.4s;
-overflow-x:hidden;
-}
-
-/* BACKGROUND ANIMATION */
-.bg-animation{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-1;
-overflow:hidden;
-}
-
-.circle{
-position:absolute;
-border-radius:50%;
-background:rgba(30,64,175,0.15);
-animation: float 12s infinite ease-in-out;
-}
-
-.circle:nth-child(1){
-width:120px;
-height:120px;
-top:20%;
-left:10%;
-animation-duration:14s;
-}
-
-.circle:nth-child(2){
-width:180px;
-height:180px;
-top:60%;
-left:70%;
-animation-duration:18s;
-}
-
-.circle:nth-child(3){
-width:80px;
-height:80px;
-top:80%;
-left:20%;
-animation-duration:10s;
-}
-
-.circle:nth-child(4){
-width:150px;
-height:150px;
-top:10%;
-left:80%;
-animation-duration:16s;
-}
-
-@keyframes float{
-0%{ transform:translateY(0px); }
-50%{ transform:translateY(-60px); }
-100%{ transform:translateY(0px); }
-}
-
-/* DARK MODE */
-body.dark{
-background:#111827;
-color:white;
-}
-
-body.dark .navbar{
-background:#1f2937;
-}
-
-body.dark .card,
-body.dark .event-box{
-background:#1f2937;
-color:white;
-}
-
-body.dark .section h2{
-color:#60a5fa;
-}
-
-body.dark .nav-links a{
-color:white;
-}
-
-body.dark input,
-body.dark textarea{
-background:#111827;
-color:white;
-border:1px solid #555;
-}
-
-body.dark .hero{
-background:linear-gradient(135deg,#1f2937,#111827);
-}
-
-body.dark .circle{
-background:rgba(255,255,255,0.08);
-}
-
-/* NAVBAR */
-.navbar{
+height:100vh;
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:center;
-padding:15px 8%;
-background:white;
-position:fixed;
-width:100%;
-top:0;
-z-index:1000;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
+background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+color:white;
+}
+
+.container{
+width:95%;
+max-width:420px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:40px;
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
 }
 
 .logo{
-font-weight:600;
-font-size:18px;
-}
-
-.nav-links{
-display:flex;
-gap:25px;
-}
-
-.nav-links a{
-text-decoration:none;
-color:#333;
-font-weight:500;
-transition:0.3s;
-}
-
-.nav-links a:hover{
-color:#ff9800;
-}
-
-.hamburger{
-display:none;
-cursor:pointer;
+text-align:center;
+font-weight:800;
 font-size:22px;
+margin-bottom:25px;
+color:var(--accent);
 }
 
-/* SECTION GENERAL */
-.section{
-padding:100px 8%;
-text-align:center;
-}
-
-.section h2{
-margin-bottom:20px;
-font-size:32px;
-color:#1e40af;
-}
-
-/* HERO */
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#dbeafe,#ffffff);
-text-align:center;
-}
-
-.hero h1{
-font-size:48px;
-color:#1e40af;
-}
-
-.hero span{
-color:#ff9800;
-}
-
-.hero p{
-font-size:18px;
-margin-top:10px;
-}
-
-/* BUTTON */
-.btn{
-background:#ff9800;
-color:white;
-padding:12px 25px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-margin-top:20px;
-text-decoration:none;
-display:inline-block;
-transition:0.3s;
-font-weight:500;
-}
-
-.btn:hover{
-transform:scale(1.05);
-background:#e68900;
-}
-
-/* CARDS */
-.cards{
-display:flex;
-gap:30px;
-justify-content:center;
-flex-wrap:wrap;
-margin-top:40px;
-padding:15px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-width:260px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-transition:0.3s;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-text-align:center;
-}
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-.card p{
-margin-bottom:15px;
-}
-
-/* EVENTS BOX */
-.event-box{
-background:white;
-padding:20px;
-margin:15px auto;
-max-width:600px;
-border-radius:8px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-}
-
-/* CONTACT FORM */
-form{
-max-width:500px;
-margin:30px auto;
+.form{
 display:flex;
 flex-direction:column;
 gap:15px;
 }
 
-input, textarea{
-padding:10px;
-border-radius:5px;
-border:1px solid #ccc;
+input, select{
+padding:14px;
+border-radius:12px;
+border:none;
+outline:none;
+font-size:14px;
 }
 
-/* ANIMATION */
-.fade{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
+button{
+padding:14px;
+border:none;
+border-radius:30px;
+background:var(--accent);
+font-weight:600;
+cursor:pointer;
 }
 
-.show{
-opacity:1;
-transform:translateY(0);
+.switch{
+text-align:center;
+margin-top:10px;
+font-size:14px;
 }
 
-/* MOBILE */
-@media(max-width:900px){
+.switch span{
+color:var(--accent);
+cursor:pointer;
+font-weight:600;
+}
 
-.nav-links{
+#error{
+text-align:center;
+color:#ff4d4d;
+font-size:13px;
+min-height:20px;
+}
+
+#signupForm{
 display:none;
-flex-direction:column;
-position:absolute;
-top:60px;
-right:20px;
-background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
-
-body.dark .nav-links{
-background:#1f2937;
-}
-
-.nav-links.active{
-display:flex;
-}
-
-.hamburger{
-display:block;
-}
-
-}
-
 </style>
 </head>
-
 <body>
 
-<!-- BACKGROUND ANIMATION -->
-<div class="bg-animation">
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
+<div class="container">
+<div class="logo">Knowledge Nexus Academy</div>
+<div id="error"></div>
+
+<!-- LOGIN -->
+<form id="loginForm" class="form">
+<input type="email" id="loginEmail" placeholder="Email Address" required>
+<input type="password" id="loginPassword" placeholder="Password" required>
+<button type="submit">Login</button>
+
+<div class="switch">
+Don't have an account? <span onclick="showSignup()">Sign Up</span>
 </div>
+</form>
 
-<div class="navbar">
-<div class="logo">💡 Knowledge Nexus Academy</div>
+<!-- SIGNUP -->
+<form id="signupForm" class="form">
+<input type="text" id="signupName" placeholder="Full Name" required>
+<input type="email" id="signupEmail" placeholder="Email Address" required>
 
-<div class="nav-links" id="navLinks">
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="#courses">Courses</a>
-<a href="#notes">Notes</a>
-<a href="#events">Events</a>
-<a href="#fees">Fees</a>
-<a href="#footer">Contact</a>
+<select id="signupClass" required>
+<option value="">Select Class</option>
+<option value="5">Class 5</option>
+<option value="6">Class 6</option>
+<option value="7">Class 7</option>
+<option value="8">Class 8</option>
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
+</select>
+
+<input type="password" id="signupPassword" placeholder="Create Password" required>
+<button type="submit">Create Account</button>
+
+<div class="switch">
+Already have an account? <span onclick="showLogin()">Login</span>
 </div>
-
-<div>
-<span onclick="toggleDark()" style="cursor:pointer; font-size:18px;">🌙</span>
-<span class="hamburger" onclick="toggleMenu()">☰</span>
-</div>
-</div>
-
-<!-- HOME -->
-<section class="hero" id="home">
-<h1>Knowledge Nexus <span>Academy</span></h1>
-<p>From Confusion To Clarity</p>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLScMSCfBHdfbtbuGncMTn4sweyrtKiyY5hHYgpd8qmW9EGuD_w/viewform" target="_blank" class="btn">Enroll Now</a>
-</section>
-
-<!-- ABOUT -->
-<section class="section fade" id="about">
-<h2>About Us</h2>
-<p>
-Knowledge Nexus Academy is a trusted and student-focused coaching institute dedicated to providing high-quality education and building a strong academic foundation for every learner.
-<br><br>
-At Knowledge Nexus Academy, we believe that every student has the potential to achieve greatness when guided with the right strategy and support.
-<br><br>
-We provide well-structured classes, concept-based learning, regular tests, doubt-clearing sessions, and personalized attention to ensure that each student understands every topic deeply.
-<br><br>
-Join Knowledge Nexus Academy and take the first step towards a brighter and successful future.
-</p>
-</section>
-
-<!-- COURSES -->
-<section class="section fade" id="courses">
-<h2>Our Courses (Class 6 – 12)</h2>
-
-<div class="cards">
-
-<div class="card">
-  <h3>Class 6</h3>
-  <p>All Subjects: Maths, Science, English, SST, Hindi</p>
-  <a href="https://knowledgenexusacademy.in/class6.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 7</h3>
-<p>All Subjects with Weekly Tests</p>
-<a href="https://knowledgenexusacademy.in/class7.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 8</h3>
-<p>All Subjects + Olympiad Preparation</p>
-<a href="https://knowledgenexusacademy.in/class8.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 9</h3>
-<p>All Subjects + Board Foundation</p>
-<a href="https://knowledgenexusacademy.in/class9.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 10</h3>
-<p>All Subjects + Complete Board Test Series</p>
-<a href="https://knowledgenexusacademy.in/class10.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 11 (PCMB)</h3>
-<p>Physics, Chemistry, Maths, Biology</p>
-<a href="https://knowledgenexusacademy.in/class11.html" class="btn">View Details</a>
-</div>
-
-<div class="card">
-<h3>Class 12 (PCMB)</h3>
-<p>Board + NEET / JEE Preparation</p>
-<a href="https://knowledgenexusacademy.in/class12.html" class="btn">View Details</a>
-</div>
-
-</div>
-</section>
-
-
-<!-- NOTES SECTION -->
-<section class="section fade" id="notes">
-<h2>Free Notes & Study Material</h2>
-<p>Download or View Notes for all classes (6 to 12) prepared by Knowledge Nexus Academy.</p>
-
-<div class="cards">
-
-<div class="card">
-  <h3>Class 6 Notes</h3>
-  <p>Maths, Science, English, SST, Hindi</p>
-  <a href="https://knowledgenexusacademy.in/notes/class6.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 7 Notes</h3>
-  <p>Complete Study Material + Practice Questions</p>
-  <a href="https://knowledgenexusacademy.in/notes/class7.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 8 Notes</h3>
-  <p>NCERT + Olympiad Notes</p>
-  <a href="https://knowledgenexusacademy.in/notes/class8.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 9 Notes</h3>
-  <p>Board Level Notes + Important Questions</p>
-  <a href="https://knowledgenexusacademy.in/notes/class9notes.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 10 Notes</h3>
-  <p>Board Notes + Sample Paper Solutions</p>
-  <a href="https://knowledgenexusacademy.in/notes/class10notes.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 11 Notes</h3>
-  <p>Physics, Chemistry, Maths, Biology</p>
-  <a href="https://knowledgenexusacademy.in/notes/class11.html" class="btn">View Notes</a>
-</div>
-
-<div class="card">
-  <h3>Class 12 Notes</h3>
-  <p>Boards + NEET / JEE Notes</p>
-  <a href="https://knowledgenexusacademy.in/notes/class12.html" class="btn">View Notes</a>
-</div>
+</form>
 
 </div>
 
-</section>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-<!-- FEE STRUCTURE -->
-<section class="section fade" id="fees">
-<h2>Fee Structure</h2>
+import { 
+  getFirestore, 
+  doc, 
+  setDoc, 
+  getDoc,
+  serverTimestamp 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<div class="event-box">
-<h3>Class 6 – 7</h3>
-<p>₹500 / month</p>
-</div>
+/* 🔥 YOUR FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
+  authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
+  projectId: "knowledgenexusacademy-7c1b3",
+  storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
+};
 
-<div class="event-box">
-<h3>Class 8</h3>
-<p>₹600 / month</p>
-</div>
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-<div class="event-box">
-<h3>Class 9</h3>
-<p>₹700 / month</p>
-</div>
+const errorBox = document.getElementById("error");
 
-<div class="event-box">
-<h3>Class 10</h3>
-<p>₹800 / month</p>
-</div>
+/* ================= SIGNUP ================= */
 
-<div class="event-box">
-<h3>Class 11 – 12 (PCMB)</h3>
-<p>₹1500 / month</p>
-</div>
+document.getElementById("signupForm").addEventListener("submit", async (e)=>{
+e.preventDefault();
 
-</section>
+const name = document.getElementById("signupName").value.trim();
+const email = document.getElementById("signupEmail").value.trim();
+const studentClass = document.getElementById("signupClass").value;
+const password = document.getElementById("signupPassword").value;
 
+if(!studentClass){
+errorBox.innerText = "Please select class.";
+return;
+}
 
-<!-- SYLLABUS -->
-<section class="section fade">
-  <h2>Download Syllabus</h2>
+try{
 
-  <button class="btn" onclick="window.location.href='https://knowledgenexusacademy.in/syllabus.html'">
-    View Syllabus
-  </button>
-</section>
+const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+const user = userCredential.user;
 
+await setDoc(doc(db,"students",user.uid),{
+name: name,
+email: email,
+class: studentClass,
+role: "student",
+createdAt: serverTimestamp()
+});
 
-<!-- EVENTS -->
-<section class="section fade" id="events">
-<h2>Upcoming Events</h2>
+alert("Account Created Successfully!");
 
-<div class="event-box">
-<h3>New Batches For Each Class (2026)</h3>
-<p>Date: 9 March 2026</p>
-</div>
+/* Redirect after signup */
+window.location.href = "class" + studentClass + "index.html";
 
-<div class="event-box">
-<h3>Opening Ceremony</h3>
-<p>Date: 27 February 2026</p>
-</div>
+}catch(error){
+errorBox.innerText = error.message;
+}
 
-</section>
+});
 
+/* ================= LOGIN ================= */
 
-<footer class="section fade" id="footer">
-<h2>Our Address</h2>
-<p>Mahavir Mandir station road Masaurhi, 804452</p>
-<p>Email: knowledgenexusacademy.edu@gmail.com</p>
-<p>Phone: +91 7903736302, +91 9162123034</p>
-</footer>
+document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+e.preventDefault();
+
+const email = document.getElementById("loginEmail").value;
+const password = document.getElementById("loginPassword").value;
+
+try{
+
+const userCredential = await signInWithEmailAndPassword(auth,email,password);
+const user = userCredential.user;
+
+/* Fetch class from Firestore */
+const docRef = doc(db,"students",user.uid);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const studentClass = docSnap.data().class;
+
+/* Redirect dynamically */
+window.location.href = "class" + studentClass + "index.html";
+
+}else{
+errorBox.innerText = "Student data not found.";
+}
+
+}catch(error){
+errorBox.innerText = error.message;
+}
+
+});
+
+</script>
 
 <script>
-
-function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active");
+function showSignup(){
+document.getElementById("loginForm").style.display="none";
+document.getElementById("signupForm").style.display="flex";
+document.getElementById("error").innerText="";
 }
-
-function toggleDark(){
-document.body.classList.toggle("dark");
+function showLogin(){
+document.getElementById("signupForm").style.display="none";
+document.getElementById("loginForm").style.display="flex";
+document.getElementById("error").innerText="";
 }
-
-/* FADE ANIMATION */
-const faders=document.querySelectorAll('.fade');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-});
-},{threshold:0.3});
-faders.forEach(f=>observer.observe(f));
-
 </script>
 
 </body>
 </html>
-
-
