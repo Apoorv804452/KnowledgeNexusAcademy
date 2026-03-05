@@ -168,7 +168,12 @@
 </script>
 
 <script>
-    function goBack() { window.location.href = "class9index.html"; }
+    // The ../ tells the browser to go OUT of the current folder 
+    // and look for the file in the main directory.
+    function goBack() { 
+        window.location.href = "../class9index.html"; 
+    }
+
     function action(type, id) { 
         console.log(`${type} requested for Chapter ${id}`);
         alert(`${type} for Chapter ${id} will be available soon!`); 
