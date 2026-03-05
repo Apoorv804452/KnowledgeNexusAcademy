@@ -16,49 +16,20 @@
             --text-muted: #64748b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-main); }
 
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        /* Fixed Header Area */
         .hero-section {
             background-color: var(--primary-blue);
-            height: 280px; /* Gives enough room so text doesn't overlap */
+            height: 280px;
             padding: 20px 50px;
             color: white;
-            position: relative;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .user-nav { display: flex; align-items: center; gap: 15px; }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
+        /* Dynamic Initials Circle */
         .avatar {
             background: #4ade80;
             color: #064e3b;
@@ -69,163 +40,117 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         .logout-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
+            background: #ef4444; color: white; border: none; 
+            padding: 8px 16px; border-radius: 8px; cursor: pointer;
         }
 
-        .logout-btn:hover { background: #dc2626; }
-
-        /* Welcome Text */
-        .welcome-box {
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-box h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        /* Dashboard Content - The "Lifting" effect */
         .main-content {
             max-width: 1200px;
-            margin: -80px auto 50px; /* Pulls content up into the blue area */
+            margin: -80px auto 50px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: 1.5fr 1fr; /* Matches the image layout */
+            grid-template-columns: 1.5fr 1fr;
             gap: 25px;
-            position: relative;
-            z-index: 10;
         }
 
-        .card {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
+        .card { background: var(--white); border-radius: 24px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; }
 
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 700;
+        /* Subject Grid */
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
             margin-bottom: 25px;
         }
 
-        /* List Items */
-        .item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border: 1px solid #f1f5f9;
+        .subject-card {
+            background: #f1f5f9;
+            padding: 20px;
             border-radius: 16px;
-            margin-bottom: 15px;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
         }
 
-        .item:hover {
-            transform: scale(1.02);
-            background: #fbfcfd;
+        .subject-card:hover { border-color: #3b82f6; background: #fff; transform: translateY(-3px); }
+        .subject-card i { font-size: 1.5rem; margin-bottom: 10px; color: #233a71; }
+        .subject-card p { font-weight: 600; font-size: 0.9rem; }
+
+        /* Item Rows */
+        .item {
+            display: flex; align-items: center; padding: 12px;
+            border: 1px solid #f1f5f9; border-radius: 12px;
+            margin-bottom: 10px; text-decoration: none; color: inherit;
         }
 
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            color: white;
-            font-size: 1.2rem;
-        }
+        .icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: white; }
+        .blue { background: #3b82f6; } .orange { background: #f59e0b; } .green { background: #10b981; }
 
-        .blue-icon { background: #3b82f6; }
-        .green-icon { background: #10b981; }
-        .orange-icon { background: #f59e0b; }
-
-        .item-text h4 { font-size: 1.1rem; margin-bottom: 2px; }
-        .item-text p { font-size: 0.9rem; color: var(--text-muted); }
-
-        @media (max-width: 900px) {
-            .main-content { grid-template-columns: 1fr; margin-top: -40px; }
-            .hero-section { height: auto; padding-bottom: 80px; }
-        }
     </style>
 </head>
 <body>
 
 <section class="hero-section">
     <nav>
-        <div class="logo">
-            <i class="fas fa-book-open"></i> Knowledge Nexus Academy
-        </div>
+        <div class="logo"><strong>Knowledge Nexus Academy</strong></div>
         <div class="user-nav">
-            <span id="displayName">Siddharth</span>
-            <div class="avatar">RA</div>
+            <span id="userName">Student</span>
+            <div class="avatar" id="userInitials">??</div>
             <button class="logout-btn" id="logoutBtn">Logout</button>
         </div>
     </nav>
-
-    <div class="welcome-box">
-        <h1>Class 9 Dashboard</h1>
-        <p id="welcomeUser">Welcome back, Rahul!</p>
-    </div>
+    <h1>Class 9 Dashboard</h1>
+    <p id="welcomeMsg">Welcome back!</p>
 </section>
 
 <main class="main-content">
-    <div class="card">
-        <div class="card-title">
-            <i class="fas fa-folder" style="color: #3b82f6;"></i> Notes
+    <div class="left-col">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-book"></i> My Subjects</div>
+            <div class="subject-grid">
+                <div class="subject-card" onclick="window.location.href='maths9.html'">
+                    <i class="fas fa-calculator"></i>
+                    <p>Maths</p>
+                </div>
+                <div class="subject-card" onclick="window.location.href='science9.html'">
+                    <i class="fas fa-flask"></i>
+                    <p>Science</p>
+                </div>
+                <div class="subject-card" onclick="window.location.href='history9.html'">
+                    <i class="fas fa-landmark"></i>
+                    <p>History</p>
+                </div>
+                <div class="subject-card" onclick="window.location.href='english9.html'">
+                    <i class="fas fa-pen-nib"></i>
+                    <p>English</p>
+                </div>
+            </div>
         </div>
-        
-        <a href="#" class="item">
-            <div class="icon-box blue-icon"><i class="fas fa-file-pdf"></i></div>
-            <div class="item-text">
-                <h4>Chemistry Chapter 6.pdf</h4>
-            </div>
-        </a>
 
-        <a href="#" class="item">
-            <div class="icon-box green-icon"><i class="fas fa-file-pdf"></i></div>
-            <div class="item-text">
-                <h4>Physics Chapter 4.pdf</h4>
-            </div>
-        </a>
+        <div class="card">
+            <div class="card-title"><i class="fas fa-folder" style="color:#3b82f6"></i> Recent Notes</div>
+            <a href="#" class="item">
+                <div class="icon-box blue"><i class="fas fa-file-pdf"></i></div>
+                <h4>Chemistry Chapter 6.pdf</h4>
+            </a>
+        </div>
     </div>
 
-    <div class="card">
-        <div class="card-title">
-            <i class="fas fa-clipboard-list" style="color: #f59e0b;"></i> Homework
-        </div>
-
-        <div class="item">
-            <div class="icon-box orange-icon"><i class="fas fa-calculator"></i></div>
-            <div class="item-text">
-                <h4>Maths Exercise 8.2</h4>
-                <p>Due April 25</p>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="icon-box green-icon"><i class="fas fa-landmark"></i></div>
-            <div class="item-text">
-                <h4>History Questions</h4>
-                <p>Due Today</p>
+    <div class="right-col">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-clipboard-list" style="color:#f59e0b"></i> Homework</div>
+            <div class="item">
+                <div class="icon-box orange"><i class="fas fa-tasks"></i></div>
+                <div>
+                    <h4>Maths Exercise 8.2</h4>
+                    <p style="font-size:0.8rem; color:gray">Due April 25</p>
+                </div>
             </div>
         </div>
     </div>
@@ -253,20 +178,22 @@
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                document.getElementById("displayName").innerText = data.name;
-                document.getElementById("welcomeUser").innerText = "Welcome back, " + data.name + "!";
+                const name = data.name;
+                
+                // Set Display Name
+                document.getElementById("userName").innerText = name;
+                document.getElementById("welcomeMsg").innerText = "Welcome back, " + name + "!";
+
+                // Generate Initials (e.g., "Siddharth" -> "S", "Rahul Sharma" -> "RS")
+                const initials = name.split(" ").map(n => n[0]).join("");
+                document.getElementById("userInitials").innerText = initials.substring(0, 2);
             }
         } else {
             window.location.href = "index.html";
         }
     });
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-        signOut(auth).then(() => {
-            window.location.href = "index.html";
-        });
-    });
+    document.getElementById("logoutBtn").addEventListener("click", () => signOut(auth));
 </script>
-
 </body>
 </html>
