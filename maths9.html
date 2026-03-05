@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 9 Maths | Knowledge Nexus Academy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --accent:#38bdf8;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+
+body{
+  background:#0f172a;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#111827;
+  box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+.logo{
+  font-weight:800;
+  font-size:20px;
+  color:var(--accent);
+  cursor:pointer;
+}
+
+.student-info{
+  font-size:14px;
+}
+
+.logout-btn{
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  background:var(--accent);
+  font-weight:600;
+  cursor:pointer;
+}
+
+.container{
+  padding:40px;
+}
+
+.title{
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:25px;
+}
+
+/* UPDATED SECTION: Changed to column to put buttons on next line */
+.chapter{
+  background:#1e293b;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:15px;
+  display:flex;
+  flex-direction: column; /* Stacks title and button div vertically */
+  align-items: flex-start; /* Aligns content to the left */
+  gap: 15px;               /* Adds spacing between title and buttons */
+  transition:0.3s;
+}
+
+.chapter:hover{
+  background:#334155;
+}
+
+.chapter h3{
+  font-size:16px;
+  font-weight: 600;
+}
+
+/* Optional: Adds spacing between the buttons themselves */
+.chapter div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap; /* Ensures buttons wrap on very small screens */
+}
+
+.btn{
+  padding:8px 16px;
+  border:none;
+  border-radius:20px;
+  background:var(--accent);
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  color: #0f172a; /* Darker text for better contrast on light blue */
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo" onclick="goBack()">Knowledge Nexus Academy</div>
+<div>
+<span class="student-info" id="studentName">Loading...</span>
+<button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
+</header>
+
+<div class="container">
+
+<div class="title">Class 9 Mathematics</div>
+
+<div class="chapter">
+<h3>Chapter 1: Number Systems</h3>
+<div>
+<button class="btn" onclick="downloadNotes(1)">Notes</button>
+<button class="btn" onclick="openQuestions(1)">Questions</button>
+<button class="btn" onclick="openMCQ(1)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 2: Polynomials</h3>
+<div>
+<button class="btn" onclick="downloadNotes(2)">Notes</button>
+<button class="btn" onclick="openQuestions(2)">Questions</button>
+<button class="btn" onclick="openMCQ(2)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 3: Coordinate Geometry</h3>
+<div>
+<button class="btn" onclick="downloadNotes(3)">Notes</button>
+<button class="btn" onclick="openQuestions(3)">Questions</button>
+<button class="btn" onclick="openMCQ(3)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 4: Linear Equations in Two Variables</h3>
+<div>
+<button class="btn" onclick="downloadNotes(4)">Notes</button>
+<button class="btn" onclick="openQuestions(4)">Questions</button>
+<button class="btn" onclick="openMCQ(4)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 5: Introduction to Euclid's Geometry</h3>
+<div>
+<button class="btn" onclick="downloadNotes(5)">Notes</button>
+<button class="btn" onclick="openQuestions(5)">Questions</button>
+<button class="btn" onclick="openMCQ(5)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 6: Lines and Angles</h3>
+<div>
+<button class="btn" onclick="downloadNotes(6)">Notes</button>
+<button class="btn" onclick="openQuestions(6)">Questions</button>
+<button class="btn" onclick="openMCQ(6)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 7: Triangles</h3>
+<div>
+<button class="btn" onclick="downloadNotes(7)">Notes</button>
+<button class="btn" onclick="openQuestions(7)">Questions</button>
+<button class="btn" onclick="openMCQ(7)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 8: Quadrilaterals</h3>
+<div>
+<button class="btn" onclick="downloadNotes(8)">Notes</button>
+<button class="btn" onclick="openQuestions(8)">Questions</button>
+<button class="btn" onclick="openMCQ(8)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 9: Areas of Parallelograms and Triangles</h3>
+<div>
+<button class="btn" onclick="downloadNotes(9)">Notes</button>
+<button class="btn" onclick="openQuestions(9)">Questions</button>
+<button class="btn" onclick="openMCQ(9)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 10: Circles</h3>
+<div>
+<button class="btn" onclick="downloadNotes(10)">Notes</button>
+<button class="btn" onclick="openQuestions(10)">Questions</button>
+<button class="btn" onclick="openMCQ(10)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 11: Constructions</h3>
+<div>
+<button class="btn" onclick="downloadNotes(11)">Notes</button>
+<button class="btn" onclick="openQuestions(11)">Questions</button>
+<button class="btn" onclick="openMCQ(11)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 12: Heron's Formula</h3>
+<div>
+<button class="btn" onclick="downloadNotes(12)">Notes</button>
+<button class="btn" onclick="openQuestions(12)">Questions</button>
+<button class="btn" onclick="openMCQ(12)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 13: Surface Areas and Volumes</h3>
+<div>
+<button class="btn" onclick="downloadNotes(13)">Notes</button>
+<button class="btn" onclick="openQuestions(13)">Questions</button>
+<button class="btn" onclick="openMCQ(13)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 14: Statistics</h3>
+<div>
+<button class="btn" onclick="downloadNotes(14)">Notes</button>
+<button class="btn" onclick="openQuestions(14)">Questions</button>
+<button class="btn" onclick="openMCQ(14)">MCQ Test</button>
+</div>
+</div>
+
+<div class="chapter">
+<h3>Chapter 15: Probability</h3>
+<div>
+<button class="btn" onclick="downloadNotes(15)">Notes</button>
+<button class="btn" onclick="openQuestions(15)">Questions</button>
+<button class="btn" onclick="openMCQ(15)">MCQ Test</button>
+</div>
+</div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { 
+  getAuth, 
+  onAuthStateChanged, 
+  signOut 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { 
+  getFirestore, 
+  doc, 
+  getDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
+  authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
+  projectId: "knowledgenexusacademy-7c1b3",
+  storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const studentName = document.getElementById("studentName");
+
+/* Protect Page */
+onAuthStateChanged(auth, async (user)=>{
+if(user){
+const docRef = doc(db,"students",user.uid);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+const data = docSnap.data();
+
+if(data.class !== "9"){
+alert("Access Denied!");
+window.location.href="login.html";
+return;
+}
+
+studentName.innerText = "Welcome, " + data.name;
+}
+}else{
+window.location.href="login.html";
+}
+});
+
+/* Logout */
+document.getElementById("logoutBtn").addEventListener("click", async ()=>{
+await signOut(auth);
+window.location.href="login.html";
+});
+</script>
+
+<script>
+function goBack(){
+window.location.href="class9index.html";
+}
+// Placeholder functions to prevent console errors
+function downloadNotes(id) { console.log("Downloading notes for chapter " + id); }
+function openQuestions(id) { console.log("Opening questions for chapter " + id); }
+function openMCQ(id) { console.log("Opening MCQ for chapter " + id); }
+</script>
+
+</body>
+</html>
