@@ -14,84 +14,72 @@
             --white: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --accent-blue: #3b82f6;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--light-bg); color: var(--text-main); }
 
-        /* Hero Header */
         .hero-section {
             background-color: var(--primary-blue);
-            min-height: 200px;
+            min-height: 180px;
             padding: 20px 5%;
             color: white;
         }
 
-        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
         .back-btn { 
             color: white; text-decoration: none; font-size: 0.9rem; 
             display: flex; align-items: center; gap: 8px; cursor: pointer;
+            background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px;
         }
 
-        /* Container */
+        .user-nav { display: flex; align-items: center; gap: 10px; }
+        .avatar {
+            background: #4ade80; color: #064e3b; width: 35px; height: 35px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 0.8rem;
+        }
+
         .container {
-            max-width: 1000px;
-            margin: -60px auto 50px;
+            max-width: 900px;
+            margin: -50px auto 50px;
             padding: 0 15px;
         }
 
-        .page-title { margin-bottom: 25px; color: white; font-size: 2rem; font-weight: 800; }
+        .page-title { margin-bottom: 25px; color: white; font-size: 1.8rem; font-weight: 800; }
 
-        /* Chapter Card Styling */
         .chapter-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
-        .chapter-card:hover { transform: translateY(-3px); }
+        .chapter-info h3 { font-size: 1rem; font-weight: 700; color: var(--primary-blue); }
 
-        .chapter-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .chapter-info p { font-size: 0.85rem; color: var(--text-muted); }
-
-        /* Buttons Group */
-        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-group { display: flex; gap: 8px; }
 
         .action-btn {
-            border: none;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-            background: #f1f5f9;
-            color: var(--text-main);
+            border: none; padding: 8px 12px; border-radius: 10px;
+            font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 6px; transition: 0.2s;
+            background: #f1f5f9; color: var(--text-main);
         }
 
-        .action-btn i { font-size: 1rem; }
-        
-        /* Button Variants */
-        .btn-notes:hover { background: #dbeafe; color: #1e40af; }
-        .btn-qs:hover { background: #dcfce7; color: #166534; }
         .btn-mcq { background: var(--primary-blue); color: white; }
         .btn-mcq:hover { background: #1a2a52; }
+        .btn-notes:hover { background: #dbeafe; }
 
-        /* Responsive Settings */
         @media (max-width: 768px) {
-            .chapter-card { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .btn-group { width: 100%; justify-content: space-between; }
-            .action-btn { flex: 1; justify-content: center; font-size: 0.75rem; padding: 12px 8px; }
+            .chapter-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn-group { width: 100%; }
+            .action-btn { flex: 1; justify-content: center; }
         }
     </style>
 </head>
@@ -100,51 +88,17 @@
 <section class="hero-section">
     <nav>
         <div class="back-btn" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i> Back to Dashboard
+            <i class="fas fa-arrow-left"></i> Dashboard
         </div>
-        <div id="studentName" style="font-size: 0.85rem; opacity: 0.9;">Loading...</div>
+        <div class="user-nav">
+            <span id="userName" style="font-size: 0.8rem;">Loading...</span>
+            <div class="avatar" id="userInitials">??</div>
+        </div>
     </nav>
     <h1 class="page-title">Mathematics</h1>
 </section>
 
-<div class="container">
-    
-    <div class="chapter-card">
-        <div class="chapter-info">
-            <h3>Chapter 1: Number Systems</h3>
-            <p>Real numbers, Laws of exponents</p>
-        </div>
-        <div class="btn-group">
-            <button class="action-btn btn-notes" onclick="downloadNotes(1)"><i class="fas fa-file-pdf"></i> Notes</button>
-            <button class="action-btn btn-qs" onclick="openQuestions(1)"><i class="fas fa-pen-to-square"></i> Questions</button>
-            <button class="action-btn btn-mcq" onclick="openMCQ(1)"><i class="fas fa-stopwatch"></i> MCQ Test</button>
-        </div>
-    </div>
-
-    <div class="chapter-card">
-        <div class="chapter-info">
-            <h3>Chapter 2: Polynomials</h3>
-            <p>Factorisation, Algebraic identities</p>
-        </div>
-        <div class="btn-group">
-            <button class="action-btn btn-notes" onclick="downloadNotes(2)"><i class="fas fa-file-pdf"></i> Notes</button>
-            <button class="action-btn btn-qs" onclick="openQuestions(2)"><i class="fas fa-pen-to-square"></i> Questions</button>
-            <button class="action-btn btn-mcq" onclick="openMCQ(2)"><i class="fas fa-stopwatch"></i> MCQ Test</button>
-        </div>
-    </div>
-
-    <div class="chapter-card">
-        <div class="chapter-info">
-            <h3>Chapter 3: Coordinate Geometry</h3>
-            <p>Cartesian system, Plotting points</p>
-        </div>
-        <div class="btn-group">
-            <button class="action-btn btn-notes" onclick="downloadNotes(3)"><i class="fas fa-file-pdf"></i> Notes</button>
-            <button class="action-btn btn-qs" onclick="openQuestions(3)"><i class="fas fa-pen-to-square"></i> Questions</button>
-            <button class="action-btn btn-mcq" onclick="openMCQ(3)"><i class="fas fa-stopwatch"></i> MCQ Test</button>
-        </div>
-    </div>
-
+<div class="container" id="chaptersContainer">
     </div>
 
 <script type="module">
@@ -163,12 +117,42 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const chapters = [
+        "Number Systems", "Polynomials", "Coordinate Geometry", 
+        "Linear Equations in Two Variables", "Introduction to Euclid's Geometry", 
+        "Lines and Angles", "Triangles", "Quadrilaterals", 
+        "Areas of Parallelograms and Triangles", "Circles", 
+        "Constructions", "Heron's Formula", "Surface Areas and Volumes", 
+        "Statistics", "Probability"
+    ];
+
+    const container = document.getElementById('chaptersContainer');
+    
+    // Dynamically generate all 15 chapters
+    chapters.forEach((name, index) => {
+        const chapterNum = index + 1;
+        container.innerHTML += `
+            <div class="chapter-card">
+                <div class="chapter-info">
+                    <h3>Chapter ${chapterNum}: ${name}</h3>
+                </div>
+                <div class="btn-group">
+                    <button class="action-btn btn-notes" onclick="action('Notes', ${chapterNum})"><i class="fas fa-file-pdf"></i> Notes</button>
+                    <button class="action-btn btn-mcq" onclick="action('MCQ', ${chapterNum})"><i class="fas fa-stopwatch"></i> Test</button>
+                </div>
+            </div>
+        `;
+    });
+
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             const docRef = doc(db, "students", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                document.getElementById("studentName").innerText = "Welcome, " + docSnap.data().name;
+                const name = docSnap.data().name;
+                document.getElementById("userName").innerText = name;
+                const initials = name.split(" ").map(n => n[0]).join("");
+                document.getElementById("userInitials").innerText = initials.substring(0, 2);
             }
         } else {
             window.location.href = "index.html";
@@ -178,9 +162,7 @@
 
 <script>
     function goBack() { window.location.href = "class9index.html"; }
-    function downloadNotes(id) { alert("Downloading Notes for Chapter " + id); }
-    function openQuestions(id) { alert("Opening Practice Questions for Chapter " + id); }
-    function openMCQ(id) { alert("Starting MCQ Test for Chapter " + id); }
+    function action(type, id) { alert(type + " for Chapter " + id + " coming soon!"); }
 </script>
 
 </body>
