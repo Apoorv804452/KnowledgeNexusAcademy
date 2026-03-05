@@ -17,102 +17,155 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--light-bg); color: var(--text-main); }
+        
+        body { 
+            background-color: var(--light-bg); 
+            color: var(--text-main);
+            line-height: 1.5;
+        }
 
+        /* Hero Section - Adjusted for Mobile */
         .hero-section {
             background-color: var(--primary-blue);
-            height: 280px;
-            padding: 20px 50px;
+            min-height: 250px;
+            padding: 20px 5%;
             color: white;
         }
 
-        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .user-nav { display: flex; align-items: center; gap: 15px; }
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-        /* Dynamic Initials Circle */
+        .user-nav { display: flex; align-items: center; gap: 10px; }
+
         .avatar {
             background: #4ade80;
             color: #064e3b;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
 
         .logout-btn {
             background: #ef4444; color: white; border: none; 
-            padding: 8px 16px; border-radius: 8px; cursor: pointer;
+            padding: 6px 12px; border-radius: 8px; cursor: pointer;
+            font-size: 0.8rem;
         }
 
+        /* Title responsive sizing */
+        .hero-section h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+
+        /* Main Content - Grid switches to 1 column on mobile */
         .main-content {
             max-width: 1200px;
-            margin: -80px auto 50px;
-            padding: 0 20px;
+            margin: -60px auto 50px;
+            padding: 0 15px;
             display: grid;
             grid-template-columns: 1.5fr 1fr;
-            gap: 25px;
+            gap: 20px;
         }
 
-        .card { background: var(--white); border-radius: 24px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card-title { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; }
+        .card { 
+            background: var(--white); 
+            border-radius: 20px; 
+            padding: 20px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06); 
+            margin-bottom: 10px; 
+        }
 
-        /* Subject Grid */
+        .card-title { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+        }
+
+        /* Subject Grid - 2 columns on mobile, 4 on desktop */
         .subject-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
         .subject-card {
             background: #f1f5f9;
-            padding: 20px;
-            border-radius: 16px;
+            padding: 15px;
+            border-radius: 15px;
             text-align: center;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
             border: 2px solid transparent;
         }
 
-        .subject-card:hover { border-color: #3b82f6; background: #fff; transform: translateY(-3px); }
-        .subject-card i { font-size: 1.5rem; margin-bottom: 10px; color: #233a71; }
-        .subject-card p { font-weight: 600; font-size: 0.9rem; }
+        .subject-card:active { transform: scale(0.95); }
+        .subject-card i { font-size: 1.3rem; margin-bottom: 8px; color: var(--primary-blue); }
+        .subject-card p { font-weight: 600; font-size: 0.85rem; }
 
-        /* Item Rows */
+        /* List Items */
         .item {
             display: flex; align-items: center; padding: 12px;
             border: 1px solid #f1f5f9; border-radius: 12px;
             margin-bottom: 10px; text-decoration: none; color: inherit;
         }
 
-        .icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: white; }
-        .blue { background: #3b82f6; } .orange { background: #f59e0b; } .green { background: #10b981; }
+        .icon-box { 
+            width: 40px; height: 40px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center; 
+            margin-right: 12px; color: white; flex-shrink: 0;
+        }
 
+        .blue { background: #3b82f6; } 
+        .orange { background: #f59e0b; }
+
+        .item-info h4 { font-size: 0.95rem; word-break: break-word; }
+
+        /* MOBILE MEDIA QUERIES */
+        @media (max-width: 850px) {
+            .main-content {
+                grid-template-columns: 1fr; /* Stacks columns */
+                margin-top: -40px;
+            }
+            
+            .hero-section { padding: 20px 20px 60px 20px; }
+        }
+
+        @media (min-width: 600px) {
+            .subject-grid { grid-template-columns: repeat(4, 1fr); }
+        }
     </style>
 </head>
 <body>
 
 <section class="hero-section">
     <nav>
-        <div class="logo"><strong>Knowledge Nexus Academy</strong></div>
+        <div class="logo"><strong>Knowledge Nexus</strong></div>
         <div class="user-nav">
-            <span id="userName">Student</span>
+            <span id="userName" style="font-size: 0.9rem;">Student</span>
             <div class="avatar" id="userInitials">??</div>
             <button class="logout-btn" id="logoutBtn">Logout</button>
         </div>
     </nav>
     <h1>Class 9 Dashboard</h1>
-    <p id="welcomeMsg">Welcome back!</p>
+    <p id="welcomeMsg" style="opacity: 0.8;">Welcome back!</p>
 </section>
 
 <main class="main-content">
     <div class="left-col">
         <div class="card">
-            <div class="card-title"><i class="fas fa-book"></i> My Subjects</div>
+            <div class="card-title"><i class="fas fa-book"></i> Subjects</div>
             <div class="subject-grid">
                 <div class="subject-card" onclick="window.location.href='maths9.html'">
                     <i class="fas fa-calculator"></i>
@@ -137,7 +190,7 @@
             <div class="card-title"><i class="fas fa-folder" style="color:#3b82f6"></i> Recent Notes</div>
             <a href="#" class="item">
                 <div class="icon-box blue"><i class="fas fa-file-pdf"></i></div>
-                <h4>Chemistry Chapter 6.pdf</h4>
+                <div class="item-info"><h4>Chemistry Chapter 6.pdf</h4></div>
             </a>
         </div>
     </div>
@@ -147,9 +200,9 @@
             <div class="card-title"><i class="fas fa-clipboard-list" style="color:#f59e0b"></i> Homework</div>
             <div class="item">
                 <div class="icon-box orange"><i class="fas fa-tasks"></i></div>
-                <div>
+                <div class="item-info">
                     <h4>Maths Exercise 8.2</h4>
-                    <p style="font-size:0.8rem; color:gray">Due April 25</p>
+                    <p style="font-size:0.75rem; color:var(--text-muted)">Due Tomorrow</p>
                 </div>
             </div>
         </div>
@@ -178,13 +231,12 @@
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                const name = data.name;
+                const name = data.name || "Student";
                 
-                // Set Display Name
-                document.getElementById("userName").innerText = name;
+                document.getElementById("userName").innerText = name.split(" ")[0]; // Just first name for mobile space
                 document.getElementById("welcomeMsg").innerText = "Welcome back, " + name + "!";
 
-                // Generate Initials (e.g., "Siddharth" -> "S", "Rahul Sharma" -> "RS")
+                // Initials Logic
                 const initials = name.split(" ").map(n => n[0]).join("");
                 document.getElementById("userInitials").innerText = initials.substring(0, 2);
             }
@@ -193,7 +245,7 @@
         }
     });
 
-    document.getElementById("logoutBtn").addEventListener("click", () => signOut(auth));
+    document.getElementById("logoutBtn").onclick = () => signOut(auth);
 </script>
 </body>
 </html>
