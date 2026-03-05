@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 9 Dashboard | Knowledge Nexus Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-blue: #233a71;
-            --light-bg: #f0f4f9;
-            --card-white: #ffffff;
-            --text-dark: #1e293b;
+            --primary-blue: #233a71;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
             --text-muted: #64748b;
-            --accent-orange: #f97316;
         }
 
         * {
@@ -26,258 +25,211 @@
 
         body {
             background-color: var(--light-bg);
-            color: var(--text-dark);
-            min-height: 100vh;
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* Header / Hero Section */
-        .hero-banner {
-            background-color: var(--bg-blue);
+        /* Fixed Header Area */
+        .hero-section {
+            background-color: var(--primary-blue);
+            height: 280px; /* Gives enough room so text doesn't overlap */
+            padding: 20px 50px;
             color: white;
-            padding: 20px 60px 100px 60px;
+            position: relative;
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 40px;
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-        }
-
-        .user-profile img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #ddd;
-        }
-
-        /* Main Content Layout */
-        .dashboard-container {
-            max-width: 1200px;
-            margin: -60px auto 40px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-        }
-
-        .welcome-section h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-        }
-
-        .welcome-section p {
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-        /* Card Styling */
-        .card {
-            background: var(--card-white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-weight: 700;
+        .logo {
+            font-weight: 800;
             font-size: 1.2rem;
-        }
-
-        /* Sub-items in cards */
-        .item-row {
             display: flex;
             align-items: center;
-            padding: 12px;
-            border: 1px solid #edf2f7;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: 0.2s;
-            text-decoration: none;
-            color: inherit;
+            gap: 10px;
         }
 
-        .item-row:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .item-icon {
+        .avatar {
+            background: #4ade80;
+            color: #064e3b;
             width: 40px;
             height: 40px;
-            border-radius: 8px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            color: white;
-        }
-
-        .item-info h4 { font-size: 0.95rem; }
-        .item-info p { font-size: 0.8rem; color: var(--text-muted); }
-
-        /* Left Column Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* Practice Banner */
-        .practice-banner {
-            grid-column: span 2;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 25px;
-        }
-
-        .practice-banner i {
-            font-size: 2.5rem;
-            color: #3b82f6;
-            margin-right: 20px;
-        }
-
-        /* Right Sidebar Styles */
-        .notification-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .notif-tag {
-            color: var(--accent-orange);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            display: block;
+            font-weight: bold;
         }
 
         .logout-btn {
             background: #ef4444;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 0.8rem;
-            margin-left: 10px;
+            transition: 0.2s;
         }
 
+        .logout-btn:hover { background: #dc2626; }
+
+        /* Welcome Text */
+        .welcome-box {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-box h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        /* Dashboard Content - The "Lifting" effect */
+        .main-content {
+            max-width: 1200px;
+            margin: -80px auto 50px; /* Pulls content up into the blue area */
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Matches the image layout */
+            gap: 25px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* List Items */
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+
+        .item:hover {
+            transform: scale(1.02);
+            background: #fbfcfd;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .blue-icon { background: #3b82f6; }
+        .green-icon { background: #10b981; }
+        .orange-icon { background: #f59e0b; }
+
+        .item-text h4 { font-size: 1.1rem; margin-bottom: 2px; }
+        .item-text p { font-size: 0.9rem; color: var(--text-muted); }
+
         @media (max-width: 900px) {
-            .dashboard-container { grid-template-columns: 1fr; }
-            .main-grid { grid-template-columns: 1fr; }
-            .hero-banner { padding: 20px; }
+            .main-content { grid-template-columns: 1fr; margin-top: -40px; }
+            .hero-section { height: auto; padding-bottom: 80px; }
         }
     </style>
 </head>
 <body>
 
-<header class="hero-banner">
-    <div class="logo-area">
-        <i class="fas fa-book-open"></i> Knowledge Nexus Academy
-    </div>
-    <div class="user-profile">
-        <span id="studentName">Loading...</span>
-        <img src="https://ui-avatars.com/api/?name=Rahul&background=random" alt="User">
-        <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
-</header>
+<section class="hero-section">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-book-open"></i> Knowledge Nexus Academy
+        </div>
+        <div class="user-nav">
+            <span id="displayName">Siddharth</span>
+            <div class="avatar">RA</div>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
 
-<div class="dashboard-container">
-    <div class="left-content">
-        <div class="welcome-section">
-            <h1 style="color: white;">Class 9 Dashboard</h1>
-            <p style="color: rgba(255,255,255,0.8);">Welcome back, Rahul!</p>
+    <div class="welcome-box">
+        <h1>Class 9 Dashboard</h1>
+        <p id="welcomeUser">Welcome back, Rahul!</p>
+    </div>
+</section>
+
+<main class="main-content">
+    <div class="card">
+        <div class="card-title">
+            <i class="fas fa-folder" style="color: #3b82f6;"></i> Notes
+        </div>
+        
+        <a href="#" class="item">
+            <div class="icon-box blue-icon"><i class="fas fa-file-pdf"></i></div>
+            <div class="item-text">
+                <h4>Chemistry Chapter 6.pdf</h4>
+            </div>
+        </a>
+
+        <a href="#" class="item">
+            <div class="icon-box green-icon"><i class="fas fa-file-pdf"></i></div>
+            <div class="item-text">
+                <h4>Physics Chapter 4.pdf</h4>
+            </div>
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <i class="fas fa-clipboard-list" style="color: #f59e0b;"></i> Homework
         </div>
 
-        <div class="main-grid">
-            <div class="card">
-                <div class="card-header"><i class="fas fa-folder" style="color:#3b82f6"></i> Notes</div>
-                <a href="#" class="item-row">
-                    <div class="item-icon" style="background:#3b82f6"><i class="fas fa-file-pdf"></i></div>
-                    <div class="item-info">
-                        <h4>Chemistry Chapter 6.pdf</h4>
-                    </div>
-                </a>
-                <a href="#" class="item-row">
-                    <div class="item-icon" style="background:#10b981"><i class="fas fa-file-pdf"></i></div>
-                    <div class="item-info">
-                        <h4>Physics Chapter 4.pdf</h4>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><i class="fas fa-clipboard-list" style="color:#f59e0b"></i> Homework</div>
-                <div class="item-row">
-                    <div class="item-icon" style="background:#f59e0b"><i class="fas fa-calculator"></i></div>
-                    <div class="item-info">
-                        <h4>Maths Exercise 8.2</h4>
-                        <p>Due April 25</p>
-                    </div>
-                </div>
-                <div class="item-row">
-                    <div class="item-icon" style="background:#10b981"><i class="fas fa-landmark"></i></div>
-                    <div class="item-info">
-                        <h4>History Questions</h4>
-                        <p>Due Today</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card practice-banner" onclick="window.location.href='maths9.html'">
-                <i class="fas fa-bullhorn"></i>
-                <div class="item-info">
-                    <h3 style="font-size: 1.4rem;">Practice test on fractions available</h3>
-                    <p>Till April 30th. Click here to start now</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="right-content">
-        <div class="card">
-            <div class="card-header"><i class="fas fa-bell" style="color:var(--accent-orange)"></i> Notifications</div>
-            
-            <div class="notification-card">
-                <i class="fas fa-bell-concierge notif-tag"></i>
-                <h4>Reminder: PTM on April</h4>
-                <p style="font-size: 0.8rem; color: #94a3b8;">28 hours ago</p>
-            </div>
-
-            <div class="notification-card">
-                <i class="fas fa-sun notif-tag"></i>
-                <h4>New notice: Summer vacation starts June 1st</h4>
-                <p style="font-size: 0.8rem; color: #94a3b8;">1 day ago</p>
+        <div class="item">
+            <div class="icon-box orange-icon"><i class="fas fa-calculator"></i></div>
+            <div class="item-text">
+                <h4>Maths Exercise 8.2</h4>
+                <p>Due April 25</p>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header"><i class="fas fa-bullhorn"></i> Announcements</div>
-            <div style="height: 100px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 10px;">
-                <p style="color: #94a3b8; font-size: 0.8rem;">No new announcements</p>
+        <div class="item">
+            <div class="icon-box green-icon"><i class="fas fa-landmark"></i></div>
+            <div class="item-text">
+                <h4>History Questions</h4>
+                <p>Due Today</p>
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -294,7 +246,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const studentName = document.getElementById("studentName");
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -302,22 +253,20 @@
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                if (data.class !== "9") {
-                    alert("Access Denied!");
-                    window.location.href = "index.html"; // Changed from login.html
-                    return;
-                }
-                studentName.innerText = data.name;
+                document.getElementById("displayName").innerText = data.name;
+                document.getElementById("welcomeUser").innerText = "Welcome back, " + data.name + "!";
             }
         } else {
-            window.location.href = "index.html"; // Changed from login.html
+            window.location.href = "index.html";
         }
     });
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-        await signOut(auth);
-        window.location.href = "index.html"; // Changed from login.html
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+        signOut(auth).then(() => {
+            window.location.href = "index.html";
+        });
     });
 </script>
+
 </body>
 </html>
