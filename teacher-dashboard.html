@@ -189,21 +189,22 @@
             }
         });
 
-        async function loadTeacherName(uid) {
-            try {
-                const docRef = doc(db, 'teachers', uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const name = docSnap.data().name;
-                    teacherNameSpan.innerText = name;
-                } else {
-                    teacherNameSpan.innerText = 'Teacher';
-                }
-            } catch (e) {
-                console.error('Error loading teacher name:', e);
-                teacherNameSpan.innerText = 'Teacher';
-            }
+       async function loadTeacherName(uid) {
+    try {
+        const docRef = doc(db, 'teachers', uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            // Use 'name' if present, otherwise fallback to 'Teacher'
+            teacherNameSpan.innerText = data.name || 'Teacher';
+        } else {
+            teacherNameSpan.innerText = 'Teacher'; // No document -> default
         }
+    } catch (e) {
+        console.error('Error loading teacher name:', e);
+        teacherNameSpan.innerText = 'Teacher'; // Error -> default
+    }
+}
 
         logoutBtn.addEventListener('click', () => signOut(auth));
 
