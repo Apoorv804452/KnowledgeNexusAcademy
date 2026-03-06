@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 9 Social Science | Knowledge Nexus Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #233a71;
+            --sst-amber: #d97706; /* Color for SST theme */
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-main); }
+
+        .hero-section { background-color: var(--primary-blue); min-height: 180px; padding: 20px 5%; color: white; }
+        .back-btn { 
+            color: white; text-decoration: none; font-size: 0.9rem; 
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px;
+        }
+
+        .container { max-width: 900px; margin: -50px auto 50px; padding: 0 15px; }
+        .page-title { margin-bottom: 25px; color: white; font-size: 1.8rem; font-weight: 800; }
+        .chapter-card { background: var(--white); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .chapter-info h3 { font-size: 1rem; font-weight: 700; color: var(--sst-amber); }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .action-btn { border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; background: #f1f5f9; transition: 0.2s; }
+        .btn-mcq { background: var(--sst-amber); color: white; }
+    </style>
+</head>
+<body>
+
+<section class="hero-section">
+    <nav>
+        <div class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </div>
+    </nav>
+    <h1 class="page-title">Social Science</h1>
+</section>
+
+<div class="container" id="chaptersContainer"></div>
+
+<script type="module">
+    // Same Firebase logic as your other files
+    const sstChapters = [
+        "India - Size and Location", "Physical Features of India", "Drainage", "Climate", 
+        "Natural Vegetation and Wildlife", "Population", "The French Revolution", 
+        "Socialism in Europe and the Russian Revolution", "Nazism and the Rise of Hitler", 
+        "What is Democracy? Why Democracy?", "Constitutional Design", "Electoral Politics", 
+        "Working of Institutions", "Democratic Rights", "The Story of Village Palampur", 
+        "People as Resource", "Poverty as a Challenge", "Food Security in India"
+    ];
+
+    const container = document.getElementById('chaptersContainer');
+    sstChapters.forEach((name, index) => {
+        container.innerHTML += `
+            <div class="chapter-card">
+                <div class="chapter-info"><h3>Chapter ${index + 1}: ${name}</h3></div>
+                <div class="btn-group">
+                    <button class="action-btn" onclick="alert('Coming soon!')"><i class="fas fa-file-pdf"></i> Notes</button>
+                    <button class="action-btn" onclick="alert('Coming soon!')"><i class="fas fa-pen-to-square"></i> Questions</button>
+                    <button class="action-btn btn-mcq" onclick="alert('Coming soon!')"><i class="fas fa-stopwatch"></i> Test</button>
+                </div>
+            </div>
+        `;
+    });
+</script>
+
+<script>
+    // Because this file is deep in 'main/class/9th/', we need 3 levels to go back
+    function goBack() { window.location.href = "../../class9index.html"; }
+</script>
+
+</body>
+</html>
