@@ -34,7 +34,14 @@
     </style>
 </head>
 <body>
-    <!-- Dashboard container (hidden until authenticated) -->
+    <!-- Login container (hidden initially, but if you use separate login page, you can remove this) -->
+    <div id="loginBox" style="display: none;">
+        <h2>Teacher Login</h2>
+        <input type="email" id="email" placeholder="Email" /><br/><br/>
+        <input type="password" id="password" placeholder="Password" /><br/><br/>
+        <button class="btn" id="loginBtn">Login</button>
+    </div>
+
     <div id="dashboardMain" style="display: none;">
         <div class="dashboard">
             <div class="header">
@@ -56,9 +63,22 @@
             <div id="notesPanel" class="panel active">
                 <h2>Upload Notes</h2>
                 <div class="row">
-                    <input type="text" id="noteSubject" placeholder="Subject" />
-                    <input type="number" id="noteClass" placeholder="Class" value="9" />
-                    <input type="text" id="noteChapter" placeholder="Chapter" />
+                    <select id="noteSubject">
+                        <option value="">Select Subject</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="English">English</option>
+                    </select>
+                    <select id="noteClass">
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                    <select id="noteChapter">
+                        <option value="">Select Chapter</option>
+                    </select>
                 </div>
                 <input type="text" id="noteTitle" placeholder="Title / Description" />
                 <input type="file" id="noteFile" accept=".pdf,.jpg,.png,.docx" />
@@ -72,9 +92,22 @@
             <div id="questionsPanel" class="panel">
                 <h2>Practice Questions</h2>
                 <div class="row">
-                    <input type="text" id="qSubject" placeholder="Subject" />
-                    <input type="number" id="qClass" placeholder="Class" value="9" />
-                    <input type="text" id="qChapter" placeholder="Chapter" />
+                    <select id="qSubject">
+                        <option value="">Select Subject</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="English">English</option>
+                    </select>
+                    <select id="qClass">
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                    <select id="qChapter">
+                        <option value="">Select Chapter</option>
+                    </select>
                 </div>
                 <textarea id="qQuestion" placeholder="Question text" rows="2"></textarea>
                 <div class="row">
@@ -92,13 +125,26 @@
                 <div id="questionsList"></div>
             </div>
 
-            <!-- MCQs Panel (for tests) -->
+            <!-- MCQs Panel -->
             <div id="mcqsPanel" class="panel">
                 <h2>MCQ Questions (for tests)</h2>
                 <div class="row">
-                    <input type="text" id="mcqSubject" placeholder="Subject" />
-                    <input type="number" id="mcqClass" placeholder="Class" value="9" />
-                    <input type="text" id="mcqChapter" placeholder="Chapter" />
+                    <select id="mcqSubject">
+                        <option value="">Select Subject</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="English">English</option>
+                    </select>
+                    <select id="mcqClass">
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                    <select id="mcqChapter">
+                        <option value="">Select Chapter</option>
+                    </select>
                 </div>
                 <textarea id="mcqQuestion" placeholder="MCQ text" rows="2"></textarea>
                 <div class="row">
@@ -124,7 +170,12 @@
                     <input type="email" id="studentEmail" placeholder="Email" />
                 </div>
                 <div class="row">
-                    <input type="number" id="studentClass" placeholder="Class" value="9" />
+                    <select id="studentClass">
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
                     <input type="text" id="studentRoll" placeholder="Roll Number" />
                 </div>
                 <button class="btn" id="addStudentBtn">Add Student</button>
@@ -138,8 +189,19 @@
                 <h2>Take Attendance</h2>
                 <div class="row">
                     <input type="date" id="attDate" />
-                    <input type="text" id="attSubject" placeholder="Subject" />
-                    <input type="number" id="attClass" placeholder="Class" value="9" />
+                    <select id="attSubject">
+                        <option value="">Subject</option>
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="English">English</option>
+                    </select>
+                    <select id="attClass">
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
                 </div>
                 <button class="btn" id="loadStudentsForAttendance">Load Students</button>
                 <div id="attendanceStudentsContainer" style="margin-top:20px;"></div>
@@ -153,7 +215,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, orderBy, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
@@ -170,43 +232,169 @@
         const storage = getStorage(app);
 
         // DOM elements
+        const loginBox = document.getElementById('loginBox');
         const dashboardMain = document.getElementById('dashboardMain');
+        const emailInp = document.getElementById('email');
+        const passInp = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const tabs = document.querySelectorAll('.tab');
         const panels = document.querySelectorAll('.panel');
         const teacherNameSpan = document.getElementById('teacherName');
 
-        // Auth state - redirect to login page if not authenticated
+        // Chapter mapping for Class 9 (extend as needed)
+        const chaptersBySubject = {
+            "Science": [
+                "Matter in Our Surroundings",
+                "Is Matter Around Us Pure",
+                "Atoms and Molecules",
+                "Structure of the Atom",
+                "The Fundamental Unit of Life",
+                "Tissues",
+                "Diversity in Living Organisms",
+                "Motion",
+                "Force and Laws of Motion",
+                "Gravitation",
+                "Work and Energy",
+                "Sound",
+                "Why Do We Fall Ill",
+                "Natural Resources",
+                "Improvement in Food Resources"
+            ],
+            "Mathematics": [
+                "Number Systems",
+                "Polynomials",
+                "Coordinate Geometry",
+                "Linear Equations in Two Variables",
+                "Introduction to Euclid's Geometry",
+                "Lines and Angles",
+                "Triangles",
+                "Quadrilaterals",
+                "Areas of Parallelograms and Triangles",
+                "Circles",
+                "Constructions",
+                "Heron's Formula",
+                "Surface Areas and Volumes",
+                "Statistics",
+                "Probability"
+            ],
+            "Social Studies": [
+                "The French Revolution",
+                "Socialism in Europe and the Russian Revolution",
+                "Nazism and the Rise of Hitler",
+                "Forest Society and Colonialism",
+                "Pastoralists in the Modern World",
+                "India – Size and Location",
+                "Physical Features of India",
+                "Drainage",
+                "Climate",
+                "Natural Vegetation and Wildlife",
+                "Population",
+                "What is Democracy? Why Democracy?",
+                "Constitutional Design",
+                "Electoral Politics",
+                "Working of Institutions",
+                "Democratic Rights",
+                "The Story of Village Palampur",
+                "People as Resource",
+                "Poverty as a Challenge",
+                "Food Security in India"
+            ],
+            "English": [
+                "The Fun They Had",
+                "The Sound of Music",
+                "The Little Girl",
+                "A Truly Beautiful Mind",
+                "The Snake and the Mirror",
+                "My Childhood",
+                "Packling",
+                "Reach for the Top",
+                "The Bond of Love",
+                "Kathmandu",
+                "If I Were You",
+                "The Road Not Taken",
+                "Wind",
+                "Rain on the Roof",
+                "The Lake Isle of Innisfree",
+                "A Legend of the Northland",
+                "No Men Are Foreign",
+                "The Duck and the Kangaroo",
+                "On Killing a Tree",
+                "The Snake Trying",
+                "The Lost Child",
+                "The Adventures of Toto",
+                "Iswaran the Storyteller",
+                "In the Kingdom of Fools",
+                "The Happy Prince",
+                "Weathering the Storm in Ersama",
+                "The Last Leaf",
+                "A House Is Not a Home",
+                "The Beggar"
+            ]
+        };
+
+        // Function to populate chapter dropdown based on selected subject
+        function updateChapterDropdown(subjectSelect, chapterSelect) {
+            const subject = subjectSelect.value;
+            const chapterDropdown = chapterSelect;
+            // Clear existing options
+            chapterDropdown.innerHTML = '<option value="">Select Chapter</option>';
+            if (subject && chaptersBySubject[subject]) {
+                chaptersBySubject[subject].forEach(ch => {
+                    const option = document.createElement('option');
+                    option.value = ch;
+                    option.textContent = ch;
+                    chapterDropdown.appendChild(option);
+                });
+            }
+        }
+
+        // Attach event listeners to subject dropdowns
+        document.getElementById('noteSubject').addEventListener('change', function() {
+            updateChapterDropdown(this, document.getElementById('noteChapter'));
+        });
+        document.getElementById('qSubject').addEventListener('change', function() {
+            updateChapterDropdown(this, document.getElementById('qChapter'));
+        });
+        document.getElementById('mcqSubject').addEventListener('change', function() {
+            updateChapterDropdown(this, document.getElementById('mcqChapter'));
+        });
+
+        // Auth state
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is logged in, show dashboard
+                loginBox.style.display = 'none';
                 dashboardMain.style.display = 'block';
                 loadTeacherName(user.uid);
                 loadAllData();
             } else {
-                // No user, redirect to your existing login page
-                window.location.href = 'index.html'; // Change to your login page path
+                loginBox.style.display = 'block';
+                dashboardMain.style.display = 'none';
             }
         });
 
-       async function loadTeacherName(uid) {
-    try {
-        const docRef = doc(db, 'teachers', uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            // Use 'name' if present, otherwise fallback to 'Teacher'
-            teacherNameSpan.innerText = data.name || 'Teacher';
-        } else {
-            teacherNameSpan.innerText = 'Teacher'; // No document -> default
-        }
-    } catch (e) {
-        console.error('Error loading teacher name:', e);
-        teacherNameSpan.innerText = 'Teacher'; // Error -> default
-    }
-}
+        loginBtn.addEventListener('click', () => {
+            signInWithEmailAndPassword(auth, emailInp.value, passInp.value)
+                .catch(err => alert('Login failed: ' + err.message));
+        });
 
         logoutBtn.addEventListener('click', () => signOut(auth));
+
+        async function loadTeacherName(uid) {
+            try {
+                const docRef = doc(db, 'teachers', uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    teacherNameSpan.innerText = data.name || 'Teacher';
+                } else {
+                    teacherNameSpan.innerText = 'Teacher';
+                }
+            } catch (e) {
+                console.error('Error loading teacher name:', e);
+                teacherNameSpan.innerText = 'Teacher';
+            }
+        }
 
         // Tab switching
         tabs.forEach(tab => {
@@ -215,7 +403,7 @@
                 tab.classList.add('active');
                 panels.forEach(p => p.classList.remove('active'));
                 document.getElementById(tab.dataset.tab + 'Panel').classList.add('active');
-                loadAllData(); // refresh data for current tab
+                loadAllData();
             });
         });
 
