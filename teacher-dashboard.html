@@ -1,212 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Teacher Dashboard | Knowledge Nexus Academy</title>
-
-<style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f4f6fb;
-}
-
-header{
-background:#0f172a;
-color:white;
-padding:20px;
-font-size:22px;
-font-weight:bold;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:30px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
-margin-bottom:30px;
-}
-
-h2{
-margin-top:0;
-}
-
-select,input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:12px;
-border-radius:8px;
-cursor:pointer;
-width:100%;
-font-size:16px;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-.success{
-color:green;
-margin-top:10px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | Knowledge Nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f1f5f9; }
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: #233a71; color: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tab { background: white; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .tab.active { background: #233a71; color: white; border-color: #233a71; }
+        .panel { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.03); display: none; }
+        .panel.active { display: block; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: 600; display: block; margin-bottom: 5px; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; }
+        .row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .row > * { flex: 1; }
+        .btn { background: #233a71; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        .btn-secondary { background: #f1f5f9; color: #1e293b; }
+        .list-item { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .actions button { background: none; border: none; font-size: 1.2rem; cursor: pointer; margin-left: 10px; }
+        .edit { color: #2563eb; } .delete { color: #dc2626; }
+        #logoutBtn { background: transparent; border: 1px solid white; color: white; padding: 8px 16px; border-radius: 30px; cursor: pointer; }
+        #loginBox { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 20px; }
+        .attendance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 10px; }
+        .student-check { background: #f1f5f9; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+    </style>
 </head>
-
 <body>
+    <div id="loginBox">
+        <h2>Teacher Login</h2>
+        <input type="email" id="email" placeholder="Email" /><br/><br/>
+        <input type="password" id="password" placeholder="Password" /><br/><br/>
+        <button class="btn" id="loginBtn">Login</button>
+    </div>
 
-<header>
-Teacher Dashboard – Knowledge Nexus Academy
-</header>
+    <div id="dashboardMain" style="display: none;">
+        <div class="dashboard">
+            <div class="header">
+                <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+                <button id="logoutBtn">Logout</button>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="notes">📓 Notes</div>
+                <div class="tab" data-tab="questions">❓ Questions</div>
+                <div class="tab" data-tab="mcqs">📝 MCQs</div>
+                <div class="tab" data-tab="students">👥 Students</div>
+                <div class="tab" data-tab="attendance">📆 Attendance</div>
+            </div>
 
-<div class="container">
+            <!-- Notes Panel -->
+            <div id="notesPanel" class="panel active">
+                <h2>Upload Notes</h2>
+                <div class="row">
+                    <input type="text" id="noteSubject" placeholder="Subject" />
+                    <input type="number" id="noteClass" placeholder="Class" value="9" />
+                    <input type="text" id="noteChapter" placeholder="Chapter" />
+                </div>
+                <input type="text" id="noteTitle" placeholder="Title / Description" />
+                <input type="file" id="noteFile" accept=".pdf,.jpg,.png,.docx" />
+                <button class="btn" id="uploadNoteBtn">Upload Note</button>
+                <hr />
+                <h3>Existing Notes</h3>
+                <div id="notesList"></div>
+            </div>
 
-<div class="card">
+            <!-- Questions Panel (Practice) -->
+            <div id="questionsPanel" class="panel">
+                <h2>Practice Questions</h2>
+                <div class="row">
+                    <input type="text" id="qSubject" placeholder="Subject" />
+                    <input type="number" id="qClass" placeholder="Class" value="9" />
+                    <input type="text" id="qChapter" placeholder="Chapter" />
+                </div>
+                <textarea id="qQuestion" placeholder="Question text" rows="2"></textarea>
+                <div class="row">
+                    <input type="text" id="qOpt0" placeholder="Option 1" />
+                    <input type="text" id="qOpt1" placeholder="Option 2" />
+                </div>
+                <div class="row">
+                    <input type="text" id="qOpt2" placeholder="Option 3" />
+                    <input type="text" id="qOpt3" placeholder="Option 4" />
+                </div>
+                <input type="number" id="qCorrect" placeholder="Correct option (0-3)" min="0" max="3" />
+                <input type="file" id="qImage" accept="image/*" />
+                <button class="btn" id="saveQuestionBtn">Save Question</button>
+                <hr />
+                <div id="questionsList"></div>
+            </div>
 
-<h2>Upload Study Material</h2>
+            <!-- MCQs Panel (can reuse same form, just store in different collection) -->
+            <div id="mcqsPanel" class="panel">
+                <h2>MCQ Questions (for tests)</h2>
+                <!-- same form as questions, but saves to 'mcqs' collection -->
+                <div class="row">
+                    <input type="text" id="mcqSubject" placeholder="Subject" />
+                    <input type="number" id="mcqClass" placeholder="Class" value="9" />
+                    <input type="text" id="mcqChapter" placeholder="Chapter" />
+                </div>
+                <textarea id="mcqQuestion" placeholder="MCQ text" rows="2"></textarea>
+                <div class="row">
+                    <input type="text" id="mcqOpt0" placeholder="Option 1" />
+                    <input type="text" id="mcqOpt1" placeholder="Option 2" />
+                </div>
+                <div class="row">
+                    <input type="text" id="mcqOpt2" placeholder="Option 3" />
+                    <input type="text" id="mcqOpt3" placeholder="Option 4" />
+                </div>
+                <input type="number" id="mcqCorrect" placeholder="Correct option (0-3)" />
+                <input type="file" id="mcqImage" accept="image/*" />
+                <button class="btn" id="saveMcqBtn">Save MCQ</button>
+                <hr />
+                <div id="mcqsList"></div>
+            </div>
 
-<select id="class">
-<option value="">Select Class</option>
-<option value="5">Class 5</option>
-<option value="6">Class 6</option>
-<option value="7">Class 7</option>
-<option value="8">Class 8</option>
-<option value="9">Class 9</option>
-<option value="10">Class 10</option>
-</select>
+            <!-- Students Panel -->
+            <div id="studentsPanel" class="panel">
+                <h2>Add Student</h2>
+                <div class="row">
+                    <input type="text" id="studentName" placeholder="Full Name" />
+                    <input type="email" id="studentEmail" placeholder="Email" />
+                </div>
+                <div class="row">
+                    <input type="number" id="studentClass" placeholder="Class" value="9" />
+                    <input type="text" id="studentRoll" placeholder="Roll Number" />
+                </div>
+                <button class="btn" id="addStudentBtn">Add Student</button>
+                <hr />
+                <h3>Student List</h3>
+                <div id="studentsList"></div>
+            </div>
 
-<select id="subject">
-<option value="">Select Subject</option>
-<option value="maths">Mathematics</option>
-<option value="science">Science</option>
-<option value="english">English</option>
-<option value="sst">Social Science</option>
-</select>
+            <!-- Attendance Panel -->
+            <div id="attendancePanel" class="panel">
+                <h2>Take Attendance</h2>
+                <div class="row">
+                    <input type="date" id="attDate" />
+                    <input type="text" id="attSubject" placeholder="Subject" />
+                    <input type="number" id="attClass" placeholder="Class" value="9" />
+                </div>
+                <button class="btn" id="loadStudentsForAttendance">Load Students</button>
+                <div id="attendanceStudentsContainer" style="margin-top:20px;"></div>
+                <button class="btn" id="saveAttendanceBtn" style="display:none;">Save Attendance</button>
+                <hr />
+                <h3>Previous Attendance</h3>
+                <div id="attendanceRecords"></div>
+            </div>
+        </div>
+    </div>
 
-<input type="text" id="chapter" placeholder="Enter Chapter Name">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-<h3>Upload Notes PDF</h3>
-<input type="file" id="notesFile">
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
+            authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
+            projectId: "knowledgenexusacademy-7c1b3",
+            storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
+        };
 
-<button onclick="uploadNotes()">Upload Notes</button>
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-<p class="success" id="notesMsg"></p>
+        // DOM elements
+        const loginBox = document.getElementById('loginBox');
+        const dashboardMain = document.getElementById('dashboardMain');
+        const emailInp = document.getElementById('email');
+        const passInp = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.panel');
 
-<hr>
+        // Auth state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginBox.style.display = 'none';
+                dashboardMain.style.display = 'block';
+                loadAllData(); // initial load for active tab
+            } else {
+                loginBox.style.display = 'block';
+                dashboardMain.style.display = 'none';
+            }
+        });
 
-<h3>Upload Chapter Video</h3>
-<input type="text" id="videoLink" placeholder="Paste YouTube Video Link">
+        loginBtn.addEventListener('click', () => {
+            signInWithEmailAndPassword(auth, emailInp.value, passInp.value)
+                .catch(err => alert('Login failed: ' + err.message));
+        });
 
-<button onclick="uploadVideo()">Upload Video</button>
+        logoutBtn.addEventListener('click', () => signOut(auth));
 
-<p class="success" id="videoMsg"></p>
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                panels.forEach(p => p.classList.remove('active'));
+                document.getElementById(tab.dataset.tab + 'Panel').classList.add('active');
+                loadAllData(); // refresh data for current tab
+            });
+        });
 
-</div>
+        // ========== NOTES ==========
+        document.getElementById('uploadNoteBtn').addEventListener('click', async () => {
+            const subject = document.getElementById('noteSubject').value;
+            const classVal = parseInt(document.getElementById('noteClass').value);
+            const chapter = document.getElementById('noteChapter').value;
+            const title = document.getElementById('noteTitle').value;
+            const file = document.getElementById('noteFile').files[0];
+            if (!subject || !classVal || !chapter || !title || !file) {
+                alert('All fields required');
+                return;
+            }
+            const storageRef = ref(storage, `notes/${Date.now()}_${file.name}`);
+            await uploadBytes(storageRef, file);
+            const url = await getDownloadURL(storageRef);
+            await addDoc(collection(db, 'notes'), {
+                subject, class: classVal, chapter, title, fileUrl: url, uploadedAt: new Date()
+            });
+            alert('Note uploaded');
+            loadNotes();
+        });
 
-</div>
+        async function loadNotes() {
+            const snapshot = await getDocs(query(collection(db, 'notes'), orderBy('uploadedAt', 'desc')));
+            const container = document.getElementById('notesList');
+            container.innerHTML = '';
+            snapshot.forEach(docSnap => {
+                const d = docSnap.data();
+                container.innerHTML += `
+                    <div class="list-item">
+                        <div><strong>${d.title}</strong> (${d.subject} - Ch ${d.chapter})</div>
+                        <div><a href="${d.fileUrl}" target="_blank">View</a></div>
+                    </div>`;
+            });
+        }
 
-<script type="module">
+        // ========== PRACTICE QUESTIONS ==========
+        document.getElementById('saveQuestionBtn').addEventListener('click', async () => {
+            const subject = document.getElementById('qSubject').value;
+            const classVal = parseInt(document.getElementById('qClass').value);
+            const chapter = document.getElementById('qChapter').value;
+            const question = document.getElementById('qQuestion').value;
+            const options = [
+                document.getElementById('qOpt0').value,
+                document.getElementById('qOpt1').value,
+                document.getElementById('qOpt2').value,
+                document.getElementById('qOpt3').value
+            ];
+            const correct = parseInt(document.getElementById('qCorrect').value);
+            const file = document.getElementById('qImage').files[0];
+            let imageUrl = '';
+            if (file) {
+                const imgRef = ref(storage, `question_images/${Date.now()}_${file.name}`);
+                await uploadBytes(imgRef, file);
+                imageUrl = await getDownloadURL(imgRef);
+            }
+            await addDoc(collection(db, 'practiceQuestions'), {
+                subject, class: classVal, chapter, question, options, correctIndex: correct, imageUrl, createdAt: new Date()
+            });
+            alert('Practice question saved');
+            loadQuestions();
+        });
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        async function loadQuestions() {
+            const snapshot = await getDocs(query(collection(db, 'practiceQuestions'), orderBy('createdAt', 'desc')));
+            const container = document.getElementById('questionsList');
+            container.innerHTML = '';
+            snapshot.forEach(docSnap => {
+                const d = docSnap.data();
+                container.innerHTML += `<div class="list-item">${d.question} (${d.subject})</div>`;
+            });
+        }
 
-import {
-getFirestore,
-collection,
-addDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        // ========== MCQs ==========
+        document.getElementById('saveMcqBtn').addEventListener('click', async () => {
+            // similar to above but saving to 'mcqs' collection
+            const subject = document.getElementById('mcqSubject').value;
+            const classVal = parseInt(document.getElementById('mcqClass').value);
+            const chapter = document.getElementById('mcqChapter').value;
+            const question = document.getElementById('mcqQuestion').value;
+            const options = [
+                document.getElementById('mcqOpt0').value,
+                document.getElementById('mcqOpt1').value,
+                document.getElementById('mcqOpt2').value,
+                document.getElementById('mcqOpt3').value
+            ];
+            const correct = parseInt(document.getElementById('mcqCorrect').value);
+            const file = document.getElementById('mcqImage').files[0];
+            let imageUrl = '';
+            if (file) {
+                const imgRef = ref(storage, `mcq_images/${Date.now()}_${file.name}`);
+                await uploadBytes(imgRef, file);
+                imageUrl = await getDownloadURL(imgRef);
+            }
+            await addDoc(collection(db, 'mcqs'), {
+                subject, class: classVal, chapter, question, options, correctIndex: correct, imageUrl, createdAt: new Date()
+            });
+            alert('MCQ saved');
+            loadMcqs();
+        });
 
-import {
-getStorage,
-ref,
-uploadBytes,
-getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+        async function loadMcqs() {
+            const snapshot = await getDocs(query(collection(db, 'mcqs'), orderBy('createdAt', 'desc')));
+            const container = document.getElementById('mcqsList');
+            container.innerHTML = '';
+            snapshot.forEach(docSnap => {
+                const d = docSnap.data();
+                container.innerHTML += `<div class="list-item">${d.question} (${d.subject})</div>`;
+            });
+        }
 
+        // ========== STUDENTS ==========
+        document.getElementById('addStudentBtn').addEventListener('click', async () => {
+            const name = document.getElementById('studentName').value;
+            const email = document.getElementById('studentEmail').value;
+            const classVal = parseInt(document.getElementById('studentClass').value);
+            const roll = document.getElementById('studentRoll').value;
+            if (!name || !email || !classVal || !roll) return alert('All fields required');
+            await addDoc(collection(db, 'students'), { name, email, class: classVal, rollNumber: roll, createdAt: new Date() });
+            alert('Student added');
+            loadStudents();
+        });
 
-const firebaseConfig = {
-apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
-authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
-projectId: "knowledgenexusacademy-7c1b3",
-storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
-};
+        async function loadStudents() {
+            const snapshot = await getDocs(query(collection(db, 'students'), orderBy('name')));
+            const container = document.getElementById('studentsList');
+            container.innerHTML = '';
+            snapshot.forEach(docSnap => {
+                const d = docSnap.data();
+                container.innerHTML += `<div class="list-item">${d.name} (Roll: ${d.rollNumber}) - Class ${d.class}</div>`;
+            });
+        }
 
-const app = initializeApp(firebaseConfig);
+        // ========== ATTENDANCE ==========
+        let currentAttendanceStudents = [];
+        document.getElementById('loadStudentsForAttendance').addEventListener('click', async () => {
+            const attClass = parseInt(document.getElementById('attClass').value);
+            if (!attClass) return alert('Enter class');
+            const snapshot = await getDocs(query(collection(db, 'students'), where('class', '==', attClass)));
+            currentAttendanceStudents = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+            renderAttendanceChecklist();
+        });
 
-const db = getFirestore(app);
-const storage = getStorage(app);
+        function renderAttendanceChecklist() {
+            const container = document.getElementById('attendanceStudentsContainer');
+            let html = '<div class="attendance-grid">';
+            currentAttendanceStudents.forEach(s => {
+                html += `<div class="student-check"><input type="checkbox" id="att_${s.id}" checked /> <label for="att_${s.id}">${s.name} (${s.rollNumber})</label></div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+            document.getElementById('saveAttendanceBtn').style.display = 'inline-block';
+        }
 
+        document.getElementById('saveAttendanceBtn').addEventListener('click', async () => {
+            const date = document.getElementById('attDate').value;
+            const subject = document.getElementById('attSubject').value;
+            const classVal = parseInt(document.getElementById('attClass').value);
+            if (!date || !subject || !classVal) return alert('Fill date, subject, class');
+            // For each student, check checkbox
+            const promises = currentAttendanceStudents.map(s => {
+                const present = document.getElementById(`att_${s.id}`).checked;
+                return addDoc(collection(db, 'attendance'), {
+                    date, subject, class: classVal, studentId: s.id, present
+                });
+            });
+            await Promise.all(promises);
+            alert('Attendance saved');
+            loadAttendanceRecords();
+        });
 
-async function uploadNotes(){
+        async function loadAttendanceRecords() {
+            const snapshot = await getDocs(query(collection(db, 'attendance'), orderBy('date', 'desc')));
+            const container = document.getElementById('attendanceRecords');
+            container.innerHTML = '';
+            snapshot.forEach(docSnap => {
+                const d = docSnap.data();
+                container.innerHTML += `<div class="list-item">${d.date} - ${d.subject} Class ${d.class}</div>`;
+            });
+        }
 
-const classNo=document.getElementById("class").value;
-const subject=document.getElementById("subject").value;
-const chapter=document.getElementById("chapter").value;
-const file=document.getElementById("notesFile").files[0];
-
-if(!classNo || !subject || !chapter || !file){
-alert("Fill all fields");
-return;
-}
-
-const storageRef=ref(storage,"notes/"+file.name);
-
-await uploadBytes(storageRef,file);
-
-const url=await getDownloadURL(storageRef);
-
-await addDoc(collection(db,"notes"),{
-class:classNo,
-subject:subject,
-chapter:chapter,
-url:url
-});
-
-document.getElementById("notesMsg").innerText="Notes Uploaded Successfully";
-
-}
-
-async function uploadVideo(){
-
-const classNo=document.getElementById("class").value;
-const subject=document.getElementById("subject").value;
-const chapter=document.getElementById("chapter").value;
-const video=document.getElementById("videoLink").value;
-
-if(!classNo || !subject || !chapter || !video){
-alert("Fill all fields");
-return;
-}
-
-await addDoc(collection(db,"videos"),{
-class:classNo,
-subject:subject,
-chapter:chapter,
-link:video
-});
-
-document.getElementById("videoMsg").innerText="Video Uploaded Successfully";
-
-}
-
-</script>
-
+        // Load data for current tab
+        function loadAllData() {
+            const activeTab = document.querySelector('.tab.active').dataset.tab;
+            if (activeTab === 'notes') loadNotes();
+            if (activeTab === 'questions') loadQuestions();
+            if (activeTab === 'mcqs') loadMcqs();
+            if (activeTab === 'students') loadStudents();
+            if (activeTab === 'attendance') loadAttendanceRecords();
+        }
+    </script>
 </body>
 </html>
