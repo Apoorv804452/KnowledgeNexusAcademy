@@ -6,61 +6,23 @@
     <title>Class 9 S.ST | Knowledge Nexus Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --primary-blue: #233a71;
-            --sst-amber: #d97706; /* Amber theme for SST */
-            --light-bg: #f8fafc;
-            --white: #ffffff;
-            --text-main: #1e293b;
-        }
-
+        :root { --primary-blue: #233a71; --sst-amber: #d97706; --light-bg: #f8fafc; --white: #ffffff; --text-main: #1e293b; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--light-bg); color: var(--text-main); }
-
         .hero-section { background-color: var(--sst-amber); min-height: 180px; padding: 20px 5%; color: white; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        
-        .back-btn { 
-            color: white; text-decoration: none; font-size: 0.9rem; 
-            display: flex; align-items: center; gap: 8px; cursor: pointer;
-            background: rgba(0,0,0,0.1); padding: 8px 15px; border-radius: 20px;
-        }
-
-        .user-nav { display: flex; align-items: center; gap: 10px; }
-        .avatar { background: #f59e0b; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
-
+        .back-btn { color: white; cursor: pointer; background: rgba(0,0,0,0.1); padding: 8px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; }
         .container { max-width: 900px; margin: -50px auto 50px; padding: 0 15px; }
-        .page-title { margin-bottom: 25px; color: white; font-size: 1.8rem; font-weight: 800; }
-
         .chapter-card { background: var(--white); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .chapter-info h3 { font-size: 1rem; font-weight: 700; color: var(--sst-amber); }
-
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-        .action-btn { border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; cursor: pointer; background: #f1f5f9; transition: 0.2s; }
-        .btn-mcq { background: var(--sst-amber); color: white; }
-        .btn-mcq:hover { background: #b45309; }
-
-        @media (max-width: 800px) {
-            .chapter-card { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .btn-group { width: 100%; justify-content: flex-start; }
-            .action-btn { flex: 1; justify-content: center; }
-        }
+        .btn-group { display: flex; gap: 8px; }
     </style>
 </head>
 <body>
 
 <section class="hero-section">
-    <nav>
-        <div class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Dashboard</div>
-        <div class="user-nav">
-            <span id="userName" style="font-size: 0.8rem;">Loading...</span>
-            <div class="avatar" id="userInitials">??</div>
-        </div>
-    </nav>
-    <h1 class="page-title">Social Science</h1>
+    <div class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Dashboard</div>
+    <h1 style="color: white; margin-top: 20px;">Social Science</h1>
 </section>
 
 <div class="container" id="chaptersContainer"></div>
@@ -70,56 +32,37 @@
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    const firebaseConfig = { /* PASTE YOUR CONFIG HERE */ };
+    const firebaseConfig = { /* YOUR CONFIG */ };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    const sstChapters = [
-        "India - Size and Location", "Physical Features of India", "Drainage", "Climate", 
-        "Natural Vegetation and Wildlife", "Population", "The French Revolution", 
-        "Socialism in Europe and the Russian Revolution", "Nazism and the Rise of Hitler", 
-        "What is Democracy? Why Democracy?", "Constitutional Design", "Electoral Politics", 
-        "Working of Institutions", "Democratic Rights", "The Story of Village Palampur", 
-        "People as Resource", "Poverty as a Challenge", "Food Security in India"
-    ];
+    const sstChapters = ["India - Size and Location", "Physical Features of India", "Drainage", "Climate", "Natural Vegetation and Wildlife", "Population", "The French Revolution", "Socialism in Europe and the Russian Revolution", "Nazism and the Rise of Hitler", "What is Democracy? Why Democracy?", "Constitutional Design", "Electoral Politics", "Working of Institutions", "Democratic Rights", "The Story of Village Palampur", "People as Resource", "Poverty as a Challenge", "Food Security in India"];
 
-    const container = document.getElementById('chaptersContainer');
-    
-    // Access Control Logic
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            const docSnap = await getDoc(doc(db, "students", user.uid));
-            if (docSnap.exists() && docSnap.data().class === "9") {
-                const name = docSnap.data().name;
-                document.getElementById("userName").innerText = name;
-                document.getElementById("userInitials").innerText = name.split(" ").map(n => n[0]).join("").substring(0, 2);
-            } else {
-                alert("Access Denied: Class 9 Only");
-                window.location.href = "../../index.html";
-            }
-        } else {
-            window.location.href = "../../index.html";
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById('chaptersContainer');
+        if (!container) return;
+        
+        sstChapters.forEach((name, index) => {
+            container.innerHTML += `
+                <div class="chapter-card">
+                    <div class="chapter-info"><h3>Chapter ${index + 1}: ${name}</h3></div>
+                    <div class="btn-group">
+                        <button onclick="alert('Coming soon!')">Notes</button>
+                        <button onclick="alert('Coming soon!')">Questions</button>
+                    </div>
+                </div>
+            `;
+        });
     });
 
-    sstChapters.forEach((name, index) => {
-        container.innerHTML += `
-            <div class="chapter-card">
-                <div class="chapter-info"><h3>Chapter ${index + 1}: ${name}</h3></div>
-                <div class="btn-group">
-                    <button class="action-btn" onclick="action('Notes', ${index + 1})"><i class="fas fa-file-pdf"></i> Notes</button>
-                    <button class="action-btn" onclick="action('Questions', ${index + 1})"><i class="fas fa-pen-to-square"></i> Questions</button>
-                    <button class="action-btn btn-mcq" onclick="action('MCQ', ${index + 1})"><i class="fas fa-stopwatch"></i> Test</button>
-                </div>
-            </div>
-        `;
+    onAuthStateChanged(auth, (user) => {
+        if (!user) window.location.href = "../../index.html";
     });
 </script>
 
 <script>
     function goBack() { window.location.href = "../../class9index.html"; }
-    function action(type, id) { alert(`${type} for S.ST Chapter ${id} coming soon!`); }
 </script>
 
 </body>
