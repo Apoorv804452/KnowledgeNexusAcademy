@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teacher Dashboard | Knowledge Nexus Academy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+display:flex;
+}
+
+.sidebar{
+width:230px;
+height:100vh;
+background:#020617;
+padding:25px;
+}
+
+.logo{
+font-size:20px;
+font-weight:700;
+color:#38bdf8;
+margin-bottom:40px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.menu button{
+padding:12px;
+border:none;
+border-radius:8px;
+background:#1e293b;
+color:white;
+cursor:pointer;
+}
+
+.menu button:hover{
+background:#334155;
+}
+
+.main{
+flex:1;
+padding:40px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:none;
+}
+
+button.upload{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+background:#38bdf8;
+cursor:pointer;
+}
+
+.student{
+background:#334155;
+padding:10px;
+border-radius:6px;
+margin-top:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">KNA Teacher</div>
+
+<div class="menu">
+<button onclick="showSection('uploadNotes')">Upload Notes</button>
+<button onclick="showSection('uploadMCQ')">Upload MCQ Test</button>
+<button onclick="showSection('uploadQuestions')">Additional Questions</button>
+<button onclick="showSection('uploadVideo')">Chapter Videos</button>
+<button onclick="showSection('students')">View Students</button>
+<button onclick="logout()">Logout</button>
+</div>
+
+</div>
+
+<div class="main">
+
+<h1>Teacher Dashboard</h1>
+
+<!-- Upload Notes -->
+
+<div id="uploadNotes" class="card">
+
+<h3>Upload Notes</h3>
+
+<select id="notesClass">
+<option value="">Select Class</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+
+<input id="notesSubject" placeholder="Subject">
+<input id="notesChapter" placeholder="Chapter Name">
+<input id="notesLink" placeholder="PDF Link">
+
+<button class="upload" onclick="uploadNotes()">Upload</button>
+
+</div>
+
+<!-- MCQ -->
+
+<div id="uploadMCQ" class="card" style="display:none">
+
+<h3>Upload MCQ Test</h3>
+
+<select id="mcqClass">
+<option value="">Select Class</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+
+<input id="mcqSubject" placeholder="Subject">
+<input id="mcqChapter" placeholder="Chapter">
+
+<textarea id="mcqQuestion" placeholder="MCQ Question"></textarea>
+<input id="mcqOption1" placeholder="Option 1">
+<input id="mcqOption2" placeholder="Option 2">
+<input id="mcqOption3" placeholder="Option 3">
+<input id="mcqOption4" placeholder="Option 4">
+
+<input id="mcqAnswer" placeholder="Correct Answer">
+
+<button class="upload" onclick="uploadMCQ()">Upload MCQ</button>
+
+</div>
+
+<!-- Additional Questions -->
+
+<div id="uploadQuestions" class="card" style="display:none">
+
+<h3>Additional Questions</h3>
+
+<select id="qClass">
+<option value="">Select Class</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+
+<input id="qSubject" placeholder="Subject">
+<input id="qChapter" placeholder="Chapter">
+
+<textarea id="qText" placeholder="Write Question"></textarea>
+
+<button class="upload" onclick="uploadQuestion()">Upload</button>
+
+</div>
+
+<!-- Video -->
+
+<div id="uploadVideo" class="card" style="display:none">
+
+<h3>Upload Chapter Video</h3>
+
+<select id="videoClass">
+<option value="">Select Class</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+
+<input id="videoSubject" placeholder="Subject">
+<input id="videoChapter" placeholder="Chapter">
+<input id="videoLink" placeholder="YouTube Link">
+
+<button class="upload" onclick="uploadVideo()">Upload Video</button>
+
+</div>
+
+<!-- Students -->
+
+<div id="students" class="card" style="display:none">
+
+<h3>Registered Students</h3>
+
+<div id="studentList"></div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
+authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
+projectId: "knowledgenexusacademy-7c1b3",
+storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+
+onAuthStateChanged(auth,(user)=>{
+if(!user){
+window.location.href="login.html";
+}
+});
+
+/* Upload Notes */
+
+window.uploadNotes = async ()=>{
+
+await addDoc(collection(db,"notes"),{
+class:notesClass.value,
+subject:notesSubject.value,
+chapter:notesChapter.value,
+pdf:notesLink.value
+});
+
+alert("Notes Uploaded");
+
+};
+
+/* Upload MCQ */
+
+window.uploadMCQ = async ()=>{
+
+await addDoc(collection(db,"mcq"),{
+class:mcqClass.value,
+subject:mcqSubject.value,
+chapter:mcqChapter.value,
+question:mcqQuestion.value,
+option1:mcqOption1.value,
+option2:mcqOption2.value,
+option3:mcqOption3.value,
+option4:mcqOption4.value,
+answer:mcqAnswer.value
+});
+
+alert("MCQ Uploaded");
+
+};
+
+/* Upload Question */
+
+window.uploadQuestion = async ()=>{
+
+await addDoc(collection(db,"questions"),{
+class:qClass.value,
+subject:qSubject.value,
+chapter:qChapter.value,
+question:qText.value
+});
+
+alert("Question Uploaded");
+
+};
+
+/* Upload Video */
+
+window.uploadVideo = async ()=>{
+
+await addDoc(collection(db,"videos"),{
+class:videoClass.value,
+subject:videoSubject.value,
+chapter:videoChapter.value,
+link:videoLink.value
+});
+
+alert("Video Uploaded");
+
+};
+
+/* View Students */
+
+window.showSection = async (id)=>{
+
+document.querySelectorAll(".card").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="block";
+
+if(id==="students"){
+
+const snap = await getDocs(collection(db,"students"));
+
+const list = document.getElementById("studentList");
+list.innerHTML="";
+
+snap.forEach(doc=>{
+const data = doc.data();
+list.innerHTML += `<div class="student">${data.name} - Class ${data.class}</div>`;
+});
+
+}
+
+};
+
+/* Logout */
+
+window.logout = async ()=>{
+await signOut(auth);
+window.location.href="login.html";
+};
+
+</script>
+
+</body>
+</html>
