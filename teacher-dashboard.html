@@ -30,20 +30,18 @@
         #loginBox { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 20px; }
         .attendance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 10px; }
         .student-check { background: #f1f5f9; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+        #teacherName { font-weight: 700; }
     </style>
 </head>
 <body>
-    <div id="loginBox">
-        <h2>Teacher Login</h2>
-        <input type="email" id="email" placeholder="Email" /><br/><br/>
-        <input type="password" id="password" placeholder="Password" /><br/><br/>
-        <button class="btn" id="loginBtn">Login</button>
-    </div>
-
+    <!-- Dashboard container (hidden until authenticated) -->
     <div id="dashboardMain" style="display: none;">
         <div class="dashboard">
             <div class="header">
-                <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+                <h1>
+                    <i class="fas fa-chalkboard-teacher"></i> 
+                    <span id="teacherName">Loading...</span> Sir
+                </h1>
                 <button id="logoutBtn">Logout</button>
             </div>
             <div class="tabs">
@@ -94,10 +92,9 @@
                 <div id="questionsList"></div>
             </div>
 
-            <!-- MCQs Panel (can reuse same form, just store in different collection) -->
+            <!-- MCQs Panel (for tests) -->
             <div id="mcqsPanel" class="panel">
                 <h2>MCQ Questions (for tests)</h2>
-                <!-- same form as questions, but saves to 'mcqs' collection -->
                 <div class="row">
                     <input type="text" id="mcqSubject" placeholder="Subject" />
                     <input type="number" id="mcqClass" placeholder="Class" value="9" />
@@ -156,8 +153,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where, orderBy, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         const firebaseConfig = {
@@ -173,31 +170,40 @@
         const storage = getStorage(app);
 
         // DOM elements
-        const loginBox = document.getElementById('loginBox');
         const dashboardMain = document.getElementById('dashboardMain');
-        const emailInp = document.getElementById('email');
-        const passInp = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const tabs = document.querySelectorAll('.tab');
         const panels = document.querySelectorAll('.panel');
+        const teacherNameSpan = document.getElementById('teacherName');
 
-        // Auth state
+        // Auth state - redirect to login page if not authenticated
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                loginBox.style.display = 'none';
+                // User is logged in, show dashboard
                 dashboardMain.style.display = 'block';
-                loadAllData(); // initial load for active tab
+                loadTeacherName(user.uid);
+                loadAllData();
             } else {
-                loginBox.style.display = 'block';
-                dashboardMain.style.display = 'none';
+                // No user, redirect to your existing login page
+                window.location.href = 'index.html'; // Change to your login page path
             }
         });
 
-        loginBtn.addEventListener('click', () => {
-            signInWithEmailAndPassword(auth, emailInp.value, passInp.value)
-                .catch(err => alert('Login failed: ' + err.message));
-        });
+        async function loadTeacherName(uid) {
+            try {
+                const docRef = doc(db, 'teachers', uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const name = docSnap.data().name;
+                    teacherNameSpan.innerText = name;
+                } else {
+                    teacherNameSpan.innerText = 'Teacher';
+                }
+            } catch (e) {
+                console.error('Error loading teacher name:', e);
+                teacherNameSpan.innerText = 'Teacher';
+            }
+        }
 
         logoutBtn.addEventListener('click', () => signOut(auth));
 
@@ -286,7 +292,6 @@
 
         // ========== MCQs ==========
         document.getElementById('saveMcqBtn').addEventListener('click', async () => {
-            // similar to above but saving to 'mcqs' collection
             const subject = document.getElementById('mcqSubject').value;
             const classVal = parseInt(document.getElementById('mcqClass').value);
             const chapter = document.getElementById('mcqChapter').value;
@@ -370,7 +375,6 @@
             const subject = document.getElementById('attSubject').value;
             const classVal = parseInt(document.getElementById('attClass').value);
             if (!date || !subject || !classVal) return alert('Fill date, subject, class');
-            // For each student, check checkbox
             const promises = currentAttendanceStudents.map(s => {
                 const present = document.getElementById(`att_${s.id}`).checked;
                 return addDoc(collection(db, 'attendance'), {
