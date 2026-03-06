@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz | Knowledge Nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; color: #1e293b; }
+        .hero-section {
+            background-color: #233a71;
+            padding: 20px 5%;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            color: white; text-decoration: none; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px;
+            border: none;
+        }
+        .user-nav { display: flex; align-items: center; gap: 10px; }
+        .avatar {
+            background: #4ade80; color: #064e3b; width: 35px; height: 35px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 0.8rem; text-transform: uppercase;
+        }
+        .page-title { margin-bottom: 10px; color: white; font-size: 1.8rem; font-weight: 800; }
+        .timer-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.15); padding: 12px 20px; border-radius: 60px;
+            margin-top: 10px; backdrop-filter: blur(4px);
+        }
+        .timer { font-size: 1.8rem; font-weight: 700; letter-spacing: 2px; font-variant-numeric: tabular-nums; }
+        .quiz-container { max-width: 900px; margin: -30px auto 50px; padding: 0 15px; }
+        .question-card {
+            background: white; border-radius: 20px; padding: 22px 25px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03); margin-bottom: 18px;
+            border: 1px solid #e9eef3;
+        }
+        .q-num {
+            display: inline-block; background: #233a71; color: white; font-weight: 700;
+            font-size: 0.8rem; padding: 4px 12px; border-radius: 30px; margin-bottom: 12px;
+        }
+        .q-text { font-weight: 600; font-size: 1.1rem; margin-bottom: 16px; line-height: 1.4; }
+        .q-image { max-width: 100%; max-height: 200px; object-fit: contain; margin: 10px 0; border-radius: 8px; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            display: flex; align-items: center; gap: 12px; background: #f1f5f9;
+            padding: 12px 18px; border-radius: 14px; cursor: pointer;
+            transition: 0.15s; border: 2px solid transparent;
+        }
+        .option:hover { background: #e6edf5; }
+        .option input[type="radio"] {
+            appearance: none; width: 18px; height: 18px; border: 2px solid #94a3b8;
+            border-radius: 50%; margin: 0; position: relative; transition: 0.1s;
+        }
+        .option input[type="radio"]:checked {
+            border-color: #233a71; background-color: #233a71; box-shadow: inset 0 0 0 4px white;
+        }
+        .option label { flex: 1; font-weight: 500; cursor: pointer; }
+        .correct-highlight { background: #dcfce7; border-color: #22c55e; }
+        .wrong-highlight { background: #fee2e2; border-color: #ef4444; }
+        .disabled-option { opacity: 0.8; pointer-events: none; }
+        .action-bar {
+            display: flex; flex-wrap: wrap; justify-content: space-between;
+            align-items: center; margin-top: 30px; gap: 15px;
+        }
+        .btn {
+            border: none; padding: 12px 30px; border-radius: 40px; font-weight: 700;
+            font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.2s; background: #f1f5f9; color: #1e293b;
+        }
+        .btn-primary { background: #233a71; color: white; box-shadow: 0 8px 18px rgba(35,58,113,0.2); }
+        .btn-primary:hover { background: #1a2a52; }
+        .btn-outline { background: white; border: 1px solid #cbd5e1; }
+        .btn-outline:hover { background: #f8fafc; }
+        .score-badge {
+            background: white; padding: 8px 22px; border-radius: 40px;
+            font-weight: 700; color: #233a71; border: 1px solid #cbd5e1;
+        }
+        footer { text-align: center; color: #64748b; font-size: 0.85rem; margin: 40px 0 20px; }
+        .loading { text-align: center; font-size: 1.2rem; padding: 50px; color: #233a71; }
+        @media (max-width: 600px) {
+            .timer-bar { flex-direction: column; gap: 8px; align-items: flex-start; }
+            .action-bar { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <nav>
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Chapters
+            </button>
+            <div class="user-nav">
+                <span id="userName" style="font-size:0.9rem;">Student</span>
+                <div class="avatar" id="userInitials">📘</div>
+            </div>
+        </nav>
+        <h1 class="page-title" id="pageTitle">MCQ Challenge</h1>
+        <div class="timer-bar">
+            <span><i class="far fa-clock"></i> Time remaining</span>
+            <span class="timer" id="timerDisplay">--:--</span>
+        </div>
+    </section>
+
+    <div class="quiz-container" id="quizContainer">
+        <div class="loading">Loading questions...</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
+            authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
+            projectId: "knowledgenexusacademy-7c1b3",
+            storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get('subject');
+        const classVal = urlParams.get('class');
+        const chapter = urlParams.get('chapter');
+
+        // DOM elements
+        const pageTitle = document.getElementById('pageTitle');
+        const quizContainer = document.getElementById('quizContainer');
+        const timerEl = document.getElementById('timerDisplay');
+        const userNameSpan = document.getElementById('userName');
+        const userInitialsSpan = document.getElementById('userInitials');
+
+        // Quiz state
+        let questions = [];
+        let userAnswers = [];
+        let timerInterval = null;
+        let quizSubmitted = false;
+        const TIME_LIMIT = 600; // 10 minutes in seconds
+
+        // Set page title
+        if (chapter) {
+            pageTitle.innerText = `MCQ: ${decodeURIComponent(chapter)}`;
+        }
+
+        // Authentication check
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Load user name from Firestore students collection (optional)
+                // For simplicity, we set a placeholder
+                userNameSpan.innerText = user.email ? user.email.split('@')[0] : 'Student';
+                userInitialsSpan.innerText = user.email ? user.email.charAt(0).toUpperCase() : 'S';
+                // Load questions after confirming user
+                loadQuestions();
+            } else {
+                window.location.href = 'index.html'; // Redirect to login
+            }
+        });
+
+        async function loadQuestions() {
+            if (!subject || !classVal || !chapter) {
+                quizContainer.innerHTML = '<div class="loading">Missing parameters. Please go back.</div>';
+                return;
+            }
+
+            try {
+                const q = query(
+                    collection(db, 'mcqs'),
+                    where('subject', '==', subject),
+                    where('class', '==', parseInt(classVal)),
+                    where('chapter', '==', decodeURIComponent(chapter))
+                );
+                const snapshot = await getDocs(q);
+                if (snapshot.empty) {
+                    quizContainer.innerHTML = '<div class="loading">No questions available for this chapter yet.</div>';
+                    return;
+                }
+
+                questions = snapshot.docs.map(doc => doc.data());
+                userAnswers = new Array(questions.length).fill(null);
+                renderQuiz();
+                startTimer();
+            } catch (error) {
+                console.error('Error loading questions:', error);
+                quizContainer.innerHTML = '<div class="loading">Error loading questions. Please try again.</div>';
+            }
+        }
+
+        function renderQuiz() {
+            let html = '';
+            questions.forEach((q, idx) => {
+                html += `
+                    <div class="question-card" id="qCard-${idx}">
+                        <span class="q-num">Question ${idx+1}</span>
+                        ${q.imageUrl ? `<img src="${q.imageUrl}" class="q-image" alt="Question image" />` : ''}
+                        <div class="q-text">${q.question}</div>
+                        <div class="options" id="options-${idx}">
+                            ${q.options.map((opt, optIdx) => `
+                                <div class="option" id="opt-${idx}-${optIdx}" onclick="selectOption(${idx}, ${optIdx})">
+                                    <input type="radio" name="q${idx}" value="${optIdx}" id="radio-${idx}-${optIdx}" ${userAnswers[idx] === optIdx ? 'checked' : ''}>
+                                    <label for="radio-${idx}-${optIdx}">${opt}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="action-bar">
+                    <div class="score-badge" id="scoreDisplay">⏳ Not attempted</div>
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-outline" onclick="resetQuiz()"><i class="fas fa-redo-alt"></i> Restart</button>
+                        <button class="btn btn-primary" id="submitBtn" onclick="submitQuiz()"><i class="fas fa-check-circle"></i> Submit Test</button>
+                    </div>
+                </div>
+            `;
+            quizContainer.innerHTML = html;
+
+            // Re-attach global functions (they need to be on window)
+            window.selectOption = function(qIdx, optIdx) {
+                if (quizSubmitted) return;
+                userAnswers[qIdx] = optIdx;
+                // Update radio button state
+                const radios = document.getElementsByName(`q${qIdx}`);
+                radios.forEach((radio, index) => {
+                    radio.checked = (index === optIdx);
+                });
+            };
+
+            window.submitQuiz = function() {
+                if (quizSubmitted) return;
+                quizSubmitted = true;
+                clearInterval(timerInterval);
+
+                let correctCount = 0;
+                for (let i = 0; i < questions.length; i++) {
+                    const selected = userAnswers[i];
+                    const isCorrect = (selected === questions[i].correctIndex);
+                    if (isCorrect) correctCount++;
+
+                    // Highlight options
+                    for (let optIdx = 0; optIdx < 4; optIdx++) {
+                        const optDiv = document.getElementById(`opt-${i}-${optIdx}`);
+                        if (!optDiv) continue;
+                        optDiv.classList.remove('correct-highlight', 'wrong-highlight');
+                        optDiv.style.pointerEvents = 'none';
+                        if (optIdx === questions[i].correctIndex) {
+                            optDiv.classList.add('correct-highlight');
+                        }
+                        if (selected !== null && optIdx === selected && selected !== questions[i].correctIndex) {
+                            optDiv.classList.add('wrong-highlight');
+                        }
+                    }
+                    // Disable all radios
+                    const radios = document.getElementsByName(`q${i}`);
+                    radios.forEach(r => r.disabled = true);
+                }
+
+                document.getElementById('scoreDisplay').innerHTML = `✅ Score: ${correctCount} / ${questions.length}`;
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('submitBtn').style.opacity = 0.5;
+            };
+
+            window.resetQuiz = function() {
+                clearInterval(timerInterval);
+                quizSubmitted = false;
+                userAnswers.fill(null);
+                // Re-render to clear highlights and re-enable
+                renderQuiz();
+                startTimer();
+            };
+        }
+
+        function startTimer() {
+            let timeLeft = TIME_LIMIT;
+            timerInterval = setInterval(() => {
+                if (quizSubmitted) return;
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    timeLeft = 0;
+                    clearInterval(timerInterval);
+                    if (!quizSubmitted) submitQuiz();
+                }
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <footer>
+        <i class="fa-regular fa-lightbulb"></i> Select the best option. Auto‑submit when time ends.
+    </footer>
+</body>
+</html>
