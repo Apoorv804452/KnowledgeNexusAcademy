@@ -93,11 +93,9 @@ display:none;
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
-
 <div class="logo">Knowledge Nexus Academy</div>
 
 <div id="error"></div>
@@ -112,12 +110,10 @@ display:none;
 <button type="submit">Login</button>
 
 <div class="switch">
-Don't have an account?
-<span onclick="showSignup()">Sign Up</span>
+Don't have an account? <span onclick="showSignup()">Sign Up</span>
 </div>
 
 </form>
-
 
 <!-- SIGNUP -->
 <form id="signupForm" class="form">
@@ -127,7 +123,6 @@ Don't have an account?
 <input type="email" id="signupEmail" placeholder="Email Address" required>
 
 <select id="signupClass" required>
-
 <option value="">Select Class</option>
 <option value="5">Class 5</option>
 <option value="6">Class 6</option>
@@ -135,7 +130,6 @@ Don't have an account?
 <option value="8">Class 8</option>
 <option value="9">Class 9</option>
 <option value="10">Class 10</option>
-
 </select>
 
 <input type="password" id="signupPassword" placeholder="Create Password" required>
@@ -143,8 +137,7 @@ Don't have an account?
 <button type="submit">Create Account</button>
 
 <div class="switch">
-Already have an account?
-<span onclick="showLogin()">Login</span>
+Already have an account? <span onclick="showLogin()">Login</span>
 </div>
 
 </form>
@@ -159,8 +152,7 @@ import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
 getFirestore,
@@ -168,11 +160,8 @@ doc,
 setDoc,
 getDoc,
 serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -186,47 +175,34 @@ storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
 
 };
 
-
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-const errorBox = document.getElementById("error");
-
+const errorBox=document.getElementById("error");
 
 
 /* ================= SIGNUP ================= */
 
-document.getElementById("signupForm").addEventListener("submit", async (e)=>{
+document.getElementById("signupForm").addEventListener("submit",async(e)=>{
 
 e.preventDefault();
 
-const name = document.getElementById("signupName").value.trim();
+const name=document.getElementById("signupName").value;
 
-const email = document.getElementById("signupEmail").value.trim();
+const email=document.getElementById("signupEmail").value;
 
-const studentClass = document.getElementById("signupClass").value;
+const studentClass=document.getElementById("signupClass").value;
 
-const password = document.getElementById("signupPassword").value;
-
-if(!studentClass){
-
-errorBox.innerText="Please select class.";
-
-return;
-
-}
+const password=document.getElementById("signupPassword").value;
 
 try{
 
-const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+const userCredential=await createUserWithEmailAndPassword(auth,email,password);
 
-const user = userCredential.user;
-
-
-/* SAVE STUDENT DATA */
+const user=userCredential.user;
 
 await setDoc(doc(db,"students",user.uid),{
 
@@ -242,9 +218,6 @@ createdAt:serverTimestamp()
 
 });
 
-
-alert("Account Created Successfully!");
-
 window.location.href="class"+studentClass+"index.html";
 
 }catch(error){
@@ -256,10 +229,9 @@ errorBox.innerText=error.message;
 });
 
 
-
 /* ================= LOGIN ================= */
 
-document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+document.getElementById("loginForm").addEventListener("submit",async(e)=>{
 
 e.preventDefault();
 
@@ -276,14 +248,11 @@ const user=userCredential.user;
 
 /* CHECK STUDENT */
 
-const studentRef=doc(db,"students",user.uid);
+const studentDoc=await getDoc(doc(db,"students",user.uid));
 
-const studentSnap=await getDoc(studentRef);
+if(studentDoc.exists()){
 
-
-if(studentSnap.exists()){
-
-const studentClass=studentSnap.data().class;
+const studentClass=studentDoc.data().class;
 
 window.location.href="class"+studentClass+"index.html";
 
@@ -294,11 +263,9 @@ return;
 
 /* CHECK TEACHER */
 
-const teacherRef=doc(db,"teachers",user.uid);
+const teacherDoc=await getDoc(doc(db,"teachers",user.uid));
 
-const teacherSnap=await getDoc(teacherRef);
-
-if(teacherSnap.exists()){
+if(teacherDoc.exists()){
 
 window.location.href="teacher-dashboard.html";
 
@@ -306,7 +273,9 @@ return;
 
 }
 
-errorBox.innerText="User data not found.";
+
+errorBox.innerText="Account type not found";
+
 
 }catch(error){
 
@@ -318,7 +287,6 @@ errorBox.innerText=error.message;
 
 </script>
 
-
 <script>
 
 function showSignup(){
@@ -327,8 +295,6 @@ document.getElementById("loginForm").style.display="none";
 
 document.getElementById("signupForm").style.display="flex";
 
-document.getElementById("error").innerText="";
-
 }
 
 function showLogin(){
@@ -336,8 +302,6 @@ function showLogin(){
 document.getElementById("signupForm").style.display="none";
 
 document.getElementById("loginForm").style.display="flex";
-
-document.getElementById("error").innerText="";
 
 }
 
