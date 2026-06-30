@@ -1,311 +1,1144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Knowledge Nexus Academy</title>
+    <!-- ============================================
+    META TAGS - SEO & RESPONSIVE
+    ============================================ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Knowledge Nexus Academy - India's trusted coaching institute for IIT-JEE, NEET, CUET, and more. Expert faculty, smart learning, proven results." />
+    <meta name="keywords" content="coaching institute, IIT-JEE, NEET, CUET, foundation courses, science, commerce, NDA, SSC, banking, spoken english" />
+    <meta name="author" content="Knowledge Nexus Academy" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yourgithubusername.github.io/coaching-website/" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- ============================================
+    OPEN GRAPH TAGS - SOCIAL SHARING
+    ============================================ -->
+    <meta property="og:title" content="Knowledge Nexus Academy - From Confusion to Clarity" />
+    <meta property="og:description" content="India's trusted coaching institute. Expert faculty, smart learning, proven results." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourgithubusername.github.io/coaching-website/" />
+    <meta property="og:image" content="https://yourgithubusername.github.io/coaching-website/assets/images/og-image.jpg" />
 
-<style>
-:root{
---accent:#00f5a0;
-}
+    <!-- ============================================
+    FAVICON
+    ============================================ -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+    <!-- ============================================
+    TITLE
+    ============================================ -->
+    <title>Knowledge Nexus Academy - From Confusion to Clarity</title>
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
-color:white;
-}
+    <!-- ============================================
+    GOOGLE FONTS
+    ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-.container{
-width:95%;
-max-width:420px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(20px);
-border-radius:25px;
-padding:40px;
-box-shadow:0 15px 40px rgba(0,0,0,0.4);
-}
+    <!-- ============================================
+    FONT AWESOME - ICONS
+    ============================================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-.logo{
-text-align:center;
-font-weight:800;
-font-size:22px;
-margin-bottom:25px;
-color:var(--accent);
-}
-
-.form{
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-
-input, select{
-padding:14px;
-border-radius:12px;
-border:none;
-outline:none;
-font-size:14px;
-}
-
-button{
-padding:14px;
-border:none;
-border-radius:30px;
-background:var(--accent);
-font-weight:600;
-cursor:pointer;
-}
-
-.switch{
-text-align:center;
-margin-top:10px;
-font-size:14px;
-}
-
-.switch span{
-color:var(--accent);
-cursor:pointer;
-font-weight:600;
-}
-
-#error{
-text-align:center;
-color:#ff4d4d;
-font-size:13px;
-min-height:20px;
-}
-
-#signupForm{
-display:none;
-}
-</style>
+    <!-- ============================================
+    MAIN STYLESHEET
+    ============================================ -->
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<div class="container">
-<div class="logo">Knowledge Nexus Academy</div>
+    <!-- ============================================
+    LOADING SCREEN
+    ============================================ -->
+    <div id="loader" aria-hidden="true">
+        <div class="loader-spinner">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-text">Loading...</div>
+        </div>
+    </div>
 
-<div id="error"></div>
+    <!-- ============================================
+    BACK TO TOP BUTTON
+    ============================================ -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<!-- LOGIN -->
-<form id="loginForm" class="form">
+    <!-- ============================================
+    FLOATING WHATSAPP BUTTON
+    ============================================ -->
+    <a href="https://wa.me/917903736302?text=Hello%20Knowledge%20Nexus%20Academy%2C%20I%20want%20to%20know%20more%20about%20your%20courses."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-<input type="email" id="loginEmail" placeholder="Email Address" required>
+<!-- ============================================
+FLOATING CALL BUTTON
+============================================ -->
+<a href="tel:+917903736302" class="call-float" aria-label="Call us">
+    <i class="fas fa-phone-alt"></i>
+</a>
 
-<input type="password" id="loginPassword" placeholder="Password" required>
+<!-- ============================================
+HEADER / STICKY NAVIGATION
+============================================ -->
+<header class="header" id="header" role="banner">
+    <div class="container header-container">
+        <!-- Logo -->
+        <a href="#" class="logo" aria-label="Knowledge Nexus Academy Home">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="logo-text">
+                <span class="logo-name">Knowledge Nexus</span>
+                <span class="logo-tagline">from confusion to clarity</span>
+            </div>
+        </a>
 
-<button type="submit">Login</button>
+        <!-- Navigation Menu -->
+        <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+            <ul class="nav-list" id="navList">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#courses" class="nav-link">Courses</a></li>
+                <li><a href="#faculty" class="nav-link">Faculty</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#faq" class="nav-link">FAQs</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
 
-<div class="switch">
-Don't have an account? <span onclick="showSignup()">Sign Up</span>
+        <!-- Right side: Enroll CTA + Dark Mode Toggle + Hamburger -->
+        <div class="header-actions">
+            <a href="#contact" class="btn btn-primary btn-enroll">
+                <i class="fas fa-user-plus"></i> Enroll Now
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ============================================
+MAIN CONTENT
+============================================ -->
+<main>
+
+    <!-- ============================================
+    HERO SECTION
+    ============================================ -->
+    <section class="hero" id="home" aria-label="Hero banner">
+        <div class="hero-shapes" aria-hidden="true">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> India's Trusted Institute
+                </div>
+                <h1 class="hero-title">
+                    Shape Your Future With <span>India's Trusted</span> Coaching Institute
+                </h1>
+                <p class="hero-subtitle">
+                    <span id="typing-text"></span>
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-graduate"></i> Get Admission
+                    </a>
+                    <a href="#courses" class="btn btn-outline btn-large">
+                        <i class="fas fa-book-open"></i> Explore Courses
+                    </a>
+                </div>
+
+                <!-- Animated Statistics -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="10000">0</span>
+                        <span class="stat-label">Students</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="500">0</span>
+                        <span class="stat-label">Selections</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="15">0</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="95">0</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image" aria-hidden="true">
+                <div class="hero-illustration">
+                    <img src="assets/images/hero-illustration.svg" alt="Students studying illustration" loading="lazy" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    ABOUT SECTION
+    ============================================ -->
+    <section class="about section-padding" id="about" aria-label="About us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About Us</span>
+                <h2 class="section-title">From Confusion to <span>Clarity</span></h2>
+                <p class="section-desc">
+                    Knowledge Nexus Academy is committed to transforming students' lives through
+                    quality education, expert guidance, and a supportive learning environment.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        Established with a vision to bridge the gap between aspiration and achievement,
+                        Knowledge Nexus Academy has been a beacon of excellence in the field of competitive
+                        exam preparation. Our holistic approach combines rigorous academics with personal
+                        mentorship, ensuring every student reaches their full potential.
+                    </p>
+                    <div class="about-mission-vision">
+                        <div class="mv-item">
+                            <i class="fas fa-eye"></i>
+                            <h4>Our Vision</h4>
+                            <p>To become India's most trusted educational institution, empowering students to achieve their dreams.</p>
+                        </div>
+                        <div class="mv-item">
+                            <i class="fas fa-bullseye"></i>
+                            <h4>Our Mission</h4>
+                            <p>To provide world-class education, personalized mentorship, and a nurturing environment for academic excellence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-features">
+                    <div class="feature-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h4>Experienced Faculty</h4>
+                        <p>Learn from IITians, doctors, and industry experts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-laptop"></i>
+                        <h4>Smart Classrooms</h4>
+                        <p>Tech-enabled learning with interactive tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Regular Tests</h4>
+                        <p>Weekly assessments to track your progress.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>Doubt Sessions</h4>
+                        <p>One-on-one doubt clearing with expert faculty.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Digital Notes</h4>
+                        <p>Comprehensive study material at your fingertips.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Personal Mentorship</h4>
+                        <p>Dedicated mentors for career guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    COURSES SECTION
+    ============================================ -->
+    <section class="courses section-padding" id="courses" aria-label="Courses">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Courses</span>
+                <h2 class="section-title">Choose Your <span>Path</span></h2>
+                <p class="section-desc">
+                    Comprehensive courses designed by experts to help you crack your dream exam.
+                </p>
+            </div>
+
+            <div class="courses-grid">
+                <!-- Course 1: IIT-JEE -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-flask"></i></div>
+                    <h3 class="course-title">IIT-JEE</h3>
+                    <p class="course-desc">Complete preparation for JEE Main & Advanced with expert faculty.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 2 Years</span>
+                        <span><i class="fas fa-rupee-sign"></i> 1,50,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 2: NEET -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3 class="course-title">NEET</h3>
+                    <p class="course-desc">Comprehensive medical entrance preparation with biology experts.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 2 Years</span>
+                        <span><i class="fas fa-rupee-sign"></i> 1,40,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 3: CUET -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-university"></i></div>
+                    <h3 class="course-title">CUET</h3>
+                    <p class="course-desc">Crack Central Universities Entrance Test with our specialized program.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 1 Year</span>
+                        <span><i class="fas fa-rupee-sign"></i> 80,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 4: Class 9-10 Foundation -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-child"></i></div>
+                    <h3 class="course-title">Class 9-10 Foundation</h3>
+                    <p class="course-desc">Build a strong foundation for competitive exams from an early age.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 2 Years</span>
+                        <span><i class="fas fa-rupee-sign"></i> 60,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 5: Class 11-12 Science -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-atom"></i></div>
+                    <h3 class="course-title">Class 11-12 Science</h3>
+                    <p class="course-desc">Complete syllabus coverage for PCM/PCB with practical sessions.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 2 Years</span>
+                        <span><i class="fas fa-rupee-sign"></i> 1,20,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 6: Class 11-12 Commerce -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="course-title">Class 11-12 Commerce</h3>
+                    <p class="course-desc">Expert guidance for Accountancy, Economics & Business Studies.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 2 Years</span>
+                        <span><i class="fas fa-rupee-sign"></i> 1,00,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 7: NDA -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="course-title">NDA</h3>
+                    <p class="course-desc">Prepare for National Defence Academy with physical & academic training.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 1 Year</span>
+                        <span><i class="fas fa-rupee-sign"></i> 90,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 8: SSC -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="course-title">SSC</h3>
+                    <p class="course-desc">Complete preparation for SSC CGL, CHSL, and other government exams.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 1 Year</span>
+                        <span><i class="fas fa-rupee-sign"></i> 70,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 9: Banking -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-building-columns"></i></div>
+                    <h3 class="course-title">Banking</h3>
+                    <p class="course-desc">Crack IBPS, SBI, RBI and other banking exams with expert coaching.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 6 Months</span>
+                        <span><i class="fas fa-rupee-sign"></i> 60,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+
+                <!-- Course 10: Spoken English -->
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-language"></i></div>
+                    <h3 class="course-title">Spoken English</h3>
+                    <p class="course-desc">Improve your communication skills with our spoken English program.</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> 3 Months</span>
+                        <span><i class="fas fa-rupee-sign"></i> 25,000</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline btn-sm">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FACULTY SECTION
+    ============================================ -->
+    <section class="faculty section-padding" id="faculty" aria-label="Faculty">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Faculty</span>
+                <h2 class="section-title">Meet Our <span>Experts</span></h2>
+                <p class="section-desc">
+                    Learn from the best minds in the industry with years of experience.
+                </p>
+            </div>
+
+            <div class="faculty-grid">
+                <!-- Faculty 1 -->
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="assets/images/faculty-1.jpg" alt="Dr. Ananya Sharma - Physics" loading="lazy" />
+                    </div>
+                    <div class="faculty-info">
+                        <h4>Dr. Ananya Sharma</h4>
+                        <span class="faculty-subject">Physics</span>
+                        <p class="faculty-qualification">Ph.D. in Physics, IIT Delhi</p>
+                        <p class="faculty-experience">15+ Years Experience</p>
+                        <div class="faculty-social">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty 2 -->
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="assets/images/faculty-2.jpg" alt="Prof. Vikram Singh - Chemistry" loading="lazy" />
+                    </div>
+                    <div class="faculty-info">
+                        <h4>Prof. Vikram Singh</h4>
+                        <span class="faculty-subject">Chemistry</span>
+                        <p class="faculty-qualification">M.Sc. Chemistry, IIT Bombay</p>
+                        <p class="faculty-experience">12+ Years Experience</p>
+                        <div class="faculty-social">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty 3 -->
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="assets/images/faculty-3.jpg" alt="Dr. Meera Patel - Biology" loading="lazy" />
+                    </div>
+                    <div class="faculty-info">
+                        <h4>Dr. Meera Patel</h4>
+                        <span class="faculty-subject">Biology</span>
+                        <p class="faculty-qualification">MBBS, AIIMS Delhi</p>
+                        <p class="faculty-experience">10+ Years Experience</p>
+                        <div class="faculty-social">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty 4 -->
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="assets/images/faculty-4.jpg" alt="Mr. Arjun Kumar - Mathematics" loading="lazy" />
+                    </div>
+                    <div class="faculty-info">
+                        <h4>Mr. Arjun Kumar</h4>
+                        <span class="faculty-subject">Mathematics</span>
+                        <p class="faculty-qualification">M.Sc. Mathematics, IIT Kanpur</p>
+                        <p class="faculty-experience">14+ Years Experience</p>
+                        <div class="faculty-social">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    RESULTS SECTION
+    ============================================ -->
+    <section class="results section-padding" id="results" aria-label="Results">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Results</span>
+                <h2 class="section-title">Student <span>Success Stories</span></h2>
+                <p class="section-desc">
+                    Our students have consistently achieved outstanding results in competitive exams.
+                </p>
+            </div>
+
+            <!-- Animated Counters -->
+            <div class="results-stats">
+                <div class="result-stat">
+                    <span class="result-number" data-count="10000">0</span>
+                    <span class="result-label">Students Trained</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-number" data-count="500">0</span>
+                    <span class="result-label">Selections</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-number" data-count="15">0</span>
+                    <span class="result-label">Years of Excellence</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-number" data-count="95">0</span>
+                    <span class="result-label">Success Rate</span>
+                </div>
+            </div>
+
+            <!-- Topper Cards -->
+            <div class="toppers-grid">
+                <!-- Topper 1 -->
+                <div class="topper-card">
+                    <div class="topper-img">
+                        <img src="assets/images/topper-1.jpg" alt="Rahul Verma - IIT Topper" loading="lazy" />
+                    </div>
+                    <div class="topper-info">
+                        <h4>Rahul Verma</h4>
+                        <p class="topper-rank">AIR 15 - IIT JEE</p>
+                        <p class="topper-marks">99.8%</p>
+                        <span class="topper-course">IIT-JEE</span>
+                    </div>
+                </div>
+
+                <!-- Topper 2 -->
+                <div class="topper-card">
+                    <div class="topper-img">
+                        <img src="assets/images/topper-2.jpg" alt="Priya Singh - NEET Topper" loading="lazy" />
+                    </div>
+                    <div class="topper-info">
+                        <h4>Priya Singh</h4>
+                        <p class="topper-rank">AIR 25 - NEET</p>
+                        <p class="topper-marks">99.6%</p>
+                        <span class="topper-course">NEET</span>
+                    </div>
+                </div>
+
+                <!-- Topper 3 -->
+                <div class="topper-card">
+                    <div class="topper-img">
+                        <img src="assets/images/topper-3.jpg" alt="Amit Kumar - CUET Topper" loading="lazy" />
+                    </div>
+                    <div class="topper-info">
+                        <h4>Amit Kumar</h4>
+                        <p class="topper-rank">AIR 10 - CUET</p>
+                        <p class="topper-marks">99.9%</p>
+                        <span class="topper-course">CUET</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    TESTIMONIALS SECTION
+    ============================================ -->
+    <section class="testimonials section-padding" id="testimonials" aria-label="Testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What Our <span>Students Say</span></h2>
+                <p class="section-desc">
+                    Real stories from real students who transformed their lives with us.
+                </p>
+            </div>
+
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Knowledge Nexus Academy completely changed my approach to learning. The faculty is exceptional and the study material is top-notch. I secured AIR 15 in IIT JEE because of their guidance."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/student-1.jpg" alt="Rahul Verma" loading="lazy" />
+                            <div>
+                                <h4>Rahul Verma</h4>
+                                <span>IIT JEE Topper, AIR 15</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The best coaching institute for NEET preparation. The regular tests and doubt sessions helped me identify my weak areas and improve continuously. I'm grateful to the entire team."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/student-2.jpg" alt="Priya Singh" loading="lazy" />
+                            <div>
+                                <h4>Priya Singh</h4>
+                                <span>NEET Topper, AIR 25</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "I joined Knowledge Nexus Academy for CUET preparation and it was the best decision of my life. The personalized mentorship and digital notes made learning so much easier and effective."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/student-3.jpg" alt="Amit Kumar" loading="lazy" />
+                            <div>
+                                <h4>Amit Kumar</h4>
+                                <span>CUET Topper, AIR 10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The foundation course at Knowledge Nexus Academy gave me the confidence to pursue my dreams. The faculty is supportive and the learning environment is truly inspiring."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/student-4.jpg" alt="Sneha Patel" loading="lazy" />
+                            <div>
+                                <h4>Sneha Patel</h4>
+                                <span>Foundation Student</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Controls -->
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevSlide" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="slider-dots" id="sliderDots"></div>
+                    <button class="slider-btn" id="nextSlide" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    GALLERY SECTION
+    ============================================ -->
+    <section class="gallery section-padding" id="gallery" aria-label="Gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Gallery</span>
+                <h2 class="section-title">Campus <span>Moments</span></h2>
+                <p class="section-desc">
+                    Take a glimpse into our vibrant campus life and learning environment.
+                </p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" data-index="0">
+                    <img src="assets/images/gallery-1.jpg" alt="Smart Classroom" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="1">
+                    <img src="assets/images/gallery-2.jpg" alt="Library" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="2">
+                    <img src="assets/images/gallery-3.jpg" alt="Computer Lab" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <img src="assets/images/gallery-4.jpg" alt="Students Studying" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="4">
+                    <img src="assets/images/gallery-5.jpg" alt="Faculty Session" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="5">
+                    <img src="assets/images/gallery-6.jpg" alt="Campus View" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-next" id="lightboxNext" aria-label="Next image">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Gallery image" />
+        </div>
+    </section>
+
+    <!-- ============================================
+    FACILITIES SECTION
+    ============================================ -->
+    <section class="facilities section-padding" id="facilities" aria-label="Facilities">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Facilities</span>
+                <h2 class="section-title">Our <span>Facilities</span></h2>
+                <p class="section-desc">
+                    We provide state-of-the-art facilities to ensure a conducive learning environment.
+                </p>
+            </div>
+
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <i class="fas fa-chalkboard"></i>
+                    <h4>Smart Classrooms</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Computer Lab</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-book-open"></i>
+                    <h4>Library</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-snowflake"></i>
+                    <h4>AC Rooms</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-video"></i>
+                    <h4>CCTV Security</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-wifi"></i>
+                    <h4>Online Classes</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-wifi"></i>
+                    <h4>WiFi Campus</h4>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Study Material</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    ADMISSION PROCESS
+    ============================================ -->
+    <section class="admission section-padding" id="admission" aria-label="Admission process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Admission</span>
+                <h2 class="section-title">Admission <span>Process</span></h2>
+                <p class="section-desc">
+                    Follow these simple steps to start your journey with Knowledge Nexus Academy.
+                </p>
+            </div>
+
+            <div class="admission-timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Registration</h4>
+                        <p>Fill out the online registration form with your details.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Counseling</h4>
+                        <p>Get a personalized counseling session to understand your goals.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Demo Class</h4>
+                        <p>Attend a free demo class to experience our teaching methodology.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Admission</h4>
+                        <p>Complete the admission formalities and secure your seat.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Start Learning</h4>
+                        <p>Begin your learning journey with our expert faculty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FAQ SECTION
+    ============================================ -->
+    <section class="faq section-padding" id="faq" aria-label="Frequently asked questions">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                <p class="section-desc">
+                    Find answers to the most common questions about our courses and services.
+                </p>
+            </div>
+
+            <div class="faq-accordion">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What are the course fees?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our course fees vary depending on the program. Please visit our contact page or call us for detailed fee structure. We also offer scholarships and installment options.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Is there any scholarship available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer merit-based scholarships for students who perform exceptionally well in our entrance test. We also provide need-based financial assistance to deserving students.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What are the batch timings?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer flexible batch timings to suit different schedules. Morning batches start at 6:00 AM, and evening batches are available from 4:00 PM onwards. Weekend batches are also available.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you provide hostel facilities?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we have comfortable hostel facilities for outstation students with all modern amenities including AC rooms, Wi-Fi, and nutritious meals in a safe environment.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Are online classes available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer both offline and online classes. Our online learning platform provides live interactive sessions, recorded lectures, and digital study material.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Can I attend a demo class before enrolling?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we encourage all prospective students to attend a free demo class. This gives you an opportunity to experience our teaching methodology and interact with our faculty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    CONTACT SECTION
+    ============================================ -->
+    <section class="contact section-padding" id="contact" aria-label="Contact us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Contact</span>
+                <h2 class="section-title">Get In <span>Touch</span></h2>
+                <p class="section-desc">
+                    Have questions? Reach out to us and we'll be happy to assist you.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Near Vishwakarma Market, Station Road, Masaurhi</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:+917903736302">+91 79037 36302</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:apoorvsinghkumar67@gmail.com">apoorvsinghkumar67@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Google Map Placeholder -->
+                    <div class="contact-map">
+                        <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.123456789012!2d85.12345678901234!3d25.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA3JzI0LjUiTiA4NcKwMDcnMjQuNSJF!5e0!3m2!1sen!2sin!4v1234567890123"
+                        width="100%"
+                        height="200"
+                        style="border:0; border-radius: 12px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    title="Google Map location of Knowledge Nexus Academy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+                <label for="formName">Full Name <span class="required">*</span></label>
+                <input type="text" id="formName" name="name" placeholder="Enter your full name" required />
+                <div class="form-error" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="formPhone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="formPhone" name="phone" placeholder="Enter your phone number" required />
+                <div class="form-error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+                <label for="formEmail">Email Address <span class="required">*</span></label>
+                <input type="email" id="formEmail" name="email" placeholder="Enter your email address" required />
+                <div class="form-error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="formCourse">Interested Course <span class="required">*</span></label>
+                <select id="formCourse" name="course" required>
+                    <option value="">Select a course</option>
+                    <option value="IIT-JEE">IIT-JEE</option>
+                    <option value="NEET">NEET</option>
+                    <option value="CUET">CUET</option>
+                    <option value="Class 9-10 Foundation">Class 9-10 Foundation</option>
+                    <option value="Class 11-12 Science">Class 11-12 Science</option>
+                    <option value="Class 11-12 Commerce">Class 11-12 Commerce</option>
+                    <option value="NDA">NDA</option>
+                    <option value="SSC">SSC</option>
+                    <option value="Banking">Banking</option>
+                    <option value="Spoken English">Spoken English</option>
+                </select>
+                <div class="form-error" id="courseError"></div>
+            </div>
+            <div class="form-group">
+                <label for="formMessage">Message</label>
+                <textarea id="formMessage" name="message" rows="4" placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large btn-block">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+    </div>
+</div>
+</section>
+
+</main>
+
+<!-- ============================================
+FOOTER
+============================================ -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand -->
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-name">Knowledge Nexus</span>
+                        <span class="logo-tagline">from confusion to clarity</span>
+                    </div>
+                </a>
+                <p>India's trusted coaching institute committed to transforming students' lives through quality education and expert guidance.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Courses -->
+            <div class="footer-links">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="#courses">IIT-JEE</a></li>
+                    <li><a href="#courses">NEET</a></li>
+                    <li><a href="#courses">CUET</a></li>
+                    <li><a href="#courses">Foundation</a></li>
+                    <li><a href="#courses">Science</a></li>
+                    <li><a href="#courses">Commerce</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Subscribe to get updates on new courses and offers.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Your email address" required />
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>Knowledge Nexus Academy</strong>. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms &amp; Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================
+SUCCESS POPUP (hidden by default)
+============================================ -->
+<div class="success-popup" id="successPopup" aria-hidden="true">
+    <div class="popup-content">
+        <div class="popup-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Thank You!</h3>
+        <p>Your message has been sent successfully. We'll get back to you soon.</p>
+        <button class="btn btn-primary" id="popupClose">OK</button>
+    </div>
 </div>
 
-</form>
 
-<!-- SIGNUP -->
-<form id="signupForm" class="form">
-
-<input type="text" id="signupName" placeholder="Full Name" required>
-
-<input type="email" id="signupEmail" placeholder="Email Address" required>
-
-<select id="signupClass" required>
-<option value="">Select Class</option>
-<option value="5">Class 5</option>
-<option value="6">Class 6</option>
-<option value="7">Class 7</option>
-<option value="8">Class 8</option>
-<option value="9">Class 9</option>
-<option value="10">Class 10</option>
-</select>
-
-<input type="password" id="signupPassword" placeholder="Create Password" required>
-
-<button type="submit">Create Account</button>
-
-<div class="switch">
-Already have an account? <span onclick="showLogin()">Login</span>
-</div>
-
-</form>
-
-</div>
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-getFirestore,
-doc,
-setDoc,
-getDoc,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyBfFH9BvfDz5E1hytPAb37hJVMkYpGtMWs",
-
-authDomain: "knowledgenexusacademy-7c1b3.firebaseapp.com",
-
-projectId: "knowledgenexusacademy-7c1b3",
-
-storageBucket: "knowledgenexusacademy-7c1b3.firebasestorage.app"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-const errorBox=document.getElementById("error");
-
-
-/* ================= SIGNUP ================= */
-
-document.getElementById("signupForm").addEventListener("submit",async(e)=>{
-
-e.preventDefault();
-
-const name=document.getElementById("signupName").value;
-
-const email=document.getElementById("signupEmail").value;
-
-const studentClass=document.getElementById("signupClass").value;
-
-const password=document.getElementById("signupPassword").value;
-
-try{
-
-const userCredential=await createUserWithEmailAndPassword(auth,email,password);
-
-const user=userCredential.user;
-
-await setDoc(doc(db,"students",user.uid),{
-
-name:name,
-
-email:email,
-
-class:studentClass,
-
-role:"student",
-
-createdAt:serverTimestamp()
-
-});
-
-window.location.href="class"+studentClass+"index.html";
-
-}catch(error){
-
-errorBox.innerText=error.message;
-
-}
-
-});
-
-
-/* ================= LOGIN ================= */
-
-document.getElementById("loginForm").addEventListener("submit",async(e)=>{
-
-e.preventDefault();
-
-const email=document.getElementById("loginEmail").value;
-
-const password=document.getElementById("loginPassword").value;
-
-try{
-
-const userCredential=await signInWithEmailAndPassword(auth,email,password);
-
-const user=userCredential.user;
-
-
-/* CHECK STUDENT */
-
-const studentDoc=await getDoc(doc(db,"students",user.uid));
-
-if(studentDoc.exists()){
-
-const studentClass=studentDoc.data().class;
-
-window.location.href="class"+studentClass+"index.html";
-
-return;
-
-}
-
-
-/* CHECK TEACHER */
-
-const teacherDoc=await getDoc(doc(db,"teachers",user.uid));
-
-if(teacherDoc.exists()){
-
-window.location.href="teacher-dashboard.html";
-
-return;
-
-}
-
-
-errorBox.innerText="Account type not found";
-
-
-}catch(error){
-
-errorBox.innerText=error.message;
-
-}
-
-});
-
-</script>
-
-<script>
-
-function showSignup(){
-
-document.getElementById("loginForm").style.display="none";
-
-document.getElementById("signupForm").style.display="flex";
-
-}
-
-function showLogin(){
-
-document.getElementById("signupForm").style.display="none";
-
-document.getElementById("loginForm").style.display="flex";
-
-}
-
-</script>
+<!-- ============================================
+JAVASCRIPT
+============================================ -->
+<script src="script.js"></script>
 
 </body>
 </html>
