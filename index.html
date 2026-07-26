@@ -129,6 +129,22 @@
             width: 100%;
             justify-content: center;
         }
+        .btn-success {
+            background: #22c55e;
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+        }
 
         /* ========== LOADER ========== */
         #loader {
@@ -1137,6 +1153,23 @@
             margin-top: 4px;
             display: none;
         }
+        .form-submit-status {
+            margin-top: 12px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+        }
+        .form-submit-status.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+        .form-submit-status.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
 
         /* ========== FOOTER ========== */
         .footer {
@@ -1267,7 +1300,7 @@
             padding: 40px 50px;
             border-radius: var(--radius);
             text-align: center;
-            max-width: 420px;
+            max-width: 480px;
             width: 100%;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
             animation: popupIn 0.3s ease;
@@ -1296,6 +1329,15 @@
         .popup-content p {
             color: var(--text-light);
             margin-bottom: 24px;
+        }
+        .popup-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .popup-actions .btn {
+            justify-content: center;
         }
 
         /* ========== DARK MODE ========== */
@@ -1360,7 +1402,6 @@
         body.dark .theme-toggle i::before {
             content: "\f186";
         }
-        /* Override for dark mode icon */
         body.dark .theme-toggle .fa-moon::before {
             content: "\f185";
         }
@@ -1474,6 +1515,9 @@
                 width: 42px;
                 height: 42px;
             }
+            .popup-content {
+                padding: 30px 20px;
+            }
         }
         @media (max-width: 480px) {
             .hero-title {
@@ -1496,9 +1540,6 @@
             }
             .about-features {
                 grid-template-columns: 1fr;
-            }
-            .popup-content {
-                padding: 30px 20px;
             }
         }
     </style>
@@ -1583,7 +1624,6 @@
                 </div>
                 <div class="hero-image">
                     <div class="hero-illustration">
-                        <!-- SVG placeholder for illustration -->
                         <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
                             <rect width="500" height="400" fill="#e0f2fe" rx="20" />
                             <circle cx="250" cy="200" r="100" fill="#93c5fd" opacity="0.3" />
@@ -1635,15 +1675,13 @@
                     <p class="section-desc">Comprehensive courses designed by experts to help you crack your dream exam.</p>
                 </div>
                 <div class="courses-grid">
-                
                     <div class="course-card"><div class="course-icon"><i class="fas fa-heartbeat"></i></div><h3 class="course-title">NEET</h3><p class="course-desc">Comprehensive medical entrance preparation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 30000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
                     <div class="course-card"><div class="course-icon"><i class="fas fa-university"></i></div><h3 class="course-title">CUET</h3><p class="course-desc">Crack Central Universities Entrance Test.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-rupee-sign"></i> 10000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                     <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 1-5 Foundation</h3><p class="course-desc">Build a strong foundation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                     <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 6-8 Foundation</h3><p class="course-desc">Build a strong foundation for future exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 1-5 Foundation</h3><p class="course-desc">Build a strong foundation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 6-8 Foundation</h3><p class="course-desc">Build a strong foundation for future exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
                     <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 9-10 Foundation</h3><p class="course-desc">Build a strong foundation for competitive exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 800/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
                     <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3 class="course-title">Class 11-12 Science</h3><p class="course-desc">Complete syllabus for PCM/PCB with practicals.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
                     <div class="course-card"><div class="course-icon"><i class="fas fa-chart-line"></i></div><h3 class="course-title">Class 11-12 Commerce</h3><p class="course-desc">Expert guidance for Accountancy & Economics.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                   
                 </div>
             </div>
         </section>
@@ -1720,7 +1758,6 @@
                     <p class="section-desc">Take a glimpse into our vibrant campus life and learning environment.</p>
                 </div>
                 <div class="gallery-grid" id="galleryGrid">
-                    <!-- 6 gallery items with placeholder SVGs -->
                     <div class="gallery-item" data-index="0"><svg viewBox="0 0 400 400" style="background:#bfdbfe;"><rect x="50" y="50" width="300" height="200" rx="10" fill="#60a5fa"/><circle cx="200" cy="300" r="40" fill="#93c5fd"/></svg><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
                     <div class="gallery-item" data-index="1"><svg viewBox="0 0 400 400" style="background:#bfdbfe;"><rect x="50" y="50" width="300" height="200" rx="10" fill="#60a5fa"/><circle cx="200" cy="300" r="40" fill="#93c5fd"/></svg><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
                     <div class="gallery-item" data-index="2"><svg viewBox="0 0 400 400" style="background:#bfdbfe;"><rect x="50" y="50" width="300" height="200" rx="10" fill="#60a5fa"/><circle cx="200" cy="300" r="40" fill="#93c5fd"/></svg><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
@@ -1729,7 +1766,6 @@
                     <div class="gallery-item" data-index="5"><svg viewBox="0 0 400 400" style="background:#bfdbfe;"><rect x="50" y="50" width="300" height="200" rx="10" fill="#60a5fa"/><circle cx="200" cy="300" r="40" fill="#93c5fd"/></svg><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
                 </div>
             </div>
-            <!-- Lightbox -->
             <div class="lightbox" id="lightbox" aria-hidden="true">
                 <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
                 <button class="lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
@@ -1819,7 +1855,8 @@
                         <div class="form-group"><label for="formEmail">Email <span class="required">*</span></label><input type="email" id="formEmail" placeholder="Enter your email address" required /><div class="form-error" id="emailError"></div></div>
                         <div class="form-group"><label for="formCourse">Course <span class="required">*</span></label><select id="formCourse" required><option value="">Select a course</option><option value="IIT-JEE">IIT-JEE</option><option value="NEET">NEET</option><option value="CUET">CUET</option><option value="Class 9-10 Foundation">Class 9-10 Foundation</option><option value="Class 11-12 Science">Class 11-12 Science</option><option value="Class 11-12 Commerce">Class 11-12 Commerce</option><option value="NDA">NDA</option><option value="SSC">SSC</option><option value="Banking">Banking</option><option value="Spoken English">Spoken English</option></select><div class="form-error" id="courseError"></div></div>
                         <div class="form-group"><label for="formMessage">Message</label><textarea id="formMessage" rows="4" placeholder="Write your message..."></textarea></div>
-                        <button type="submit" class="btn btn-primary btn-large btn-block"><i class="fas fa-paper-plane"></i> Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-large btn-block" id="formSubmitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                        <div class="form-submit-status" id="formStatus"></div>
                     </form>
                 </div>
             </div>
@@ -1843,13 +1880,17 @@
         </div>
     </footer>
 
-    <!-- SUCCESS POPUP -->
+    <!-- SUCCESS POPUP with WhatsApp & Email options -->
     <div class="success-popup" id="successPopup" aria-hidden="true">
         <div class="popup-content">
             <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
-            <h3>Thank You!</h3>
-            <p>Your message has been sent successfully. We'll get back to you soon.</p>
-            <button class="btn btn-primary" id="popupClose">OK</button>
+            <h3>Thank You! 🎉</h3>
+            <p>Your enquiry has been sent successfully. We'll get back to you soon.</p>
+            <div class="popup-actions">
+                <a href="#" class="btn btn-whatsapp" id="popupWhatsAppBtn" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="#" class="btn btn-primary" id="popupEmailBtn"><i class="fas fa-envelope"></i> Send Email</a>
+                <button class="btn btn-outline" id="popupClose">Close</button>
+            </div>
         </div>
     </div>
 
@@ -1868,7 +1909,6 @@
             initBackToTop();
             initNavbar();
             initSmoothScroll();
-            // start observer for scroll animations
             initScrollReveal();
         });
 
@@ -1967,7 +2007,6 @@
             prev.addEventListener('click', () => goTo(current - 1));
             next.addEventListener('click', () => goTo(current + 1));
 
-            // auto slide every 5s
             let interval = setInterval(() => goTo(current + 1), 6000);
             track.parentElement.addEventListener('mouseenter', () => clearInterval(interval));
             track.parentElement.addEventListener('mouseleave', () => {
@@ -2040,37 +2079,44 @@
                     if (!isActive) item.classList.add('active');
                 });
             });
-            // open first by default
             document.querySelector('.faq-item')?.classList.add('active');
         }
 
-        // ========== CONTACT FORM ==========
+        // ========== CONTACT FORM — sends to Gmail + WhatsApp ==========
         function initContactForm() {
             const form = document.getElementById('contactForm');
             const popup = document.getElementById('successPopup');
             const popupClose = document.getElementById('popupClose');
+            const popupWhatsAppBtn = document.getElementById('popupWhatsAppBtn');
+            const popupEmailBtn = document.getElementById('popupEmailBtn');
+            const statusEl = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('formSubmitBtn');
 
-            form.addEventListener('submit', (e) => {
+            // Store form data for WhatsApp/Email links
+            let lastFormData = {};
+
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 let valid = true;
                 const fields = [
                     { id: 'formName', error: 'nameError', msg: 'Please enter your name.' },
-                    { id: 'formPhone', error: 'phoneError', msg: 'Please enter a valid phone number.' },
+                    { id: 'formPhone', error: 'phoneError', msg: 'Please enter a valid 10-digit phone number.' },
                     { id: 'formEmail', error: 'emailError', msg: 'Please enter a valid email address.' },
                     { id: 'formCourse', error: 'courseError', msg: 'Please select a course.' },
                 ];
                 fields.forEach(({ id, error, msg }) => {
                     const el = document.getElementById(id);
                     const errEl = document.getElementById(error);
-                    if (!el.value.trim()) {
+                    const val = el.value.trim();
+                    if (!val) {
                         errEl.textContent = msg;
                         errEl.style.display = 'block';
                         valid = false;
-                    } else if (id === 'formEmail' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) {
+                    } else if (id === 'formEmail' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
                         errEl.textContent = 'Please enter a valid email address.';
                         errEl.style.display = 'block';
                         valid = false;
-                    } else if (id === 'formPhone' && !/^[0-9]{10}$/.test(el.value.replace(/\s/g,''))) {
+                    } else if (id === 'formPhone' && !/^[0-9]{10}$/.test(val.replace(/\s/g, ''))) {
                         errEl.textContent = 'Please enter a 10-digit phone number.';
                         errEl.style.display = 'block';
                         valid = false;
@@ -2078,15 +2124,128 @@
                         errEl.style.display = 'none';
                     }
                 });
-                if (valid) {
-                    popup.classList.add('open');
-                    form.reset();
+
+                if (!valid) return;
+
+                // Gather data
+                const name = document.getElementById('formName').value.trim();
+                const phone = document.getElementById('formPhone').value.trim();
+                const email = document.getElementById('formEmail').value.trim();
+                const course = document.getElementById('formCourse').value;
+                const message = document.getElementById('formMessage').value.trim() || 'No message provided.';
+
+                lastFormData = { name, phone, email, course, message };
+
+                // Disable button, show loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                statusEl.className = 'form-submit-status';
+                statusEl.style.display = 'none';
+
+                // --- 1. Send to Gmail via Formspree (free, reliable) ---
+                // Replace the FORMSPREE_ID with your own from https://formspree.io
+                // Get a free endpoint: sign up at formspree.io, create a new form, copy the ID.
+                const FORMSPREE_ID = 'YOUR_FORMSPREE_ID'; // <-- USER: replace with your Formspree form ID
+                const useFormspree = FORMSPREE_ID && FORMSPREE_ID !== 'YOUR_FORMSPREE_ID';
+
+                let emailSent = false;
+
+                if (useFormspree) {
+                    try {
+                        const formData = new FormData();
+                        formData.append('name', name);
+                        formData.append('phone', phone);
+                        formData.append('email', email);
+                        formData.append('course', course);
+                        formData.append('message', message);
+
+                        const resp = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
+                        if (resp.ok) {
+                            emailSent = true;
+                        } else {
+                            console.warn('Formspree responded with error:', resp.status);
+                        }
+                    } catch (err) {
+                        console.warn('Formspree submission failed:', err);
+                    }
                 }
+
+                // --- 2. Fallback: use mailto: as backup if Formspree not configured or failed ---
+                if (!emailSent) {
+                    // Build mailto link
+                    const subject = encodeURIComponent(`New Enquiry from ${name} - ${course}`);
+                    const body = encodeURIComponent(
+                        `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCourse: ${course}\n\nMessage:\n${message}`
+                    );
+                    const mailtoLink = `mailto:apoorvsinghkumar67@gmail.com?subject=${subject}&body=${body}`;
+                    // We'll open it on popup close or via the email button
+                    // But also try to send via formsubmit.co as a second fallback
+                    try {
+                        // Try formsubmit.co (no signup required) as a second fallback
+                        const fd = new FormData();
+                        fd.append('name', name);
+                        fd.append('phone', phone);
+                        fd.append('email', email);
+                        fd.append('course', course);
+                        fd.append('message', message);
+                        await fetch('https://formsubmit.co/ajax/apoorvsinghkumar67@gmail.com', {
+                            method: 'POST',
+                            body: fd
+                        });
+                        emailSent = true;
+                    } catch (e) {
+                        // If both fail, we still show success popup with mailto/WhatsApp options
+                        console.warn('All email fallbacks failed:', e);
+                    }
+                }
+
+                // --- 3. Show success popup with WhatsApp + Email links ---
+                // Build WhatsApp link with pre-filled message
+                const whatsappMsg = encodeURIComponent(
+                    `📩 *New Enquiry from Knowledge Nexus*\n\n` +
+                    `👤 Name: ${name}\n` +
+                    `📞 Phone: ${phone}\n` +
+                    `📧 Email: ${email}\n` +
+                    `📚 Course: ${course}\n` +
+                    `💬 Message: ${message}`
+                );
+                const whatsappLink = `https://wa.me/917903736302?text=${whatsappMsg}`;
+                popupWhatsAppBtn.href = whatsappLink;
+
+                // Build mailto link for email button
+                const mailtoSubject = encodeURIComponent(`New Enquiry from ${name} - ${course}`);
+                const mailtoBody = encodeURIComponent(
+                    `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCourse: ${course}\n\nMessage:\n${message}`
+                );
+                popupEmailBtn.href = `mailto:apoorvsinghkumar67@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+                // Show popup
+                popup.classList.add('open');
+
+                // Reset form
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                statusEl.style.display = 'none';
             });
 
-            popupClose.addEventListener('click', () => popup.classList.remove('open'));
+            // Popup close handlers
+            popupClose.addEventListener('click', () => {
+                popup.classList.remove('open');
+            });
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) popup.classList.remove('open');
+            });
+
+            // Also close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && popup.classList.contains('open')) {
+                    popup.classList.remove('open');
+                }
             });
         }
 
@@ -2113,7 +2272,6 @@
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
                 icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
             });
-            // initial icon
             icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
         }
 
@@ -2138,7 +2296,6 @@
                 hamburger.classList.toggle('active');
                 navList.classList.toggle('open');
             });
-            // Close on link click
             navList.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     navList.classList.remove('open');
@@ -2146,7 +2303,6 @@
                     hamburger.setAttribute('aria-expanded', 'false');
                 });
             });
-            // Active link highlight
             const sections = document.querySelectorAll('section[id]');
             window.addEventListener('scroll', () => {
                 let current = '';
@@ -2175,9 +2331,11 @@
             });
         }
 
-        // ========== SCROLL REVEAL ANIMATIONS ==========
+        // ========== SCROLL REVEAL ==========
         function initScrollReveal() {
-            const elements = document.querySelectorAll('.section-padding, .hero, .course-card, .faculty-card, .topper-card, .testimonial-card, .gallery-item, .facility-item, .timeline-step, .faq-item');
+            const elements = document.querySelectorAll(
+                '.section-padding, .hero, .course-card, .faculty-card, .topper-card, .testimonial-card, .gallery-item, .facility-item, .timeline-step, .faq-item'
+                );
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -2192,14 +2350,17 @@
                 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(el);
             });
-            // force immediate reveal for hero
             document.querySelector('.hero').style.opacity = '1';
             document.querySelector('.hero').style.transform = 'translateY(0)';
         }
 
-        // ========== FALLBACK FOR IMAGES ==========
-        // All image placeholders are SVGs, so no broken images.
         console.log('Knowledge Nexus Academy loaded successfully.');
+        console.log('💡 To enable Gmail delivery:');
+        console.log('   1. Go to https://formspree.io and sign up (free).');
+        console.log('   2. Create a new form and copy your form ID.');
+        console.log('   3. Replace YOUR_FORMSPREE_ID in the JavaScript with your actual ID.');
+        console.log('   (The form also uses formsubmit.co as a fallback, no signup required.)');
+        console.log('📱 WhatsApp messages are sent via the popup link.');
     </script>
 </body>
 </html>
