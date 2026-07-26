@@ -38,6 +38,9 @@
             line-height: 1.7;
             overflow-x: hidden;
         }
+        body.no-scroll {
+            overflow: hidden;
+        }
         a {
             text-decoration: none;
             color: inherit;
@@ -506,10 +509,6 @@
             width: 100%;
             max-width: 500px;
         }
-        .hero-illustration img {
-            width: 100%;
-            height: auto;
-        }
 
         /* ========== ABOUT ========== */
         .about-grid {
@@ -627,6 +626,9 @@
         }
         .course-meta i {
             margin-right: 4px;
+        }
+        .course-learn-more {
+            cursor: pointer;
         }
 
         /* ========== FACULTY ========== */
@@ -1340,6 +1342,226 @@
             justify-content: center;
         }
 
+        /* ========== COURSE DETAIL MODAL (NEET PAGE) ========== */
+        .course-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 99999;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 30px 20px;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .course-modal-overlay.open {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .course-modal {
+            background: var(--bg);
+            border-radius: var(--radius);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 45px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            margin: 20px 0;
+        }
+        .course-modal::-webkit-scrollbar {
+            width: 6px;
+        }
+        .course-modal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .course-modal::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        .course-modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: rgba(0, 0, 0, 0.06);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            margin-bottom: 10px;
+        }
+        .course-modal-close:hover {
+            background: rgba(0, 0, 0, 0.12);
+            transform: rotate(90deg);
+        }
+        .course-modal .modal-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 4px 16px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .course-modal .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .course-modal .modal-title span {
+            color: var(--primary);
+        }
+        .course-modal .modal-subtitle {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+        .course-modal .modal-section {
+            margin-top: 28px;
+        }
+        .course-modal .modal-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .course-modal .modal-section h3 i {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        .course-modal .modal-section p,
+        .course-modal .modal-section li {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        .course-modal .modal-section ul {
+            padding-left: 24px;
+            list-style: disc;
+        }
+        .course-modal .modal-section ul li {
+            margin-bottom: 6px;
+        }
+        .course-modal .modal-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 12px;
+        }
+        .course-modal .info-box {
+            background: var(--bg);
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+        .course-modal .info-box h4 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        .course-modal .info-box p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .course-modal .syllabus-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .course-modal .syllabus-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--primary);
+        }
+        .course-modal .syllabus-card h4 {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .course-modal .syllabus-card h4 i {
+            color: var(--primary);
+        }
+        .course-modal .syllabus-card ul {
+            padding-left: 18px;
+            font-size: 0.85rem;
+            list-style: disc;
+        }
+        .course-modal .syllabus-card ul li {
+            margin-bottom: 3px;
+            color: var(--text-light);
+        }
+        .course-modal .table-wrap {
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+        .course-modal table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .course-modal table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .course-modal table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .course-modal table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        .course-modal table tr:hover {
+            background: rgba(37, 99, 235, 0.04);
+        }
+        .course-modal .modal-cta {
+            margin-top: 32px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
         /* ========== DARK MODE ========== */
         body.dark {
             --bg: #0F172A;
@@ -1382,10 +1604,25 @@
         body.dark .faq-item,
         body.dark .contact-form,
         body.dark .feature-card,
-        body.dark .mv-item {
+        body.dark .mv-item,
+        body.dark .course-modal,
+        body.dark .info-box,
+        body.dark .syllabus-card {
             background: #1E293B;
             color: var(--text);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        body.dark .course-modal table td {
+            border-bottom-color: #334155;
+        }
+        body.dark .course-modal table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        body.dark .course-modal table tr:hover {
+            background: rgba(56, 189, 248, 0.05);
+        }
+        body.dark .course-modal .modal-cta {
+            border-top-color: #334155;
         }
         body.dark .course-card .course-desc,
         body.dark .feature-card p,
@@ -1404,6 +1641,13 @@
         }
         body.dark .theme-toggle .fa-moon::before {
             content: "\f185";
+        }
+        body.dark .course-modal-close {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        body.dark .course-modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -1451,6 +1695,15 @@
             }
             .hero-title {
                 font-size: 2.2rem;
+            }
+            .course-modal .modal-grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .course-modal .syllabus-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .course-modal {
+                padding: 30px 24px;
             }
         }
         @media (max-width: 768px) {
@@ -1517,6 +1770,22 @@
             }
             .popup-content {
                 padding: 30px 20px;
+            }
+            .course-modal .syllabus-grid {
+                grid-template-columns: 1fr;
+            }
+            .course-modal .modal-title {
+                font-size: 1.6rem;
+            }
+            .course-modal {
+                padding: 20px 16px;
+            }
+            .course-modal .modal-cta {
+                flex-direction: column;
+            }
+            .course-modal .modal-cta .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
         @media (max-width: 480px) {
@@ -1675,13 +1944,21 @@
                     <p class="section-desc">Comprehensive courses designed by experts to help you crack your dream exam.</p>
                 </div>
                 <div class="courses-grid">
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-heartbeat"></i></div><h3 class="course-title">NEET</h3><p class="course-desc">Comprehensive medical entrance preparation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 30000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-university"></i></div><h3 class="course-title">CUET</h3><p class="course-desc">Crack Central Universities Entrance Test.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-rupee-sign"></i> 10000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 1-5 Foundation</h3><p class="course-desc">Build a strong foundation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 6-8 Foundation</h3><p class="course-desc">Build a strong foundation for future exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 9-10 Foundation</h3><p class="course-desc">Build a strong foundation for competitive exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 800/month</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3 class="course-title">Class 11-12 Science</h3><p class="course-desc">Complete syllabus for PCM/PCB with practicals.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-chart-line"></i></div><h3 class="course-title">Class 11-12 Commerce</h3><p class="course-desc">Expert guidance for Accountancy & Economics.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><a href="#contact" class="btn btn-outline btn-sm">Learn More</a></div>
+                    <!-- NEET Card -->
+                    <div class="course-card" data-course="neet">
+                        <div class="course-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h3 class="course-title">NEET</h3>
+                        <p class="course-desc">Comprehensive medical entrance preparation.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 30000</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="neet">Learn More</button>
+                    </div>
+
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-university"></i></div><h3 class="course-title">CUET</h3><p class="course-desc">Crack Central Universities Entrance Test.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-rupee-sign"></i> 10000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="cuet">Learn More</button></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 1-5 Foundation</h3><p class="course-desc">Build a strong foundation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-1-5">Learn More</button></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 6-8 Foundation</h3><p class="course-desc">Build a strong foundation for future exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-6-8">Learn More</button></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 9-10 Foundation</h3><p class="course-desc">Build a strong foundation for competitive exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 800/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-9-10">Learn More</button></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3 class="course-title">Class 11-12 Science</h3><p class="course-desc">Complete syllabus for PCM/PCB with practicals.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="science-11-12">Learn More</button></div>
+                    <div class="course-card"><div class="course-icon"><i class="fas fa-chart-line"></i></div><h3 class="course-title">Class 11-12 Commerce</h3><p class="course-desc">Expert guidance for Accountancy & Economics.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="commerce-11-12">Learn More</button></div>
                 </div>
             </div>
         </section>
@@ -1880,7 +2157,7 @@
         </div>
     </footer>
 
-    <!-- SUCCESS POPUP with WhatsApp & Email options -->
+    <!-- SUCCESS POPUP -->
     <div class="success-popup" id="successPopup" aria-hidden="true">
         <div class="popup-content">
             <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
@@ -1890,6 +2167,164 @@
                 <a href="#" class="btn btn-whatsapp" id="popupWhatsAppBtn" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
                 <a href="#" class="btn btn-primary" id="popupEmailBtn"><i class="fas fa-envelope"></i> Send Email</a>
                 <button class="btn btn-outline" id="popupClose">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== COURSE DETAIL MODAL – NEET ===== -->
+    <div class="course-modal-overlay" id="neetModal" role="dialog" aria-modal="true" aria-labelledby="neetModalTitle">
+        <div class="course-modal">
+            <button class="course-modal-close" id="neetModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+
+            <span class="modal-badge"><i class="fas fa-graduation-cap"></i> Medical Entrance</span>
+            <h2 class="modal-title" id="neetModalTitle">NEET <span>Ultimate Guide</span></h2>
+            <p class="modal-subtitle">Complete roadmap to crack the National Eligibility cum Entrance Test with Knowledge Nexus Academy.</p>
+
+            <!-- Overview -->
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Overview</h3>
+                <p>NEET (National Eligibility cum Entrance Test) is India's single largest medical entrance examination, conducted by NTA for admission to MBBS, BDS, BAMS, BHMS, and other medical courses across the country. With over 1.5 million aspirants appearing every year, NEET demands strategic preparation, conceptual clarity, and consistent practice.</p>
+                <p style="margin-top:8px;">At Knowledge Nexus Academy, we provide a comprehensive NEET preparation program designed by experienced medical faculty, covering the entire syllabus with regular tests, doubt sessions, and personalized mentorship.</p>
+            </div>
+
+            <!-- Quick Info -->
+            <div class="modal-section">
+                <h3><i class="fas fa-bolt"></i> Exam At a Glance</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📋 Exam Mode</h4><p>Online (Computer-Based Test) – Pen & Paper mode also available</p></div>
+                    <div class="info-box"><h4>⏱️ Duration</h4><p>3 hours 20 minutes (200 minutes)</p></div>
+                    <div class="info-box"><h4>📝 Total Questions</h4><p>200 (180 to be attempted)</p></div>
+                    <div class="info-box"><h4>🏷️ Marking Scheme</h4><p>+4 for correct, -1 for incorrect</p></div>
+                    <div class="info-box"><h4>📚 Subjects</h4><p>Physics, Chemistry, Biology (Botany & Zoology)</p></div>
+                    <div class="info-box"><h4>🎯 Total Marks</h4><p>720 (180 questions × 4 marks)</p></div>
+                </div>
+            </div>
+
+            <!-- Syllabus -->
+            <div class="modal-section">
+                <h3><i class="fas fa-book-open"></i> Detailed Syllabus</h3>
+                <p>The NEET syllabus is based on NCERT curriculum for Class 11 & 12. Here's the subject-wise breakdown:</p>
+
+                <div class="syllabus-grid">
+                    <!-- Physics -->
+                    <div class="syllabus-card">
+                        <h4><i class="fas fa-atom"></i> Physics</h4>
+                        <ul>
+                            <li>Class 11: Mechanics, Gravitation, Waves, Thermodynamics</li>
+                            <li>Class 12: Electrostatics, Magnetism, Optics, Modern Physics</li>
+                            <li>Key topics: Kinematics, Laws of Motion, Work & Energy</li>
+                            <li>Rotational Motion, Properties of Matter</li>
+                            <li>Current Electricity, EM Waves, Dual Nature</li>
+                        </ul>
+                    </div>
+                    <!-- Chemistry -->
+                    <div class="syllabus-card">
+                        <h4><i class="fas fa-flask"></i> Chemistry</h4>
+                        <ul>
+                            <li>Physical: Atomic Structure, Chemical Bonding, Thermodynamics</li>
+                            <li>Organic: Basic Principles, Hydrocarbons, Polymers</li>
+                            <li>Inorganic: Periodic Table, Coordination Compounds</li>
+                            <li>Equilibrium, Redox, Electrochemistry</li>
+                            <li>Biomolecules, Chemistry in Everyday Life</li>
+                        </ul>
+                    </div>
+                    <!-- Biology -->
+                    <div class="syllabus-card">
+                        <h4><i class="fas fa-dna"></i> Biology</h4>
+                        <ul>
+                            <li>Botany: Plant Physiology, Anatomy, Reproduction</li>
+                            <li>Zoology: Human Physiology, Animal Kingdom, Genetics</li>
+                            <li>Ecology, Evolution, Biotechnology</li>
+                            <li>Cell Structure, Biomolecules, Enzymes</li>
+                            <li>Human Health, Immunology, Microbes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eligibility -->
+            <div class="modal-section">
+                <h3><i class="fas fa-user-check"></i> Eligibility Criteria</h3>
+                <ul>
+                    <li><strong>Age:</strong> Minimum 17 years as of December 31 of the admission year. Maximum age limit varies (general: 25 years, SC/ST/OBC: 30 years).</li>
+                    <li><strong>Qualification:</strong> Passed Class 12 (or equivalent) with Physics, Chemistry, Biology/Biotechnology, and English as core subjects.</li>
+                    <li><strong>Minimum Marks:</strong> General category: 50% (45% for PwD), SC/ST/OBC: 40%.</li>
+                    <li><strong>Attempts:</strong> General category: 3 attempts, SC/ST/OBC: No limit.</li>
+                </ul>
+            </div>
+
+            <!-- Exam Pattern Table -->
+            <div class="modal-section">
+                <h3><i class="fas fa-table"></i> Exam Pattern</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Section</th><th>Subject</th><th>Questions</th><th>Marks</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Section A</td><td>Physics</td><td>35</td><td>140</td></tr>
+                            <tr><td>Section A</td><td>Chemistry</td><td>35</td><td>140</td></tr>
+                            <tr><td>Section A</td><td>Biology (Botany + Zoology)</td><td>70</td><td>280</td></tr>
+                            <tr><td>Section B</td><td>Physics</td><td>15 (10 to attempt)</td><td>40</td></tr>
+                            <tr><td>Section B</td><td>Chemistry</td><td>15 (10 to attempt)</td><td>40</td></tr>
+                            <tr><td>Section B</td><td>Biology</td><td>30 (20 to attempt)</td><td>80</td></tr>
+                            <tr style="font-weight:700; background:rgba(37,99,235,0.06);"><td colspan="2">Total</td><td>180 (attempted)</td><td>720</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top:8px; font-size:0.9rem; color:var(--text-light);"><i class="fas fa-info-circle"></i> Section B has optional questions — you can choose the best ones to attempt.</p>
+            </div>
+
+            <!-- Preparation Tips -->
+            <div class="modal-section">
+                <h3><i class="fas fa-lightbulb"></i> Preparation Tips</h3>
+                <ul>
+                    <li><strong>NCERT is the Bible:</strong> Thoroughly read and revise NCERT textbooks for Biology, Chemistry, and Physics.</li>
+                    <li><strong>Mock Tests:</strong> Take regular full-length mock tests to build stamina and time management skills.</li>
+                    <li><strong>Analyze Mistakes:</strong> Review your test performance to identify weak areas and work on them.</li>
+                    <li><strong>Conceptual Clarity:</strong> Focus on understanding concepts rather than rote memorization.</li>
+                    <li><strong>Daily Practice:</strong> Solve at least 50 MCQ questions daily across all three subjects.</li>
+                    <li><strong>Revision:</strong> Create short notes and revise them weekly. Last 2 months should be dedicated to intensive revision.</li>
+                </ul>
+            </div>
+
+            <!-- Important Dates -->
+            <div class="modal-section">
+                <h3><i class="fas fa-calendar-alt"></i> Important Dates (Tentative)</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Event</th><th>Date</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Notification Release</td><td>February</td></tr>
+                            <tr><td>Registration Start</td><td>February – March</td></tr>
+                            <tr><td>Admit Card Release</td><td>April – May</td></tr>
+                            <tr><td>Exam Date</td><td>May (First Sunday)</td></tr>
+                            <tr><td>Result Declaration</td><td>June</td></tr>
+                            <tr><td>Counseling Start</td><td>July – August</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FAQ Specific -->
+            <div class="modal-section">
+                <h3><i class="fas fa-question-circle"></i> NEET FAQs</h3>
+                <ul>
+                    <li><strong>Is NEET compulsory for BDS?</strong> Yes, NEET is mandatory for admission to all medical and dental colleges in India.</li>
+                    <li><strong>Can I appear for NEET in regional language?</strong> Yes, NEET is conducted in 13 languages including Hindi, English, and regional languages.</li>
+                    <li><strong>Is there negative marking?</strong> Yes, 1 mark is deducted for every incorrect answer.</li>
+                    <li><strong>Can I use a calculator?</strong> No, calculators are not allowed. You can use rough sheets provided by the center.</li>
+                    <li><strong>How many times can I appear for NEET?</strong> General: 3 attempts, SC/ST/OBC: unlimited attempts.</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll for NEET 2026</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20more%20about%20NEET%20coaching" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" id="neetModalCloseBtn"><i class="fas fa-times"></i> Close</button>
             </div>
         </div>
     </div>
@@ -1910,6 +2345,7 @@
             initNavbar();
             initSmoothScroll();
             initScrollReveal();
+            initCourseModals();
         });
 
         // ========== COUNTERS ==========
@@ -2082,7 +2518,7 @@
             document.querySelector('.faq-item')?.classList.add('active');
         }
 
-        // ========== CONTACT FORM — sends to Gmail + WhatsApp ==========
+        // ========== CONTACT FORM ==========
         function initContactForm() {
             const form = document.getElementById('contactForm');
             const popup = document.getElementById('successPopup');
@@ -2091,9 +2527,6 @@
             const popupEmailBtn = document.getElementById('popupEmailBtn');
             const statusEl = document.getElementById('formStatus');
             const submitBtn = document.getElementById('formSubmitBtn');
-
-            // Store form data for WhatsApp/Email links
-            let lastFormData = {};
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -2127,84 +2560,34 @@
 
                 if (!valid) return;
 
-                // Gather data
                 const name = document.getElementById('formName').value.trim();
                 const phone = document.getElementById('formPhone').value.trim();
                 const email = document.getElementById('formEmail').value.trim();
                 const course = document.getElementById('formCourse').value;
                 const message = document.getElementById('formMessage').value.trim() || 'No message provided.';
 
-                lastFormData = { name, phone, email, course, message };
-
-                // Disable button, show loading
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 statusEl.className = 'form-submit-status';
                 statusEl.style.display = 'none';
 
-                // --- 1. Send to Gmail via Formspree (free, reliable) ---
-                // Replace the FORMSPREE_ID with your own from https://formspree.io
-                // Get a free endpoint: sign up at formspree.io, create a new form, copy the ID.
-                const FORMSPREE_ID = 'YOUR_FORMSPREE_ID'; // <-- USER: replace with your Formspree form ID
-                const useFormspree = FORMSPREE_ID && FORMSPREE_ID !== 'YOUR_FORMSPREE_ID';
-
-                let emailSent = false;
-
-                if (useFormspree) {
-                    try {
-                        const formData = new FormData();
-                        formData.append('name', name);
-                        formData.append('phone', phone);
-                        formData.append('email', email);
-                        formData.append('course', course);
-                        formData.append('message', message);
-
-                        const resp = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'Accept': 'application/json' }
-                        });
-                        if (resp.ok) {
-                            emailSent = true;
-                        } else {
-                            console.warn('Formspree responded with error:', resp.status);
-                        }
-                    } catch (err) {
-                        console.warn('Formspree submission failed:', err);
-                    }
+                try {
+                    // Try formsubmit.co (no signup required)
+                    const fd = new FormData();
+                    fd.append('name', name);
+                    fd.append('phone', phone);
+                    fd.append('email', email);
+                    fd.append('course', course);
+                    fd.append('message', message);
+                    await fetch('https://formsubmit.co/ajax/apoorvsinghkumar67@gmail.com', {
+                        method: 'POST',
+                        body: fd
+                    });
+                } catch (e) {
+                    console.warn('Email delivery fallback:', e);
                 }
 
-                // --- 2. Fallback: use mailto: as backup if Formspree not configured or failed ---
-                if (!emailSent) {
-                    // Build mailto link
-                    const subject = encodeURIComponent(`New Enquiry from ${name} - ${course}`);
-                    const body = encodeURIComponent(
-                        `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCourse: ${course}\n\nMessage:\n${message}`
-                    );
-                    const mailtoLink = `mailto:apoorvsinghkumar67@gmail.com?subject=${subject}&body=${body}`;
-                    // We'll open it on popup close or via the email button
-                    // But also try to send via formsubmit.co as a second fallback
-                    try {
-                        // Try formsubmit.co (no signup required) as a second fallback
-                        const fd = new FormData();
-                        fd.append('name', name);
-                        fd.append('phone', phone);
-                        fd.append('email', email);
-                        fd.append('course', course);
-                        fd.append('message', message);
-                        await fetch('https://formsubmit.co/ajax/apoorvsinghkumar67@gmail.com', {
-                            method: 'POST',
-                            body: fd
-                        });
-                        emailSent = true;
-                    } catch (e) {
-                        // If both fail, we still show success popup with mailto/WhatsApp options
-                        console.warn('All email fallbacks failed:', e);
-                    }
-                }
-
-                // --- 3. Show success popup with WhatsApp + Email links ---
-                // Build WhatsApp link with pre-filled message
+                // Build WhatsApp link
                 const whatsappMsg = encodeURIComponent(
                     `📩 *New Enquiry from Knowledge Nexus*\n\n` +
                     `👤 Name: ${name}\n` +
@@ -2213,35 +2596,25 @@
                     `📚 Course: ${course}\n` +
                     `💬 Message: ${message}`
                 );
-                const whatsappLink = `https://wa.me/917903736302?text=${whatsappMsg}`;
-                popupWhatsAppBtn.href = whatsappLink;
+                popupWhatsAppBtn.href = `https://wa.me/917903736302?text=${whatsappMsg}`;
 
-                // Build mailto link for email button
                 const mailtoSubject = encodeURIComponent(`New Enquiry from ${name} - ${course}`);
                 const mailtoBody = encodeURIComponent(
                     `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCourse: ${course}\n\nMessage:\n${message}`
                 );
                 popupEmailBtn.href = `mailto:apoorvsinghkumar67@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 
-                // Show popup
                 popup.classList.add('open');
-
-                // Reset form
                 form.reset();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
                 statusEl.style.display = 'none';
             });
 
-            // Popup close handlers
-            popupClose.addEventListener('click', () => {
-                popup.classList.remove('open');
-            });
+            popupClose.addEventListener('click', () => popup.classList.remove('open'));
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) popup.classList.remove('open');
             });
-
-            // Also close on Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && popup.classList.contains('open')) {
                     popup.classList.remove('open');
@@ -2335,7 +2708,7 @@
         function initScrollReveal() {
             const elements = document.querySelectorAll(
                 '.section-padding, .hero, .course-card, .faculty-card, .topper-card, .testimonial-card, .gallery-item, .facility-item, .timeline-step, .faq-item'
-                );
+            );
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -2354,13 +2727,73 @@
             document.querySelector('.hero').style.transform = 'translateY(0)';
         }
 
+        // ========== COURSE MODALS ==========
+        function initCourseModals() {
+            const neetModal = document.getElementById('neetModal');
+            const neetModalClose = document.getElementById('neetModalClose');
+            const neetModalCloseBtn = document.getElementById('neetModalCloseBtn');
+
+            // Open NEET modal when clicking "Learn More" on NEET card
+            document.querySelectorAll('.course-learn-more').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const course = btn.getAttribute('data-course');
+                    if (course === 'neet') {
+                        neetModal.classList.add('open');
+                        document.body.classList.add('no-scroll');
+                    } else {
+                        // For other courses, show a friendly alert
+                        const courseNames = {
+                            'cuet': 'CUET',
+                            'foundation-1-5': 'Class 1-5 Foundation',
+                            'foundation-6-8': 'Class 6-8 Foundation',
+                            'foundation-9-10': 'Class 9-10 Foundation',
+                            'science-11-12': 'Class 11-12 Science',
+                            'commerce-11-12': 'Class 11-12 Commerce'
+                        };
+                        const name = courseNames[course] || 'this course';
+                        alert(`📚 ${name} details will be available soon. Please contact us for more information!`);
+                    }
+                });
+            });
+
+            // Close functions
+            function closeNeetModal() {
+                neetModal.classList.remove('open');
+                document.body.classList.remove('no-scroll');
+            }
+
+            neetModalClose.addEventListener('click', closeNeetModal);
+            neetModalCloseBtn.addEventListener('click', closeNeetModal);
+
+            // Close on overlay click
+            neetModal.addEventListener('click', (e) => {
+                if (e.target === neetModal) {
+                    closeNeetModal();
+                }
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && neetModal.classList.contains('open')) {
+                    closeNeetModal();
+                }
+            });
+
+            // If any Learn More button inside course card is clicked, prevent default card click
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // If the click is on the Learn More button, it's already handled above
+                    if (e.target.closest('.course-learn-more')) return;
+                    // Otherwise, find the Learn More button and trigger it
+                    const btn = card.querySelector('.course-learn-more');
+                    if (btn) btn.click();
+                });
+            });
+        }
+
         console.log('Knowledge Nexus Academy loaded successfully.');
-        console.log('💡 To enable Gmail delivery:');
-        console.log('   1. Go to https://formspree.io and sign up (free).');
-        console.log('   2. Create a new form and copy your form ID.');
-        console.log('   3. Replace YOUR_FORMSPREE_ID in the JavaScript with your actual ID.');
-        console.log('   (The form also uses formsubmit.co as a fallback, no signup required.)');
-        console.log('📱 WhatsApp messages are sent via the popup link.');
+        console.log('💡 Click "Learn More" on NEET card to open detailed NEET guide.');
     </script>
 </body>
 </html>
