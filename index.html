@@ -595,6 +595,7 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
+            cursor: pointer;
         }
         .course-card:hover {
             transform: translateY(-6px);
@@ -1342,7 +1343,7 @@
             justify-content: center;
         }
 
-        /* ========== COURSE DETAIL MODAL (NEET PAGE) ========== */
+        /* ========== COURSE DETAIL MODAL (shared) ========== */
         .course-modal-overlay {
             position: fixed;
             inset: 0;
@@ -1944,7 +1945,7 @@
                     <p class="section-desc">Comprehensive courses designed by experts to help you crack your dream exam.</p>
                 </div>
                 <div class="courses-grid">
-                    <!-- NEET Card -->
+                    <!-- NEET -->
                     <div class="course-card" data-course="neet">
                         <div class="course-icon"><i class="fas fa-heartbeat"></i></div>
                         <h3 class="course-title">NEET</h3>
@@ -1952,13 +1953,54 @@
                         <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 30000</span></div>
                         <button class="btn btn-outline btn-sm course-learn-more" data-course="neet">Learn More</button>
                     </div>
-
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-university"></i></div><h3 class="course-title">CUET</h3><p class="course-desc">Crack Central Universities Entrance Test.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-rupee-sign"></i> 10000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="cuet">Learn More</button></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 1-5 Foundation</h3><p class="course-desc">Build a strong foundation.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-1-5">Learn More</button></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 6-8 Foundation</h3><p class="course-desc">Build a strong foundation for future exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-6-8">Learn More</button></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-child"></i></div><h3 class="course-title">Class 9-10 Foundation</h3><p class="course-desc">Build a strong foundation for competitive exams.</p><div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 800/month</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-9-10">Learn More</button></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3 class="course-title">Class 11-12 Science</h3><p class="course-desc">Complete syllabus for PCM/PCB with practicals.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="science-11-12">Learn More</button></div>
-                    <div class="course-card"><div class="course-icon"><i class="fas fa-chart-line"></i></div><h3 class="course-title">Class 11-12 Commerce</h3><p class="course-desc">Expert guidance for Accountancy & Economics.</p><div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div><button class="btn btn-outline btn-sm course-learn-more" data-course="commerce-11-12">Learn More</button></div>
+                    <!-- CUET -->
+                    <div class="course-card" data-course="cuet">
+                        <div class="course-icon"><i class="fas fa-university"></i></div>
+                        <h3 class="course-title">CUET</h3>
+                        <p class="course-desc">Crack Central Universities Entrance Test.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-rupee-sign"></i> 10000</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="cuet">Learn More</button>
+                    </div>
+                    <!-- Foundation 1-5 -->
+                    <div class="course-card" data-course="foundation-1-5">
+                        <div class="course-icon"><i class="fas fa-child"></i></div>
+                        <h3 class="course-title">Class 1-5 Foundation</h3>
+                        <p class="course-desc">Build a strong foundation.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 500/month</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-1-5">Learn More</button>
+                    </div>
+                    <!-- Foundation 6-8 -->
+                    <div class="course-card" data-course="foundation-6-8">
+                        <div class="course-icon"><i class="fas fa-child"></i></div>
+                        <h3 class="course-title">Class 6-8 Foundation</h3>
+                        <p class="course-desc">Build a strong foundation for future exams.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 600/month</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-6-8">Learn More</button>
+                    </div>
+                    <!-- Foundation 9-10 -->
+                    <div class="course-card" data-course="foundation-9-10">
+                        <div class="course-icon"><i class="fas fa-child"></i></div>
+                        <h3 class="course-title">Class 9-10 Foundation</h3>
+                        <p class="course-desc">Build a strong foundation for competitive exams.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Years</span><span><i class="fas fa-rupee-sign"></i> 800/month</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="foundation-9-10">Learn More</button>
+                    </div>
+                    <!-- Science 11-12 -->
+                    <div class="course-card" data-course="science-11-12">
+                        <div class="course-icon"><i class="fas fa-atom"></i></div>
+                        <h3 class="course-title">Class 11-12 Science</h3>
+                        <p class="course-desc">Complete syllabus for PCM/PCB with practicals.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="science-11-12">Learn More</button>
+                    </div>
+                    <!-- Commerce 11-12 -->
+                    <div class="course-card" data-course="commerce-11-12">
+                        <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="course-title">Class 11-12 Commerce</h3>
+                        <p class="course-desc">Expert guidance for Accountancy & Economics.</p>
+                        <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-rupee-sign"></i> 20,000</span></div>
+                        <button class="btn btn-outline btn-sm course-learn-more" data-course="commerce-11-12">Learn More</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2171,23 +2213,20 @@
         </div>
     </div>
 
-    <!-- ===== COURSE DETAIL MODAL – NEET ===== -->
+    <!-- ===== COURSE DETAIL MODALS ===== -->
+
+    <!-- NEET Modal -->
     <div class="course-modal-overlay" id="neetModal" role="dialog" aria-modal="true" aria-labelledby="neetModalTitle">
         <div class="course-modal">
-            <button class="course-modal-close" id="neetModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
-
+            <button class="course-modal-close" data-modal="neetModal" aria-label="Close"><i class="fas fa-times"></i></button>
             <span class="modal-badge"><i class="fas fa-graduation-cap"></i> Medical Entrance</span>
             <h2 class="modal-title" id="neetModalTitle">NEET <span>Ultimate Guide</span></h2>
             <p class="modal-subtitle">Complete roadmap to crack the National Eligibility cum Entrance Test with Knowledge Nexus Academy.</p>
-
-            <!-- Overview -->
             <div class="modal-section">
                 <h3><i class="fas fa-info-circle"></i> Overview</h3>
-                <p>NEET (National Eligibility cum Entrance Test) is India's single largest medical entrance examination, conducted by NTA for admission to MBBS, BDS, BAMS, BHMS, and other medical courses across the country. With over 1.5 million aspirants appearing every year, NEET demands strategic preparation, conceptual clarity, and consistent practice.</p>
+                <p>NEET (National Eligibility cum Entrance Test) is India's single largest medical entrance examination, conducted by NTA for admission to MBBS, BDS, BAMS, BHMS, and other medical courses. With over 1.5 million aspirants appearing every year, NEET demands strategic preparation, conceptual clarity, and consistent practice.</p>
                 <p style="margin-top:8px;">At Knowledge Nexus Academy, we provide a comprehensive NEET preparation program designed by experienced medical faculty, covering the entire syllabus with regular tests, doubt sessions, and personalized mentorship.</p>
             </div>
-
-            <!-- Quick Info -->
             <div class="modal-section">
                 <h3><i class="fas fa-bolt"></i> Exam At a Glance</h3>
                 <div class="modal-grid-2">
@@ -2199,132 +2238,329 @@
                     <div class="info-box"><h4>🎯 Total Marks</h4><p>720 (180 questions × 4 marks)</p></div>
                 </div>
             </div>
-
-            <!-- Syllabus -->
             <div class="modal-section">
                 <h3><i class="fas fa-book-open"></i> Detailed Syllabus</h3>
                 <p>The NEET syllabus is based on NCERT curriculum for Class 11 & 12. Here's the subject-wise breakdown:</p>
-
                 <div class="syllabus-grid">
-                    <!-- Physics -->
-                    <div class="syllabus-card">
-                        <h4><i class="fas fa-atom"></i> Physics</h4>
-                        <ul>
-                            <li>Class 11: Mechanics, Gravitation, Waves, Thermodynamics</li>
-                            <li>Class 12: Electrostatics, Magnetism, Optics, Modern Physics</li>
-                            <li>Key topics: Kinematics, Laws of Motion, Work & Energy</li>
-                            <li>Rotational Motion, Properties of Matter</li>
-                            <li>Current Electricity, EM Waves, Dual Nature</li>
-                        </ul>
-                    </div>
-                    <!-- Chemistry -->
-                    <div class="syllabus-card">
-                        <h4><i class="fas fa-flask"></i> Chemistry</h4>
-                        <ul>
-                            <li>Physical: Atomic Structure, Chemical Bonding, Thermodynamics</li>
-                            <li>Organic: Basic Principles, Hydrocarbons, Polymers</li>
-                            <li>Inorganic: Periodic Table, Coordination Compounds</li>
-                            <li>Equilibrium, Redox, Electrochemistry</li>
-                            <li>Biomolecules, Chemistry in Everyday Life</li>
-                        </ul>
-                    </div>
-                    <!-- Biology -->
-                    <div class="syllabus-card">
-                        <h4><i class="fas fa-dna"></i> Biology</h4>
-                        <ul>
-                            <li>Botany: Plant Physiology, Anatomy, Reproduction</li>
-                            <li>Zoology: Human Physiology, Animal Kingdom, Genetics</li>
-                            <li>Ecology, Evolution, Biotechnology</li>
-                            <li>Cell Structure, Biomolecules, Enzymes</li>
-                            <li>Human Health, Immunology, Microbes</li>
-                        </ul>
-                    </div>
+                    <div class="syllabus-card"><h4><i class="fas fa-atom"></i> Physics</h4><ul><li>Class 11: Mechanics, Gravitation, Waves, Thermodynamics</li><li>Class 12: Electrostatics, Magnetism, Optics, Modern Physics</li><li>Key topics: Kinematics, Laws of Motion, Work & Energy</li><li>Rotational Motion, Properties of Matter</li><li>Current Electricity, EM Waves, Dual Nature</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-flask"></i> Chemistry</h4><ul><li>Physical: Atomic Structure, Chemical Bonding, Thermodynamics</li><li>Organic: Basic Principles, Hydrocarbons, Polymers</li><li>Inorganic: Periodic Table, Coordination Compounds</li><li>Equilibrium, Redox, Electrochemistry</li><li>Biomolecules, Chemistry in Everyday Life</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-dna"></i> Biology</h4><ul><li>Botany: Plant Physiology, Anatomy, Reproduction</li><li>Zoology: Human Physiology, Animal Kingdom, Genetics</li><li>Ecology, Evolution, Biotechnology</li><li>Cell Structure, Biomolecules, Enzymes</li><li>Human Health, Immunology, Microbes</li></ul></div>
                 </div>
             </div>
-
-            <!-- Eligibility -->
             <div class="modal-section">
                 <h3><i class="fas fa-user-check"></i> Eligibility Criteria</h3>
-                <ul>
-                    <li><strong>Age:</strong> Minimum 17 years as of December 31 of the admission year. Maximum age limit varies (general: 25 years, SC/ST/OBC: 30 years).</li>
-                    <li><strong>Qualification:</strong> Passed Class 12 (or equivalent) with Physics, Chemistry, Biology/Biotechnology, and English as core subjects.</li>
-                    <li><strong>Minimum Marks:</strong> General category: 50% (45% for PwD), SC/ST/OBC: 40%.</li>
-                    <li><strong>Attempts:</strong> General category: 3 attempts, SC/ST/OBC: No limit.</li>
-                </ul>
+                <ul><li><strong>Age:</strong> Minimum 17 years as of December 31 of the admission year. Maximum age limit varies (general: 25 years, SC/ST/OBC: 30 years).</li><li><strong>Qualification:</strong> Passed Class 12 (or equivalent) with Physics, Chemistry, Biology/Biotechnology, and English as core subjects.</li><li><strong>Minimum Marks:</strong> General category: 50% (45% for PwD), SC/ST/OBC: 40%.</li><li><strong>Attempts:</strong> General category: 3 attempts, SC/ST/OBC: No limit.</li></ul>
             </div>
-
-            <!-- Exam Pattern Table -->
             <div class="modal-section">
                 <h3><i class="fas fa-table"></i> Exam Pattern</h3>
                 <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr><th>Section</th><th>Subject</th><th>Questions</th><th>Marks</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Section A</td><td>Physics</td><td>35</td><td>140</td></tr>
-                            <tr><td>Section A</td><td>Chemistry</td><td>35</td><td>140</td></tr>
-                            <tr><td>Section A</td><td>Biology (Botany + Zoology)</td><td>70</td><td>280</td></tr>
-                            <tr><td>Section B</td><td>Physics</td><td>15 (10 to attempt)</td><td>40</td></tr>
-                            <tr><td>Section B</td><td>Chemistry</td><td>15 (10 to attempt)</td><td>40</td></tr>
-                            <tr><td>Section B</td><td>Biology</td><td>30 (20 to attempt)</td><td>80</td></tr>
-                            <tr style="font-weight:700; background:rgba(37,99,235,0.06);"><td colspan="2">Total</td><td>180 (attempted)</td><td>720</td></tr>
-                        </tbody>
-                    </table>
+                    <table><thead><tr><th>Section</th><th>Subject</th><th>Questions</th><th>Marks</th></tr></thead><tbody>
+                        <tr><td>Section A</td><td>Physics</td><td>35</td><td>140</td></tr>
+                        <tr><td>Section A</td><td>Chemistry</td><td>35</td><td>140</td></tr>
+                        <tr><td>Section A</td><td>Biology</td><td>70</td><td>280</td></tr>
+                        <tr><td>Section B</td><td>Physics</td><td>15 (10 to attempt)</td><td>40</td></tr>
+                        <tr><td>Section B</td><td>Chemistry</td><td>15 (10 to attempt)</td><td>40</td></tr>
+                        <tr><td>Section B</td><td>Biology</td><td>30 (20 to attempt)</td><td>80</td></tr>
+                        <tr style="font-weight:700; background:rgba(37,99,235,0.06);"><td colspan="2">Total</td><td>180 (attempted)</td><td>720</td></tr>
+                    </tbody></table>
                 </div>
-                <p style="margin-top:8px; font-size:0.9rem; color:var(--text-light);"><i class="fas fa-info-circle"></i> Section B has optional questions — you can choose the best ones to attempt.</p>
             </div>
-
-            <!-- Preparation Tips -->
             <div class="modal-section">
                 <h3><i class="fas fa-lightbulb"></i> Preparation Tips</h3>
-                <ul>
-                    <li><strong>NCERT is the Bible:</strong> Thoroughly read and revise NCERT textbooks for Biology, Chemistry, and Physics.</li>
-                    <li><strong>Mock Tests:</strong> Take regular full-length mock tests to build stamina and time management skills.</li>
-                    <li><strong>Analyze Mistakes:</strong> Review your test performance to identify weak areas and work on them.</li>
-                    <li><strong>Conceptual Clarity:</strong> Focus on understanding concepts rather than rote memorization.</li>
-                    <li><strong>Daily Practice:</strong> Solve at least 50 MCQ questions daily across all three subjects.</li>
-                    <li><strong>Revision:</strong> Create short notes and revise them weekly. Last 2 months should be dedicated to intensive revision.</li>
-                </ul>
+                <ul><li><strong>NCERT is the Bible:</strong> Thoroughly read and revise NCERT textbooks.</li><li><strong>Mock Tests:</strong> Take regular full-length mock tests.</li><li><strong>Analyze Mistakes:</strong> Review your test performance.</li><li><strong>Conceptual Clarity:</strong> Focus on understanding concepts.</li><li><strong>Daily Practice:</strong> Solve at least 50 MCQ questions daily.</li><li><strong>Revision:</strong> Create short notes and revise weekly.</li></ul>
             </div>
-
-            <!-- Important Dates -->
             <div class="modal-section">
                 <h3><i class="fas fa-calendar-alt"></i> Important Dates (Tentative)</h3>
                 <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr><th>Event</th><th>Date</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Notification Release</td><td>February</td></tr>
-                            <tr><td>Registration Start</td><td>February – March</td></tr>
-                            <tr><td>Admit Card Release</td><td>April – May</td></tr>
-                            <tr><td>Exam Date</td><td>May (First Sunday)</td></tr>
-                            <tr><td>Result Declaration</td><td>June</td></tr>
-                            <tr><td>Counseling Start</td><td>July – August</td></tr>
-                        </tbody>
-                    </table>
+                    <table><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody>
+                        <tr><td>Notification Release</td><td>February</td></tr>
+                        <tr><td>Registration Start</td><td>February – March</td></tr>
+                        <tr><td>Admit Card Release</td><td>April – May</td></tr>
+                        <tr><td>Exam Date</td><td>May (First Sunday)</td></tr>
+                        <tr><td>Result Declaration</td><td>June</td></tr>
+                        <tr><td>Counseling Start</td><td>July – August</td></tr>
+                    </tbody></table>
                 </div>
             </div>
-
-            <!-- FAQ Specific -->
             <div class="modal-section">
                 <h3><i class="fas fa-question-circle"></i> NEET FAQs</h3>
-                <ul>
-                    <li><strong>Is NEET compulsory for BDS?</strong> Yes, NEET is mandatory for admission to all medical and dental colleges in India.</li>
-                    <li><strong>Can I appear for NEET in regional language?</strong> Yes, NEET is conducted in 13 languages including Hindi, English, and regional languages.</li>
-                    <li><strong>Is there negative marking?</strong> Yes, 1 mark is deducted for every incorrect answer.</li>
-                    <li><strong>Can I use a calculator?</strong> No, calculators are not allowed. You can use rough sheets provided by the center.</li>
-                    <li><strong>How many times can I appear for NEET?</strong> General: 3 attempts, SC/ST/OBC: unlimited attempts.</li>
-                </ul>
+                <ul><li><strong>Is NEET compulsory for BDS?</strong> Yes.</li><li><strong>Can I appear in regional language?</strong> Yes, 13 languages available.</li><li><strong>Is there negative marking?</strong> Yes, -1 for each wrong.</li><li><strong>Can I use a calculator?</strong> No.</li><li><strong>How many attempts?</strong> General: 3, SC/ST/OBC: unlimited.</li></ul>
             </div>
-
-            <!-- CTA -->
             <div class="modal-cta">
                 <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll for NEET 2026</a>
                 <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20more%20about%20NEET%20coaching" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
-                <button class="btn btn-outline btn-large" id="neetModalCloseBtn"><i class="fas fa-times"></i> Close</button>
+                <button class="btn btn-outline btn-large" data-modal="neetModal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUET Modal -->
+    <div class="course-modal-overlay" id="cuetModal" role="dialog" aria-modal="true" aria-labelledby="cuetModalTitle">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="cuetModal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-university"></i> Central Universities</span>
+            <h2 class="modal-title" id="cuetModalTitle">CUET <span>Ultimate Guide</span></h2>
+            <p class="modal-subtitle">Complete roadmap to crack the Common University Entrance Test for admission to central universities.</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Overview</h3>
+                <p>CUET (Common University Entrance Test) is a national-level entrance exam for admission to undergraduate, postgraduate, and PhD programs in 45+ central universities across India. The exam tests language, domain-specific knowledge, and general aptitude.</p>
+                <p style="margin-top:8px;">Our comprehensive CUET preparation program covers all sections with expert faculty, personalized doubt sessions, and regular mock tests to help you secure a top rank.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-bolt"></i> Exam At a Glance</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📋 Exam Mode</h4><p>Online (Computer-Based Test)</p></div>
+                    <div class="info-box"><h4>⏱️ Duration</h4><p>3 hours 15 minutes (total)</p></div>
+                    <div class="info-box"><h4>📝 Sections</h4><p>Language, Domain, General Test</p></div>
+                    <div class="info-box"><h4>🏷️ Marking</h4><p>+5 for correct, -1 for incorrect</p></div>
+                    <div class="info-box"><h4>📚 Subjects</h4><p>As per choice (up to 6)</p></div>
+                    <div class="info-box"><h4>🎯 Total Marks</h4><p>Varies by section (max ~800)</p></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book-open"></i> Syllabus & Sections</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-language"></i> Section 1 – Language</h4><ul><li>Reading Comprehension</li><li>Verbal Ability</li><li>Grammar & Vocabulary</li><li>Sentence Correction</li><li>Para Jumbles</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-cogs"></i> Section 2 – Domain</h4><ul><li>Choose subjects (Physics, Chem, Math, Bio, Commerce, Humanities etc.)</li><li>As per Class 11-12 NCERT syllabus</li><li>Subject-specific MCQs</li><li>In-depth conceptual questions</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-brain"></i> Section 3 – General Test</h4><ul><li>Quantitative Reasoning</li><li>Logical Reasoning</li><li>Data Interpretation</li><li>General Knowledge & Current Affairs</li><li>Analytical Skills</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-user-check"></i> Eligibility</h3>
+                <ul><li><strong>Age:</strong> No upper age limit for CUET (as per UGC guidelines).</li><li><strong>Qualification:</strong> Passed Class 12 (or equivalent) from a recognized board.</li><li><strong>Minimum Marks:</strong> Varies by university – generally 50% (general) and 45% (SC/ST/OBC).</li><li><strong>Subject Choice:</strong> As per the course you want to pursue.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-table"></i> Exam Pattern (Example)</h3>
+                <div class="table-wrap">
+                    <table><thead><tr><th>Section</th><th>Questions</th><th>Duration</th><th>Marks</th></tr></thead><tbody>
+                        <tr><td>Section 1A (Language)</td><td>40</td><td>45 min</td><td>200</td></tr>
+                        <tr><td>Section 1B (Language)</td><td>40</td><td>45 min</td><td>200</td></tr>
+                        <tr><td>Section 2 (Domain – each subject)</td><td>40</td><td>45 min</td><td>200</td></tr>
+                        <tr><td>Section 3 (General Test)</td><td>60</td><td>60 min</td><td>300</td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-lightbulb"></i> Preparation Tips</h3>
+                <ul><li><strong>Know your subjects:</strong> Choose domain subjects wisely.</li><li><strong>Practice mock tests:</strong> Time management is key.</li><li><strong>Strong vocabulary:</strong> For language and general test.</li><li><strong>Revise NCERT:</strong> For domain subjects, NCERT is essential.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-calendar-alt"></i> Important Dates</h3>
+                <div class="table-wrap">
+                    <table><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody>
+                        <tr><td>Notification</td><td>February</td></tr>
+                        <tr><td>Registration</td><td>February – March</td></tr>
+                        <tr><td>Admit Card</td><td>May</td></tr>
+                        <tr><td>Exam</td><td>May – June</td></tr>
+                        <tr><td>Result</td><td>July</td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll for CUET 2026</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20more%20about%20CUET%20coaching" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="cuetModal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Foundation 1-5 Modal -->
+    <div class="course-modal-overlay" id="foundation1-5Modal" role="dialog" aria-modal="true" aria-labelledby="f1-5Title">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="foundation1-5Modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-child"></i> Early Learning</span>
+            <h2 class="modal-title" id="f1-5Title">Class 1-5 <span>Foundation Program</span></h2>
+            <p class="modal-subtitle">Building a strong academic foundation for lifelong learning.</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Program Overview</h3>
+                <p>Our Foundation Program for Classes 1-5 focuses on building conceptual clarity in core subjects – Mathematics, English, Science, and Social Studies. Using interactive and activity-based learning, we ensure that young learners develop curiosity, critical thinking, and a love for learning.</p>
+                <p style="margin-top:8px;">The curriculum is aligned with NCERT/CBSE standards and is designed to bridge the gap between school and competitive mindset from an early age.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book"></i> Key Subjects</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-calculator"></i> Mathematics</h4><ul><li>Number sense, Addition/Subtraction</li><li>Multiplication/Division basics</li><li>Fractions, Decimals, Geometry</li><li>Measurement, Data handling</li><li>Mental Math & Puzzles</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-book-open"></i> English</h4><ul><li>Reading comprehension</li><li>Grammar (nouns, verbs, tenses)</li><li>Vocabulary building</li><li>Creative writing</li><li>Spelling & Phonics</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-flask"></i> Science & SST</h4><ul><li>Plants & animals, Human body</li><li>Weather, seasons, environment</li><li>Our country & world</li><li>Maps, cultures, festivals</li><li>Basic scientific observations</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-chalkboard-teacher"></i> Teaching Methodology</h3>
+                <ul><li><strong>Activity-based learning:</strong> Hands-on experiments, projects, and games.</li><li><strong>Regular assessments:</strong> Weekly quizzes and monthly tests.</li><li><strong>Personal attention:</strong> Small batch sizes for individual focus.</li><li><strong>Parent-teacher interaction:</strong> Regular feedback and progress tracking.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-clock"></i> Program Details</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📅 Duration</h4><p>1 Year (Annual program)</p></div>
+                    <div class="info-box"><h4>💰 Fee</h4><p>₹500/month (or annual package)</p></div>
+                    <div class="info-box"><h4>⏰ Timings</h4><p>Evening batches 4-6 PM (flexible)</p></div>
+                    <div class="info-box"><h4>📞 Batch Size</h4><p>10-12 students per batch</p></div>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll Now</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20about%20Foundation%20(1-5)" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="foundation1-5Modal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Foundation 6-8 Modal -->
+    <div class="course-modal-overlay" id="foundation6-8Modal" role="dialog" aria-modal="true" aria-labelledby="f6-8Title">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="foundation6-8Modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-child"></i> Middle School</span>
+            <h2 class="modal-title" id="f6-8Title">Class 6-8 <span>Foundation Program</span></h2>
+            <p class="modal-subtitle">Strengthening concepts for future competitive exams.</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Program Overview</h3>
+                <p>This program is designed for students in Classes 6-8 to build a strong foundation in Science, Mathematics, English, and Social Studies. The curriculum goes beyond textbooks to develop analytical thinking, problem-solving skills, and a scientific temperament – preparing students for board exams and future entrance tests like JEE, NEET, and CUET.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book"></i> Subject-wise Coverage</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-calculator"></i> Mathematics</h4><ul><li>Algebra, Geometry, Mensuration</li><li>Number systems, Fractions</li><li>Ratio, Proportion, Percentages</li><li>Simple equations, Data handling</li><li>Logical reasoning</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-flask"></i> Science</h4><ul><li>Physics: Motion, Force, Light</li><li>Chemistry: Matter, Acids/Bases</li><li>Biology: Cell, Human Body</li><li>Environmental Science</li><li>Practical experiments</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-globe"></i> SST & English</h4><ul><li>History, Civics, Geography</li><li>Reading comprehension, Grammar</li><li>Writing skills, Vocabulary</li><li>Critical thinking</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-chalkboard-teacher"></i> Pedagogy</h3>
+                <ul><li><strong>Conceptual clarity:</strong> Focus on 'why' and 'how'.</li><li><strong>Regular tests:</strong> Fortnightly assessments.</li><li><strong>Doubt clearing:</strong> Dedicated sessions.</li><li><strong>Project work:</strong> Hands-on learning.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-clock"></i> Program Details</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📅 Duration</h4><p>1 Year</p></div>
+                    <div class="info-box"><h4>💰 Fee</h4><p>₹600/month</p></div>
+                    <div class="info-box"><h4>⏰ Timings</h4><p>Evening 4-6 PM</p></div>
+                    <div class="info-box"><h4>📞 Batch Size</h4><p>12-15 students</p></div>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll Now</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20about%20Foundation%20(6-8)" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="foundation6-8Modal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Foundation 9-10 Modal -->
+    <div class="course-modal-overlay" id="foundation9-10Modal" role="dialog" aria-modal="true" aria-labelledby="f9-10Title">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="foundation9-10Modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-child"></i> Board Prep</span>
+            <h2 class="modal-title" id="f9-10Title">Class 9-10 <span>Foundation Program</span></h2>
+            <p class="modal-subtitle">Dual focus on board exams and competitive foundation.</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Overview</h3>
+                <p>This program is tailored for Classes 9-10 students aiming to excel in their board exams while simultaneously building a strong foundation for JEE/NEET and other entrance tests. The curriculum covers NCERT in depth, with additional advanced concepts and problem-solving techniques.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book"></i> Syllabus Highlights</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-calculator"></i> Mathematics</h4><ul><li>Polynomials, Linear Equations</li><li>Quadratic Equations, Arithmetic Progression</li><li>Trigonometry, Statistics</li><li>Geometry, Coordinate Geometry</li><li>Mensuration</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-flask"></i> Science</h4><ul><li>Physics: Light, Electricity, Magnetic Effects</li><li>Chemistry: Chemical Reactions, Acids/Bases</li><li>Biology: Life Processes, Control & Coordination</li><li>Heredity, Environment</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-globe"></i> SST & English</h4><ul><li>History (Nationalism, World History)</li><li>Geography (Resources, Climate)</li><li>Political Science, Economics</li><li>English: Literature, Grammar, Writing</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-chart-line"></i> Additional Benefits</h3>
+                <ul><li><strong>Weekly tests:</strong> Based on board + competitive pattern.</li><li><strong>Doubt sessions:</strong> One-on-one with faculty.</li><li><strong>Study material:</strong> Comprehensive notes and practice papers.</li><li><strong>Career guidance:</strong> For stream selection (Science/Commerce/Arts).</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-clock"></i> Program Details</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📅 Duration</h4><p>1 Year</p></div>
+                    <div class="info-box"><h4>💰 Fee</h4><p>₹800/month</p></div>
+                    <div class="info-box"><h4>⏰ Timings</h4><p>Evening 5-7 PM</p></div>
+                    <div class="info-box"><h4>📞 Batch Size</h4><p>15-20 students</p></div>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll Now</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20about%20Foundation%20(9-10)" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="foundation9-10Modal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Science 11-12 Modal -->
+    <div class="course-modal-overlay" id="science11-12Modal" role="dialog" aria-modal="true" aria-labelledby="sciTitle">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="science11-12Modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-atom"></i> PCM / PCB</span>
+            <h2 class="modal-title" id="sciTitle">Class 11-12 <span>Science</span></h2>
+            <p class="modal-subtitle">Complete preparation for board exams and entrance tests (JEE/NEET).</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Overview</h3>
+                <p>Our Science program for Classes 11-12 covers the entire CBSE/NCERT syllabus for Physics, Chemistry, and Biology/Mathematics. It is designed to help students excel in board exams while preparing for competitive exams like JEE Main, JEE Advanced, NEET, and other engineering/medical entrance tests.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book"></i> Subject Coverage</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-atom"></i> Physics</h4><ul><li>Class 11: Mechanics, Waves, Thermodynamics</li><li>Class 12: Electrostatics, Magnetism, Optics</li><li>Modern Physics, Semiconductors</li><li>Practical experiments & Viva</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-flask"></i> Chemistry</h4><ul><li>Physical: Atomic structure, Equilibrium</li><li>Organic: Hydrocarbons, Biomolecules</li><li>Inorganic: Periodic table, Coordination</li><li>Practical chemistry</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-dna"></i> Biology (PCB)</h4><ul><li>Botany: Plant physiology, Anatomy</li><li>Zoology: Human physiology, Genetics</li><li>Ecology, Biotechnology</li><li>Practical biology</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-chart-line"></i> Additional Features</h3>
+                <ul><li><strong>Daily practice problems (DPP):</strong> For regular practice.</li><li><strong>Weekly tests:</strong> Based on board and competitive pattern.</li><li><strong>Doubt clearing sessions:</strong> Every day after class.</li><li><strong>Study material:</strong> Comprehensive notes and sample papers.</li><li><strong>Career counseling:</strong> For future streams.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-clock"></i> Program Details</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📅 Duration</h4><p>2 Years (Full course)</p></div>
+                    <div class="info-box"><h4>💰 Fee</h4><p>₹20,000/year</p></div>
+                    <div class="info-box"><h4>⏰ Timings</h4><p>Morning & Evening batches</p></div>
+                    <div class="info-box"><h4>📞 Batch Size</h4><p>20-25 students</p></div>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll Now</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20about%20Science%20(11-12)" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="science11-12Modal"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Commerce 11-12 Modal -->
+    <div class="course-modal-overlay" id="commerce11-12Modal" role="dialog" aria-modal="true" aria-labelledby="commTitle">
+        <div class="course-modal">
+            <button class="course-modal-close" data-modal="commerce11-12Modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            <span class="modal-badge"><i class="fas fa-chart-line"></i> Commerce</span>
+            <h2 class="modal-title" id="commTitle">Class 11-12 <span>Commerce</span></h2>
+            <p class="modal-subtitle">Expert guidance for Accountancy, Economics, Business Studies & more.</p>
+            <div class="modal-section">
+                <h3><i class="fas fa-info-circle"></i> Overview</h3>
+                <p>Our Commerce program for Classes 11-12 is designed to build a strong foundation in Accountancy, Economics, Business Studies, and Mathematics/Informatics Practices. The curriculum is aligned with CBSE/NCERT and also prepares students for professional courses like CA, CS, CMA, and B.Com/BBA entrance exams.</p>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-book"></i> Subject Coverage</h3>
+                <div class="syllabus-grid">
+                    <div class="syllabus-card"><h4><i class="fas fa-calculator"></i> Accountancy</h4><ul><li>Financial Accounting</li><li>Partnership Accounts</li><li>Company Accounts</li><li>Analysis of Financial Statements</li><li>Computerized Accounting</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-coins"></i> Economics</h4><ul><li>Microeconomics: Demand, Supply, Elasticity</li><li>Macroeconomics: National Income, Money & Banking</li><li>Indian Economy & Development</li><li>Current Economic Issues</li></ul></div>
+                    <div class="syllabus-card"><h4><i class="fas fa-building"></i> Business Studies</h4><ul><li>Principles of Management</li><li>Business Environment</li><li>Marketing Management</li><li>Financial Management</li><li>Consumer Protection</li></ul></div>
+                </div>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-chart-line"></i> Additional Benefits</h3>
+                <ul><li><strong>Practical projects:</strong> Real-world case studies.</li><li><strong>Guest lectures:</strong> By industry experts.</li><li><strong>Mock tests:</strong> For board and competitive exams.</li><li><strong>Career guidance:</strong> For CA, CS, CMA, BBA, B.Com, etc.</li></ul>
+            </div>
+            <div class="modal-section">
+                <h3><i class="fas fa-clock"></i> Program Details</h3>
+                <div class="modal-grid-2">
+                    <div class="info-box"><h4>📅 Duration</h4><p>2 Years</p></div>
+                    <div class="info-box"><h4>💰 Fee</h4><p>₹20,000/year</p></div>
+                    <div class="info-box"><h4>⏰ Timings</h4><p>Morning & Evening</p></div>
+                    <div class="info-box"><h4>📞 Batch Size</h4><p>15-20 students</p></div>
+                </div>
+            </div>
+            <div class="modal-cta">
+                <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-user-graduate"></i> Enroll Now</a>
+                <a href="https://wa.me/917903736302?text=Hello%20I%20want%20to%20know%20about%20Commerce%20(11-12)" target="_blank" class="btn btn-whatsapp btn-large"><i class="fab fa-whatsapp"></i> Talk to Counselor</a>
+                <button class="btn btn-outline btn-large" data-modal="commerce11-12Modal"><i class="fas fa-times"></i> Close</button>
             </div>
         </div>
     </div>
@@ -2572,7 +2808,6 @@
                 statusEl.style.display = 'none';
 
                 try {
-                    // Try formsubmit.co (no signup required)
                     const fd = new FormData();
                     fd.append('name', name);
                     fd.append('phone', phone);
@@ -2587,7 +2822,6 @@
                     console.warn('Email delivery fallback:', e);
                 }
 
-                // Build WhatsApp link
                 const whatsappMsg = encodeURIComponent(
                     `📩 *New Enquiry from Knowledge Nexus*\n\n` +
                     `👤 Name: ${name}\n` +
@@ -2729,63 +2963,70 @@
 
         // ========== COURSE MODALS ==========
         function initCourseModals() {
-            const neetModal = document.getElementById('neetModal');
-            const neetModalClose = document.getElementById('neetModalClose');
-            const neetModalCloseBtn = document.getElementById('neetModalCloseBtn');
+            // Map course data-attribute to modal ID
+            const modalMap = {
+                'neet': 'neetModal',
+                'cuet': 'cuetModal',
+                'foundation-1-5': 'foundation1-5Modal',
+                'foundation-6-8': 'foundation6-8Modal',
+                'foundation-9-10': 'foundation9-10Modal',
+                'science-11-12': 'science11-12Modal',
+                'commerce-11-12': 'commerce11-12Modal'
+            };
 
-            // Open NEET modal when clicking "Learn More" on NEET card
+            // Open modal on "Learn More" click
             document.querySelectorAll('.course-learn-more').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const course = btn.getAttribute('data-course');
-                    if (course === 'neet') {
-                        neetModal.classList.add('open');
-                        document.body.classList.add('no-scroll');
-                    } else {
-                        // For other courses, show a friendly alert
-                        const courseNames = {
-                            'cuet': 'CUET',
-                            'foundation-1-5': 'Class 1-5 Foundation',
-                            'foundation-6-8': 'Class 6-8 Foundation',
-                            'foundation-9-10': 'Class 9-10 Foundation',
-                            'science-11-12': 'Class 11-12 Science',
-                            'commerce-11-12': 'Class 11-12 Commerce'
-                        };
-                        const name = courseNames[course] || 'this course';
-                        alert(`📚 ${name} details will be available soon. Please contact us for more information!`);
+                    const modalId = modalMap[course];
+                    if (modalId) {
+                        const modal = document.getElementById(modalId);
+                        if (modal) {
+                            modal.classList.add('open');
+                            document.body.classList.add('no-scroll');
+                        }
                     }
                 });
             });
 
-            // Close functions
-            function closeNeetModal() {
-                neetModal.classList.remove('open');
-                document.body.classList.remove('no-scroll');
-            }
-
-            neetModalClose.addEventListener('click', closeNeetModal);
-            neetModalCloseBtn.addEventListener('click', closeNeetModal);
+            // Close modal using data-modal attribute on close buttons and overlay
+            document.querySelectorAll('[data-modal]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const modalId = el.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.remove('open');
+                        document.body.classList.remove('no-scroll');
+                    }
+                });
+            });
 
             // Close on overlay click
-            neetModal.addEventListener('click', (e) => {
-                if (e.target === neetModal) {
-                    closeNeetModal();
-                }
+            document.querySelectorAll('.course-modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('open');
+                        document.body.classList.remove('no-scroll');
+                    }
+                });
             });
 
             // Close on Escape
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && neetModal.classList.contains('open')) {
-                    closeNeetModal();
+                if (e.key === 'Escape') {
+                    const openModal = document.querySelector('.course-modal-overlay.open');
+                    if (openModal) {
+                        openModal.classList.remove('open');
+                        document.body.classList.remove('no-scroll');
+                    }
                 }
             });
 
-            // If any Learn More button inside course card is clicked, prevent default card click
+            // Click on card (but not on button) opens modal
             document.querySelectorAll('.course-card').forEach(card => {
                 card.addEventListener('click', (e) => {
-                    // If the click is on the Learn More button, it's already handled above
                     if (e.target.closest('.course-learn-more')) return;
-                    // Otherwise, find the Learn More button and trigger it
                     const btn = card.querySelector('.course-learn-more');
                     if (btn) btn.click();
                 });
@@ -2793,7 +3034,7 @@
         }
 
         console.log('Knowledge Nexus Academy loaded successfully.');
-        console.log('💡 Click "Learn More" on NEET card to open detailed NEET guide.');
+        console.log('💡 All course "Learn More" buttons now open detailed modals.');
     </script>
 </body>
 </html>
