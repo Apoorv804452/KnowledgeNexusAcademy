@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login · Knowledge Nexus Academy</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #0b1a33 0%, #1a2f4f 45%, #243b5e 100%);
+            padding: 1rem;
+            position: relative;
+        }
+
+        /* subtle decorative glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 89, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 89, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ---------- CARD ---------- */
+        .login-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 2.8rem;
+            padding: 2.8rem 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            border: 1px solid rgba(201, 169, 89, 0.08);
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 70px -14px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 1px rgba(201, 169, 89, 0.15);
+        }
+
+        /* ---------- HEADER ---------- */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.4rem;
+        }
+
+        .login-header .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #c9a959, #dbb86a);
+            border-radius: 50%;
+            font-size: 2.4rem;
+            color: #0b1a33;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px rgba(201, 169, 89, 0.30);
+            transition: transform 0.3s ease;
+        }
+
+        .login-card:hover .icon-circle {
+            transform: scale(1.02);
+        }
+
+        .login-header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-header h1 span {
+            background: linear-gradient(to right, #f0d78c, #c9a959);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-header .subtitle {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            font-weight: 300;
+            letter-spacing: 0.4px;
+        }
+
+        .login-header .subtitle i {
+            color: #c9a959;
+            margin: 0 4px;
+        }
+
+        /* ---------- FORM ---------- */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        /* input groups */
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.30);
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.07);
+            border-radius: 2.2rem;
+            font-size: 1rem;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.28);
+            font-weight: 300;
+        }
+
+        .input-group input:focus {
+            border-color: #c9a959;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(201, 169, 89, 0.12);
+        }
+
+        .input-group input:focus+i,
+        .input-group input:focus~i {
+            color: #c9a959;
+        }
+
+        /* password toggle */
+        .toggle-password {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 4px;
+        }
+
+        .toggle-password:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------- OPTIONS ROW ---------- */
+        .options-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding: 0 0.2rem;
+        }
+
+        .options-row label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        .options-row label input[type="checkbox"] {
+            accent-color: #c9a959;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            filter: drop-shadow(0 0 2px rgba(201, 169, 89, 0.2));
+        }
+
+        .options-row a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .options-row a:hover {
+            color: #f0d78c;
+            border-bottom-color: #c9a959;
+        }
+
+        /* ---------- BUTTON ---------- */
+        .btn-login {
+            padding: 1rem;
+            border: none;
+            border-radius: 2.2rem;
+            background: linear-gradient(145deg, #c9a959, #b8943e);
+            color: #0b1a33;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 28px rgba(201, 169, 89, 0.30);
+            letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .btn-login i {
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(201, 169, 89, 0.45);
+            background: linear-gradient(145deg, #dbb86a, #c9a959);
+        }
+
+        .btn-login:hover i {
+            transform: translateX(5px);
+        }
+
+        .btn-login:active {
+            transform: scale(0.96);
+        }
+
+        /* ---------- SIGNUP LINK ---------- */
+        .signup-link {
+            text-align: center;
+            margin-top: 0.3rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .signup-link a {
+            color: #dbb86a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: #f0d78c;
+            border-bottom-color: #f0d78c;
+        }
+
+        /* ---------- ERROR MESSAGE ---------- */
+        .error-msg {
+            background: rgba(255, 82, 82, 0.10);
+            border: 1px solid rgba(255, 82, 82, 0.18);
+            border-radius: 2rem;
+            padding: 0.7rem 1.2rem;
+            color: #ff8a8a;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .error-msg.show {
+            display: flex;
+        }
+
+        .error-msg i {
+            font-size: 1rem;
+            color: #ff6b6b;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .login-header .icon-circle {
+                width: 66px;
+                height: 66px;
+                font-size: 2rem;
+            }
+
+            .options-row {
+                flex-direction: column;
+                gap: 0.6rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+
+        <!-- Header -->
+        <div class="login-header">
+            <div class="icon-circle">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>
+                <span>Knowledge Nexus</span><br />
+                Academy
+            </h1>
+            <p class="subtitle">
+                <i class="fas fa-arrow-right"></i> From Confusion to Clarity <i class="fas fa-arrow-left"></i>
+            </p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="login-form" id="loginForm" novalidate>
+
+            <!-- Email -->
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input
+                type="email"
+                id="email"
+                placeholder="Email address"
+                required
+                autocomplete="email"
+                />
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+                autocomplete="current-password"
+                minlength="6"
+                />
+                <button type="button" class="toggle-password" id="togglePassword" aria-label="Toggle password visibility">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <!-- Error message -->
+            <div class="error-msg" id="errorMsg">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Invalid email or password.</span>
+            </div>
+
+            <!-- Options -->
+            <div class="options-row">
+                <label>
+                    <input type="checkbox" checked />
+                    Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-login">
+                <span>Sign In</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <!-- Sign up -->
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const form = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePassword');
+            const errorMsg = document.getElementById('errorMsg');
+            const errorText = document.getElementById('errorText');
+
+            // ---------- TOGGLE PASSWORD ----------
+            toggleBtn.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+
+            // ---------- HIDE ERROR ON TYPING ----------
+            emailInput.addEventListener('input', hideError);
+            passwordInput.addEventListener('input', hideError);
+
+            function hideError() {
+                errorMsg.classList.remove('show');
+            }
+
+            // ---------- FORM SUBMISSION ----------
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                errorMsg.classList.remove('show');
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                let isValid = true;
+                let errMessage = '';
+
+                if (!email) {
+                    errMessage = 'Email is required.';
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    errMessage = 'Please enter a valid email address.';
+                    isValid = false;
+                }
+
+                if (isValid && !password) {
+                    errMessage = 'Password is required.';
+                    isValid = false;
+                } else if (isValid && password.length < 6) {
+                    errMessage = 'Password must be at least 6 characters.';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    errorText.textContent = errMessage;
+                    errorMsg.classList.add('show');
+                    return;
+                }
+
+                // ----- SUCCESS (demo) -----
+                alert('✅ Welcome to Knowledge Nexus Academy!\n\nYou have successfully signed in as:\n' + email);
+                form.reset();
+                // Reset toggle icon
+                const icon = toggleBtn.querySelector('i');
+                if (passwordInput.getAttribute('type') === 'text') {
+                    passwordInput.setAttribute('type', 'password');
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+                errorMsg.classList.remove('show');
+            });
+
+            // ---------- EMAIL VALIDATION ----------
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
