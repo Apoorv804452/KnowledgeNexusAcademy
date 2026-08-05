@@ -3,1888 +3,505 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Knowledge Nexus Academy - Quality Education for Classes 6th to 12th" />
-    <title>Knowledge Nexus Academy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <title>Login · Knowledge Nexus Academy</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ========== RESET & BASE ========== */
-        *,
-        *::before,
-        *::after {
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        :root {
-            --primary: #1a56db;
-            --primary-light: #3b82f6;
-            --primary-dark: #1e3a8a;
-            --secondary: #0f172a;
-            --accent: #60a5fa;
-            --bg: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --white: #ffffff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --radius: 16px;
-            --transition: 0.3s ease;
-        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .section-padding {
-            padding: 70px 0;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .section-tag {
-            display: inline-block;
-            background: rgba(26, 86, 219, 0.10);
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 4px 18px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 10px;
-        }
-        .section-title span {
-            color: var(--primary);
-        }
-        .section-desc {
-            max-width: 640px;
-            margin: 0 auto;
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-            background: transparent;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 4px 14px rgba(26, 86, 219, 0.35);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(26, 86, 219, 0.4);
-        }
-        .btn-outline {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-white {
-            background: #fff;
-            color: var(--primary);
-        }
-        .btn-white:hover {
-            background: #f0f4ff;
-            transform: translateY(-2px);
-        }
-        .btn-large {
-            padding: 14px 36px;
-            font-size: 1rem;
-        }
-        .btn-sm {
-            padding: 8px 20px;
-            font-size: 0.85rem;
-        }
-
-        /* ========== LOADER ========== */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease;
-        }
-        #loader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .loader-spinner {
-            text-align: center;
-        }
-        .loader-ring {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(26, 86, 219, 0.15);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .loader-text {
-            margin-top: 12px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* ========== BACK TO TOP ========== */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 14px rgba(26, 86, 219, 0.35);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            z-index: 1000;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            transform: translateY(-4px);
-        }
-
-        /* ========== WHATSAPP FLOAT ========== */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 90px;
-            right: 30px;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-            z-index: 999;
-            border: none;
-            background: #25D366;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.08);
-        }
-
-        /* ========== HEADER ========== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-            z-index: 1000;
-            transition: 0.3s;
-        }
-        .header-top {
-            display: none;
-            background: var(--secondary);
-            color: #94a3b8;
-            padding: 6px 0;
-            font-size: 0.8rem;
-        }
-        .header-top .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-top a {
-            color: #94a3b8;
-            transition: var(--transition);
-        }
-        .header-top a:hover {
-            color: #fff;
-        }
-        .header-top .contact-info {
-            display: flex;
-            gap: 20px;
-        }
-        .header-top .contact-info i {
-            margin-right: 6px;
-            color: var(--primary-light);
-        }
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        .logo-icon {
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-        .logo-name {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--secondary);
-            letter-spacing: -0.5px;
-        }
-        .logo-tagline {
-            font-size: 0.6rem;
-            font-weight: 500;
-            color: var(--text-light);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        .nav-list {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-            align-items: center;
-        }
-        .nav-link {
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text);
-            transition: var(--transition);
+            background: linear-gradient(145deg, #0b1a33 0%, #1a2f4f 45%, #243b5e 100%);
+            padding: 1rem;
             position: relative;
         }
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-        }
-        .nav-link::after {
+
+        /* subtle decorative glow */
+        body::before {
             content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-shrink: 0;
-        }
-        .header-actions .btn-login {
-            font-size: 0.85rem;
-            padding: 8px 18px;
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .hamburger-line {
-            width: 26px;
-            height: 2.5px;
-            background: var(--text);
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-        .hamburger.active .hamburger-line:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active .hamburger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            position: relative;
-            padding: 120px 0 70px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            overflow: hidden;
-        }
-        .hero-shapes {
-            position: absolute;
-            inset: 0;
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 89, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
             pointer-events: none;
         }
-        .shape {
-            position: absolute;
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 89, 0.06) 0%, transparent 70%);
             border-radius: 50%;
-            opacity: 0.15;
-            background: var(--primary);
-            animation: float 8s infinite alternate ease-in-out;
+            pointer-events: none;
         }
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            right: -80px;
-            background: var(--accent);
-            animation-duration: 10s;
-        }
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            bottom: -60px;
-            left: -60px;
-            background: #a78bfa;
-            animation-duration: 12s;
-        }
-        .shape-3 {
-            width: 120px;
-            height: 120px;
-            top: 20%;
-            left: 10%;
-            background: #fcd34d;
-            animation-duration: 7s;
-            opacity: 0.1;
-        }
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-        }
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+
+        /* ---------- CARD ---------- */
+        .login-card {
             position: relative;
             z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 2.8rem;
+            padding: 2.8rem 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            border: 1px solid rgba(201, 169, 89, 0.08);
         }
-        .hero-content {
-            max-width: 600px;
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 70px -14px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 1px rgba(201, 169, 89, 0.15);
         }
-        .hero-badge {
+
+        /* ---------- HEADER ---------- */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.4rem;
+        }
+
+        .login-header .icon-circle {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(26, 86, 219, 0.12);
-            color: var(--primary);
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 8px;
-        }
-        .hero-title span {
-            color: var(--primary);
-        }
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        .hero-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 16px;
-            margin-bottom: 28px;
-        }
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.7);
-            padding: 6px 14px;
-            border-radius: 50px;
-            backdrop-filter: blur(4px);
-        }
-        .hero-feature i {
-            color: var(--primary);
-            font-size: 0.9rem;
-        }
-        .hero-feature .highlight {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-        .hero-image {
-            display: flex;
             justify-content: center;
-            align-items: center;
-        }
-        .hero-illustration {
-            width: 100%;
-            max-width: 480px;
-        }
-        .hero-illustration svg {
-            width: 100%;
-            height: auto;
-        }
-
-        /* ========== FEATURES / STATS ========== */
-        .features {
-            background: var(--bg);
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-        .feature-card {
-            text-align: center;
-            padding: 24px 16px;
-            transition: var(--transition);
-            border-radius: var(--radius);
-        }
-        .feature-card:hover {
-            transform: translateY(-4px);
-        }
-        .feature-card .icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(26, 86, 219, 0.10);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #c9a959, #dbb86a);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 1.6rem;
-            color: var(--primary);
-        }
-        .feature-card h4 {
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 4px;
-        }
-        .feature-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            max-width: 220px;
-            margin: 0 auto;
-        }
-
-        /* ========== ABOUT / COURSES ========== */
-        .courses {
-            background: #f8fafc;
-        }
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 30px;
-        }
-        .course-card {
-            background: var(--bg);
-            padding: 28px 22px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-        .course-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-        }
-        .course-icon {
             font-size: 2.4rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-        .course-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-        }
-        .course-desc {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 12px;
-        }
-        .course-meta {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-bottom: 14px;
-        }
-        .course-meta i {
-            margin-right: 4px;
-            color: var(--primary);
+            color: #0b1a33;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px rgba(201, 169, 89, 0.30);
+            transition: transform 0.3s ease;
         }
 
-        /* ========== WHY US ========== */
-        .why-us {
-            background: var(--bg);
-        }
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-        .why-card {
-            text-align: center;
-            padding: 28px 20px;
-            border-radius: var(--radius);
-            background: var(--bg);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-bottom: 3px solid transparent;
-        }
-        .why-card:hover {
-            border-bottom-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        .why-card .icon {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-        .why-card h4 {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-        .why-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        /* ========== TEACHERS ========== */
-        .teachers {
-            background: #f8fafc;
-        }
-        .teachers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 30px;
-        }
-        .teacher-card {
-            background: var(--bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .teacher-card:hover {
-            transform: translateY(-6px);
-        }
-        .teacher-img {
-            height: 180px;
-            background: linear-gradient(135deg, #dbeafe, #eff6ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            color: var(--primary);
-        }
-        .teacher-info {
-            padding: 18px 16px;
-        }
-        .teacher-info h4 {
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-        .teacher-subject {
-            display: inline-block;
-            background: rgba(26, 86, 219, 0.10);
-            color: var(--primary);
-            padding: 2px 14px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin: 4px 0 6px;
-        }
-        .teacher-qualification {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        /* ========== GALLERY ========== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .gallery-item {
-            border-radius: var(--radius);
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .gallery-item:hover {
+        .login-card:hover .icon-circle {
             transform: scale(1.02);
         }
-        .gallery-item svg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
-        /* ========== CONTACT ========== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        .contact-detail {
-            display: flex;
-            gap: 14px;
-            margin-bottom: 20px;
-            align-items: flex-start;
-        }
-        .contact-detail i {
-            font-size: 1.3rem;
-            color: var(--primary);
-            width: 24px;
-            margin-top: 3px;
-        }
-        .contact-detail h4 {
+        .login-header h1 {
+            font-size: 1.6rem;
             font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
-        .contact-detail p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-        .contact-form {
-            background: var(--bg);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .form-group {
-            margin-bottom: 16px;
-        }
-        .form-group label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .form-group .required {
-            color: #ef4444;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 11px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            background: #f8fafc;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
-            background: #fff;
-        }
-        .form-error {
-            color: #ef4444;
-            font-size: 0.8rem;
-            margin-top: 4px;
-            display: none;
-        }
-        .form-submit-status {
-            margin-top: 12px;
-            padding: 10px 16px;
-            border-radius: 8px;
-            display: none;
-            font-weight: 500;
-        }
-        .form-submit-status.success {
-            display: block;
-            background: #dcfce7;
-            color: #166534;
-        }
-        .form-submit-status.error {
-            display: block;
-            background: #fee2e2;
-            color: #991b1b;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* ========== FOOTER ========== */
-        .footer {
-            background: var(--secondary);
-            color: #94a3b8;
-            padding: 50px 0 20px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-        .footer-brand .logo {
-            margin-bottom: 12px;
-        }
-        .footer-brand .logo .logo-name {
-            color: #fff;
-        }
-        .footer-brand p {
-            font-size: 0.9rem;
-            max-width: 300px;
-        }
-        .footer-social {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .footer-social a {
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            color: #94a3b8;
-        }
-        .footer-social a:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-        .footer-links h4 {
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 14px;
-            font-size: 1rem;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
-        .footer-links ul li a:hover {
-            color: #fff;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 18px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-size: 0.85rem;
-        }
-        .footer-legal {
-            display: flex;
-            gap: 20px;
-        }
-        .footer-legal a:hover {
-            color: #fff;
+        .login-header h1 span {
+            background: linear-gradient(to right, #f0d78c, #c9a959);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* ========== SUCCESS POPUP ========== */
-        .success-popup {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-            padding: 20px;
+        .login-header .subtitle {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            font-weight: 300;
+            letter-spacing: 0.4px;
         }
-        .success-popup.open {
-            display: flex;
+
+        .login-header .subtitle i {
+            color: #c9a959;
+            margin: 0 4px;
         }
-        .popup-content {
-            background: var(--bg);
-            padding: 36px 44px;
-            border-radius: var(--radius);
-            text-align: center;
-            max-width: 440px;
-            width: 100%;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-            animation: popupIn 0.3s ease;
-        }
-        @keyframes popupIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        .popup-icon {
-            font-size: 3.5rem;
-            color: #22c55e;
-            margin-bottom: 12px;
-        }
-        .popup-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-        }
-        .popup-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-        .popup-actions {
+
+        /* ---------- FORM ---------- */
+        .login-form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 1.4rem;
         }
-        .popup-actions .btn {
+
+        /* input groups */
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.30);
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.07);
+            border-radius: 2.2rem;
+            font-size: 1rem;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.28);
+            font-weight: 300;
+        }
+
+        .input-group input:focus {
+            border-color: #c9a959;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(201, 169, 89, 0.12);
+        }
+
+        .input-group input:focus+i,
+        .input-group input:focus~i {
+            color: #c9a959;
+        }
+
+        /* password toggle */
+        .toggle-password {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 4px;
+        }
+
+        .toggle-password:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------- OPTIONS ROW ---------- */
+        .options-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding: 0 0.2rem;
+        }
+
+        .options-row label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        .options-row label input[type="checkbox"] {
+            accent-color: #c9a959;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            filter: drop-shadow(0 0 2px rgba(201, 169, 89, 0.2));
+        }
+
+        .options-row a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .options-row a:hover {
+            color: #f0d78c;
+            border-bottom-color: #c9a959;
+        }
+
+        /* ---------- BUTTON ---------- */
+        .btn-login {
+            padding: 1rem;
+            border: none;
+            border-radius: 2.2rem;
+            background: linear-gradient(145deg, #c9a959, #b8943e);
+            color: #0b1a33;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 28px rgba(201, 169, 89, 0.30);
+            letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 0.6rem;
         }
 
-        /* ========== DARK MODE ========== */
-        body.dark {
-            --bg: #0f172a;
-            --text: #f1f5f9;
-            --text-light: #94a3b8;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            background: var(--bg);
-            color: var(--text);
-        }
-        body.dark .header {
-            background: rgba(15, 23, 42, 0.95);
-        }
-        body.dark .header .logo-name {
-            color: #fff;
-        }
-        body.dark .nav-link {
-            color: #cbd5e1;
-        }
-        body.dark .nav-link:hover,
-        body.dark .nav-link.active {
-            color: var(--accent);
-        }
-        body.dark .hero {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
-        body.dark .hero-feature {
-            background: rgba(30, 41, 59, 0.7);
-            color: #e2e8f0;
-        }
-        body.dark .courses {
-            background: #0f172a;
-        }
-        body.dark .course-card,
-        body.dark .why-card,
-        body.dark .teacher-card,
-        body.dark .contact-form {
-            background: #1e293b;
-            color: var(--text);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        body.dark .teacher-img {
-            background: linear-gradient(135deg, #1e293b, #334155);
-        }
-        body.dark .footer {
-            background: #020617;
-        }
-        body.dark .popup-content {
-            background: #1e293b;
-            color: var(--text);
-        }
-        body.dark .form-group input,
-        body.dark .form-group select,
-        body.dark .form-group textarea {
-            background: #0f172a;
-            border-color: #334155;
-            color: #fff;
-        }
-        body.dark .form-group input:focus,
-        body.dark .form-group select:focus,
-        body.dark .form-group textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        .btn-login i {
+            font-size: 1.1rem;
+            transition: transform 0.3s;
         }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 992px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-content {
-                max-width: 100%;
-            }
-            .hero-features {
-                justify-content: center;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .why-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .nav-list {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--bg);
-                flex-direction: column;
-                padding: 20px;
-                gap: 12px;
-                box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
-                display: none;
-                border-top: 1px solid rgba(0, 0, 0, 0.05);
-            }
-            .nav-list.open {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .header-actions .btn-enroll {
-                display: none;
-            }
-            .hero-title {
-                font-size: 2.2rem;
-            }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(201, 169, 89, 0.45);
+            background: linear-gradient(145deg, #dbb86a, #c9a959);
         }
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-            .why-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-            .courses-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .teachers-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .whatsapp-float {
-                bottom: 80px;
-                right: 16px;
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
-            }
-            .back-to-top {
-                bottom: 20px;
-                right: 16px;
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            .hero-features {
-                gap: 8px;
-            }
-            .hero-feature {
-                font-size: 0.75rem;
-                padding: 4px 12px;
-            }
-            .popup-content {
-                padding: 28px 20px;
-            }
+
+        .btn-login:hover i {
+            transform: translateX(5px);
         }
+
+        .btn-login:active {
+            transform: scale(0.96);
+        }
+
+        /* ---------- SIGNUP LINK ---------- */
+        .signup-link {
+            text-align: center;
+            margin-top: 0.3rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .signup-link a {
+            color: #dbb86a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: #f0d78c;
+            border-bottom-color: #f0d78c;
+        }
+
+        /* ---------- ERROR MESSAGE ---------- */
+        .error-msg {
+            background: rgba(255, 82, 82, 0.10);
+            border: 1px solid rgba(255, 82, 82, 0.18);
+            border-radius: 2rem;
+            padding: 0.7rem 1.2rem;
+            color: #ff8a8a;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .error-msg.show {
+            display: flex;
+        }
+
+        .error-msg i {
+            font-size: 1rem;
+            color: #ff6b6b;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.5rem;
+            .login-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2rem;
             }
-            .features-grid {
-                grid-template-columns: 1fr;
+
+            .login-header h1 {
+                font-size: 1.3rem;
             }
-            .why-grid {
-                grid-template-columns: 1fr;
+
+            .login-header .icon-circle {
+                width: 66px;
+                height: 66px;
+                font-size: 2rem;
             }
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-            .teachers-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-buttons .btn {
-                width: 100%;
-                justify-content: center;
+
+            .options-row {
+                flex-direction: column;
+                gap: 0.6rem;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOADER -->
-    <div id="loader" aria-hidden="true">
-        <div class="loader-spinner">
-            <div class="loader-ring"></div>
-            <div class="loader-text">Loading...</div>
-        </div>
-    </div>
+    <div class="login-card">
 
-    <!-- BACK TO TOP -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/917903736302?text=Hello%20Knowledge%20Nexus%20Academy" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-
-    <!-- HEADER -->
-    <header class="header" id="header" role="banner">
-        <div class="header-top">
-            <div class="container">
-                <div class="contact-info">
-                    <span><i class="fas fa-phone-alt"></i> <a href="tel:+919123456780">+91 9296867642</a></span>
-                    <span><i class="fas fa-envelope"></i> <a href="mailto:info@knowledgenexusacademy.in">knowledgenexusacademy.in@gmail.com</a></span>
-                </div>
-                <div>
-                    <a href="https://knowledgenexusacademy.in/LoginPage" target="_blank"><i class="fas fa-sign-in-alt"></i> Login</a>
-                </div>
+        <!-- Header -->
+        <div class="login-header">
+            <div class="icon-circle">
+                <i class="fas fa-graduation-cap"></i>
             </div>
+            <h1>
+                <span>Knowledge Nexus</span><br />
+                Academy
+            </h1>
+            <p class="subtitle">
+                <i class="fas fa-arrow-right"></i> From Confusion to Clarity <i class="fas fa-arrow-left"></i>
+            </p>
         </div>
-        <div class="container header-container">
-            <a href="#" class="logo" aria-label="Home">
-                <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="logo-text">
-                    <span class="logo-name">KNOWLEDGE NEXUS</span>
-                    <span class="logo-tagline">From Confusion to Clarity</span>
-                </div>
-            </a>
-            <nav class="nav" id="nav" role="navigation">
-                <ul class="nav-list" id="navList">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About Us</a></li>
-                    <li><a href="#courses" class="nav-link">Courses</a></li>
-                    <li><a href="#study-material" class="nav-link" id="studyMaterialNav">Study Material</a></li>
-                    <li><a href="#teachers" class="nav-link">Our Teachers</a></li>
-                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                    <li><a href="#contact" class="nav-link">Contact Us</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <a href="#contact" class="btn btn-primary btn-enroll"><i class="fas fa-user-plus"></i> Enroll Now</a>
-                <a href="https://knowledgenexusacademy.in/LoginPage" target="_blank" class="btn btn-outline btn-sm btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
+
+        <!-- Login Form -->
+        <form class="login-form" id="loginForm" novalidate>
+
+            <!-- Email -->
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input
+                type="email"
+                id="email"
+                placeholder="Email address"
+                required
+                autocomplete="email"
+                />
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+                autocomplete="current-password"
+                minlength="6"
+                />
+                <button type="button" class="toggle-password" id="togglePassword" aria-label="Toggle password visibility">
+                    <i class="fas fa-eye"></i>
                 </button>
             </div>
-        </div>
-    </header>
 
-    <main>
-        <!-- HERO -->
-        <section class="hero" id="home" aria-label="Hero">
-            <div class="hero-shapes" aria-hidden="true">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
+            <!-- Error message -->
+            <div class="error-msg" id="errorMsg">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Invalid email or password.</span>
             </div>
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fas fa-star"></i> Trusted by 1000+ Students</div>
-                    <h1 class="hero-title">From Confusion <br /><span>To Clarity</span></h1>
-                    <p class="hero-subtitle">Quality Education for Classes 6th to 10th</p>
-                    <div class="hero-features">
-                        <span class="hero-feature"><i class="fas fa-school"></i> CBSE Board</span>
-                        <span class="hero-feature"><i class="fas fa-users"></i> <span class="highlight">Small Batch Size</span> (Max. 30 Students)</span>
-                        <span class="hero-feature"><i class="fas fa-print"></i> Printed Notes</span>
-                        <span class="hero-feature"><i class="fas fa-calendar-alt"></i> <span class="highlight">7 Days</span> Free Demo</span>
-                        <span class="hero-feature"><i class="fas fa-bullseye"></i> <span class="highlight">100% Focus</span> on Concept Clarity</span>
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="#courses" class="btn btn-primary btn-large"><i class="fas fa-book-open"></i> Explore Courses</a>
-                        <a href="#contact" class="btn btn-outline btn-large"><i class="fas fa-phone-alt"></i> Contact Us</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="hero-illustration">
-                        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-                            <rect width="500" height="400" fill="#dbeafe" rx="24" />
-                            <circle cx="250" cy="180" r="90" fill="#93c5fd" opacity="0.3" />
-                            <circle cx="190" cy="130" r="35" fill="#60a5fa" opacity="0.5" />
-                            <circle cx="310" cy="130" r="35" fill="#60a5fa" opacity="0.5" />
-                            <rect x="160" y="230" width="180" height="60" rx="12" fill="#1a56db" opacity="0.15" />
-                            <text x="200" y="268" font-family="Inter" font-size="22" fill="#1e293b" font-weight="700">📚 Learn with Clarity</text>
-                            <text x="170" y="320" font-family="Inter" font-size="15" fill="#475569">Expert Teachers • Smart Classes • Proven Results</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- WHY US / FEATURES -->
-        <section class="features section-padding" id="about" aria-label="About">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Why Choose Us</span>
-                    <h2 class="section-title">Expert <span>Teachers</span> • Quality <span>Learning</span></h2>
-                    <p class="section-desc">We provide personalized attention with a focus on concept clarity for every student.</p>
-                </div>
-                <div class="why-grid">
-                    <div class="why-card">
-                        <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                        <h4>Expert Teachers</h4>
-                        <p>Learn from experienced and dedicated teachers who are passionate about teaching.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="icon"><i class="fas fa-brain"></i></div>
-                        <h4>Quality Learning</h4>
-                        <p>Concept-based learning with real-life applications for better understanding.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="icon"><i class="fas fa-user-check"></i></div>
-                        <h4>Personalized Attention</h4>
-                        <p>Small batches ensure individual focus on every student's learning needs.</p>
-                    </div>
-                    <div class="why-card">
-                        <div class="icon"><i class="fas fa-trophy"></i></div>
-                        <h4>Better Results</h4>
-                        <p>Focused preparation for school exams and future goals with proven success.</p>
-                    </div>
-                </div>
+            <!-- Options -->
+            <div class="options-row">
+                <label>
+                    <input type="checkbox" checked />
+                    Remember me
+                </label>
+                <a href="#">Forgot password?</a>
             </div>
-        </section>
 
-        <!-- COURSES -->
-        <section class="courses section-padding" id="courses" aria-label="Courses">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Our Courses</span>
-                    <h2 class="section-title">Choose Your <span>Path</span></h2>
-                    <p class="section-desc">Comprehensive courses designed for Classes 6th to 10th with CBSE curriculum.</p>
-                </div>
-                <div class="courses-grid">
-                    <div class="course-card">
-                        <div class="course-icon"><i class="fas fa-child"></i></div>
-                        <h3 class="course-title">Class 6-8 Foundation</h3>
-                        <p class="course-desc">Build a strong foundation in Maths, Science, English & SST.</p>
-                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-users"></i> 30 Students</span></div>
-                        <a href="#contact" class="btn btn-primary btn-sm">Enroll Now</a>
-                    </div>
-                    <div class="course-card">
-                        <div class="course-icon"><i class="fas fa-flask"></i></div>
-                        <h3 class="course-title">Class 9-10 Science</h3>
-                        <p class="course-desc">Complete syllabus with practicals & competitive exam prep.</p>
-                        <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-users"></i> 25 Students</span></div>
-                        <a href="#contact" class="btn btn-primary btn-sm">Enroll Now</a>
-                    </div>
-                    <div class="course-card">
-                        <div class="course-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3 class="course-title">Class 9-10 Commerce</h3>
-                        <p class="course-desc">Expert guidance for Accountancy, Economics & Business Studies.</p>
-                        <div class="course-meta"><span><i class="far fa-clock"></i> 2 Years</span><span><i class="fas fa-users"></i> 25 Students</span></div>
-                        <a href="#contact" class="btn btn-primary btn-sm">Enroll Now</a>
-                    </div>
-                    <div class="course-card">
-                        <div class="course-icon"><i class="fas fa-pencil-alt"></i></div>
-                        <h3 class="course-title">CBSE Board Prep</h3>
-                        <p class="course-desc">Focused preparation for CBSE board exams with mock tests.</p>
-                        <div class="course-meta"><span><i class="far fa-clock"></i> 1 Year</span><span><i class="fas fa-users"></i> 30 Students</span></div>
-                        <a href="#contact" class="btn btn-primary btn-sm">Enroll Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <!-- Submit -->
+            <button type="submit" class="btn-login">
+                <span>Sign In</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
 
-        <!-- STUDY MATERIAL (Overlay) -->
-        <div class="study-overlay" id="studyOverlay" role="dialog" aria-modal="true">
-            <div class="study-header">
-                <h2><i class="fas fa-book-open" style="color:var(--primary);"></i> <span>Study</span> Material</h2>
-                <button class="study-close" id="studyClose" aria-label="Close study material"><i class="fas fa-times"></i></button>
+            <!-- Sign up -->
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign up</a>
             </div>
-            <div class="study-body">
-                <div class="study-intro">
-                    <h3>📚 Access Free Study Resources</h3>
-                    <p>Explore notes, sample papers, and more — organized by class and subject.</p>
-                </div>
-                <div class="study-tabs" id="studyTabs">
-                    <button class="study-tab active" data-tab="all">All</button>
-                    <button class="study-tab" data-tab="class6-8">Class 6-8</button>
-                    <button class="study-tab" data-tab="class9-10">Class 9-10</button>
-                    <button class="study-tab" data-tab="science">Science</button>
-                    <button class="study-tab" data-tab="maths">Maths</button>
-                    <button class="study-tab" data-tab="english">English</button>
-                </div>
-                <div class="study-grid" id="studyGrid"></div>
-            </div>
-        </div>
+        </form>
 
-        <style>
-            .study-overlay {
-                position: fixed;
-                inset: 0;
-                background: var(--bg);
-                z-index: 99998;
-                display: none;
-                flex-direction: column;
-                overflow-y: auto;
-                padding: 20px;
-                animation: modalFadeIn 0.3s ease;
-            }
-            .study-overlay.open {
-                display: flex;
-            }
-            .study-overlay .study-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 16px 24px;
-                background: var(--bg);
-                border-bottom: 1px solid #e2e8f0;
-                position: sticky;
-                top: 0;
-                z-index: 10;
-                backdrop-filter: blur(8px);
-                background: rgba(255, 255, 255, 0.92);
-            }
-            body.dark .study-overlay .study-header {
-                background: rgba(15, 23, 42, 0.95);
-                border-bottom-color: #334155;
-            }
-            .study-overlay .study-header h2 {
-                font-family: 'Poppins', sans-serif;
-                font-weight: 800;
-                font-size: 1.3rem;
-            }
-            .study-overlay .study-header h2 span {
-                color: var(--primary);
-            }
-            .study-overlay .study-header .study-close {
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: var(--text-light);
-                transition: var(--transition);
-                padding: 8px;
-                border-radius: 50%;
-            }
-            .study-overlay .study-header .study-close:hover {
-                background: rgba(0, 0, 0, 0.06);
-                color: var(--text);
-                transform: rotate(90deg);
-            }
-            .study-overlay .study-body {
-                max-width: 1200px;
-                margin: 0 auto;
-                width: 100%;
-                padding: 30px 20px 60px;
-            }
-            .study-overlay .study-body .study-intro {
-                text-align: center;
-                margin-bottom: 30px;
-            }
-            .study-overlay .study-body .study-intro h3 {
-                font-family: 'Poppins', sans-serif;
-                font-size: 1.6rem;
-                font-weight: 700;
-                margin-bottom: 6px;
-            }
-            .study-overlay .study-body .study-intro p {
-                color: var(--text-light);
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            .study-overlay .study-body .study-tabs {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-                margin-bottom: 24px;
-                justify-content: center;
-            }
-            .study-overlay .study-body .study-tab {
-                padding: 8px 20px;
-                border-radius: 50px;
-                border: 2px solid #e2e8f0;
-                background: transparent;
-                cursor: pointer;
-                font-weight: 600;
-                font-size: 0.85rem;
-                transition: var(--transition);
-                color: var(--text);
-            }
-            .study-overlay .study-body .study-tab:hover {
-                border-color: var(--primary);
-                color: var(--primary);
-            }
-            .study-overlay .study-body .study-tab.active {
-                background: var(--primary);
-                color: #fff;
-                border-color: var(--primary);
-            }
-            .study-overlay .study-body .study-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-                gap: 20px;
-            }
-            .study-overlay .study-body .study-card {
-                background: var(--bg);
-                border-radius: var(--radius);
-                box-shadow: var(--shadow);
-                padding: 20px 18px;
-                transition: var(--transition);
-                border: 1px solid rgba(0, 0, 0, 0.04);
-            }
-            .study-overlay .study-body .study-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-                border-color: var(--primary);
-            }
-            .study-overlay .study-body .study-card .study-card-icon {
-                font-size: 2rem;
-                color: var(--primary);
-                margin-bottom: 8px;
-            }
-            .study-overlay .study-body .study-card h4 {
-                font-weight: 700;
-                font-size: 1rem;
-                margin-bottom: 4px;
-            }
-            .study-overlay .study-body .study-card p {
-                font-size: 0.85rem;
-                color: var(--text-light);
-                margin-bottom: 10px;
-            }
-            .study-overlay .study-body .study-card .study-meta {
-                display: flex;
-                gap: 12px;
-                font-size: 0.75rem;
-                color: var(--text-light);
-            }
-            .study-overlay .study-body .study-card .study-meta i {
-                margin-right: 4px;
-            }
-            .study-overlay .study-body .study-card .study-download-btn {
-                margin-top: 12px;
-                padding: 6px 16px;
-                border-radius: 50px;
-                border: none;
-                background: var(--primary);
-                color: #fff;
-                font-weight: 600;
-                font-size: 0.8rem;
-                cursor: pointer;
-                transition: var(--transition);
-            }
-            .study-overlay .study-body .study-card .study-download-btn:hover {
-                background: var(--primary-dark);
-                transform: translateY(-2px);
-            }
-            .study-overlay .study-body .study-card .study-download-btn i {
-                margin-right: 6px;
-            }
-            body.dark .study-overlay .study-body .study-card {
-                background: #1e293b;
-                border-color: #334155;
-            }
-            body.dark .study-overlay .study-body .study-tab {
-                border-color: #334155;
-                color: #cbd5e1;
-            }
-            body.dark .study-overlay .study-body .study-tab:hover {
-                border-color: var(--accent);
-                color: var(--accent);
-            }
-            body.dark .study-overlay .study-body .study-tab.active {
-                background: var(--primary);
-                color: #fff;
-                border-color: var(--primary);
-            }
-            @media (max-width: 768px) {
-                .study-overlay .study-body .study-grid {
-                    grid-template-columns: 1fr 1fr;
-                }
-                .study-overlay .study-header h2 {
-                    font-size: 1.1rem;
-                }
-            }
-            @media (max-width: 480px) {
-                .study-overlay .study-body .study-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-        </style>
-
-        <!-- TEACHERS -->
-        <section class="teachers section-padding" id="teachers" aria-label="Teachers">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Our Teachers</span>
-                    <h2 class="section-title">Meet Our <span>Experts</span></h2>
-                    <p class="section-desc">Learn from experienced and dedicated teachers who are passionate about education.</p>
-                </div>
-                <div class="teachers-grid">
-                    <div class="teacher-card">
-                        <div class="teacher-img"><i class="fas fa-user-circle"></i></div>
-                        <div class="teacher-info">
-                            <h4>Apoorv Sir</h4>
-                            <span class="teacher-subject">Physics & Mathematics</span>
-                            <p class="teacher-qualification">M.Sc Physics • 5+ Years</p>
-                        </div>
-                    </div>
-                    <div class="teacher-card">
-                        <div class="teacher-img"><i class="fas fa-user-circle"></i></div>
-                        <div class="teacher-info">
-                            <h4>Mayank Sir</h4>
-                            <span class="teacher-subject">S.St & English</span>
-                            <p class="teacher-qualification">B.A • 5+ Years</p>
-                        </div>
-                    </div>
-                    <div class="teacher-card">
-                        <div class="teacher-img"><i class="fas fa-user-circle"></i></div>
-                        <div class="teacher-info">
-                            <h4>Sonu Sir</h4>
-                            <span class="teacher-subject">Biology</span>
-                            <p class="teacher-qualification">B.Sc • 10+ Years</p>
-                        </div>
-                    </div>
-                    <div class="teacher-card">
-                        <div class="teacher-img"><i class="fas fa-user-circle"></i></div>
-                        <div class="teacher-info">
-                            <h4>Chemistry Teacher</h4>
-                            <span class="teacher-subject">Chemistry</span>
-                            <p class="teacher-qualification">M.Sc • 7+ Years</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- GALLERY -->
-        <section class="gallery section-padding" id="gallery" aria-label="Gallery">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Gallery</span>
-                    <h2 class="section-title">Campus <span>Moments</span></h2>
-                    <p class="section-desc">Take a glimpse into our vibrant learning environment.</p>
-                </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item"><svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#bfdbfe"/><rect x="50" y="50" width="300" height="150" rx="10" fill="#60a5fa"/><circle cx="200" cy="250" r="30" fill="#93c5fd"/></svg></div>
-                    <div class="gallery-item"><svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#bfdbfe"/><rect x="50" y="50" width="300" height="150" rx="10" fill="#60a5fa"/><circle cx="200" cy="250" r="30" fill="#93c5fd"/></svg></div>
-                    <div class="gallery-item"><svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#bfdbfe"/><rect x="50" y="50" width="300" height="150" rx="10" fill="#60a5fa"/><circle cx="200" cy="250" r="30" fill="#93c5fd"/></svg></div>
-                    <div class="gallery-item"><svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#bfdbfe"/><rect x="50" y="50" width="300" height="150" rx="10" fill="#60a5fa"/><circle cx="200" cy="250" r="30" fill="#93c5fd"/></svg></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="contact section-padding" id="contact" aria-label="Contact">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Contact Us</span>
-                    <h2 class="section-title">Get In <span>Touch</span></h2>
-                    <p class="section-desc">Have questions? Reach out to us and we'll be happy to assist you.</p>
-                </div>
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>Near Vishwakarma Market, Station Road, Masaurhi</p></div></div>
-                        <div class="contact-detail"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p><a href="tel:+919123456780">+91 91234 56780</a></p></div></div>
-                        <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><p><a href="mailto:info@knowledgenexusacademy.in">info@knowledgenexusacademy.in</a></p></div></div>
-                        <div class="contact-map">
-                            <iframe src="https://maps.google.com/maps?q=Masaurhi+Bihar&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" title="Map"></iframe>
-                            <p style="margin-top:8px;font-size:0.85rem;color:var(--text-light);">
-                                <a href="https://maps.app.goo.gl/Qv9jP6kUNLys63n78" target="_blank" style="color:var(--primary);font-weight:600;">
-                                    <i class="fas fa-external-link-alt"></i> Open in Google Maps
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                    <form class="contact-form" id="contactForm" novalidate>
-                        <div class="form-group"><label for="formName">Full Name <span class="required">*</span></label><input type="text" id="formName" placeholder="Enter your full name" required /><div class="form-error" id="nameError"></div></div>
-                        <div class="form-group"><label for="formPhone">Phone <span class="required">*</span></label><input type="tel" id="formPhone" placeholder="Enter your phone number" required /><div class="form-error" id="phoneError"></div></div>
-                        <div class="form-group"><label for="formEmail">Email <span class="required">*</span></label><input type="email" id="formEmail" placeholder="Enter your email address" required /><div class="form-error" id="emailError"></div></div>
-                        <div class="form-group"><label for="formCourse">Course <span class="required">*</span></label><select id="formCourse" required><option value="">Select a course</option><option value="Class 6-8 Foundation">Class 6-8 Foundation</option><option value="Class 9-10 Science">Class 9-10 Science</option><option value="Class 9-10 Commerce">Class 9-10 Commerce</option><option value="CBSE Board Prep">CBSE Board Prep</option></select><div class="form-error" id="courseError"></div></div>
-                        <div class="form-group"><label for="formMessage">Message</label><textarea id="formMessage" rows="4" placeholder="Write your message..."></textarea></div>
-                        <button type="submit" class="btn btn-primary btn-block btn-large" id="formSubmitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
-                        <div class="form-submit-status" id="formStatus"></div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo"><div class="logo-icon"><i class="fas fa-graduation-cap"></i></div><div class="logo-text"><span class="logo-name">KNOWLEDGE NEXUS</span><span class="logo-tagline">From Confusion to Clarity</span></div></a>
-                    <p>Quality Education for Classes 6th to 10th. We provide expert guidance with small batch sizes and personalized attention.</p>
-                    <div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                </div>
-                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#courses">Courses</a></li><li><a href="#teachers">Our Teachers</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact Us</a></li></ul></div>
-                <div class="footer-links"><h4>Courses</h4><ul><li><a href="#courses">Class 6-8 Foundation</a></li><li><a href="#courses">Class 9-10 Science</a></li><li><a href="#courses">Class 9-10 Commerce</a></li><li><a href="#courses">CBSE Board Prep</a></li></ul></div>
-                <div class="footer-links"><h4>Contact Info</h4><ul><li><i class="fas fa-phone-alt" style="width:20px;"></i> <a href="tel:+919123456780">+91 91234 56780</a></li><li><i class="fas fa-envelope" style="width:20px;"></i> <a href="mailto:info@knowledgenexusacademy.in">info@knowledgenexusacademy.in</a></li><li><i class="fas fa-map-marker-alt" style="width:20px;"></i> Near Vishwakarma Market, Station Road, Masaurhi</li></ul></div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2026 <strong>Knowledge Nexus Academy</strong>. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div></div>
-        </div>
-    </footer>
-
-    <!-- SUCCESS POPUP -->
-    <div class="success-popup" id="successPopup" aria-hidden="true">
-        <div class="popup-content">
-            <div class="popup-icon"><i class="fas fa-check-circle"></i></div>
-            <h3>Thank You! 🎉</h3>
-            <p>Your enquiry has been sent successfully. We'll get back to you soon.</p>
-            <div class="popup-actions">
-                <a href="https://wa.me/917903736302" target="_blank" class="btn btn-whatsapp" style="background:#25D366;color:#fff;justify-content:center;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
-                <a href="mailto:info@knowledgenexusacademy.in" class="btn btn-primary" style="justify-content:center;"><i class="fas fa-envelope"></i> Send Email</a>
-                <button class="btn btn-outline" id="popupClose" style="justify-content:center;">Close</button>
-            </div>
-        </div>
     </div>
 
-    <style>
-        .btn-whatsapp {
-            background: #25D366;
-            color: #fff;
-        }
-        .btn-whatsapp:hover {
-            background: #1da851;
-            transform: translateY(-2px);
-        }
-    </style>
-
     <script>
-        // ========== LOADER ==========
-        window.addEventListener('load', () => {
-            document.getElementById('loader').classList.add('hidden');
-            initNavbar();
-            initBackToTop();
-            initContactForm();
-            initStudyMaterial();
-            initSmoothScroll();
-        });
+        (function() {
+            'use strict';
 
-        // ========== NAVBAR ==========
-        function initNavbar() {
-            const hamburger = document.getElementById('hamburger');
-            const navList = document.getElementById('navList');
-            hamburger.addEventListener('click', () => {
-                const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-                hamburger.setAttribute('aria-expanded', !expanded);
-                hamburger.classList.toggle('active');
-                navList.classList.toggle('open');
-            });
-            navList.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navList.classList.remove('open');
-                    hamburger.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                });
-            });
-            const sections = document.querySelectorAll('section[id]');
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const top = section.offsetTop - 120;
-                    if (window.scrollY >= top) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                navList.querySelectorAll('.nav-link').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        link.classList.toggle('active', href === '#' + current);
-                    }
-                });
-            });
-        }
+            const form = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePassword');
+            const errorMsg = document.getElementById('errorMsg');
+            const errorText = document.getElementById('errorText');
 
-        // ========== BACK TO TOP ==========
-        function initBackToTop() {
-            const btn = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                btn.classList.toggle('visible', window.scrollY > 300);
+            // ---------- TOGGLE PASSWORD ----------
+            toggleBtn.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
             });
-            btn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
 
-        // ========== SMOOTH SCROLL ==========
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-        }
+            // ---------- HIDE ERROR ON TYPING ----------
+            emailInput.addEventListener('input', hideError);
+            passwordInput.addEventListener('input', hideError);
 
-        // ========== CONTACT FORM ==========
-        function initContactForm() {
-            const form = document.getElementById('contactForm');
-            const popup = document.getElementById('successPopup');
-            const popupClose = document.getElementById('popupClose');
-            const statusEl = document.getElementById('formStatus');
-            const submitBtn = document.getElementById('formSubmitBtn');
+            function hideError() {
+                errorMsg.classList.remove('show');
+            }
 
-            form.addEventListener('submit', async (e) => {
+            // ---------- FORM SUBMISSION ----------
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                let valid = true;
-                const fields = [
-                    { id: 'formName', error: 'nameError', msg: 'Please enter your name.' },
-                    { id: 'formPhone', error: 'phoneError', msg: 'Please enter a valid 10-digit phone number.' },
-                    { id: 'formEmail', error: 'emailError', msg: 'Please enter a valid email address.' },
-                    { id: 'formCourse', error: 'courseError', msg: 'Please select a course.' },
-                ];
-                fields.forEach(({ id, error, msg }) => {
-                    const el = document.getElementById(id);
-                    const errEl = document.getElementById(error);
-                    const val = el.value.trim();
-                    if (!val) {
-                        errEl.textContent = msg;
-                        errEl.style.display = 'block';
-                        valid = false;
-                    } else if (id === 'formEmail' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-                        errEl.textContent = 'Please enter a valid email address.';
-                        errEl.style.display = 'block';
-                        valid = false;
-                    } else if (id === 'formPhone' && !/^[0-9]{10}$/.test(val.replace(/\s/g, ''))) {
-                        errEl.textContent = 'Please enter a 10-digit phone number.';
-                        errEl.style.display = 'block';
-                        valid = false;
-                    } else {
-                        errEl.style.display = 'none';
-                    }
-                });
-                if (!valid) return;
 
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                statusEl.className = 'form-submit-status';
-                statusEl.style.display = 'none';
+                errorMsg.classList.remove('show');
 
-                try {
-                    const fd = new FormData();
-                    fd.append('name', document.getElementById('formName').value.trim());
-                    fd.append('phone', document.getElementById('formPhone').value.trim());
-                    fd.append('email', document.getElementById('formEmail').value.trim());
-                    fd.append('course', document.getElementById('formCourse').value);
-                    fd.append('message', document.getElementById('formMessage').value.trim() || 'No message.');
-                    await fetch('https://formsubmit.co/ajax/info@knowledgenexusacademy.in', { method: 'POST', body: fd });
-                } catch (e) {
-                    console.warn('Email delivery fallback:', e);
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                let isValid = true;
+                let errMessage = '';
+
+                if (!email) {
+                    errMessage = 'Email is required.';
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    errMessage = 'Please enter a valid email address.';
+                    isValid = false;
                 }
 
-                popup.classList.add('open');
+                if (isValid && !password) {
+                    errMessage = 'Password is required.';
+                    isValid = false;
+                } else if (isValid && password.length < 6) {
+                    errMessage = 'Password must be at least 6 characters.';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    errorText.textContent = errMessage;
+                    errorMsg.classList.add('show');
+                    return;
+                }
+
+                // ----- SUCCESS (demo) -----
+                alert('✅ Welcome to Knowledge Nexus Academy!\n\nYou have successfully signed in as:\n' + email);
                 form.reset();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                statusEl.style.display = 'none';
+                // Reset toggle icon
+                const icon = toggleBtn.querySelector('i');
+                if (passwordInput.getAttribute('type') === 'text') {
+                    passwordInput.setAttribute('type', 'password');
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+                errorMsg.classList.remove('show');
             });
 
-            popupClose.addEventListener('click', () => popup.classList.remove('open'));
-            popup.addEventListener('click', (e) => { if (e.target === popup) popup.classList.remove('open'); });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && popup.classList.contains('open')) popup
-                    .classList.remove('open'); });
-        }
-
-        // ========== STUDY MATERIAL ==========
-        function initStudyMaterial() {
-            const overlay = document.getElementById('studyOverlay');
-            const closeBtn = document.getElementById('studyClose');
-            const navBtn = document.getElementById('studyMaterialNav');
-            const grid = document.getElementById('studyGrid');
-            const tabs = document.querySelectorAll('.study-tab');
-
-            const data = [
-                { id: 1, title: 'Class 6 Maths Notes', desc: 'Chapter-wise notes for Class 6 Mathematics', category: 'class6-8',
-                    icon: 'fa-calculator', pages: 30, type: 'PDF' },
-                { id: 2, title: 'Class 7 Science Notes', desc: 'Comprehensive science notes for Class 7', category: 'class6-8',
-                    icon: 'fa-flask', pages: 28, type: 'PDF' },
-                { id: 3, title: 'Class 8 English Grammar', desc: 'Complete grammar guide for Class 8', category: 'class6-8',
-                    icon: 'fa-book-open', pages: 25, type: 'PDF' },
-                { id: 4, title: 'Class 9 Science Notes', desc: 'Physics, Chemistry & Biology notes', category: 'class9-10',
-                    icon: 'fa-flask', pages: 45, type: 'PDF' },
-                { id: 5, title: 'Class 10 Maths Solutions', desc: 'NCERT solutions with step-by-step explanation',
-                    category: 'class9-10', icon: 'fa-calculator', pages: 50, type: 'PDF' },
-                { id: 6, title: 'Class 9-10 SST Notes', desc: 'History, Civics & Geography notes', category: 'class9-10',
-                    icon: 'fa-globe', pages: 35, type: 'PDF' },
-                { id: 7, title: 'Science Sample Papers', desc: 'Practice papers for Class 9 & 10 Science', category: 'science',
-                    icon: 'fa-file-alt', pages: 20, type: 'PDF' },
-                { id: 8, title: 'Maths Practice Sheets', desc: 'Topic-wise practice sheets for Class 9-10', category: 'maths',
-                    icon: 'fa-calculator', pages: 40, type: 'PDF' },
-                { id: 9, title: 'English Comprehension', desc: 'Reading comprehension & grammar practice', category: 'english',
-                    icon: 'fa-book-open', pages: 22, type: 'PDF' },
-            ];
-
-            function renderCards(category) {
-                const filtered = category === 'all' ? data : data.filter(d => d.category === category);
-                grid.innerHTML = filtered.map(d => `
-                    <div class="study-card">
-                        <div class="study-card-icon"><i class="fas ${d.icon}"></i></div>
-                        <h4>${d.title}</h4>
-                        <p>${d.desc}</p>
-                        <div class="study-meta">
-                            <span><i class="far fa-file-pdf"></i> ${d.type}</span>
-                            <span><i class="far fa-file-alt"></i> ${d.pages} pages</span>
-                        </div>
-                        <button class="study-download-btn" onclick="alert('📥 Downloading: ${d.title}')">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                `).join('');
+            // ---------- EMAIL VALIDATION ----------
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
             }
 
-            function openStudy() {
-                overlay.classList.add('open');
-                document.body.style.overflow = 'hidden';
-                renderCards('all');
-                tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === 'all'));
-            }
-
-            function closeStudy() {
-                overlay.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-
-            navBtn.addEventListener('click', (e) => { e.preventDefault();
-                openStudy(); });
-            closeBtn.addEventListener('click', closeStudy);
-            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeStudy(); });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open'))
-                    closeStudy(); });
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const cat = tab.dataset.tab;
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    renderCards(cat);
-                });
-            });
-        }
-
-        console.log('Knowledge Nexus Academy loaded successfully.');
-        console.log('📚 Study Material overlay ready.');
-        console.log('🔗 Login redirects to: https://knowledgenexusacademy.in/LoginPage');
+        })();
     </script>
+
 </body>
 </html>
