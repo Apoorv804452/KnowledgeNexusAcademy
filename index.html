@@ -23,9 +23,10 @@
             background: #f8faff;
             color: #1e1e2f;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Subtle background pattern */
+        /* subtle background pattern */
         body::before {
             content: '';
             position: fixed;
@@ -36,6 +37,61 @@
             background: radial-gradient(circle at 30% 40%, rgba(99, 102, 241, 0.04) 0%, transparent 60%),
                 radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 60%);
             z-index: -1;
+        }
+
+        /* ----- STATIC FLOATING BUBBLES (guaranteed visibility) ----- */
+        .static-bubble {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBubble linear infinite;
+            will-change: transform, opacity;
+            user-select: none;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.15);
+            opacity: 0.9;
+        }
+
+        /* JS-generated bubbles use the same class */
+        .floating-bubble {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBubble linear infinite;
+            will-change: transform, opacity;
+            user-select: none;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.15);
+            opacity: 0.9;
+        }
+
+        @keyframes floatBubble {
+            0% {
+                transform: translateY(100vh) translateX(0px) scale(0.6);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.9;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(40px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ----- SITE WRAPPER (to overlay bubbles) ----- */
+        .site-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
         .container {
@@ -723,271 +779,318 @@
 </head>
 <body>
 
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="nav-brand">
-                <i class="fas fa-graduation-cap"></i>
-                Knowledge Nexus <span>Academy</span>
-            </a>
-            <div class="nav-links">
-                <a href="#teach">Courses</a>
-                <a href="#why">Why Us</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <a href="#" class="btn btn-login-small"><i class="fas fa-arrow-right-to-bracket"></i> Login</a>
-            </div>
-        </div>
-    </nav>
+    <!-- ===== GUARANTEED STATIC BUBBLES (visible on load) ===== -->
+    <div class="static-bubble" style="width:120px;height:120px;left:10%;background:rgba(99,102,241,0.15);animation-duration:28s;animation-delay:0s;"></div>
+    <div class="static-bubble" style="width:80px;height:80px;left:85%;background:rgba(139,92,246,0.18);animation-duration:35s;animation-delay:0.5s;"></div>
+    <div class="static-bubble" style="width:60px;height:60px;left:50%;background:rgba(13,148,136,0.20);animation-duration:22s;animation-delay:1s;"></div>
+    <div class="static-bubble" style="width:100px;height:100px;left:25%;background:rgba(245,158,11,0.12);animation-duration:40s;animation-delay:0.2s;"></div>
+    <div class="static-bubble" style="width:70px;height:70px;left:70%;background:rgba(236,72,153,0.15);animation-duration:30s;animation-delay:1.5s;"></div>
+    <div class="static-bubble" style="width:50px;height:50px;left:5%;background:rgba(255,255,255,0.25);animation-duration:25s;animation-delay:0.8s;"></div>
+    <div class="static-bubble" style="width:90px;height:90px;left:60%;background:rgba(99,102,241,0.12);animation-duration:32s;animation-delay:0.3s;"></div>
+    <div class="static-bubble" style="width:40px;height:40px;left:40%;background:rgba(139,92,246,0.22);animation-duration:20s;animation-delay:1.2s;"></div>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-        <div class="container">
-            <h1>From <span>Confusion</span> to <span>Clarity</span></h1>
-            <p style="font-size:1.3rem; font-weight:500;">Build Strong Concepts. Learn with Confidence.</p>
-            <p>At Knowledge Nexus Academy, we help students understand concepts clearly, practice consistently, and improve with confidence.</p>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start 7-Day Free Demo</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Learn More</a>
-            </div>
-        </div>
-    </section>
+    <!-- ===== SITE WRAPPER ===== -->
+    <div class="site-wrapper">
 
-    <!-- ===== FEATURES STRIP ===== -->
-    <div class="container">
-        <div class="features-strip">
-            <span class="feature-item"><i class="fas fa-users"></i> Small Batches</span>
-            <span class="feature-item"><i class="fas fa-user-check"></i> Personal Attention</span>
-            <span class="feature-item"><i class="fas fa-pencil-alt"></i> Regular Tests</span>
-            <span class="feature-item"><i class="fas fa-question-circle"></i> Doubt Support</span>
-        </div>
-    </div>
+        <!-- ===== NAVBAR ===== -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="nav-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    Knowledge Nexus <span>Academy</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#teach">Courses</a>
+                    <a href="#why">Why Us</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#" class="btn btn-login-small"><i class="fas fa-arrow-right-to-bracket"></i> Login</a>
+                </div>
+            </div>
+        </nav>
 
-    <!-- ===== WHAT WE TEACH ===== -->
-    <section id="teach">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title"><i class="fas fa-chalkboard-teacher"></i> What We Teach</h2>
-                <p class="section-subtitle">Learn Better. Understand Deeper. We provide structured learning support for students with a focus on strong concepts, regular practice, and academic improvement.</p>
-            </div>
-            <div class="teach-grid">
-                <div class="teach-card">
-                    <div class="icon-big"><i class="fas fa-child"></i></div>
-                    <h3>Class 6–8</h3>
-                    <p><strong>Foundation & Concept Building</strong><br>Build a strong academic foundation through clear explanations, practice, and regular assessment.</p>
-                </div>
-                <div class="teach-card">
-                    <div class="icon-big"><i class="fas fa-book"></i></div>
-                    <h3>Class 9–10</h3>
-                    <p><strong>Board Preparation</strong><br>Strengthen concepts, practice important questions, and prepare systematically for board examinations.</p>
-                </div>
-                <div class="teach-card">
-                    <div class="icon-big"><i class="fas fa-flask"></i></div>
-                    <h3>Class 11–12</h3>
-                    <p><strong>Senior Secondary</strong><br>Develop strong conceptual understanding and problem-solving skills in Physics, Chemistry, and Mathematics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== WHY US ===== -->
-    <section id="why" style="background:#f8faff; border-radius:2rem; padding:4rem 0;">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title"><i class="fas fa-star"></i> Why Knowledge Nexus Academy?</h2>
-                <p class="section-subtitle">More Than Just Teaching — we believe that good education is not about memorising answers. It is about understanding concepts and learning how to apply them.</p>
-            </div>
-            <div class="why-grid">
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
-                    <h4>Concept-Based Teaching</h4>
-                    <p>Understand the concept behind every formula, problem, and topic.</p>
-                </div>
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-user-graduate"></i></div>
-                    <h4>Personal Attention</h4>
-                    <p>Small batches allow students to interact, ask questions, and learn more effectively.</p>
-                </div>
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-file-alt"></i></div>
-                    <h4>Structured Study Material</h4>
-                    <p>Get organised notes and learning resources designed to support classroom learning.</p>
-                </div>
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-tasks"></i></div>
-                    <h4>Regular Tests</h4>
-                    <p>Regular assessments help students identify weak areas and track their improvement.</p>
-                </div>
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-comments"></i></div>
-                    <h4>Doubt Support</h4>
-                    <p>Students can ask questions and get their doubts clarified without hesitation.</p>
-                </div>
-                <div class="why-item">
-                    <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
-                    <h4>Progress Monitoring</h4>
-                    <p>Regular academic feedback helps students and parents understand learning progress.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== LEARNING APPROACH ===== -->
-    <section>
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title"><i class="fas fa-route"></i> Our Learning Approach</h2>
-                <p class="section-subtitle">Learn → Practice → Improve</p>
-            </div>
-            <div class="approach-steps">
-                <div class="step">
-                    <div class="step-num">01</div>
-                    <h4>Understand</h4>
-                    <p>Build a clear understanding of the fundamental concepts.</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">02</div>
-                    <h4>Practice</h4>
-                    <p>Solve questions and apply what you have learned.</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">03</div>
-                    <h4>Clear Doubts</h4>
-                    <p>Identify mistakes and get your doubts resolved.</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">04</div>
-                    <h4>Test</h4>
-                    <p>Regular tests help measure your preparation.</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">05</div>
-                    <h4>Improve</h4>
-                    <p>Analyse your performance and work on your weak areas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 7-DAY FREE DEMO ===== -->
-    <section>
-        <div class="container">
-            <div class="demo-section">
-                <div class="text-center">
-                    <h2 class="section-title" style="color:#fff;"><i class="fas fa-gift"></i> 7-Day Free Demo</h2>
-                    <p class="section-subtitle" style="color:#cbd5e1;">Experience the Difference Before You Decide</p>
-                    <p style="color:#d1d5db; max-width:600px; margin:0 auto 2rem;">Not sure if Knowledge Nexus Academy is right for you? Join our 7-Day Free Demo and experience our teaching approach yourself. No pressure. Just learn, experience, and decide.</p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-demo"><i class="fas fa-calendar-check"></i> Book Your Free Demo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ABOUT + PHILOSOPHY ===== -->
-    <section id="about">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title"><i class="fas fa-info-circle"></i> About Knowledge Nexus Academy</h2>
-                <p class="section-subtitle">Built with a simple goal — to make learning clear, structured, and meaningful.</p>
-            </div>
-            <div class="about-philosophy">
-                <div class="block">
-                    <h3>Our Story</h3>
-                    <p>Knowledge Nexus Academy is built with a simple goal — to make learning clear, structured, and meaningful. We focus on strong conceptual understanding, regular practice, personal attention, and continuous improvement so that students can approach their studies with greater confidence.</p>
-                    <p style="margin-top:1rem;"><strong>Our philosophy is simple:</strong> <em>From Confusion to Clarity.</em></p>
-                </div>
-                <div class="block">
-                    <h3>Our Teaching Philosophy</h3>
-                    <p><strong>We Don't Just Teach Answers.</strong> We help students understand <em>why</em> an answer is correct.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> When concepts are clear, learning becomes easier.</li>
-                        <li><i class="fas fa-check-circle"></i> Practice becomes meaningful.</li>
-                        <li><i class="fas fa-check-circle"></i> Confidence grows.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== LOCATION ===== -->
-    <section id="contact" style="background:#f8faff; border-radius:2rem; padding:4rem 0;">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Visit Knowledge Nexus Academy</h2>
-            </div>
-            <div class="location-grid">
-                <div class="location-info">
-                    <h3>Knowledge Nexus Academy</h3>
-                    <address>
-                        <i class="fas fa-location-dot" style="color:#6366f1; width:1.5rem;"></i> Behind Vishwakarma Market,<br>
-                        Near Devi Asthan Mandir,<br>
-                        Rahmatganj, Masaurhi – 804452, Bihar
-                    </address>
-                    <p><i class="fas fa-phone" style="color:#6366f1; width:1.5rem;"></i> <strong>9296867642</strong></p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-directions"></i> Get Directions</a>
-                        <a href="#" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
-                        <a href="#" class="btn btn-demo"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
-                    </div>
-                </div>
-                <div class="location-map">
-                    <i class="fas fa-map"></i> <span>Map placeholder</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FINAL CTA ===== -->
-    <section>
-        <div class="container">
-            <div class="final-cta">
-                <h2 class="section-title" style="font-size:2.4rem;">Ready to Turn Confusion Into Clarity?</h2>
-                <p style="font-size:1.1rem; color:#4b5563; max-width:600px; margin:0 auto;">Give your learning a better direction. Join Knowledge Nexus Academy and start your journey towards stronger concepts, better preparation, and greater confidence.</p>
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="container">
+                <h1>From <span>Confusion</span> to <span>Clarity</span></h1>
+                <p style="font-size:1.3rem; font-weight:500;">Build Strong Concepts. Learn with Confidence.</p>
+                <p>At Knowledge Nexus Academy, we help students understand concepts clearly, practice consistently, and improve with confidence.</p>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-primary"><i class="fas fa-play-circle"></i> 7-Day Free Demo</a>
-                    <a href="#" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
+                    <a href="#" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start 7-Day Free Demo</a>
+                    <a href="#" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Learn More</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
+        <!-- ===== FEATURES STRIP ===== -->
         <div class="container">
-            <div>
-                <div class="brand-footer">KNOWLEDGE NEXUS ACADEMY <span>From Confusion to Clarity</span></div>
-                <p style="margin-top:0.8rem;">Empowering minds, building futures — your success is our story.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4>Quick Links</h4>
-                <a href="#teach">Courses</a>
-                <a href="#why">Why Us</a>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div>
-                <h4>Login</h4>
-                <a href="#"><i class="fas fa-arrow-right-to-bracket"></i> Student Login</a>
-                <a href="#"><i class="fas fa-arrow-right-to-bracket"></i> Parent Login</a>
-            </div>
-            <div>
-                <h4>Contact</h4>
-                <p><i class="fas fa-phone"></i> 9296867642</p>
-                <p><i class="fas fa-location-dot"></i> Masaurhi, Bihar</p>
-            </div>
-            <div class="footer-bottom">
-                <span>© 2026 Knowledge Nexus Academy. All Rights Reserved.</span>
-                <span><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></span>
+            <div class="features-strip">
+                <span class="feature-item"><i class="fas fa-users"></i> Small Batches</span>
+                <span class="feature-item"><i class="fas fa-user-check"></i> Personal Attention</span>
+                <span class="feature-item"><i class="fas fa-pencil-alt"></i> Regular Tests</span>
+                <span class="feature-item"><i class="fas fa-question-circle"></i> Doubt Support</span>
             </div>
         </div>
-    </footer>
+
+        <!-- ===== WHAT WE TEACH ===== -->
+        <section id="teach">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><i class="fas fa-chalkboard-teacher"></i> What We Teach</h2>
+                    <p class="section-subtitle">Learn Better. Understand Deeper. We provide structured learning support for students with a focus on strong concepts, regular practice, and academic improvement.</p>
+                </div>
+                <div class="teach-grid">
+                    <div class="teach-card">
+                        <div class="icon-big"><i class="fas fa-child"></i></div>
+                        <h3>Class 6–8</h3>
+                        <p><strong>Foundation & Concept Building</strong><br>Build a strong academic foundation through clear explanations, practice, and regular assessment.</p>
+                    </div>
+                    <div class="teach-card">
+                        <div class="icon-big"><i class="fas fa-book"></i></div>
+                        <h3>Class 9–10</h3>
+                        <p><strong>Board Preparation</strong><br>Strengthen concepts, practice important questions, and prepare systematically for board examinations.</p>
+                    </div>
+                    <div class="teach-card">
+                        <div class="icon-big"><i class="fas fa-flask"></i></div>
+                        <h3>Class 11–12</h3>
+                        <p><strong>Senior Secondary</strong><br>Develop strong conceptual understanding and problem-solving skills in Physics, Chemistry, and Mathematics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHY US ===== -->
+        <section id="why" style="background:#f8faff; border-radius:2rem; padding:4rem 0;">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Why Knowledge Nexus Academy?</h2>
+                    <p class="section-subtitle">More Than Just Teaching — we believe that good education is not about memorising answers. It is about understanding concepts and learning how to apply them.</p>
+                </div>
+                <div class="why-grid">
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
+                        <h4>Concept-Based Teaching</h4>
+                        <p>Understand the concept behind every formula, problem, and topic.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-user-graduate"></i></div>
+                        <h4>Personal Attention</h4>
+                        <p>Small batches allow students to interact, ask questions, and learn more effectively.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-file-alt"></i></div>
+                        <h4>Structured Study Material</h4>
+                        <p>Get organised notes and learning resources designed to support classroom learning.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-tasks"></i></div>
+                        <h4>Regular Tests</h4>
+                        <p>Regular assessments help students identify weak areas and track their improvement.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-comments"></i></div>
+                        <h4>Doubt Support</h4>
+                        <p>Students can ask questions and get their doubts clarified without hesitation.</p>
+                    </div>
+                    <div class="why-item">
+                        <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+                        <h4>Progress Monitoring</h4>
+                        <p>Regular academic feedback helps students and parents understand learning progress.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LEARNING APPROACH ===== -->
+        <section>
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><i class="fas fa-route"></i> Our Learning Approach</h2>
+                    <p class="section-subtitle">Learn → Practice → Improve</p>
+                </div>
+                <div class="approach-steps">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <h4>Understand</h4>
+                        <p>Build a clear understanding of the fundamental concepts.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <h4>Practice</h4>
+                        <p>Solve questions and apply what you have learned.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <h4>Clear Doubts</h4>
+                        <p>Identify mistakes and get your doubts resolved.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">04</div>
+                        <h4>Test</h4>
+                        <p>Regular tests help measure your preparation.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">05</div>
+                        <h4>Improve</h4>
+                        <p>Analyse your performance and work on your weak areas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7-DAY FREE DEMO ===== -->
+        <section>
+            <div class="container">
+                <div class="demo-section">
+                    <div class="text-center">
+                        <h2 class="section-title" style="color:#fff;"><i class="fas fa-gift"></i> 7-Day Free Demo</h2>
+                        <p class="section-subtitle" style="color:#cbd5e1;">Experience the Difference Before You Decide</p>
+                        <p style="color:#d1d5db; max-width:600px; margin:0 auto 2rem;">Not sure if Knowledge Nexus Academy is right for you? Join our 7-Day Free Demo and experience our teaching approach yourself. No pressure. Just learn, experience, and decide.</p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-demo"><i class="fas fa-calendar-check"></i> Book Your Free Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT + PHILOSOPHY ===== -->
+        <section id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> About Knowledge Nexus Academy</h2>
+                    <p class="section-subtitle">Built with a simple goal — to make learning clear, structured, and meaningful.</p>
+                </div>
+                <div class="about-philosophy">
+                    <div class="block">
+                        <h3>Our Story</h3>
+                        <p>Knowledge Nexus Academy is built with a simple goal — to make learning clear, structured, and meaningful. We focus on strong conceptual understanding, regular practice, personal attention, and continuous improvement so that students can approach their studies with greater confidence.</p>
+                        <p style="margin-top:1rem;"><strong>Our philosophy is simple:</strong> <em>From Confusion to Clarity.</em></p>
+                    </div>
+                    <div class="block">
+                        <h3>Our Teaching Philosophy</h3>
+                        <p><strong>We Don't Just Teach Answers.</strong> We help students understand <em>why</em> an answer is correct.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> When concepts are clear, learning becomes easier.</li>
+                            <li><i class="fas fa-check-circle"></i> Practice becomes meaningful.</li>
+                            <li><i class="fas fa-check-circle"></i> Confidence grows.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LOCATION ===== -->
+        <section id="contact" style="background:#f8faff; border-radius:2rem; padding:4rem 0;">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Visit Knowledge Nexus Academy</h2>
+                </div>
+                <div class="location-grid">
+                    <div class="location-info">
+                        <h3>Knowledge Nexus Academy</h3>
+                        <address>
+                            <i class="fas fa-location-dot" style="color:#6366f1; width:1.5rem;"></i> Behind Vishwakarma Market,<br>
+                            Near Devi Asthan Mandir,<br>
+                            Rahmatganj, Masaurhi – 804452, Bihar
+                        </address>
+                        <p><i class="fas fa-phone" style="color:#6366f1; width:1.5rem;"></i> <strong>9296867642</strong></p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-primary"><i class="fas fa-directions"></i> Get Directions</a>
+                            <a href="#" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
+                            <a href="#" class="btn btn-demo"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+                        </div>
+                    </div>
+                    <div class="location-map">
+                        <i class="fas fa-map"></i> <span>Map placeholder</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FINAL CTA ===== -->
+        <section>
+            <div class="container">
+                <div class="final-cta">
+                    <h2 class="section-title" style="font-size:2.4rem;">Ready to Turn Confusion Into Clarity?</h2>
+                    <p style="font-size:1.1rem; color:#4b5563; max-width:600px; margin:0 auto;">Give your learning a better direction. Join Knowledge Nexus Academy and start your journey towards stronger concepts, better preparation, and greater confidence.</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-play-circle"></i> 7-Day Free Demo</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="container">
+                <div>
+                    <div class="brand-footer">KNOWLEDGE NEXUS ACADEMY <span>From Confusion to Clarity</span></div>
+                    <p style="margin-top:0.8rem;">Empowering minds, building futures — your success is our story.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="#teach">Courses</a>
+                    <a href="#why">Why Us</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div>
+                    <h4>Login</h4>
+                    <a href="#"><i class="fas fa-arrow-right-to-bracket"></i> Student Login</a>
+                    <a href="#"><i class="fas fa-arrow-right-to-bracket"></i> Parent Login</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> 9296867642</p>
+                    <p><i class="fas fa-location-dot"></i> Masaurhi, Bihar</p>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 Knowledge Nexus Academy. All Rights Reserved.</span>
+                    <span><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- ===== END SITE WRAPPER ===== -->
+
+    <!-- ===== SCRIPT FOR EXTRA FLOATING BUBBLES ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Soft brand colors
+            const colors = [
+                'rgba(99, 102, 241, 0.18)',
+                'rgba(139, 92, 246, 0.20)',
+                'rgba(13, 148, 136, 0.20)',
+                'rgba(245, 158, 11, 0.15)',
+                'rgba(236, 72, 153, 0.15)',
+                'rgba(255, 255, 255, 0.30)'
+            ];
+
+            // Add 25 more bubbles for a rich effect
+            for (let i = 0; i < 25; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'floating-bubble';
+
+                const size = Math.random() * 100 + 30;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = (Math.random() * 25 + 20) + 's';
+                bubble.style.animationDelay = (Math.random() * 3) + 's';
+                bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                document.body.appendChild(bubble);
+            }
+        });
+    </script>
 
 </body>
 </html>
