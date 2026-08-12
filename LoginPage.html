@@ -51,6 +51,8 @@
                 0 20px 60px rgba(0, 20, 50, 0.10),
                 0 8px 24px rgba(0, 0, 0, 0.04);
             transition: transform 0.2s ease;
+            position: relative;
+            z-index: 10;
         }
 
         .auth-card:hover {
@@ -384,7 +386,7 @@
             background: #e2e8f0;
         }
 
-        /* ---------- SOCIAL BUTTONS (only Google now) ---------- */
+        /* ---------- SOCIAL BUTTONS ---------- */
         .social-row {
             display: flex;
             gap: 0.75rem;
@@ -460,6 +462,83 @@
             font-size: 1.1rem;
         }
 
+        /* ---------- CLASS SELECTOR MODAL (for Google login) ---------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.40);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: #fff;
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem 1.8rem 1.8rem;
+            border-radius: 1.8rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.20);
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-box .modal-icon {
+            font-size: 2.6rem;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-box h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-box p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-box .input-wrap {
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-box .btn-submit {
+            margin-top: 0;
+        }
+
         /* ---------- FOOTER ---------- */
         .auth-footer {
             text-align: center;
@@ -503,6 +582,10 @@
             .form-options {
                 flex-wrap: wrap;
                 gap: 0.5rem;
+            }
+
+            .modal-box {
+                padding: 1.5rem 1.2rem;
             }
         }
     </style>
@@ -647,7 +730,7 @@
             <!-- ===== DIVIDER ===== -->
             <div class="divider">or continue with</div>
 
-            <!-- ===== SOCIAL BUTTONS (Google only) ===== -->
+            <!-- ===== SOCIAL BUTTONS ===== -->
             <div class="social-row">
                 <button class="btn-google" id="googleBtn">
                     <i class="fab fa-google"></i> Sign in with Google
@@ -662,8 +745,47 @@
         </div>
     </div>
 
+    <!-- ================================================================ -->
+    <!-- ===== CLASS SELECTOR MODAL (for Google login) ===== -->
+    <!-- ================================================================ -->
+    <div class="modal-overlay" id="classModal">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h2>Select Your Class</h2>
+            <p>Please select your class to continue to your dashboard.</p>
+
+            <div class="input-wrap" style="margin-bottom: 1.2rem;">
+                <span class="icon"><i class="fas fa-layer-group"></i></span>
+                <select id="modalClassSelect" required>
+                    <option value="">Select your class</option>
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                    <option value="4">Class 4</option>
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                    <option value="11">Class 11</option>
+                    <option value="12">Class 12</option>
+                </select>
+                <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
+            </div>
+
+            <button class="btn-submit" id="modalSaveBtn">
+                <span class="btn-text"><i class="fas fa-arrow-right" style="margin-right:8px;"></i>Continue</span>
+                <span class="spinner"></span>
+            </button>
+        </div>
+    </div>
+
     <!-- ============================================================ -->
     <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================ -->
     <script>
         (function() {
             'use strict';
@@ -707,6 +829,11 @@
             const forgotLink = document.getElementById('forgotLink');
             const rememberMe = document.getElementById('rememberMe');
 
+            // Modal refs
+            const classModal = document.getElementById('classModal');
+            const modalClassSelect = document.getElementById('modalClassSelect');
+            const modalSaveBtn = document.getElementById('modalSaveBtn');
+
             // --------------------------------------------------------------
             // 3. HELPERS
             // --------------------------------------------------------------
@@ -748,7 +875,32 @@
             }
 
             // --------------------------------------------------------------
-            // 4. TOGGLE TABS
+            // 4. CLASS STORAGE & REDIRECT
+            // --------------------------------------------------------------
+            function saveClassForUser(email, classValue) {
+                if (!email || !classValue) return;
+                const key = 'userClass_' + email.replace(/[.#$[\]]/g, '_');
+                localStorage.setItem(key, classValue);
+            }
+
+            function getClassForUser(email) {
+                if (!email) return null;
+                const key = 'userClass_' + email.replace(/[.#$[\]]/g, '_');
+                return localStorage.getItem(key);
+            }
+
+            function redirectToClassPage(classValue) {
+                const val = parseInt(classValue);
+                if (val && val >= 1 && val <= 12) {
+                    window.location.href = 'class' + val + 'index.html';
+                } else {
+                    // Fallback: redirect to a generic dashboard
+                    window.location.href = 'dashboard.html';
+                }
+            }
+
+            // --------------------------------------------------------------
+            // 5. TOGGLE TABS
             // --------------------------------------------------------------
             function switchTab(tabId) {
                 hideMessage();
@@ -773,7 +925,7 @@
             });
 
             // --------------------------------------------------------------
-            // 5. TOGGLE PASSWORD VISIBILITY
+            // 6. TOGGLE PASSWORD VISIBILITY
             // --------------------------------------------------------------
             togglePassBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
@@ -783,7 +935,7 @@
             });
 
             // --------------------------------------------------------------
-            // 6. VALIDATION HELPERS
+            // 7. VALIDATION HELPERS
             // --------------------------------------------------------------
             function validateEmail(email) {
                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -794,7 +946,7 @@
             }
 
             // --------------------------------------------------------------
-            // 7. LOGIN HANDLER
+            // 8. LOGIN HANDLER (with class-based redirect)
             // --------------------------------------------------------------
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -818,10 +970,21 @@
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        setLoading(loginBtn, false);
                         const user = userCredential.user;
-                        showMessage('Welcome back, ' + (user.displayName || 'Student') + '! 🎉', 'success');
-                        console.log('Logged in:', user.email);
+                        setLoading(loginBtn, false);
+
+                        // Look up the stored class
+                        const storedClass = getClassForUser(user.email);
+                        if (storedClass) {
+                            showMessage('Welcome back, ' + (user.displayName || 'Student') + '! 🎉', 'success');
+                            setTimeout(() => {
+                                redirectToClassPage(storedClass);
+                            }, 800);
+                        } else {
+                            // No class found — ask the user to select
+                            showMessage('Please select your class to continue.', 'info');
+                            openClassModal(user.email);
+                        }
                     })
                     .catch((error) => {
                         setLoading(loginBtn, false);
@@ -840,7 +1003,7 @@
             });
 
             // --------------------------------------------------------------
-            // 8. SIGNUP HANDLER
+            // 9. SIGNUP HANDLER (store class + redirect)
             // --------------------------------------------------------------
             signupForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -886,18 +1049,16 @@
                         return user.updateProfile({
                             displayName: name
                         }).then(() => {
-                            // Store class in user metadata (custom claim or just log)
-                            // For demo, we store in local storage as Firebase custom claims require backend.
-                            // We'll just show a success message with the class.
+                            // Store the class in localStorage
+                            saveClassForUser(user.email, classValue);
                             setLoading(signupBtn, false);
-                            showMessage('Account created! Welcome ' + name + ' (Class ' + classValue + ') 🎉',
-                            'success');
+                            showMessage('Account created! Welcome ' + name + ' 🎉', 'success');
                             console.log('Signed up:', user.email, 'Class:', classValue);
+
+                            // Redirect to class page after a short delay
                             setTimeout(() => {
-                                switchTab('login');
-                                loginEmail.value = email;
-                                loginPassword.value = '';
-                            }, 1800);
+                                redirectToClassPage(classValue);
+                            }, 1000);
                         });
                     })
                     .catch((error) => {
@@ -915,7 +1076,61 @@
             });
 
             // --------------------------------------------------------------
-            // 9. SOCIAL AUTH (Google only — GitHub removed)
+            // 10. CLASS MODAL (for Google login / missing class)
+            // --------------------------------------------------------------
+            let pendingUserEmail = null;
+
+            function openClassModal(email) {
+                pendingUserEmail = email;
+                modalClassSelect.value = '';
+                classModal.classList.add('open');
+            }
+
+            function closeClassModal() {
+                classModal.classList.remove('open');
+                pendingUserEmail = null;
+            }
+
+            modalSaveBtn.addEventListener('click', function() {
+                const selectedClass = modalClassSelect.value;
+                if (!selectedClass) {
+                    showMessage('Please select your class.', 'error');
+                    return;
+                }
+
+                setLoading(modalSaveBtn, true);
+
+                // Save the class for the pending user
+                if (pendingUserEmail) {
+                    saveClassForUser(pendingUserEmail, selectedClass);
+                    closeClassModal();
+                    setLoading(modalSaveBtn, false);
+                    showMessage('Class saved! Redirecting...', 'success');
+                    setTimeout(() => {
+                        redirectToClassPage(selectedClass);
+                    }, 800);
+                } else {
+                    setLoading(modalSaveBtn, false);
+                    showMessage('Error: No user found. Please try logging in again.', 'error');
+                }
+            });
+
+            // Close modal on overlay click
+            classModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeClassModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && classModal.classList.contains('open')) {
+                    closeClassModal();
+                }
+            });
+
+            // --------------------------------------------------------------
+            // 11. SOCIAL AUTH — GOOGLE (with class selection)
             // --------------------------------------------------------------
             function handleGoogleAuth() {
                 hideMessage();
@@ -925,10 +1140,21 @@
 
                 auth.signInWithPopup(provider)
                     .then((result) => {
-                        setLoading(loginBtn, false);
                         const user = result.user;
-                        showMessage('Welcome ' + (user.displayName || 'Student') + '! 🎉', 'success');
-                        console.log('Google login:', user.email);
+                        setLoading(loginBtn, false);
+
+                        // Check if we have a stored class for this user
+                        const storedClass = getClassForUser(user.email);
+                        if (storedClass) {
+                            showMessage('Welcome ' + (user.displayName || 'Student') + '! 🎉', 'success');
+                            setTimeout(() => {
+                                redirectToClassPage(storedClass);
+                            }, 800);
+                        } else {
+                            // No class found — show the modal
+                            showMessage('Please select your class to continue.', 'info');
+                            openClassModal(user.email);
+                        }
                     })
                     .catch((error) => {
                         setLoading(loginBtn, false);
@@ -945,7 +1171,7 @@
             googleBtn.addEventListener('click', handleGoogleAuth);
 
             // --------------------------------------------------------------
-            // 10. FORGOT PASSWORD
+            // 12. FORGOT PASSWORD
             // --------------------------------------------------------------
             forgotLink.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -973,7 +1199,7 @@
             });
 
             // --------------------------------------------------------------
-            // 11. REMEMBER ME (UI feedback)
+            // 13. REMEMBER ME (UI feedback)
             // --------------------------------------------------------------
             rememberMe.addEventListener('change', function() {
                 if (this.checked) {
@@ -984,14 +1210,14 @@
             });
 
             // --------------------------------------------------------------
-            // 12. AUTO-DETECT SIGNUP FROM URL
+            // 14. AUTO-DETECT SIGNUP FROM URL
             // --------------------------------------------------------------
             if (window.location.search.includes('signup')) {
                 switchTab('signup');
             }
 
             // --------------------------------------------------------------
-            // 13. ESCAPE clears message
+            // 15. ESCAPE clears message
             // --------------------------------------------------------------
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
@@ -1000,6 +1226,7 @@
             });
 
             console.log('🔥 Knowledge Nexus Academy — From Confusion to Clarity');
+            console.log('📚 Class-based redirect: classXindex.html where X = 1–12');
         })();
     </script>
 
