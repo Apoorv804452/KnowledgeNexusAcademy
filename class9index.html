@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Class 9 Dashboard | Knowledge Nexus Academy</title>
-
-    <!-- ===== Firebase SDKs ===== -->
+    <title>Class 9 Dashboard | Student View</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js">
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js">
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js">
     </script>
-
-    <!-- ===== Google Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-
-    <!-- ===== Font Awesome 6 ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
     <style>
         /* ---------- RESET & BASE ---------- */
         * {
@@ -39,7 +32,6 @@
                 radial-gradient(ellipse at 90% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 50%);
         }
 
-        /* ---------- FLOATING BUBBLES (decorative) ---------- */
         .floating-bubble {
             position: fixed;
             border-radius: 50%;
@@ -72,7 +64,6 @@
             }
         }
 
-        /* ---------- SITE WRAPPER ---------- */
         .site-wrapper {
             position: relative;
             z-index: 1;
@@ -81,11 +72,10 @@
             padding: 1.5rem;
         }
 
-        /* ---------- TOP NAV BAR ---------- */
+        /* ---------- TOP NAV ---------- */
         .top-nav {
             background: rgba(255, 255, 255, 0.80);
             backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border-radius: 2rem;
             padding: 0.8rem 1.8rem;
             display: flex;
@@ -128,7 +118,6 @@
         .brand h1 span {
             color: #2563eb;
         }
-
         .brand .tagline-small {
             font-size: 0.7rem;
             font-weight: 500;
@@ -141,13 +130,11 @@
             align-items: center;
             gap: 1rem;
         }
-
         .user-section .greeting {
             font-size: 0.85rem;
             font-weight: 600;
             color: #1e293b;
         }
-
         .user-section .greeting span {
             color: #2563eb;
         }
@@ -190,17 +177,13 @@
             color: #b91c1c;
         }
 
-        .btn-logout i {
-            font-size: 0.8rem;
-        }
-
         /* ---------- HERO BANNER ---------- */
         .hero-banner {
             background: linear-gradient(135deg, #1e3a8a, #2563eb);
             border-radius: 2rem;
-            padding: 2.5rem 2.8rem;
+            padding: 2rem 2.5rem;
             color: #fff;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
             box-shadow: 0 16px 48px rgba(37, 99, 235, 0.20);
@@ -219,7 +202,7 @@
         }
 
         .hero-banner h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 0.3rem;
@@ -245,62 +228,406 @@
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.03em;
-            margin-top: 0.8rem;
+            margin-top: 0.6rem;
             border: 1px solid rgba(255, 255, 255, 0.10);
         }
 
-        /* ---------- GRID LAYOUT ---------- */
-        .dashboard-grid {
+        /* ---------- STATS ROW ---------- */
+        .stats-row {
             display: grid;
-            grid-template-columns: 1.6fr 1fr;
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        /* ---------- CARDS ---------- */
-        .card {
+        .stat-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.15s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0b1e3a;
+            line-height: 1.2;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .stat-card .stat-icon {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        .stat-card .stat-icon.green {
+            color: #22c55e;
+        }
+        .stat-card .stat-icon.red {
+            color: #ef4444;
+        }
+        .stat-card .stat-icon.yellow {
+            color: #f59e0b;
+        }
+        .stat-card .stat-icon.blue {
+            color: #3b82f6;
+        }
+        .stat-card .stat-icon.purple {
+            color: #8b5cf6;
+        }
+
+        /* ---------- CALENDAR + ROUTINE GRID ---------- */
+        .middle-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ---------- CALENDAR CARD ---------- */
+        .calendar-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             border-radius: 1.8rem;
             padding: 1.8rem 1.8rem 1.6rem;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            margin-bottom: 1.8rem;
-            transition: transform 0.15s ease;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-        }
-
-        .card-title {
+        .calendar-header {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b1e3a;
+            justify-content: space-between;
             margin-bottom: 1.2rem;
-        }
-
-        .card-title i {
-            color: #2563eb;
-            font-size: 1.2rem;
-        }
-
-        /* ---------- SUBJECT GRID ---------- */
-        .subject-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            flex-wrap: wrap;
             gap: 0.8rem;
         }
 
-        .subject-card {
+        .calendar-header .cal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .calendar-header .cal-title i {
+            color: #2563eb;
+        }
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .calendar-nav .month-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e293b;
+            min-width: 120px;
+            text-align: center;
+        }
+        .calendar-nav button {
+            background: #f1f5f9;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #475569;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+        .calendar-nav button:hover {
+            background: #e2e8f0;
+            color: #0b1e3a;
+        }
+        .calendar-nav .today-btn {
+            background: #2563eb;
+            color: #fff;
+            border-radius: 60px;
+            padding: 0 1.2rem;
+            width: auto;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .calendar-nav .today-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .calendar-grid .day-name {
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #94a3b8;
+            padding: 0.3rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .calendar-grid .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
             background: #f8fafc;
-            border: 2px solid #eef2f6;
-            border-radius: 1.2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #1e293b;
+            position: relative;
+            border: 2px solid transparent;
+            min-height: 44px;
+            padding: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-grid .day-cell:hover {
+            border-color: #2563eb;
+            transform: scale(1.03);
+            z-index: 2;
+        }
+
+        .calendar-grid .day-cell.empty {
+            background: transparent;
+            cursor: default;
+        }
+        .calendar-grid .day-cell.empty:hover {
+            border-color: transparent;
+            transform: none;
+        }
+
+        .calendar-grid .day-cell .day-number {
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .calendar-grid .day-cell .indicators {
+            display: flex;
+            gap: 2px;
+            margin-top: 1px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .calendar-grid .day-cell .indicators .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .calendar-grid .day-cell .indicators .dot.present {
+            background: #22c55e;
+            box-shadow: 0 0 6px rgba(34, 197, 94, 0.30);
+        }
+        .calendar-grid .day-cell .indicators .dot.absent {
+            background: #ef4444;
+            box-shadow: 0 0 6px rgba(239, 68, 68, 0.30);
+        }
+        .calendar-grid .day-cell .indicators .dot.partial {
+            background: #f59e0b;
+            box-shadow: 0 0 6px rgba(245, 158, 11, 0.30);
+        }
+        .calendar-grid .day-cell .indicators .dot.homework {
+            background: #3b82f6;
+            width: 5px;
+            height: 5px;
+            border-radius: 2px;
+        }
+        .calendar-grid .day-cell .indicators .dot.test {
+            background: #8b5cf6;
+            width: 5px;
+            height: 5px;
+            border-radius: 2px;
+        }
+
+        .calendar-grid .day-cell.today {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .calendar-grid .day-cell.weekend {
+            color: #94a3b8;
+        }
+        .calendar-grid .day-cell.selected {
+            border-color: #2563eb;
+            background: #dbeafe;
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+        }
+
+        /* ---------- ROUTINE CARD ---------- */
+        .routine-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.8rem 1.6rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .routine-card .routine-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .routine-card .routine-title i {
+            color: #f59e0b;
+        }
+
+        .routine-card .routine-title .day-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-left: auto;
+            background: #f1f5f9;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+        }
+
+        .routine-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .routine-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 1rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #0b1e3a;
+        }
+
+        .routine-item .time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #94a3b8;
+            min-width: 60px;
+        }
+
+        .routine-item .subject-name {
+            flex: 1;
+        }
+
+        .routine-item .subject-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.7rem;
+        }
+
+        .routine-item .subject-icon.maths {
+            background: #3b82f6;
+        }
+        .routine-item .subject-icon.science {
+            background: #10b981;
+        }
+        .routine-item .subject-icon.sst {
+            background: #f59e0b;
+        }
+        .routine-item .subject-icon.english {
+            background: #8b5cf6;
+        }
+        .routine-item .subject-icon.hindi {
+            background: #ec4899;
+        }
+        .routine-item .subject-icon.cs {
+            background: #f97316;
+        }
+
+        .no-classes {
+            text-align: center;
+            color: #94a3b8;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .no-classes i {
+            font-size: 2rem;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- SUBJECT GRID ---------- */
+        .subject-grid-section {
+            margin-bottom: 2rem;
+        }
+
+        .subject-grid-section .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .subject-grid-section .section-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .subject-grid-section .section-header h3 i {
+            color: #2563eb;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.4rem;
             padding: 1.2rem 0.8rem;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
@@ -308,10 +635,9 @@
         }
 
         .subject-card:hover {
+            transform: translateY(-5px);
             border-color: #2563eb;
-            background: #eff6ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.10);
         }
 
         .subject-card:active {
@@ -325,7 +651,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 0.5rem;
+            margin: 0 auto 0.6rem;
             font-size: 1.3rem;
             color: #fff;
         }
@@ -345,6 +671,9 @@
         .subject-card .icon-wrap.hindi {
             background: linear-gradient(135deg, #ec4899, #db2777);
         }
+        .subject-card .icon-wrap.cs {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+        }
 
         .subject-card p {
             font-weight: 600;
@@ -359,279 +688,321 @@
             margin-top: 0.15rem;
         }
 
-        /* ---------- LIST ITEMS (notes, homework) ---------- */
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .item-row {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1rem;
-            background: #f8fafc;
-            border-radius: 1rem;
-            border: 1px solid #eef2f6;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s ease;
-            gap: 0.8rem;
-        }
-
-        .item-row:hover {
-            border-color: #2563eb;
-            background: #eff6ff;
-        }
-
-        .item-row .item-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .item-row .item-icon.blue {
-            background: #3b82f6;
-        }
-        .item-row .item-icon.orange {
-            background: #f59e0b;
-        }
-        .item-row .item-icon.purple {
-            background: #8b5cf6;
-        }
-        .item-row .item-icon.green {
-            background: #10b981;
-        }
-        .item-row .item-icon.red {
-            background: #ef4444;
-        }
-
-        .item-row .item-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .item-row .item-content h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #0b1e3a;
-            word-break: break-word;
-        }
-
-        .item-row .item-content p {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 0.05rem;
-        }
-
-        .item-row .item-badge {
-            font-size: 0.65rem;
-            font-weight: 600;
-            padding: 0.2rem 0.8rem;
-            border-radius: 60px;
+        .subject-card .badge-count {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
             background: #eef2ff;
             color: #2563eb;
-            flex-shrink: 0;
-            white-space: nowrap;
+            padding: 0.1rem 0.6rem;
+            border-radius: 60px;
+            margin-top: 0.3rem;
         }
 
-        .item-row .item-badge.urgent {
-            background: #fef2f2;
-            color: #b91c1c;
+        /* ---------- TEST SECTION ---------- */
+        .test-section {
+            margin-bottom: 2rem;
         }
 
-        .item-row .item-badge.done {
-            background: #ecfdf5;
-            color: #065f46;
-        }
-
-        /* ---------- PROGRESS BAR ---------- */
-        .progress-section {
-            margin-top: 0.5rem;
-        }
-
-        .progress-item {
+        .test-section .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 0.3rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .progress-track {
-            width: 100%;
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 0.2rem 0 0.6rem;
+        .test-section .section-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
-        .progress-track .bar {
-            height: 100%;
-            border-radius: 20px;
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            transition: width 0.8s ease;
+        .test-section .section-header h3 i {
+            color: #8b5cf6;
         }
 
-        /* ---------- QUOTE CARD ---------- */
-        .quote-card {
-            background: linear-gradient(135deg, #eef2ff, #f5f3ff);
-            border-radius: 1.5rem;
-            padding: 1.5rem 1.8rem;
-            border: 1px solid rgba(99, 102, 241, 0.08);
-            margin-bottom: 1.8rem;
+        .test-tabs {
+            display: flex;
+            gap: 0.4rem;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 60px;
         }
 
-        .quote-card i {
-            color: #6366f1;
-            font-size: 1.4rem;
-            opacity: 0.5;
-            margin-right: 0.4rem;
-        }
-
-        .quote-card p {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #1e293b;
-            font-style: italic;
-        }
-
-        .quote-card .author {
-            font-size: 0.8rem;
+        .test-tabs button {
+            padding: 0.3rem 1.2rem;
+            border: none;
+            border-radius: 60px;
             font-weight: 600;
-            color: #6366f1;
-            margin-top: 0.3rem;
-            font-style: normal;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            color: #64748b;
         }
 
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 992px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
+        .test-tabs button.active {
+            background: #fff;
+            color: #0b1e3a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
-        @media (max-width: 768px) {
-            .site-wrapper {
-                padding: 1rem;
-            }
-
-            .top-nav {
-                padding: 0.6rem 1.2rem;
-                border-radius: 1.5rem;
-                gap: 0.5rem;
-            }
-
-            .brand h1 {
-                font-size: 1rem;
-            }
-            .brand .tagline-small {
-                display: none;
-            }
-
-            .hero-banner {
-                padding: 1.8rem 1.5rem;
-                border-radius: 1.5rem;
-            }
-
-            .hero-banner h2 {
-                font-size: 1.4rem;
-            }
-            .hero-banner p {
-                font-size: 0.85rem;
-            }
-
-            .card {
-                padding: 1.4rem 1.2rem;
-                border-radius: 1.4rem;
-            }
-
-            .subject-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
-            }
-
-            .user-section .greeting {
-                font-size: 0.75rem;
-            }
-            .btn-logout span {
-                display: none;
-            }
-            .btn-logout i {
-                font-size: 1rem;
-            }
-            .btn-logout {
-                padding: 0.4rem 0.8rem;
-            }
+        .test-tabs button:hover:not(.active) {
+            color: #1e293b;
         }
 
-        @media (max-width: 480px) {
-            .subject-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
-            }
-
-            .subject-card {
-                padding: 0.8rem 0.4rem;
-            }
-            .subject-card .icon-wrap {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .subject-card p {
-                font-size: 0.75rem;
-            }
-
-            .item-row {
-                padding: 0.6rem 0.8rem;
-                flex-wrap: wrap;
-            }
-            .item-row .item-badge {
-                font-size: 0.6rem;
-                padding: 0.1rem 0.6rem;
-            }
-
-            .hero-banner h2 {
-                font-size: 1.2rem;
-            }
-            .hero-banner .class-badge {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.8rem;
-            }
+        .test-list-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.5rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            min-height: 120px;
         }
 
-        /* ---------- LOADING SHIMMER ---------- */
-        .loading-shimmer {
-            display: inline-block;
-            width: 80px;
-            height: 12px;
-            border-radius: 20px;
-            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
+        .test-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #eef2f6;
         }
 
-        @keyframes shimmer {
+        .test-item:last-child {
+            border-bottom: none;
+        }
+
+        .test-item .test-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .test-item .test-info .test-name {
+            font-weight: 600;
+            color: #0b1e3a;
+            font-size: 0.9rem;
+        }
+
+        .test-item .test-info .test-subject {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.1rem 0.6rem;
+            border-radius: 60px;
+            background: #eef2ff;
+            color: #2563eb;
+        }
+
+        .test-item .test-info .test-date {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .test-item .test-marks {
+            font-weight: 700;
+            color: #0b1e3a;
+            font-size: 0.9rem;
+        }
+
+        .test-item .test-marks .max {
+            font-weight: 400;
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        .test-item .status-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.15rem 0.7rem;
+            border-radius: 60px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .test-item .status-badge.upcoming {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .test-item .status-badge.past {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        .test-item .status-badge.today {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .no-tests {
+            text-align: center;
+            color: #94a3b8;
+            padding: 1.5rem 0;
+        }
+
+        .no-tests i {
+            font-size: 2rem;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- MODAL ---------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.40);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
             0% {
-                background-position: 200% 0;
+                opacity: 0;
             }
             100% {
-                background-position: -200% 0;
+                opacity: 1;
             }
         }
 
-        /* ---------- MESSAGE TOAST ---------- */
+        .modal-box {
+            background: #fff;
+            max-width: 560px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem 1.8rem 1.8rem;
+            border-radius: 1.8rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.20);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-box .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-box .modal-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .modal-box .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 0.2rem 0.5rem;
+        }
+
+        .modal-box .modal-header .close-btn:hover {
+            color: #1e293b;
+        }
+
+        .modal-box .modal-section {
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-box .modal-section .modal-section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-box .modal-section .modal-section-title i {
+            font-size: 0.8rem;
+        }
+
+        .modal-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.8rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 0.3rem;
+            border-left: 3px solid #2563eb;
+        }
+
+        .modal-item .item-info {
+            font-size: 0.85rem;
+        }
+
+        .modal-item .item-info .item-title {
+            font-weight: 600;
+            color: #0b1e3a;
+        }
+
+        .modal-item .item-info .item-sub {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-left: 0.3rem;
+        }
+
+        .modal-item .item-status {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.1rem 0.6rem;
+            border-radius: 60px;
+        }
+
+        .modal-item .item-status.done {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+        .modal-item .item-status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .modal-no-items {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            padding: 0.8rem 0;
+        }
+
+        /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -660,7 +1031,6 @@
         .toast i {
             font-size: 1.1rem;
         }
-
         .toast.success i {
             color: #4ade80;
         }
@@ -671,7 +1041,136 @@
             color: #60a5fa;
         }
 
-        @media (max-width: 480px) {
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 992px) {
+            .middle-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-wrapper {
+                padding: 1rem;
+            }
+
+            .top-nav {
+                padding: 0.6rem 1.2rem;
+                border-radius: 1.5rem;
+                gap: 0.5rem;
+            }
+
+            .brand h1 {
+                font-size: 1rem;
+            }
+            .brand .tagline-small {
+                display: none;
+            }
+
+            .hero-banner {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            .hero-banner h2 {
+                font-size: 1.3rem;
+            }
+            .hero-banner p {
+                font-size: 0.8rem;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.6rem;
+            }
+            .stat-card {
+                padding: 0.8rem 0.5rem;
+            }
+            .stat-card .stat-number {
+                font-size: 1.4rem;
+            }
+
+            .calendar-card,
+            .routine-card,
+            .test-list-container {
+                padding: 1.2rem 1rem;
+                border-radius: 1.4rem;
+            }
+
+            .calendar-grid .day-cell {
+                min-height: 36px;
+                font-size: 0.7rem;
+                border-radius: 8px;
+            }
+            .calendar-grid .day-cell .day-number {
+                font-size: 0.7rem;
+            }
+            .calendar-grid .day-cell .indicators .dot {
+                width: 5px;
+                height: 5px;
+            }
+            .calendar-grid .day-cell .indicators .dot.homework,
+            .calendar-grid .day-cell .indicators .dot.test {
+                width: 4px;
+                height: 4px;
+            }
+
+            .calendar-nav .month-label {
+                font-size: 0.8rem;
+                min-width: 90px;
+            }
+            .calendar-nav button {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+
+            .user-section .greeting {
+                font-size: 0.7rem;
+            }
+            .btn-logout span {
+                display: none;
+            }
+            .btn-logout i {
+                font-size: 1rem;
+            }
+            .btn-logout {
+                padding: 0.4rem 0.8rem;
+            }
+
+            .subject-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.6rem;
+            }
+            .subject-card {
+                padding: 0.8rem 0.4rem;
+            }
+            .subject-card .icon-wrap {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .subject-card p {
+                font-size: 0.75rem;
+            }
+
+            .test-tabs button {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.8rem;
+            }
+
+            .test-item {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            .test-item .test-info {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .modal-box {
+                padding: 1.5rem 1.2rem;
+            }
+
             .toast {
                 bottom: 1rem;
                 right: 1rem;
@@ -682,11 +1181,57 @@
                 padding: 0.7rem 1.2rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .subject-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .calendar-grid .day-cell {
+                min-height: 30px;
+                font-size: 0.6rem;
+                border-radius: 6px;
+            }
+            .calendar-grid .day-cell .day-number {
+                font-size: 0.6rem;
+            }
+            .calendar-grid .day-cell .indicators .dot {
+                width: 4px;
+                height: 4px;
+            }
+            .calendar-grid .day-cell .indicators .dot.homework,
+            .calendar-grid .day-cell .indicators .dot.test {
+                width: 3px;
+                height: 3px;
+            }
+
+            .calendar-nav .month-label {
+                font-size: 0.7rem;
+                min-width: 70px;
+            }
+            .calendar-nav .today-btn {
+                font-size: 0.6rem;
+                padding: 0 0.8rem;
+            }
+
+            .routine-item {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .routine-item .time {
+                font-size: 0.6rem;
+                min-width: 45px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ===== FLOATING BUBBLES (decorative) ===== -->
+    <!-- ===== FLOATING BUBBLES ===== -->
     <div class="floating-bubble" style="width:100px;height:100px;left:5%;background:rgba(99,102,241,0.08);animation-duration:30s;animation-delay:0s;"></div>
     <div class="floating-bubble" style="width:70px;height:70px;left:85%;background:rgba(139,92,246,0.10);animation-duration:35s;animation-delay:1.5s;"></div>
     <div class="floating-bubble" style="width:50px;height:50px;left:50%;background:rgba(13,148,136,0.08);animation-duration:25s;animation-delay:0.8s;"></div>
@@ -699,289 +1244,140 @@
         <!-- ===== TOP NAV ===== -->
         <nav class="top-nav">
             <a href="#" class="brand">
-                <div class="brand-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
+                <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
                 <div>
                     <h1>Knowledge <span>Nexus</span></h1>
                     <span class="tagline-small">From Confusion to Clarity</span>
                 </div>
             </a>
-
             <div class="user-section">
-                <span class="greeting">
-                    <i class="fas fa-hand-wave" style="color:#f59e0b;"></i>
-                    <span id="userNameDisplay">Student</span>
-                </span>
+                <span class="greeting"><i class="fas fa-hand-wave" style="color:#f59e0b;"></i> <span id="userNameDisplay">Student</span></span>
                 <div class="avatar" id="userAvatar">SN</div>
-                <button class="btn-logout" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </button>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
             </div>
         </nav>
 
         <!-- ===== HERO BANNER ===== -->
         <div class="hero-banner">
             <h2><i class="fas fa-rocket"></i> Class 9 Dashboard</h2>
-            <p id="welcomeMessage">Welcome back! Let's continue your journey from confusion to clarity.</p>
-            <div class="class-badge">
-                <i class="fas fa-book-open"></i> Class 9 · CBSE
+            <p id="welcomeMessage">Welcome! Here's your complete performance overview.</p>
+            <div class="class-badge"><i class="fas fa-book-open"></i> Class 9 · CBSE</div>
+        </div>
+
+        <!-- ===== STATS ROW ===== -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <span class="stat-icon green"><i class="fas fa-check-circle"></i></span>
+                <div class="stat-number" id="statPresentCount">0</div>
+                <div class="stat-label">Present</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon red"><i class="fas fa-times-circle"></i></span>
+                <div class="stat-number" id="statAbsentCount">0</div>
+                <div class="stat-label">Absent</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon yellow"><i class="fas fa-clock"></i></span>
+                <div class="stat-number" id="statPartialCount">0</div>
+                <div class="stat-label">Partial</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon blue"><i class="fas fa-book"></i></span>
+                <div class="stat-number" id="statHWCount">0</div>
+                <div class="stat-label">Homework</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon purple"><i class="fas fa-pencil-alt"></i></span>
+                <div class="stat-number" id="statTestCount">0</div>
+                <div class="stat-label">Tests</div>
             </div>
         </div>
 
-        <!-- ===== DASHBOARD GRID ===== -->
-        <div class="dashboard-grid">
+        <!-- ===== MIDDLE GRID: CALENDAR + ROUTINE ===== -->
+        <div class="middle-grid">
 
-            <!-- ===== LEFT COLUMN ===== -->
-            <div class="left-col">
-
-                <!-- ===== SUBJECTS ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-th-large"></i> Your Subjects
-                    </div>
-                    <div class="subject-grid">
-                        <a href="#" class="subject-card" onclick="showToast('📐 Maths resources coming soon!', 'info')">
-                            <div class="icon-wrap maths"><i class="fas fa-calculator"></i></div>
-                            <p>Mathematics</p>
-                            <span class="sub-text">Algebra · Geometry</span>
-                        </a>
-                        <a href="#" class="subject-card" onclick="showToast('🧪 Science resources coming soon!', 'info')">
-                            <div class="icon-wrap science"><i class="fas fa-flask"></i></div>
-                            <p>Science</p>
-                            <span class="sub-text">Physics · Chem · Bio</span>
-                        </a>
-                        <a href="#" class="subject-card" onclick="showToast('🏛️ Social Studies coming soon!', 'info')">
-                            <div class="icon-wrap sst"><i class="fas fa-landmark"></i></div>
-                            <p>Social Studies</p>
-                            <span class="sub-text">History · Geo · Civics</span>
-                        </a>
-                        <a href="#" class="subject-card" onclick="showToast('📝 English resources coming soon!', 'info')">
-                            <div class="icon-wrap english"><i class="fas fa-pen-nib"></i></div>
-                            <p>English</p>
-                            <span class="sub-text">Grammar · Literature</span>
-                        </a>
-                        <a href="#" class="subject-card" onclick="showToast('📖 Hindi resources coming soon!', 'info')">
-                            <div class="icon-wrap hindi"><i class="fas fa-font"></i></div>
-                            <p>Hindi</p>
-                            <span class="sub-text">Grammar · Writing</span>
-                        </a>
-                        <a href="#" class="subject-card" onclick="showToast('💻 Computer Science coming soon!', 'info')">
-                            <div class="icon-wrap" style="background:linear-gradient(135deg,#f97316,#ea580c);"><i class="fas fa-laptop-code"></i></div>
-                            <p>Computer Science</p>
-                            <span class="sub-text">Programming · IT</span>
-                        </a>
+            <!-- ===== CALENDAR ===== -->
+            <div class="calendar-card">
+                <div class="calendar-header">
+                    <div class="cal-title"><i class="fas fa-calendar-alt"></i> Calendar</div>
+                    <div class="calendar-nav">
+                        <button id="calPrev"><i class="fas fa-chevron-left"></i></button>
+                        <span class="month-label" id="monthLabel">January 2026</span>
+                        <button id="calNext"><i class="fas fa-chevron-right"></i></button>
+                        <button class="today-btn" id="todayBtn">Today</button>
                     </div>
                 </div>
-
-                <!-- ===== RECENT NOTES ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-folder-open" style="color:#3b82f6;"></i> Recent Notes & PDFs
-                    </div>
-                    <div class="item-list">
-                        <a href="#" class="item-row">
-                            <div class="item-icon blue"><i class="fas fa-file-pdf"></i></div>
-                            <div class="item-content">
-                                <h4>Ch. 6 — Lines & Angles</h4>
-                                <p>Mathematics · 2 pages</p>
-                            </div>
-                            <span class="item-badge">New</span>
-                        </a>
-                        <a href="#" class="item-row">
-                            <div class="item-icon green"><i class="fas fa-file-pdf"></i></div>
-                            <div class="item-content">
-                                <h4>Ch. 6 — Tissues</h4>
-                                <p>Science (Biology) · 4 pages</p>
-                            </div>
-                            <span class="item-badge">Updated</span>
-                        </a>
-                        <a href="#" class="item-row">
-                            <div class="item-icon purple"><i class="fas fa-file-alt"></i></div>
-                            <div class="item-content">
-                                <h4>The Fun They Had — Summary</h4>
-                                <p>English · 2 pages</p>
-                            </div>
-                            <span class="item-badge">New</span>
-                        </a>
-                        <a href="#" class="item-row">
-                            <div class="item-icon orange"><i class="fas fa-file-pdf"></i></div>
-                            <div class="item-content">
-                                <h4>French Revolution — Timeline</h4>
-                                <p>Social Studies · 3 pages</p>
-                            </div>
-                            <span class="item-badge">Saved</span>
-                        </a>
-                    </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-stats" id="calendarStats" style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:1rem; padding-top:0.8rem; border-top:1px solid #eef2f6;">
+                    <span class="stat-item"><span class="dot green"></span> Present: <strong id="statPresent">0</strong></span>
+                    <span class="stat-item"><span class="dot red"></span> Absent: <strong id="statAbsent">0</strong></span>
+                    <span class="stat-item"><span class="dot yellow"></span> Partial: <strong id="statPartial">0</strong></span>
+                    <span class="stat-item"><span class="dot gray"></span> No Data: <strong id="statNoData">0</strong></span>
+                    <span class="stat-item"><span class="dot blue"></span> HW: <strong id="statHW">0</strong></span>
+                    <span class="stat-item"><span class="dot purple"></span> Tests: <strong id="statTests">0</strong></span>
                 </div>
-
-                <!-- ===== PROGRESS ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-chart-simple" style="color:#10b981;"></i> Progress Overview
-                    </div>
-                    <div class="progress-section">
-                        <div class="progress-item">
-                            <span>Mathematics</span>
-                            <span>72%</span>
-                        </div>
-                        <div class="progress-track"><div class="bar" style="width:72%;"></div></div>
-
-                        <div class="progress-item">
-                            <span>Science</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="progress-track"><div class="bar" style="width:65%;"></div></div>
-
-                        <div class="progress-item">
-                            <span>Social Studies</span>
-                            <span>58%</span>
-                        </div>
-                        <div class="progress-track"><div class="bar" style="width:58%;"></div></div>
-
-                        <div class="progress-item">
-                            <span>English</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="progress-track"><div class="bar" style="width:80%;"></div></div>
-
-                        <div class="progress-item" style="margin-top:0.6rem; font-weight:700; color:#0b1e3a;">
-                            <span>Overall Progress</span>
-                            <span>68%</span>
-                        </div>
-                        <div class="progress-track"><div class="bar" style="width:68%; background:linear-gradient(90deg,#6366f1,#8b5cf6);"></div></div>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- ===== RIGHT COLUMN ===== -->
-            <div class="right-col">
-
-                <!-- ===== QUOTE ===== -->
-                <div class="quote-card">
-                    <p>
-                        <i class="fas fa-quote-left"></i>
-                        The beautiful thing about learning is that nobody can take it away from you.
-                    </p>
-                    <div class="author">— B.B. King</div>
+            <!-- ===== TODAY'S ROUTINE ===== -->
+            <div class="routine-card">
+                <div class="routine-title">
+                    <i class="fas fa-clock"></i> Today's Routine
+                    <span class="day-badge" id="todayDayBadge">Monday</span>
                 </div>
-
-                <!-- ===== HOMEWORK / ASSIGNMENTS ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-clipboard-list" style="color:#f59e0b;"></i> Homework & Assignments
-                    </div>
-                    <div class="item-list">
-                        <div class="item-row">
-                            <div class="item-icon orange"><i class="fas fa-tasks"></i></div>
-                            <div class="item-content">
-                                <h4>Maths — Exercise 8.2</h4>
-                                <p>Due: Tomorrow, 10:00 AM</p>
-                            </div>
-                            <span class="item-badge urgent">Urgent</span>
-                        </div>
-                        <div class="item-row">
-                            <div class="item-icon purple"><i class="fas fa-pen"></i></div>
-                            <div class="item-content">
-                                <h4>English — Essay: My Favourite Book</h4>
-                                <p>Due: Friday, 5:00 PM</p>
-                            </div>
-                            <span class="item-badge">Pending</span>
-                        </div>
-                        <div class="item-row">
-                            <div class="item-icon green"><i class="fas fa-flask"></i></div>
-                            <div class="item-content">
-                                <h4>Science — Lab Report: Osmosis</h4>
-                                <p>Due: Monday, 9:00 AM</p>
-                            </div>
-                            <span class="item-badge">Submitted</span>
-                        </div>
-                        <div class="item-row">
-                            <div class="item-icon red"><i class="fas fa-map"></i></div>
-                            <div class="item-content">
-                                <h4>SST — Map: Rivers of India</h4>
-                                <p>Due: Next Wednesday</p>
-                            </div>
-                            <span class="item-badge">Pending</span>
-                        </div>
-                    </div>
+                <div class="routine-list" id="routineList">
+                    <!-- Rendered by JS -->
                 </div>
-
-                <!-- ===== UPCOMING TESTS ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-calendar-check" style="color:#8b5cf6;"></i> Upcoming Tests
-                    </div>
-                    <div class="item-list">
-                        <div class="item-row">
-                            <div class="item-icon blue"><i class="fas fa-clock"></i></div>
-                            <div class="item-content">
-                                <h4>Maths — Weekly Test</h4>
-                                <p>Friday, 10:00 AM · Ch. 5–6</p>
-                            </div>
-                            <span class="item-badge">3 days</span>
-                        </div>
-                        <div class="item-row">
-                            <div class="item-icon green"><i class="fas fa-clock"></i></div>
-                            <div class="item-content">
-                                <h4>Science — Periodic Test</h4>
-                                <p>Tuesday, 11:30 AM · Ch. 4–6</p>
-                            </div>
-                            <span class="item-badge">5 days</span>
-                        </div>
-                        <div class="item-row">
-                            <div class="item-icon orange"><i class="fas fa-clock"></i></div>
-                            <div class="item-content">
-                                <h4>English — Grammar Test</h4>
-                                <p>Next Thursday, 9:00 AM</p>
-                            </div>
-                            <span class="item-badge">7 days</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ===== QUICK LINKS ===== -->
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-link" style="color:#6366f1;"></i> Quick Links
-                    </div>
-                    <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-                        <a href="#" class="item-row" style="flex:1; min-width:120px; justify-content:center; text-align:center; padding:0.6rem 0.8rem; background:#eef2ff; border-color:#dbeafe;">
-                            <i class="fas fa-download" style="color:#2563eb;"></i>
-                            <span style="font-weight:600; font-size:0.8rem;">Study Material</span>
-                        </a>
-                        <a href="#" class="item-row" style="flex:1; min-width:120px; justify-content:center; text-align:center; padding:0.6rem 0.8rem; background:#ecfdf5; border-color:#a7f3d0;">
-                            <i class="fas fa-video" style="color:#059669;"></i>
-                            <span style="font-weight:600; font-size:0.8rem;">Video Lectures</span>
-                        </a>
-                        <a href="#" class="item-row" style="flex:1; min-width:120px; justify-content:center; text-align:center; padding:0.6rem 0.8rem; background:#fef3c7; border-color:#fcd34d;">
-                            <i class="fas fa-question-circle" style="color:#d97706;"></i>
-                            <span style="font-weight:600; font-size:0.8rem;">Doubt Support</span>
-                        </a>
-                        <a href="#" class="item-row" style="flex:1; min-width:120px; justify-content:center; text-align:center; padding:0.6rem 0.8rem; background:#fce7f3; border-color:#f9a8d4;">
-                            <i class="fas fa-trophy" style="color:#db2777;"></i>
-                            <span style="font-weight:600; font-size:0.8rem;">PYQs</span>
-                        </a>
-                    </div>
-                </div>
-
             </div>
 
+        </div>
+
+        <!-- ===== SUBJECT GRID ===== -->
+        <div class="subject-grid-section">
+            <div class="section-header">
+                <h3><i class="fas fa-th-large"></i> Your Subjects</h3>
+                <span style="font-size:0.75rem; color:#94a3b8;">Click a subject to view notes & tests</span>
+            </div>
+            <div class="subject-grid" id="subjectGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+
+        <!-- ===== TEST SECTION ===== -->
+        <div class="test-section">
+            <div class="section-header">
+                <h3><i class="fas fa-pencil-alt"></i> Tests</h3>
+                <div class="test-tabs">
+                    <button class="active" data-tab="upcoming">Upcoming</button>
+                    <button data-tab="previous">Previous</button>
+                </div>
+            </div>
+            <div class="test-list-container" id="testListContainer">
+                <!-- Rendered by JS -->
+            </div>
         </div>
 
         <!-- ===== FOOTER ===== -->
         <footer style="text-align:center; padding:2rem 0 0.5rem; font-size:0.8rem; color:#94a3b8; border-top:1px solid rgba(0,0,0,0.04); margin-top:1.5rem;">
             &copy; 2026 <strong style="color:#1e293b;">Knowledge Nexus Academy</strong> · From Confusion to Clarity
-            <span style="display:inline-block; margin-left:0.8rem;">
-                <i class="fas fa-graduation-cap" style="color:#6366f1;"></i>
-            </span>
+            <span style="display:inline-block; margin-left:0.8rem;"><i class="fas fa-graduation-cap" style="color:#6366f1;"></i></span>
         </footer>
 
     </div>
 
-    <!-- ===== TOAST NOTIFICATION ===== -->
+    <!-- ===== MODAL ===== -->
+    <div class="modal-overlay" id="subjectModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalSubjectTitle"><i class="fas fa-book"></i> Subject Name</h3>
+                <button class="close-btn" id="modalCloseBtn">&times;</button>
+            </div>
+            <div id="modalContent">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast">
         <i class="fas fa-circle-info"></i>
         <span id="toastMessage">Message</span>
@@ -1019,8 +1415,121 @@
             const welcomeMessage = document.getElementById('welcomeMessage');
             const logoutBtn = document.getElementById('logoutBtn');
 
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthLabel = document.getElementById('monthLabel');
+            const calPrev = document.getElementById('calPrev');
+            const calNext = document.getElementById('calNext');
+            const todayBtn = document.getElementById('todayBtn');
+
+            const statPresent = document.getElementById('statPresent');
+            const statAbsent = document.getElementById('statAbsent');
+            const statPartial = document.getElementById('statPartial');
+            const statNoData = document.getElementById('statNoData');
+            const statHW = document.getElementById('statHW');
+            const statTests = document.getElementById('statTests');
+
+            const statPresentCount = document.getElementById('statPresentCount');
+            const statAbsentCount = document.getElementById('statAbsentCount');
+            const statPartialCount = document.getElementById('statPartialCount');
+            const statHWCount = document.getElementById('statHWCount');
+            const statTestCount = document.getElementById('statTestCount');
+
+            const routineList = document.getElementById('routineList');
+            const todayDayBadge = document.getElementById('todayDayBadge');
+
+            const subjectGrid = document.getElementById('subjectGrid');
+            const testListContainer = document.getElementById('testListContainer');
+
+            const modalOverlay = document.getElementById('subjectModal');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            const modalSubjectTitle = document.getElementById('modalSubjectTitle');
+            const modalContent = document.getElementById('modalContent');
+
             // --------------------------------------------------------------
-            // 3. TOAST SYSTEM
+            // 3. STATE
+            // --------------------------------------------------------------
+            let currentUserId = null;
+            let currentDate = new Date();
+            let currentYear = currentDate.getFullYear();
+            let currentMonth = currentDate.getMonth();
+            let selectedDateKey = null;
+            let attendanceData = {};
+            let homeworkData = {};
+            let testData = {};
+            let currentTestTab = 'upcoming';
+
+            // --------------------------------------------------------------
+            // 4. ROUTINE DATA
+            // --------------------------------------------------------------
+            const routine = {
+                'Monday': [
+                    { time: '08:00 - 08:45', subject: 'Mathematics', icon: 'maths' },
+                    { time: '08:45 - 09:30', subject: 'Science', icon: 'science' },
+                    { time: '09:30 - 10:15', subject: 'English', icon: 'english' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'Hindi', icon: 'hindi' },
+                    { time: '11:15 - 12:00', subject: 'Social Studies', icon: 'sst' }
+                ],
+                'Tuesday': [
+                    { time: '08:00 - 08:45', subject: 'Science', icon: 'science' },
+                    { time: '08:45 - 09:30', subject: 'Mathematics', icon: 'maths' },
+                    { time: '09:30 - 10:15', subject: 'Hindi', icon: 'hindi' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'English', icon: 'english' },
+                    { time: '11:15 - 12:00', subject: 'Computer Science', icon: 'cs' }
+                ],
+                'Wednesday': [
+                    { time: '08:00 - 08:45', subject: 'English', icon: 'english' },
+                    { time: '08:45 - 09:30', subject: 'Social Studies', icon: 'sst' },
+                    { time: '09:30 - 10:15', subject: 'Mathematics', icon: 'maths' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'Science', icon: 'science' },
+                    { time: '11:15 - 12:00', subject: 'Hindi', icon: 'hindi' }
+                ],
+                'Thursday': [
+                    { time: '08:00 - 08:45', subject: 'Hindi', icon: 'hindi' },
+                    { time: '08:45 - 09:30', subject: 'Mathematics', icon: 'maths' },
+                    { time: '09:30 - 10:15', subject: 'Science', icon: 'science' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'Social Studies', icon: 'sst' },
+                    { time: '11:15 - 12:00', subject: 'English', icon: 'english' }
+                ],
+                'Friday': [
+                    { time: '08:00 - 08:45', subject: 'Social Studies', icon: 'sst' },
+                    { time: '08:45 - 09:30', subject: 'English', icon: 'english' },
+                    { time: '09:30 - 10:15', subject: 'Computer Science', icon: 'cs' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'Mathematics', icon: 'maths' },
+                    { time: '11:15 - 12:00', subject: 'Science', icon: 'science' }
+                ],
+                'Saturday': [
+                    { time: '08:00 - 08:45', subject: 'Mathematics', icon: 'maths' },
+                    { time: '08:45 - 09:30', subject: 'Science', icon: 'science' },
+                    { time: '09:30 - 10:15', subject: 'English', icon: 'english' },
+                    { time: '10:15 - 10:30', subject: 'Break', icon: 'break' },
+                    { time: '10:30 - 11:15', subject: 'Doubt Session', icon: 'doubt' },
+                    { time: '11:15 - 12:00', subject: 'Weekly Test', icon: 'test' }
+                ],
+                'Sunday': [
+                    { time: '-- : --', subject: 'Holiday', icon: 'holiday' }
+                ]
+            };
+
+            const subjectIcons = {
+                'Mathematics': 'maths',
+                'Science': 'science',
+                'Social Studies': 'sst',
+                'English': 'english',
+                'Hindi': 'hindi',
+                'Computer Science': 'cs',
+                'Break': 'break',
+                'Doubt Session': 'doubt',
+                'Weekly Test': 'test',
+                'Holiday': 'holiday'
+            };
+
+            // --------------------------------------------------------------
+            // 5. TOAST SYSTEM
             // --------------------------------------------------------------
             let toastTimeout = null;
 
@@ -1045,31 +1554,571 @@
             };
 
             // --------------------------------------------------------------
-            // 4. AUTH STATE
+            // 6. HELPERS
+            // --------------------------------------------------------------
+            function formatDateKey(year, month, day) {
+                return year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+            }
+
+            function parseDateKey(dateKey) {
+                const p = dateKey.split('-').map(Number);
+                return { year: p[0], month: p[1] - 1, day: p[2] };
+            }
+
+            function getDaysInMonth(year, month) {
+                return new Date(year, month + 1, 0).getDate();
+            }
+
+            function getFirstDayOfMonth(year, month) {
+                return new Date(year, month, 1).getDay();
+            }
+
+            function isToday(year, month, day) {
+                const t = new Date();
+                return t.getFullYear() === year && t.getMonth() === month && t.getDate() === day;
+            }
+
+            function isWeekend(dayIndex) {
+                return dayIndex === 0 || dayIndex === 6;
+            }
+
+            function getMonthName(month) {
+                return ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ][month];
+            }
+
+            function getTodayKey() {
+                const d = new Date();
+                return formatDateKey(d.getFullYear(), d.getMonth(), d.getDate());
+            }
+
+            function getDayName(date) {
+                return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()];
+            }
+
+            function getSubjectIcon(subject) {
+                const map = {
+                    'Mathematics': 'maths',
+                    'Science': 'science',
+                    'Social Studies': 'sst',
+                    'English': 'english',
+                    'Hindi': 'hindi',
+                    'Computer Science': 'cs',
+                    'Break': 'break',
+                    'Doubt Session': 'doubt',
+                    'Weekly Test': 'test',
+                    'Holiday': 'holiday'
+                };
+                return map[subject] || 'default';
+            }
+
+            function getSubjectColor(subject) {
+                const map = {
+                    'Mathematics': '#3b82f6',
+                    'Science': '#10b981',
+                    'Social Studies': '#f59e0b',
+                    'English': '#8b5cf6',
+                    'Hindi': '#ec4899',
+                    'Computer Science': '#f97316',
+                    'Break': '#94a3b8',
+                    'Doubt Session': '#6366f1',
+                    'Weekly Test': '#ef4444',
+                    'Holiday': '#22c55e'
+                };
+                return map[subject] || '#64748b';
+            }
+
+            // --------------------------------------------------------------
+            // 7. RENDER TODAY'S ROUTINE
+            // --------------------------------------------------------------
+            function renderRoutine() {
+                const today = new Date();
+                const dayName = getDayName(today);
+                todayDayBadge.textContent = dayName;
+
+                const classes = routine[dayName] || [];
+
+                if (classes.length === 0 || (classes.length === 1 && classes[0].subject === 'Holiday')) {
+                    routineList.innerHTML = `
+                            <div class="no-classes">
+                                <i class="fas fa-umbrella-beach"></i>
+                                No classes today! Enjoy your holiday.
+                            </div>
+                        `;
+                    return;
+                }
+
+                let html = '';
+                classes.forEach(cls => {
+                    const iconClass = getSubjectIcon(cls.subject);
+                    const color = getSubjectColor(cls.subject);
+                    const isBreak = cls.subject === 'Break';
+                    const isHoliday = cls.subject === 'Holiday';
+
+                    html += `
+                            <div class="routine-item" style="${isBreak ? 'opacity:0.6; border-left-color: #94a3b8;' : ''} ${isHoliday ? 'opacity:0.5; border-left-color: #22c55e;' : ''}">
+                                <span class="time">${cls.time}</span>
+                                ${!isBreak && !isHoliday ? `<div class="subject-icon ${iconClass}"><i class="fas ${getSubjectIconClass(cls.subject)}"></i></div>` : ''}
+                                <span class="subject-name">${cls.subject}</span>
+                            </div>
+                        `;
+                });
+
+                routineList.innerHTML = html;
+            }
+
+            function getSubjectIconClass(subject) {
+                const map = {
+                    'Mathematics': 'fa-calculator',
+                    'Science': 'fa-flask',
+                    'Social Studies': 'fa-landmark',
+                    'English': 'fa-pen-nib',
+                    'Hindi': 'fa-font',
+                    'Computer Science': 'fa-laptop-code',
+                    'Break': 'fa-coffee',
+                    'Doubt Session': 'fa-question-circle',
+                    'Weekly Test': 'fa-pencil-alt',
+                    'Holiday': 'fa-umbrella-beach'
+                };
+                return map[subject] || 'fa-book';
+            }
+
+            // --------------------------------------------------------------
+            // 8. RENDER CALENDAR
+            // --------------------------------------------------------------
+            function renderCalendar() {
+                const year = currentYear,
+                    month = currentMonth;
+                const daysInMonth = getDaysInMonth(year, month);
+                const firstDay = getFirstDayOfMonth(year, month);
+                monthLabel.textContent = getMonthName(month) + ' ' + year;
+
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                let html = '';
+                dayNames.forEach(name => html += `<div class="day-name">${name}</div>`);
+
+                for (let i = 0; i < firstDay; i++) {
+                    html += `<div class="day-cell empty"></div>`;
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateKey = formatDateKey(year, month, day);
+                    const isTodayDate = isToday(year, month, day);
+                    const dayOfWeek = new Date(year, month, day).getDay();
+                    const isWeekendDay = isWeekend(dayOfWeek);
+                    const isSelected = dateKey === selectedDateKey;
+
+                    const status = attendanceData[dateKey] || null;
+                    const hwCount = (homeworkData[dateKey] || []).length;
+                    const testCount = (testData[dateKey] || []).length;
+
+                    let dotHtml = '';
+                    if (status === 'present') dotHtml += `<span class="dot present"></span>`;
+                    else if (status === 'absent') dotHtml += `<span class="dot absent"></span>`;
+                    else if (status === 'partial') dotHtml += `<span class="dot partial"></span>`;
+
+                    if (hwCount > 0) dotHtml += `<span class="dot homework"></span>`;
+                    if (testCount > 0) dotHtml += `<span class="dot test"></span>`;
+
+                    let extraClass = '';
+                    if (isTodayDate) extraClass += ' today';
+                    if (isWeekendDay) extraClass += ' weekend';
+                    if (isSelected) extraClass += ' selected';
+
+                    html += `
+                            <div class="day-cell${extraClass}" data-date="${dateKey}" data-day="${day}">
+                                <span class="day-number">${day}</span>
+                                ${dotHtml ? `<div class="indicators">${dotHtml}</div>` : ''}
+                            </div>
+                        `;
+                }
+
+                calendarGrid.innerHTML = html;
+                updateStats();
+
+                document.querySelectorAll('.day-cell:not(.empty)').forEach(cell => {
+                    cell.addEventListener('click', function() {
+                        const dateKey = this.dataset.date;
+                        selectDate(dateKey);
+                    });
+                });
+
+                // Auto-select today if in view, else first day
+                if (selectedDateKey) {
+                    const [y, m] = selectedDateKey.split('-').map(Number);
+                    if (y === currentYear && m === currentMonth + 1) {
+                        // keep selected
+                    } else {
+                        selectedDateKey = null;
+                    }
+                }
+
+                if (!selectedDateKey) {
+                    const todayKey = getTodayKey();
+                    const [ty, tm] = todayKey.split('-').map(Number);
+                    if (ty === currentYear && tm === currentMonth + 1) {
+                        selectDate(todayKey);
+                    } else {
+                        const firstKey = formatDateKey(currentYear, currentMonth, 1);
+                        selectDate(firstKey);
+                    }
+                }
+            }
+
+            // --------------------------------------------------------------
+            // 9. UPDATE STATS
+            // --------------------------------------------------------------
+            function updateStats() {
+                const year = currentYear,
+                    month = currentMonth;
+                const daysInMonth = getDaysInMonth(year, month);
+
+                let present = 0,
+                    absent = 0,
+                    partial = 0,
+                    noData = 0,
+                    hwTotal = 0,
+                    testTotal = 0;
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateKey = formatDateKey(year, month, day);
+                    const status = attendanceData[dateKey] || null;
+
+                    if (status === 'present') present++;
+                    else if (status === 'absent') absent++;
+                    else if (status === 'partial') partial++;
+                    else noData++;
+
+                    hwTotal += (homeworkData[dateKey] || []).length;
+                    testTotal += (testData[dateKey] || []).length;
+                }
+
+                statPresent.textContent = present;
+                statAbsent.textContent = absent;
+                statPartial.textContent = partial;
+                statNoData.textContent = noData;
+                statHW.textContent = hwTotal;
+                statTests.textContent = testTotal;
+
+                // Overall stats
+                statPresentCount.textContent = present;
+                statAbsentCount.textContent = absent;
+                statPartialCount.textContent = partial;
+                statHWCount.textContent = hwTotal;
+                statTestCount.textContent = testTotal;
+            }
+
+            // --------------------------------------------------------------
+            // 10. SELECT DATE
+            // --------------------------------------------------------------
+            function selectDate(dateKey) {
+                selectedDateKey = dateKey;
+                renderCalendar();
+                // Update the details panel with the selected date's data
+                renderDayDetails(dateKey);
+            }
+
+            // --------------------------------------------------------------
+            // 11. RENDER DAY DETAILS (in the calendar stats area)
+            // --------------------------------------------------------------
+            function renderDayDetails(dateKey) {
+                // We already show dots on the calendar. We can show additional details
+                // in a tooltip or a small panel. For now, we just update the calendar.
+                // The details are visible via the indicators.
+            }
+
+            // --------------------------------------------------------------
+            // 12. RENDER SUBJECT GRID
+            // --------------------------------------------------------------
+            const subjects = [
+                { name: 'Mathematics', icon: 'maths', id: 'maths' },
+                { name: 'Science', icon: 'science', id: 'science' },
+                { name: 'Social Studies', icon: 'sst', id: 'sst' },
+                { name: 'English', icon: 'english', id: 'english' },
+                { name: 'Hindi', icon: 'hindi', id: 'hindi' },
+                { name: 'Computer Science', icon: 'cs', id: 'cs' }
+            ];
+
+            function renderSubjectGrid() {
+                let html = '';
+                subjects.forEach(sub => {
+                    // Count homework and tests for this subject
+                    let hwCount = 0,
+                        testCount = 0;
+                    Object.values(homeworkData).forEach(hwList => {
+                        hwList.forEach(hw => {
+                            if (hw.subject === sub.name) hwCount++;
+                        });
+                    });
+                    Object.values(testData).forEach(testList => {
+                        testList.forEach(test => {
+                            if (test.subject === sub.name) testCount++;
+                        });
+                    });
+
+                    const total = hwCount + testCount;
+
+                    html += `
+                            <div class="subject-card" data-subject="${sub.name}" onclick="openSubjectModal('${sub.name}')">
+                                <div class="icon-wrap ${sub.icon}"><i class="fas ${getSubjectIconClass(sub.name)}"></i></div>
+                                <p>${sub.name}</p>
+                                <span class="sub-text">${hwCount} notes · ${testCount} tests</span>
+                                ${total > 0 ? `<span class="badge-count">${total} items</span>` : ''}
+                            </div>
+                        `;
+                });
+                subjectGrid.innerHTML = html;
+            }
+
+            // --------------------------------------------------------------
+            // 13. SUBJECT MODAL
+            // --------------------------------------------------------------
+            window.openSubjectModal = function(subjectName) {
+                modalSubjectTitle.innerHTML = `<i class="fas ${getSubjectIconClass(subjectName)}" style="color:${getSubjectColor(subjectName)};"></i> ${subjectName}`;
+
+                // Filter homework for this subject
+                let hwItems = [];
+                Object.values(homeworkData).forEach(hwList => {
+                    hwList.forEach(hw => {
+                        if (hw.subject === subjectName) {
+                            hwItems.push(hw);
+                        }
+                    });
+                });
+
+                // Filter tests for this subject
+                let testItems = [];
+                Object.values(testData).forEach(testList => {
+                    testList.forEach(test => {
+                        if (test.subject === subjectName) {
+                            testItems.push(test);
+                        }
+                    });
+                });
+
+                let html = '';
+
+                // Notes/Homework section
+                html += `
+                        <div class="modal-section">
+                            <div class="modal-section-title"><i class="fas fa-book"></i> Notes & Homework (${hwItems.length})</div>
+                            ${hwItems.length === 0 ? '<div class="modal-no-items">No notes or homework for this subject.</div>' : ''}
+                            ${hwItems.map(hw => `
+                                <div class="modal-item">
+                                    <div class="item-info">
+                                        <span class="item-title">${hw.title}</span>
+                                        <span class="item-sub">· ${hw.done ? '✅ Completed' : '⏳ Pending'}</span>
+                                    </div>
+                                    <span class="item-status ${hw.done ? 'done' : 'pending'}">${hw.done ? 'Done' : 'Pending'}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                // Tests section
+                html += `
+                        <div class="modal-section">
+                            <div class="modal-section-title"><i class="fas fa-pencil-alt"></i> Tests (${testItems.length})</div>
+                            ${testItems.length === 0 ? '<div class="modal-no-items">No tests for this subject.</div>' : ''}
+                            ${testItems.map(test => `
+                                <div class="modal-item">
+                                    <div class="item-info">
+                                        <span class="item-title">${test.name}</span>
+                                        <span class="item-sub">· ${test.marks} / ${test.maxMarks}</span>
+                                    </div>
+                                    <span style="font-size:0.7rem; color:#94a3b8;">${test.testDate || 'No date'}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                modalContent.innerHTML = html;
+                modalOverlay.classList.add('open');
+            };
+
+            // Modal close
+            modalCloseBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('open');
+            });
+
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    modalOverlay.classList.remove('open');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    modalOverlay.classList.remove('open');
+                }
+            });
+
+            // --------------------------------------------------------------
+            // 14. RENDER TESTS (Upcoming / Previous)
+            // --------------------------------------------------------------
+            function renderTests(tab = 'upcoming') {
+                currentTestTab = tab;
+
+                // Get all tests as a flat array with their date info
+                let allTests = [];
+                Object.entries(testData).forEach(([dateKey, tests]) => {
+                    tests.forEach(test => {
+                        // If test has a testDate, use it; otherwise use the recorded date
+                        const testDate = test.testDate || dateKey;
+                        allTests.push({
+                            ...test,
+                            recordedDate: dateKey,
+                            testDate: testDate
+                        });
+                    });
+                });
+
+                const today = new Date();
+                const todayStr = formatDateKey(today.getFullYear(), today.getMonth(), today.getDate());
+
+                // Sort by testDate
+                allTests.sort((a, b) => a.testDate.localeCompare(b.testDate));
+
+                let filteredTests = [];
+                if (tab === 'upcoming') {
+                    filteredTests = allTests.filter(t => t.testDate >= todayStr);
+                } else {
+                    filteredTests = allTests.filter(t => t.testDate < todayStr);
+                }
+
+                if (filteredTests.length === 0) {
+                    testListContainer.innerHTML = `
+                            <div class="no-tests">
+                                <i class="fas fa-calendar-check"></i>
+                                No ${tab} tests found.
+                            </div>
+                        `;
+                    return;
+                }
+
+                let html = '';
+                filteredTests.forEach(test => {
+                    const isTodayTest = test.testDate === todayStr;
+                    const status = isTodayTest ? 'today' : (tab === 'upcoming' ? 'upcoming' : 'past');
+                    const statusLabels = {
+                        'today': 'Today',
+                        'upcoming': 'Upcoming',
+                        'past': 'Past'
+                    };
+
+                    html += `
+                            <div class="test-item">
+                                <div class="test-info">
+                                    <span class="test-name">${test.name}</span>
+                                    <span class="test-subject">${test.subject}</span>
+                                    <span class="test-date"><i class="far fa-calendar-alt"></i> ${test.testDate}</span>
+                                </div>
+                                <div>
+                                    <span class="test-marks">${test.marks} <span class="max">/ ${test.maxMarks}</span></span>
+                                    <span class="status-badge ${status}">${statusLabels[status]}</span>
+                                </div>
+                            </div>
+                        `;
+                });
+
+                testListContainer.innerHTML = html;
+            }
+
+            // Test tab switching
+            document.querySelectorAll('.test-tabs button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.test-tabs button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderTests(this.dataset.tab);
+                });
+            });
+
+            // --------------------------------------------------------------
+            // 15. LOAD DATA FROM FIRESTORE
+            // --------------------------------------------------------------
+            function loadAttendance() {
+                if (!currentUserId) return Promise.resolve();
+                return db.collection('users').doc(currentUserId).collection('attendance').get()
+                    .then(snapshot => {
+                        attendanceData = {};
+                        snapshot.forEach(doc => {
+                            attendanceData[doc.id] = doc.data().status;
+                        });
+                        renderCalendar();
+                        updateStats();
+                    })
+                    .catch(err => console.error(err));
+            }
+
+            function loadHomework() {
+                if (!currentUserId) return Promise.resolve();
+                return db.collection('users').doc(currentUserId).collection('homework').get()
+                    .then(snapshot => {
+                        homeworkData = {};
+                        snapshot.forEach(doc => {
+                            const data = doc.data();
+                            const dateKey = data.date;
+                            if (!homeworkData[dateKey]) homeworkData[dateKey] = [];
+                            homeworkData[dateKey].push({
+                                id: doc.id,
+                                title: data.title,
+                                subject: data.subject,
+                                done: data.done || false
+                            });
+                        });
+                        renderSubjectGrid();
+                        renderCalendar();
+                    })
+                    .catch(err => console.error(err));
+            }
+
+            function loadTests() {
+                if (!currentUserId) return Promise.resolve();
+                return db.collection('users').doc(currentUserId).collection('tests').get()
+                    .then(snapshot => {
+                        testData = {};
+                        snapshot.forEach(doc => {
+                            const data = doc.data();
+                            const dateKey = data.date;
+                            if (!testData[dateKey]) testData[dateKey] = [];
+                            testData[dateKey].push({
+                                id: doc.id,
+                                name: data.name,
+                                subject: data.subject,
+                                marks: data.marks,
+                                maxMarks: data.maxMarks,
+                                testDate: data.testDate || dateKey
+                            });
+                        });
+                        renderSubjectGrid();
+                        renderTests(currentTestTab);
+                        renderCalendar();
+                    })
+                    .catch(err => console.error(err));
+            }
+
+            // --------------------------------------------------------------
+            // 16. AUTH STATE
             // --------------------------------------------------------------
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
+                    currentUserId = user.uid;
+
                     try {
-                        // Try to get student data from Firestore
                         const docRef = db.collection('students').doc(user.uid);
                         const docSnap = await docRef.get();
-
                         let displayName = user.displayName || 'Student';
 
-                        if (docSnap.exists) {
-                            const data = docSnap.data();
-                            if (data.name) {
-                                displayName = data.name;
-                            }
+                        if (docSnap.exists && docSnap.data().name) {
+                            displayName = docSnap.data().name;
                         }
 
-                        // Update UI
                         const firstName = displayName.split(' ')[0];
                         userNameDisplay.textContent = firstName;
                         welcomeMessage.textContent =
-                            'Welcome back, ' + displayName + '! Let\'s continue your journey from confusion to clarity.';
+                            `Welcome, ${displayName}! Here's your complete performance overview.`;
 
-                        // Avatar initials
                         const initials = displayName.split(' ')
                             .map(n => n[0])
                             .join('')
@@ -1078,13 +2127,11 @@
                         userAvatar.textContent = initials;
 
                     } catch (err) {
-                        console.warn('Firestore error:', err);
-                        // Fallback: use auth display name
+                        console.warn(err);
                         const name = user.displayName || 'Student';
-                        const firstName = name.split(' ')[0];
-                        userNameDisplay.textContent = firstName;
+                        userNameDisplay.textContent = name.split(' ')[0];
                         welcomeMessage.textContent =
-                            'Welcome back, ' + name + '! Let\'s continue your journey from confusion to clarity.';
+                            `Welcome, ${name}! Here's your complete performance overview.`;
                         const initials = name.split(' ')
                             .map(n => n[0])
                             .join('')
@@ -1093,30 +2140,68 @@
                         userAvatar.textContent = initials;
                     }
 
+                    await Promise.all([
+                        loadAttendance(),
+                        loadHomework(),
+                        loadTests()
+                    ]);
+
+                    renderRoutine();
+
                     showToast('Welcome back! 👋', 'success');
 
                 } else {
-                    // Redirect to login if not authenticated
                     window.location.href = 'index.html';
                 }
             });
 
             // --------------------------------------------------------------
-            // 5. LOGOUT
+            // 17. LOGOUT
             // --------------------------------------------------------------
             logoutBtn.addEventListener('click', () => {
                 auth.signOut().then(() => {
-                    showToast('Logged out successfully.', 'info');
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 500);
-                }).catch((err) => {
-                    showToast('Error logging out: ' + err.message, 'error');
-                });
+                    showToast('Logged out.', 'info');
+                    setTimeout(() => window.location.href = 'index.html', 500);
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
             // --------------------------------------------------------------
-            // 6. ESCAPE to close toast
+            // 18. CALENDAR NAVIGATION
+            // --------------------------------------------------------------
+            calPrev.addEventListener('click', () => {
+                if (currentMonth === 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                } else {
+                    currentMonth--;
+                }
+                renderCalendar();
+            });
+
+            calNext.addEventListener('click', () => {
+                if (currentMonth === 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                } else {
+                    currentMonth++;
+                }
+                renderCalendar();
+            });
+
+            todayBtn.addEventListener('click', () => {
+                const today = new Date();
+                currentYear = today.getFullYear();
+                currentMonth = today.getMonth();
+                renderCalendar();
+                const todayKey = getTodayKey();
+                const [ty, tm] = todayKey.split('-').map(Number);
+                if (ty === currentYear && tm === currentMonth + 1) {
+                    selectDate(todayKey);
+                }
+            });
+
+            // --------------------------------------------------------------
+            // 19. ESCAPE clears toast
             // --------------------------------------------------------------
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
@@ -1126,8 +2211,16 @@
                 }
             });
 
-            console.log('📚 Knowledge Nexus Academy — Class 9 Dashboard');
-            console.log('🔥 From Confusion to Clarity');
+            // --------------------------------------------------------------
+            // 20. INIT
+            // --------------------------------------------------------------
+            renderCalendar();
+            renderRoutine();
+            renderSubjectGrid();
+            renderTests('upcoming');
+
+            console.log('📚 Knowledge Nexus — Enhanced Student Dashboard');
+            console.log('📅 Features: Routine, Subject-wise notes, Test timeline');
 
         })();
     </script>
