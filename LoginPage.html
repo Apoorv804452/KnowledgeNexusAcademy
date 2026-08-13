@@ -15,207 +15,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f4ff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            background-image: radial-gradient(ellipse at 10% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 80%, rgba(37, 99, 235, 0.06) 0%, transparent 50%);
-        }
-        .auth-card {
-            background: #ffffff;
-            max-width: 440px;
-            width: 100%;
-            padding: 2.5rem 2rem 2.2rem;
-            border-radius: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 20, 50, 0.10), 0 8px 24px rgba(0, 0, 0, 0.04);
-        }
-        .brand {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .brand-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(145deg, #1e3a8a, #2563eb);
-            border-radius: 18px;
-            color: #fff;
-            font-size: 2rem;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-            margin-bottom: 0.75rem;
-        }
-        .brand h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #0b1e3a;
-            letter-spacing: -0.02em;
-        }
-        .brand h1 span {
-            color: #2563eb;
-        }
-        .brand .tagline {
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: #64748b;
-            margin-top: 0.2rem;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            margin-bottom: 1.2rem;
-        }
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .input-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 60px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .input-wrap:focus-within {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
-            background: #ffffff;
-        }
-        .input-wrap .icon {
-            padding: 0 0 0 1.1rem;
-            color: #94a3b8;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .input-wrap:focus-within .icon {
-            color: #2563eb;
-        }
-        .input-wrap input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            padding: 0.9rem 1rem 0.9rem 0.75rem;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            color: #0b1e3a;
-            outline: none;
-        }
-        .input-wrap input::placeholder {
-            color: #aab4c9;
-        }
-        .btn-submit {
-            width: 100%;
-            padding: 0.95rem;
-            background: linear-gradient(145deg, #1e3a8a, #2563eb);
-            border: none;
-            border-radius: 60px;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-        }
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
-        }
-        .btn-submit:disabled {
-            opacity: 0.65;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .btn-submit .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.25);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-        .btn-submit.loading .spinner {
-            display: inline-block;
-        }
-        .btn-submit.loading .btn-text {
-            display: none;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .message {
-            padding: 0.75rem 1rem;
-            border-radius: 60px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            display: none;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 1rem;
-        }
-        .message.error {
-            display: flex;
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-        }
-        .message.success {
-            display: flex;
-            background: #f0fdf4;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-        .message.info {
-            display: flex;
-            background: #eff6ff;
-            color: #1e40af;
-            border: 1px solid #bfdbfe;
-        }
-        .auth-footer {
-            text-align: center;
-            margin-top: 1.6rem;
-            font-size: 0.85rem;
-            color: #94a3b8;
-        }
-        .auth-footer a {
-            color: #2563eb;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 480px) {
-            .auth-card {
-                padding: 1.8rem 1.2rem 1.6rem;
-                border-radius: 1.5rem;
-            }
-            .brand h1 {
-                font-size: 1.3rem;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4ff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background-image: radial-gradient(ellipse at 10% 20%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(ellipse at 90% 80%, rgba(37,99,235,0.06) 0%, transparent 50%); }
+        .auth-card { background: #ffffff; max-width: 440px; width: 100%; padding: 2.5rem 2rem 2.2rem; border-radius: 2rem; box-shadow: 0 20px 60px rgba(0,20,50,0.10), 0 8px 24px rgba(0,0,0,0.04); }
+        .brand { text-align: center; margin-bottom: 2rem; }
+        .brand-icon { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: linear-gradient(145deg, #1e3a8a, #2563eb); border-radius: 18px; color: #fff; font-size: 2rem; box-shadow: 0 8px 20px rgba(37,99,235,0.25); margin-bottom: 0.75rem; }
+        .brand h1 { font-size: 1.6rem; font-weight: 800; color: #0b1e3a; letter-spacing: -0.02em; }
+        .brand h1 span { color: #2563eb; }
+        .brand .tagline { font-size: 0.92rem; font-weight: 500; color: #64748b; margin-top: 0.2rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: #1e293b; }
+        .input-wrap { position: relative; display: flex; align-items: center; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 60px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .input-wrap:focus-within { border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37,99,235,0.10); background: #ffffff; }
+        .input-wrap .icon { padding: 0 0 0 1.1rem; color: #94a3b8; font-size: 1rem; flex-shrink: 0; }
+        .input-wrap:focus-within .icon { color: #2563eb; }
+        .input-wrap input { width: 100%; border: none; background: transparent; padding: 0.9rem 1rem 0.9rem 0.75rem; font-size: 0.95rem; font-family: 'Inter', sans-serif; color: #0b1e3a; outline: none; }
+        .input-wrap input::placeholder { color: #aab4c9; }
+        .btn-submit { width: 100%; padding: 0.95rem; background: linear-gradient(145deg, #1e3a8a, #2563eb); border: none; border-radius: 60px; color: #fff; font-size: 1rem; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 8px 24px rgba(37,99,235,0.25); display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,99,235,0.35); }
+        .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+        .btn-submit .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.25); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+        .btn-submit.loading .spinner { display: inline-block; }
+        .btn-submit.loading .btn-text { display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .message { padding: 0.75rem 1rem; border-radius: 60px; font-size: 0.88rem; font-weight: 500; display: none; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+        .message.error { display: flex; background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .message.success { display: flex; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .message.info { display: flex; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+        .auth-footer { text-align: center; margin-top: 1.6rem; font-size: 0.85rem; color: #94a3b8; }
+        .auth-footer a { color: #2563eb; font-weight: 600; text-decoration: none; }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        /* Already logged in banner */
+        .logged-in-banner { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 1rem; padding: 1rem; margin-bottom: 1.5rem; display: none; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+        .logged-in-banner.show { display: flex; }
+        .logged-in-banner .info { flex: 1; font-size: 0.9rem; color: #166534; }
+        .logged-in-banner .info i { margin-right: 0.4rem; }
+        .logged-in-banner .btn-dash { background: #22c55e; color: #fff; border: none; padding: 0.4rem 1.2rem; border-radius: 60px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; }
+        .logged-in-banner .btn-dash:hover { transform: scale(1.03); }
+        .logged-in-banner .btn-logout-sm { background: transparent; color: #64748b; border: 1px solid #e2e8f0; padding: 0.4rem 1.2rem; border-radius: 60px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; }
+        .logged-in-banner .btn-logout-sm:hover { background: #fef2f2; border-color: #ef4444; color: #b91c1c; }
+
+        @media (max-width: 480px) { .auth-card { padding: 1.8rem 1.2rem 1.6rem; border-radius: 1.5rem; } .brand h1 { font-size: 1.3rem; } }
     </style>
 </head>
 <body>
@@ -225,6 +66,13 @@
             <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
             <h1>Knowledge <span>Nexus</span></h1>
             <p class="tagline"><i class="fas fa-quote-left" style="color:#f59e0b;"></i> From Confusion to Clarity <i class="fas fa-quote-right" style="color:#f59e0b;"></i></p>
+        </div>
+
+        <!-- Logged-in banner -->
+        <div class="logged-in-banner" id="loggedInBanner">
+            <div class="info"><i class="fas fa-check-circle"></i> Already logged in as <strong id="loggedInEmail">user@example.com</strong></div>
+            <button class="btn-dash" id="goToDashboardBtn"><i class="fas fa-arrow-right"></i> Go to Dashboard</button>
+            <button class="btn-logout-sm" id="logoutSmBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
 
         <div id="messageBox" class="message">
@@ -283,6 +131,10 @@
             const loginBtn = document.getElementById('loginBtn');
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
+            const loggedInBanner = document.getElementById('loggedInBanner');
+            const loggedInEmail = document.getElementById('loggedInEmail');
+            const goToDashboardBtn = document.getElementById('goToDashboardBtn');
+            const logoutSmBtn = document.getElementById('logoutSmBtn');
 
             let msgTimeout = null;
 
@@ -290,62 +142,80 @@
                 messageBox.className = 'message ' + type;
                 messageText.textContent = text;
                 clearTimeout(msgTimeout);
-                msgTimeout = setTimeout(() => {
-                    messageBox.className = 'message';
-                }, 6000);
+                msgTimeout = setTimeout(() => { messageBox.className = 'message'; }, 6000);
             }
 
             function setLoading(btn, isLoading) {
-                if (isLoading) {
-                    btn.classList.add('loading');
-                    btn.disabled = true;
-                } else {
-                    btn.classList.remove('loading');
-                    btn.disabled = false;
-                }
+                if (isLoading) { btn.classList.add('loading');
+                    btn.disabled = true; } else { btn.classList.remove('loading');
+                    btn.disabled = false; }
             }
 
-            function validateEmail(email) {
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            }
+            function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
-            // Check if user is already logged in
-            auth.onAuthStateChanged(user => {
-                if (user) {
-                    // Check role
-                    db.collection('users').doc(user.uid).get()
-                        .then(doc => {
-                            if (doc.exists) {
-                                const role = doc.data().role;
-                                if (role === 'teacher') {
-                                    window.location.href = 'teacher-dashboard.html';
-                                } else if (role === 'student') {
+            // ===== REDIRECT TO DASHBOARD =====
+            function redirectToDashboard(user) {
+                db.collection('users').doc(user.uid).get()
+                    .then(doc => {
+                        if (doc.exists && doc.data().role === 'teacher') {
+                            window.location.href = 'teacher-dashboard.html';
+                        } else {
+                            window.location.href = 'student-dashboard.html';
+                        }
+                    })
+                    .catch(() => {
+                        // Check if student exists
+                        db.collection('students').doc(user.uid).get()
+                            .then(snap => {
+                                if (snap.exists) {
                                     window.location.href = 'student-dashboard.html';
                                 } else {
-                                    // Default to student
-                                    window.location.href = 'student-dashboard.html';
+                                    showMessage('Account not found. Please contact your teacher.', 'error');
                                 }
-                            } else {
-                                // Try checking students collection
-                                db.collection('students').doc(user.uid).get()
-                                    .then(snap => {
-                                        if (snap.exists) {
-                                            window.location.href = 'student-dashboard.html';
-                                        } else {
-                                            window.location.href = 'student-dashboard.html';
-                                        }
-                                    })
-                                    .catch(() => {
-                                        window.location.href = 'student-dashboard.html';
-                                    });
-                            }
-                        })
-                        .catch(() => {
-                            window.location.href = 'student-dashboard.html';
-                        });
+                            })
+                            .catch(() => { window.location.href = 'student-dashboard.html'; });
+                    });
+            }
+
+            // ===== CHECK AUTH STATE (NO AUTO-REDIRECT) =====
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // Show the "already logged in" banner instead of auto-redirecting
+                    loggedInBanner.classList.add('show');
+                    loggedInEmail.textContent = user.email || 'user';
+                    // Show a small success message
+                    showMessage('You are already logged in. Click "Go to Dashboard" to continue.', 'success');
+                } else {
+                    loggedInBanner.classList.remove('show');
+                    // Clear any stale messages
+                    if (messageBox.className !== 'message') {
+                        // Keep messages that might be showing
+                    }
                 }
             });
 
+            // ===== GO TO DASHBOARD BUTTON =====
+            goToDashboardBtn.addEventListener('click', function() {
+                const user = auth.currentUser;
+                if (user) {
+                    redirectToDashboard(user);
+                } else {
+                    showMessage('You are not logged in.', 'error');
+                    loggedInBanner.classList.remove('show');
+                }
+            });
+
+            // ===== LOGOUT FROM BANNER =====
+            logoutSmBtn.addEventListener('click', function() {
+                auth.signOut().then(() => {
+                    loggedInBanner.classList.remove('show');
+                    showMessage('Logged out successfully.', 'info');
+                    loginEmail.value = '';
+                    loginPassword.value = '';
+                }).catch(err => showMessage('Error: ' + err.message, 'error'));
+            });
+
+            // ===== LOGIN FORM SUBMIT =====
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -367,38 +237,11 @@
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        const user = userCredential.user;
                         setLoading(loginBtn, false);
-
-                        // Check role
-                        db.collection('users').doc(user.uid).get()
-                            .then(doc => {
-                                if (doc.exists) {
-                                    const role = doc.data().role;
-                                    if (role === 'teacher') {
-                                        window.location.href = 'teacher-dashboard.html';
-                                    } else {
-                                        window.location.href = 'student-dashboard.html';
-                                    }
-                                } else {
-                                    // Check if student exists
-                                    db.collection('students').doc(user.uid).get()
-                                        .then(snap => {
-                                            if (snap.exists) {
-                                                window.location.href = 'student-dashboard.html';
-                                            } else {
-                                                showMessage('Account not found. Please contact your teacher.',
-                                                    'error');
-                                            }
-                                        })
-                                        .catch(() => {
-                                            window.location.href = 'student-dashboard.html';
-                                        });
-                                }
-                            })
-                            .catch(() => {
-                                window.location.href = 'student-dashboard.html';
-                            });
+                        showMessage('Login successful! Redirecting...', 'success');
+                        setTimeout(() => {
+                            redirectToDashboard(userCredential.user);
+                        }, 600);
                     })
                     .catch((error) => {
                         setLoading(loginBtn, false);
