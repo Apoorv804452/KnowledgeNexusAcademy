@@ -3,30 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Knowledge Nexus Academy | Login</title>
-
-    <!-- ===== Firebase SDKs ===== -->
+    <title>Login | Knowledge Nexus Academy</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js">
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js">
     </script>
-
-    <!-- ===== Google Fonts ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js">
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-
-    <!-- ===== Font Awesome 6 ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
     <style>
-        /* ---------- RESET & BASE ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: #f0f4ff;
@@ -35,36 +28,21 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
-            background-image:
-                radial-gradient(ellipse at 10% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+            background-image: radial-gradient(ellipse at 10% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
                 radial-gradient(ellipse at 90% 80%, rgba(37, 99, 235, 0.06) 0%, transparent 50%);
         }
-
-        /* ---------- MAIN CARD ---------- */
         .auth-card {
             background: #ffffff;
             max-width: 440px;
             width: 100%;
             padding: 2.5rem 2rem 2.2rem;
             border-radius: 2rem;
-            box-shadow:
-                0 20px 60px rgba(0, 20, 50, 0.10),
-                0 8px 24px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s ease;
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 20px 60px rgba(0, 20, 50, 0.10), 0 8px 24px rgba(0, 0, 0, 0.04);
         }
-
-        .auth-card:hover {
-            transform: translateY(-2px);
-        }
-
-        /* ---------- BRAND HEADER ---------- */
         .brand {
             text-align: center;
             margin-bottom: 2rem;
         }
-
         .brand-icon {
             display: inline-flex;
             align-items: center;
@@ -78,107 +56,32 @@
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
             margin-bottom: 0.75rem;
         }
-
         .brand h1 {
             font-size: 1.6rem;
             font-weight: 800;
             color: #0b1e3a;
             letter-spacing: -0.02em;
         }
-
         .brand h1 span {
             color: #2563eb;
         }
-
         .brand .tagline {
             font-size: 0.92rem;
             font-weight: 500;
             color: #64748b;
             margin-top: 0.2rem;
-            letter-spacing: 0.02em;
         }
-
-        .brand .tagline i {
-            color: #f59e0b;
-            margin: 0 4px;
-        }
-
-        /* ---------- TOGGLE TABS ---------- */
-        .toggle-tabs {
-            display: flex;
-            background: #f1f5f9;
-            border-radius: 60px;
-            padding: 4px;
-            margin-bottom: 1.8rem;
-            position: relative;
-        }
-
-        .toggle-tabs button {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 0.7rem 0.5rem;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #64748b;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            z-index: 1;
-        }
-
-        .toggle-tabs button.active {
-            color: #0b1e3a;
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .toggle-tabs button:not(.active):hover {
-            color: #1e293b;
-        }
-
-        /* ---------- FORMS ---------- */
-        .form-container {
-            position: relative;
-        }
-
-        .auth-form {
-            display: none;
-            flex-direction: column;
-            gap: 1.25rem;
-            animation: fadeSlide 0.3s ease;
-        }
-
-        .auth-form.active {
-            display: flex;
-        }
-
-        @keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
+            margin-bottom: 1.2rem;
         }
-
         .form-group label {
             font-size: 0.85rem;
             font-weight: 600;
             color: #1e293b;
-            letter-spacing: 0.01em;
         }
-
         .input-wrap {
             position: relative;
             display: flex;
@@ -188,27 +91,21 @@
             border-radius: 60px;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-
         .input-wrap:focus-within {
             border-color: #2563eb;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
             background: #ffffff;
         }
-
         .input-wrap .icon {
             padding: 0 0 0 1.1rem;
             color: #94a3b8;
             font-size: 1rem;
-            transition: color 0.2s;
             flex-shrink: 0;
         }
-
         .input-wrap:focus-within .icon {
             color: #2563eb;
         }
-
-        .input-wrap input,
-        .input-wrap select {
+        .input-wrap input {
             width: 100%;
             border: none;
             background: transparent;
@@ -218,95 +115,9 @@
             color: #0b1e3a;
             outline: none;
         }
-
         .input-wrap input::placeholder {
             color: #aab4c9;
-            font-weight: 400;
         }
-
-        .input-wrap select {
-            appearance: none;
-            cursor: pointer;
-            color: #0b1e3a;
-            font-weight: 500;
-        }
-
-        .input-wrap select option {
-            font-weight: 400;
-        }
-
-        .input-wrap .select-arrow {
-            padding-right: 1.1rem;
-            color: #94a3b8;
-            pointer-events: none;
-            flex-shrink: 0;
-        }
-
-        .input-wrap .toggle-pass {
-            padding-right: 1.1rem;
-            background: none;
-            border: none;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: color 0.2s;
-            flex-shrink: 0;
-        }
-
-        .input-wrap .toggle-pass:hover {
-            color: #475569;
-        }
-
-        /* ---------- PASSWORD HINTS ---------- */
-        .password-hint {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            padding: 0 0.25rem;
-            margin-top: -0.2rem;
-        }
-
-        .password-hint i {
-            margin-right: 4px;
-        }
-
-        /* ---------- FORM OPTIONS ---------- */
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            margin-top: -0.2rem;
-        }
-
-        .form-options label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #475569;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .form-options label input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #2563eb;
-            cursor: pointer;
-        }
-
-        .form-options a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .form-options a:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
-        }
-
-        /* ---------- SUBMIT BUTTON ---------- */
         .btn-submit {
             width: 100%;
             padding: 0.95rem;
@@ -324,25 +135,16 @@
             align-items: center;
             justify-content: center;
             gap: 0.6rem;
-            letter-spacing: 0.01em;
-            margin-top: 0.3rem;
         }
-
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
         }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
         .btn-submit:disabled {
             opacity: 0.65;
             cursor: not-allowed;
             transform: none;
         }
-
         .btn-submit .spinner {
             display: none;
             width: 20px;
@@ -352,80 +154,17 @@
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
-
         .btn-submit.loading .spinner {
             display: inline-block;
         }
-
         .btn-submit.loading .btn-text {
             display: none;
         }
-
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-
-        /* ---------- DIVIDER ---------- */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 0.5rem 0 0.2rem;
-            color: #cbd5e1;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #e2e8f0;
-        }
-
-        /* ---------- SOCIAL BUTTONS ---------- */
-        .social-row {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-        }
-
-        .social-row button {
-            flex: 1;
-            max-width: 220px;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 60px;
-            background: #fff;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1e293b;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .social-row button i {
-            font-size: 1.2rem;
-        }
-
-        .social-row button:hover {
-            border-color: #94a3b8;
-            background: #f8fafc;
-        }
-
-        .social-row .btn-google i {
-            color: #ea4335;
-        }
-
-        /* ---------- MESSAGES ---------- */
         .message {
             padding: 0.75rem 1rem;
             border-radius: 60px;
@@ -434,158 +173,47 @@
             display: none;
             align-items: center;
             gap: 0.6rem;
-            animation: fadeSlide 0.25s ease;
+            margin-bottom: 1rem;
         }
-
         .message.error {
             display: flex;
             background: #fef2f2;
             color: #b91c1c;
             border: 1px solid #fecaca;
         }
-
         .message.success {
             display: flex;
             background: #f0fdf4;
             color: #166534;
             border: 1px solid #bbf7d0;
         }
-
         .message.info {
             display: flex;
             background: #eff6ff;
             color: #1e40af;
             border: 1px solid #bfdbfe;
         }
-
-        .message i {
-            font-size: 1.1rem;
-        }
-
-        /* ---------- CLASS SELECTOR MODAL (for Google login) ---------- */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.40);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .modal-overlay.open {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .modal-box {
-            background: #fff;
-            max-width: 400px;
-            width: 100%;
-            padding: 2rem 1.8rem 1.8rem;
-            border-radius: 1.8rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.20);
-            text-align: center;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-box .modal-icon {
-            font-size: 2.6rem;
-            color: #2563eb;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-box h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #0b1e3a;
-            margin-bottom: 0.3rem;
-        }
-
-        .modal-box p {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .modal-box .input-wrap {
-            margin-bottom: 1.2rem;
-        }
-
-        .modal-box .btn-submit {
-            margin-top: 0;
-        }
-
-        /* ---------- FOOTER ---------- */
         .auth-footer {
             text-align: center;
             margin-top: 1.6rem;
             font-size: 0.85rem;
             color: #94a3b8;
         }
-
         .auth-footer a {
             color: #2563eb;
             font-weight: 600;
             text-decoration: none;
-            transition: color 0.2s;
         }
-
         .auth-footer a:hover {
-            color: #1d4ed8;
             text-decoration: underline;
         }
-
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
             .auth-card {
                 padding: 1.8rem 1.2rem 1.6rem;
                 border-radius: 1.5rem;
             }
-
             .brand h1 {
                 font-size: 1.3rem;
-            }
-
-            .toggle-tabs button {
-                font-size: 0.85rem;
-                padding: 0.6rem 0.3rem;
-            }
-
-            .social-row button {
-                max-width: 100%;
-            }
-
-            .form-options {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .modal-box {
-                padding: 1.5rem 1.2rem;
             }
         }
     </style>
@@ -593,206 +221,49 @@
 <body>
 
     <div class="auth-card">
-
-        <!-- ===== BRAND ===== -->
         <div class="brand">
-            <div class="brand-icon">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
             <h1>Knowledge <span>Nexus</span></h1>
-            <p class="tagline">
-                <i class="fas fa-quote-left"></i> From Confusion to Clarity <i class="fas fa-quote-right"></i>
-            </p>
+            <p class="tagline"><i class="fas fa-quote-left" style="color:#f59e0b;"></i> From Confusion to Clarity <i class="fas fa-quote-right" style="color:#f59e0b;"></i></p>
         </div>
 
-        <!-- ===== TOGGLE TABS ===== -->
-        <div class="toggle-tabs" role="tablist">
-            <button class="active" data-tab="login" role="tab" aria-selected="true">
-                <i class="fas fa-sign-in-alt" style="margin-right:6px;"></i> Login
-            </button>
-            <button data-tab="signup" role="tab" aria-selected="false">
-                <i class="fas fa-user-plus" style="margin-right:6px;"></i> Sign Up
-            </button>
-        </div>
-
-        <!-- ===== MESSAGE DISPLAY ===== -->
-        <div id="messageBox" class="message" role="alert">
+        <div id="messageBox" class="message">
             <i class="fas fa-circle-info"></i>
             <span id="messageText">Message</span>
         </div>
 
-        <!-- ===== FORM CONTAINER ===== -->
-        <div class="form-container">
-
-            <!-- ===== LOGIN FORM ===== -->
-            <form id="loginForm" class="auth-form active" autocomplete="off" novalidate>
-                <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <input type="email" id="loginEmail" placeholder="your@email.com" required />
-                    </div>
+        <form id="loginForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <div class="input-wrap">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required />
                 </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" id="loginPassword" placeholder="••••••••" required />
-                        <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-options">
-                    <label>
-                        <input type="checkbox" id="rememberMe" /> Remember me
-                    </label>
-                    <a href="#" id="forgotLink">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="btn-submit" id="loginBtn">
-                    <span class="btn-text"><i class="fas fa-arrow-right-to-bracket" style="margin-right:8px;"></i>Log In</span>
-                    <span class="spinner"></span>
-                </button>
-            </form>
-
-            <!-- ===== SIGNUP FORM ===== -->
-            <form id="signupForm" class="auth-form" autocomplete="off" novalidate>
-                <div class="form-group">
-                    <label for="signupName">Full Name</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-user"></i></span>
-                        <input type="text" id="signupName" placeholder="John Doe" required />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signupEmail">Email Address</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <input type="email" id="signupEmail" placeholder="your@email.com" required />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signupClass">Class</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-layer-group"></i></span>
-                        <select id="signupClass" required>
-                            <option value="">Select your class</option>
-                            <option value="1">Class 1</option>
-                            <option value="2">Class 2</option>
-                            <option value="3">Class 3</option>
-                            <option value="4">Class 4</option>
-                            <option value="5">Class 5</option>
-                            <option value="6">Class 6</option>
-                            <option value="7">Class 7</option>
-                            <option value="8">Class 8</option>
-                            <option value="9">Class 9</option>
-                            <option value="10">Class 10</option>
-                            <option value="11">Class 11</option>
-                            <option value="12">Class 12</option>
-                        </select>
-                        <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" id="signupPassword" placeholder="Min 6 characters" required />
-                        <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <div class="password-hint">
-                        <i class="fas fa-info-circle"></i> At least 6 characters
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="signupConfirm">Confirm Password</label>
-                    <div class="input-wrap">
-                        <span class="icon"><i class="fas fa-check-circle"></i></span>
-                        <input type="password" id="signupConfirm" placeholder="Re-enter password" required />
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit" id="signupBtn">
-                    <span class="btn-text"><i class="fas fa-user-plus" style="margin-right:8px;"></i>Create Account</span>
-                    <span class="spinner"></span>
-                </button>
-            </form>
-
-            <!-- ===== DIVIDER ===== -->
-            <div class="divider">or continue with</div>
-
-            <!-- ===== SOCIAL BUTTONS ===== -->
-            <div class="social-row">
-                <button class="btn-google" id="googleBtn">
-                    <i class="fab fa-google"></i> Sign in with Google
-                </button>
             </div>
 
-        </div>
-
-        <!-- ===== FOOTER ===== -->
-        <div class="auth-footer">
-            &copy; 2026 <a href="#">Knowledge Nexus Academy</a> · From Confusion to Clarity
-        </div>
-    </div>
-
-    <!-- ================================================================ -->
-    <!-- ===== CLASS SELECTOR MODAL (for Google login) ===== -->
-    <!-- ================================================================ -->
-    <div class="modal-overlay" id="classModal">
-        <div class="modal-box">
-            <div class="modal-icon">
-                <i class="fas fa-user-graduate"></i>
-            </div>
-            <h2>Select Your Class</h2>
-            <p>Please select your class to continue to your dashboard.</p>
-
-            <div class="input-wrap" style="margin-bottom: 1.2rem;">
-                <span class="icon"><i class="fas fa-layer-group"></i></span>
-                <select id="modalClassSelect" required>
-                    <option value="">Select your class</option>
-                    <option value="1">Class 1</option>
-                    <option value="2">Class 2</option>
-                    <option value="3">Class 3</option>
-                    <option value="4">Class 4</option>
-                    <option value="5">Class 5</option>
-                    <option value="6">Class 6</option>
-                    <option value="7">Class 7</option>
-                    <option value="8">Class 8</option>
-                    <option value="9">Class 9</option>
-                    <option value="10">Class 10</option>
-                    <option value="11">Class 11</option>
-                    <option value="12">Class 12</option>
-                </select>
-                <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="input-wrap">
+                    <span class="icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required />
+                </div>
             </div>
 
-            <button class="btn-submit" id="modalSaveBtn">
-                <span class="btn-text"><i class="fas fa-arrow-right" style="margin-right:8px;"></i>Continue</span>
+            <button type="submit" class="btn-submit" id="loginBtn">
+                <span class="btn-text"><i class="fas fa-arrow-right-to-bracket" style="margin-right:8px;"></i>Log In</span>
                 <span class="spinner"></span>
             </button>
+        </form>
+
+        <div class="auth-footer">
+            &copy; 2026 <a href="#">Knowledge Nexus Academy</a>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ===== JAVASCRIPT ===== -->
-    <!-- ============================================================ -->
     <script>
         (function() {
             'use strict';
 
-            // --------------------------------------------------------------
-            // 1. FIREBASE INIT
-            // --------------------------------------------------------------
             const firebaseConfig = {
                 apiKey: "AIzaSyBL2OiW6f1PCbiFMSqyPuhPnfa1d0ywGKc",
                 authDomain: "knowledgenexusacademy-a2550.firebaseapp.com",
@@ -805,50 +276,23 @@
 
             firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
+            const db = firebase.firestore();
 
-            // --------------------------------------------------------------
-            // 2. DOM REFS
-            // --------------------------------------------------------------
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
             const loginEmail = document.getElementById('loginEmail');
             const loginPassword = document.getElementById('loginPassword');
-            const signupName = document.getElementById('signupName');
-            const signupEmail = document.getElementById('signupEmail');
-            const signupClass = document.getElementById('signupClass');
-            const signupPassword = document.getElementById('signupPassword');
-            const signupConfirm = document.getElementById('signupConfirm');
             const loginBtn = document.getElementById('loginBtn');
-            const signupBtn = document.getElementById('signupBtn');
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
 
-            const toggleTabs = document.querySelectorAll('.toggle-tabs button');
-            const togglePassBtns = document.querySelectorAll('.toggle-pass');
-            const googleBtn = document.getElementById('googleBtn');
-            const forgotLink = document.getElementById('forgotLink');
-            const rememberMe = document.getElementById('rememberMe');
+            let msgTimeout = null;
 
-            // Modal refs
-            const classModal = document.getElementById('classModal');
-            const modalClassSelect = document.getElementById('modalClassSelect');
-            const modalSaveBtn = document.getElementById('modalSaveBtn');
-
-            // --------------------------------------------------------------
-            // 3. HELPERS
-            // --------------------------------------------------------------
             function showMessage(text, type = 'info') {
                 messageBox.className = 'message ' + type;
                 messageText.textContent = text;
-                clearTimeout(window._msgTimer);
-                window._msgTimer = setTimeout(() => {
+                clearTimeout(msgTimeout);
+                msgTimeout = setTimeout(() => {
                     messageBox.className = 'message';
                 }, 6000);
-            }
-
-            function hideMessage() {
-                messageBox.className = 'message';
-                clearTimeout(window._msgTimer);
             }
 
             function setLoading(btn, isLoading) {
@@ -861,96 +305,49 @@
                 }
             }
 
-            function togglePasswordVisibility(btn) {
-                const input = btn.closest('.input-wrap').querySelector('input');
-                if (!input) return;
-                const icon = btn.querySelector('i');
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.className = 'fas fa-eye-slash';
-                } else {
-                    input.type = 'password';
-                    icon.className = 'fas fa-eye';
-                }
-            }
-
-            // --------------------------------------------------------------
-            // 4. CLASS STORAGE & REDIRECT
-            // --------------------------------------------------------------
-            function saveClassForUser(email, classValue) {
-                if (!email || !classValue) return;
-                const key = 'userClass_' + email.replace(/[.#$[\]]/g, '_');
-                localStorage.setItem(key, classValue);
-            }
-
-            function getClassForUser(email) {
-                if (!email) return null;
-                const key = 'userClass_' + email.replace(/[.#$[\]]/g, '_');
-                return localStorage.getItem(key);
-            }
-
-            function redirectToClassPage(classValue) {
-                const val = parseInt(classValue);
-                if (val && val >= 1 && val <= 12) {
-                    window.location.href = 'class' + val + 'index.html';
-                } else {
-                    // Fallback: redirect to a generic dashboard
-                    window.location.href = 'dashboard.html';
-                }
-            }
-
-            // --------------------------------------------------------------
-            // 5. TOGGLE TABS
-            // --------------------------------------------------------------
-            function switchTab(tabId) {
-                hideMessage();
-
-                toggleTabs.forEach(btn => {
-                    const isActive = btn.dataset.tab === tabId;
-                    btn.classList.toggle('active', isActive);
-                    btn.setAttribute('aria-selected', isActive);
-                });
-
-                loginForm.classList.toggle('active', tabId === 'login');
-                signupForm.classList.toggle('active', tabId === 'signup');
-
-                setLoading(loginBtn, false);
-                setLoading(signupBtn, false);
-            }
-
-            toggleTabs.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    switchTab(this.dataset.tab);
-                });
-            });
-
-            // --------------------------------------------------------------
-            // 6. TOGGLE PASSWORD VISIBILITY
-            // --------------------------------------------------------------
-            togglePassBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    togglePasswordVisibility(this);
-                });
-            });
-
-            // --------------------------------------------------------------
-            // 7. VALIDATION HELPERS
-            // --------------------------------------------------------------
             function validateEmail(email) {
                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
             }
 
-            function validatePassword(pw) {
-                return pw.length >= 6;
-            }
+            // Check if user is already logged in
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // Check role
+                    db.collection('users').doc(user.uid).get()
+                        .then(doc => {
+                            if (doc.exists) {
+                                const role = doc.data().role;
+                                if (role === 'teacher') {
+                                    window.location.href = 'teacher-dashboard.html';
+                                } else if (role === 'student') {
+                                    window.location.href = 'student-dashboard.html';
+                                } else {
+                                    // Default to student
+                                    window.location.href = 'student-dashboard.html';
+                                }
+                            } else {
+                                // Try checking students collection
+                                db.collection('students').doc(user.uid).get()
+                                    .then(snap => {
+                                        if (snap.exists) {
+                                            window.location.href = 'student-dashboard.html';
+                                        } else {
+                                            window.location.href = 'student-dashboard.html';
+                                        }
+                                    })
+                                    .catch(() => {
+                                        window.location.href = 'student-dashboard.html';
+                                    });
+                            }
+                        })
+                        .catch(() => {
+                            window.location.href = 'student-dashboard.html';
+                        });
+                }
+            });
 
-            // --------------------------------------------------------------
-            // 8. LOGIN HANDLER (with class-based redirect)
-            // --------------------------------------------------------------
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                hideMessage();
 
                 const email = loginEmail.value.trim();
                 const password = loginPassword.value.trim();
@@ -973,18 +370,35 @@
                         const user = userCredential.user;
                         setLoading(loginBtn, false);
 
-                        // Look up the stored class
-                        const storedClass = getClassForUser(user.email);
-                        if (storedClass) {
-                            showMessage('Welcome back, ' + (user.displayName || 'Student') + '! 🎉', 'success');
-                            setTimeout(() => {
-                                redirectToClassPage(storedClass);
-                            }, 800);
-                        } else {
-                            // No class found — ask the user to select
-                            showMessage('Please select your class to continue.', 'info');
-                            openClassModal(user.email);
-                        }
+                        // Check role
+                        db.collection('users').doc(user.uid).get()
+                            .then(doc => {
+                                if (doc.exists) {
+                                    const role = doc.data().role;
+                                    if (role === 'teacher') {
+                                        window.location.href = 'teacher-dashboard.html';
+                                    } else {
+                                        window.location.href = 'student-dashboard.html';
+                                    }
+                                } else {
+                                    // Check if student exists
+                                    db.collection('students').doc(user.uid).get()
+                                        .then(snap => {
+                                            if (snap.exists) {
+                                                window.location.href = 'student-dashboard.html';
+                                            } else {
+                                                showMessage('Account not found. Please contact your teacher.',
+                                                    'error');
+                                            }
+                                        })
+                                        .catch(() => {
+                                            window.location.href = 'student-dashboard.html';
+                                        });
+                                }
+                            })
+                            .catch(() => {
+                                window.location.href = 'student-dashboard.html';
+                            });
                     })
                     .catch((error) => {
                         setLoading(loginBtn, false);
@@ -1002,231 +416,13 @@
                     });
             });
 
-            // --------------------------------------------------------------
-            // 9. SIGNUP HANDLER (store class + redirect)
-            // --------------------------------------------------------------
-            signupForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                hideMessage();
-
-                const name = signupName.value.trim();
-                const email = signupEmail.value.trim();
-                const classValue = signupClass.value;
-                const password = signupPassword.value.trim();
-                const confirm = signupConfirm.value.trim();
-
-                if (!name || name.length < 2) {
-                    showMessage('Please enter your full name.', 'error');
-                    signupName.focus();
-                    return;
-                }
-                if (!email || !validateEmail(email)) {
-                    showMessage('Please enter a valid email address.', 'error');
-                    signupEmail.focus();
-                    return;
-                }
-                if (!classValue) {
-                    showMessage('Please select your class.', 'error');
-                    signupClass.focus();
-                    return;
-                }
-                if (!validatePassword(password)) {
-                    showMessage('Password must be at least 6 characters.', 'error');
-                    signupPassword.focus();
-                    return;
-                }
-                if (password !== confirm) {
-                    showMessage('Passwords do not match.', 'error');
-                    signupConfirm.focus();
-                    return;
-                }
-
-                setLoading(signupBtn, true);
-
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        const user = userCredential.user;
-                        return user.updateProfile({
-                            displayName: name
-                        }).then(() => {
-                            // Store the class in localStorage
-                            saveClassForUser(user.email, classValue);
-                            setLoading(signupBtn, false);
-                            showMessage('Account created! Welcome ' + name + ' 🎉', 'success');
-                            console.log('Signed up:', user.email, 'Class:', classValue);
-
-                            // Redirect to class page after a short delay
-                            setTimeout(() => {
-                                redirectToClassPage(classValue);
-                            }, 1000);
-                        });
-                    })
-                    .catch((error) => {
-                        setLoading(signupBtn, false);
-                        let msg = error.message;
-                        if (error.code === 'auth/email-already-in-use') {
-                            msg = 'This email is already registered. Please log in.';
-                        } else if (error.code === 'auth/invalid-email') {
-                            msg = 'Invalid email address.';
-                        } else if (error.code === 'auth/weak-password') {
-                            msg = 'Password is too weak. Use at least 6 characters.';
-                        }
-                        showMessage(msg, 'error');
-                    });
-            });
-
-            // --------------------------------------------------------------
-            // 10. CLASS MODAL (for Google login / missing class)
-            // --------------------------------------------------------------
-            let pendingUserEmail = null;
-
-            function openClassModal(email) {
-                pendingUserEmail = email;
-                modalClassSelect.value = '';
-                classModal.classList.add('open');
-            }
-
-            function closeClassModal() {
-                classModal.classList.remove('open');
-                pendingUserEmail = null;
-            }
-
-            modalSaveBtn.addEventListener('click', function() {
-                const selectedClass = modalClassSelect.value;
-                if (!selectedClass) {
-                    showMessage('Please select your class.', 'error');
-                    return;
-                }
-
-                setLoading(modalSaveBtn, true);
-
-                // Save the class for the pending user
-                if (pendingUserEmail) {
-                    saveClassForUser(pendingUserEmail, selectedClass);
-                    closeClassModal();
-                    setLoading(modalSaveBtn, false);
-                    showMessage('Class saved! Redirecting...', 'success');
-                    setTimeout(() => {
-                        redirectToClassPage(selectedClass);
-                    }, 800);
-                } else {
-                    setLoading(modalSaveBtn, false);
-                    showMessage('Error: No user found. Please try logging in again.', 'error');
+            // Enter key on password field
+            loginPassword.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    loginForm.dispatchEvent(new Event('submit'));
                 }
             });
 
-            // Close modal on overlay click
-            classModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeClassModal();
-                }
-            });
-
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && classModal.classList.contains('open')) {
-                    closeClassModal();
-                }
-            });
-
-            // --------------------------------------------------------------
-            // 11. SOCIAL AUTH — GOOGLE (with class selection)
-            // --------------------------------------------------------------
-            function handleGoogleAuth() {
-                hideMessage();
-                setLoading(loginBtn, true);
-
-                const provider = new firebase.auth.GoogleAuthProvider();
-
-                auth.signInWithPopup(provider)
-                    .then((result) => {
-                        const user = result.user;
-                        setLoading(loginBtn, false);
-
-                        // Check if we have a stored class for this user
-                        const storedClass = getClassForUser(user.email);
-                        if (storedClass) {
-                            showMessage('Welcome ' + (user.displayName || 'Student') + '! 🎉', 'success');
-                            setTimeout(() => {
-                                redirectToClassPage(storedClass);
-                            }, 800);
-                        } else {
-                            // No class found — show the modal
-                            showMessage('Please select your class to continue.', 'info');
-                            openClassModal(user.email);
-                        }
-                    })
-                    .catch((error) => {
-                        setLoading(loginBtn, false);
-                        let msg = error.message;
-                        if (error.code === 'auth/popup-closed-by-user') {
-                            msg = 'Sign-in popup was closed. Please try again.';
-                        } else if (error.code === 'auth/account-exists-with-different-credential') {
-                            msg = 'An account already exists with this email. Please log in with your password.';
-                        }
-                        showMessage(msg, 'error');
-                    });
-            }
-
-            googleBtn.addEventListener('click', handleGoogleAuth);
-
-            // --------------------------------------------------------------
-            // 12. FORGOT PASSWORD
-            // --------------------------------------------------------------
-            forgotLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                const email = loginEmail.value.trim();
-                if (!email || !validateEmail(email)) {
-                    showMessage('Enter your email address to receive a reset link.', 'info');
-                    loginEmail.focus();
-                    return;
-                }
-
-                setLoading(loginBtn, true);
-                auth.sendPasswordResetEmail(email)
-                    .then(() => {
-                        setLoading(loginBtn, false);
-                        showMessage('Password reset link sent to ' + email + ' 📧', 'success');
-                    })
-                    .catch((error) => {
-                        setLoading(loginBtn, false);
-                        let msg = error.message;
-                        if (error.code === 'auth/user-not-found') {
-                            msg = 'No account found with this email.';
-                        }
-                        showMessage(msg, 'error');
-                    });
-            });
-
-            // --------------------------------------------------------------
-            // 13. REMEMBER ME (UI feedback)
-            // --------------------------------------------------------------
-            rememberMe.addEventListener('change', function() {
-                if (this.checked) {
-                    showMessage('Session will be remembered on this device.', 'info');
-                } else {
-                    hideMessage();
-                }
-            });
-
-            // --------------------------------------------------------------
-            // 14. AUTO-DETECT SIGNUP FROM URL
-            // --------------------------------------------------------------
-            if (window.location.search.includes('signup')) {
-                switchTab('signup');
-            }
-
-            // --------------------------------------------------------------
-            // 15. ESCAPE clears message
-            // --------------------------------------------------------------
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    hideMessage();
-                }
-            });
-
-            console.log('🔥 Knowledge Nexus Academy — From Confusion to Clarity');
-            console.log('📚 Class-based redirect: classXindex.html where X = 1–12');
         })();
     </script>
 
