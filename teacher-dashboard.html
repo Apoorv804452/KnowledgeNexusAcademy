@@ -16,689 +16,120 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* ---------- RESET & BASE ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f4ff;
-            color: #1e293b;
-            min-height: 100vh;
-        }
-        .floating-bubble {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatBubble linear infinite;
-            will-change: transform, opacity;
-            user-select: none;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.06);
-            opacity: 0.5;
-        }
-        @keyframes floatBubble {
-            0% {
-                transform: translateY(100vh) translateX(0px) scale(0.6);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.5;
-            }
-            85% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-10vh) translateX(40px) scale(1.2);
-                opacity: 0;
-            }
-        }
-        .site-wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem;
-        }
-
-        /* ---------- TOP NAV ---------- */
-        .top-nav {
-            background: rgba(255, 255, 255, 0.80);
-            backdrop-filter: blur(14px);
-            border-radius: 2rem;
-            padding: 0.7rem 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-        }
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(145deg, #1e3a8a, #2563eb);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.2rem;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.20);
-        }
-        .brand h1 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #0b1e3a;
-        }
-        .brand h1 span {
-            color: #2563eb;
-        }
-        .brand .tagline-small {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #94a3b8;
-            margin-left: 0.2rem;
-        }
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .user-section .greeting {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .user-section .greeting span {
-            color: #2563eb;
-        }
-        .avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-        .btn-logout {
-            background: transparent;
-            border: 1.5px solid #e2e8f0;
-            color: #64748b;
-            padding: 0.4rem 1.2rem;
-            border-radius: 60px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .btn-logout:hover {
-            background: #fef2f2;
-            border-color: #ef4444;
-            color: #b91c1c;
-        }
-
-        /* ---------- HERO BANNER ---------- */
-        .hero-banner {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-            border-radius: 2rem;
-            padding: 1.6rem 2.5rem;
-            color: #fff;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 16px 48px rgba(37, 99, 235, 0.20);
-        }
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            pointer-events: none;
-        }
-        .hero-banner h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.2rem;
-        }
-        .hero-banner h2 i {
-            color: #fcd34d;
-            margin-right: 0.4rem;
-        }
-        .hero-banner p {
-            font-size: 0.95rem;
-            opacity: 0.85;
-            max-width: 550px;
-        }
-
-        /* ---------- STATS ROW ---------- */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .stat-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 1.2rem;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            transition: transform 0.15s ease;
-        }
-        .stat-card:hover {
-            transform: translateY(-3px);
-        }
-        .stat-card .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0b1e3a;
-            line-height: 1.2;
-        }
-        .stat-card .stat-label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .stat-card .stat-icon {
-            font-size: 1.2rem;
-            margin-bottom: 0.1rem;
-            display: block;
-        }
-        .stat-card .stat-icon.blue {
-            color: #3b82f6;
-        }
-        .stat-card .stat-icon.green {
-            color: #22c55e;
-        }
-        .stat-card .stat-icon.purple {
-            color: #8b5cf6;
-        }
-        .stat-card .stat-icon.orange {
-            color: #f97316;
-        }
-        .stat-card .stat-icon.red {
-            color: #ef4444;
-        }
-        .stat-card .stat-icon.yellow {
-            color: #f59e0b;
-        }
-
-        /* ---------- LAYOUT ---------- */
-        .dashboard-layout {
-            display: flex;
-            gap: 1.8rem;
-            align-items: flex-start;
-        }
-
-        /* ---------- SIDEBAR ---------- */
-        .sidebar {
-            width: 260px;
-            flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 1.2rem 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-            position: sticky;
-            top: 1.5rem;
-            max-height: calc(100vh - 3rem);
-            overflow-y: auto;
-        }
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .sidebar .sidebar-title {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            padding: 0.5rem 1rem 0.8rem;
-        }
-        .sidebar .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.7rem 1rem;
-            border-radius: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #64748b;
-            font-weight: 500;
-            font-size: 0.85rem;
-            border: none;
-            background: transparent;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-        }
-        .sidebar .nav-item:hover {
-            background: #eef2ff;
-            color: #1e293b;
-        }
-        .sidebar .nav-item.active {
-            background: #dbeafe;
-            color: #1e3a8a;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.06);
-        }
-        .sidebar .nav-item i {
-            width: 20px;
-            text-align: center;
-            font-size: 1rem;
-        }
-        .sidebar .nav-item .badge {
-            margin-left: auto;
-            background: #e2e8f0;
-            padding: 0.05rem 0.5rem;
-            border-radius: 60px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: #64748b;
-        }
-        .sidebar .nav-item.active .badge {
-            background: #2563eb;
-            color: #fff;
-        }
-
-        /* ---------- CONTENT AREA ---------- */
-        .content-area {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* ---------- SECTION CARDS ---------- */
-        .section-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 1.8rem 2rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            margin-bottom: 1.8rem;
-            display: none;
-        }
-        .section-card.active {
-            display: block;
-            animation: fadeSlide 0.3s ease;
-        }
-        @keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-card .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .section-card .section-header h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0b1e3a;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .section-card .section-header h3 i {
-            color: #2563eb;
-        }
-        .section-card .section-header .sub-text {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        /* ---------- FORM ELEMENTS ---------- */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .form-grid .full-width {
-            grid-column: 1 / -1;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .form-group label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 0.6rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            transition: border-color 0.2s;
-            outline: none;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #2563eb;
-            background: #fff;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
-        .form-group .helper-text {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-top: 0.1rem;
-        }
-
-        .btn-primary {
-            padding: 0.6rem 1.8rem;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: #fff;
-            border: none;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
-        }
-        .btn-success {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-        }
-        .btn-success:hover {
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
-        }
-        .btn-danger {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-        .btn-danger:hover {
-            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
-        }
-        .btn-orange {
-            background: linear-gradient(135deg, #f97316, #ea580c);
-        }
-        .btn-orange:hover {
-            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
-        }
-        .btn-purple {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-        }
-        .btn-purple:hover {
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
-        }
-        .btn-sm {
-            padding: 0.3rem 1rem;
-            font-size: 0.75rem;
-        }
-        .btn-sm2 {
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-        }
-
-        /* ---------- TABLES ---------- */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        .data-table th {
-            text-align: left;
-            padding: 0.6rem 0.8rem;
-            background: #f1f5f9;
-            font-weight: 600;
-            color: #475569;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        .data-table td {
-            padding: 0.6rem 0.8rem;
-            border-bottom: 1px solid #eef2f6;
-        }
-        .data-table tr:hover td {
-            background: #f8fafc;
-        }
-        .data-table .actions {
-            display: flex;
-            gap: 0.3rem;
-        }
-        .data-table .actions button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            color: #94a3b8;
-        }
-        .data-table .actions button:hover {
-            background: #eef2ff;
-            color: #2563eb;
-        }
-        .data-table .actions button.danger:hover {
-            background: #fef2f2;
-            color: #ef4444;
-        }
-        .empty-state {
-            text-align: center;
-            color: #94a3b8;
-            padding: 2rem 0;
-        }
-        .empty-state i {
-            font-size: 2.5rem;
-            color: #cbd5e1;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ---------- TOAST ---------- */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #1e293b;
-            color: #fff;
-            padding: 0.8rem 1.5rem;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            transform: translateY(120px);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            max-width: 90%;
-        }
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .toast i {
-            font-size: 1.1rem;
-        }
-        .toast.success i {
-            color: #4ade80;
-        }
-        .toast.error i {
-            color: #f87171;
-        }
-        .toast.info i {
-            color: #60a5fa;
-        }
-
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 1024px) {
-            .dashboard-layout {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                position: static;
-                max-height: none;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.3rem;
-                padding: 0.8rem;
-                border-radius: 1.4rem;
-            }
-            .sidebar .sidebar-title {
-                display: none;
-            }
-            .sidebar .nav-item {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-                width: auto;
-                border-radius: 60px;
-            }
-            .sidebar .nav-item .badge {
-                display: none;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 768px) {
-            .site-wrapper {
-                padding: 1rem;
-            }
-            .top-nav {
-                padding: 0.6rem 1.2rem;
-                border-radius: 1.5rem;
-                gap: 0.5rem;
-            }
-            .brand h1 {
-                font-size: 1rem;
-            }
-            .brand .tagline-small {
-                display: none;
-            }
-            .hero-banner {
-                padding: 1.2rem 1.2rem;
-                border-radius: 1.5rem;
-            }
-            .hero-banner h2 {
-                font-size: 1.2rem;
-            }
-            .hero-banner p {
-                font-size: 0.8rem;
-            }
-            .stats-row {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.5rem;
-            }
-            .stat-card {
-                padding: 0.6rem 0.3rem;
-            }
-            .stat-card .stat-number {
-                font-size: 1.2rem;
-            }
-            .section-card {
-                padding: 1.2rem 1rem;
-                border-radius: 1.4rem;
-            }
-            .section-card .section-header h3 {
-                font-size: 1rem;
-            }
-            .data-table {
-                font-size: 0.75rem;
-            }
-            .data-table th,
-            .data-table td {
-                padding: 0.4rem 0.5rem;
-            }
-            .user-section .greeting {
-                font-size: 0.7rem;
-            }
-            .btn-logout span {
-                display: none;
-            }
-            .btn-logout i {
-                font-size: 1rem;
-            }
-            .btn-logout {
-                padding: 0.4rem 0.8rem;
-            }
-            .toast {
-                bottom: 1rem;
-                right: 1rem;
-                left: 1rem;
-                border-radius: 1rem;
-                justify-content: center;
-                font-size: 0.8rem;
-                padding: 0.7rem 1.2rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .sidebar .nav-item {
-                font-size: 0.7rem;
-                padding: 0.4rem 0.6rem;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4ff; color: #1e293b; min-height: 100vh; }
+        .floating-bubble { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; animation: floatBubble linear infinite; will-change: transform, opacity; user-select: none; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.25); box-shadow: 0 0 40px rgba(99,102,241,0.06); opacity: 0.5; }
+        @keyframes floatBubble { 0% { transform: translateY(100vh) translateX(0px) scale(0.6); opacity: 0; } 15% { opacity: 0.5; } 85% { opacity: 0.5; } 100% { transform: translateY(-10vh) translateX(40px) scale(1.2); opacity: 0; } }
+        .site-wrapper { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
+        .top-nav { background: rgba(255,255,255,0.80); backdrop-filter: blur(14px); border-radius: 2rem; padding: 0.7rem 1.8rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border: 1px solid rgba(255,255,255,0.6); margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.8rem; }
+        .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+        .brand-icon { width: 40px; height: 40px; background: linear-gradient(145deg, #1e3a8a, #2563eb); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; box-shadow: 0 6px 16px rgba(37,99,235,0.20); }
+        .brand h1 { font-size: 1.2rem; font-weight: 800; color: #0b1e3a; }
+        .brand h1 span { color: #2563eb; }
+        .brand .tagline-small { font-size: 0.7rem; font-weight: 500; color: #94a3b8; margin-left: 0.2rem; }
+        .user-section { display: flex; align-items: center; gap: 1rem; }
+        .user-section .greeting { font-size: 0.85rem; font-weight: 600; color: #1e293b; }
+        .user-section .greeting span { color: #2563eb; }
+        .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #7c3aed); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; flex-shrink: 0; }
+        .btn-logout { background: transparent; border: 1.5px solid #e2e8f0; color: #64748b; padding: 0.4rem 1.2rem; border-radius: 60px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 0.4rem; }
+        .btn-logout:hover { background: #fef2f2; border-color: #ef4444; color: #b91c1c; }
+        .hero-banner { background: linear-gradient(135deg, #1e3a8a, #2563eb); border-radius: 2rem; padding: 1.6rem 2.5rem; color: #fff; margin-bottom: 2rem; position: relative; overflow: hidden; box-shadow: 0 16px 48px rgba(37,99,235,0.20); }
+        .hero-banner::after { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none; }
+        .hero-banner h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.2rem; }
+        .hero-banner h2 i { color: #fcd34d; margin-right: 0.4rem; }
+        .hero-banner p { font-size: 0.95rem; opacity: 0.85; max-width: 550px; }
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: 1.2rem; padding: 1rem; text-align: center; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.15s ease; }
+        .stat-card:hover { transform: translateY(-3px); }
+        .stat-card .stat-number { font-size: 1.8rem; font-weight: 800; color: #0b1e3a; line-height: 1.2; }
+        .stat-card .stat-label { font-size: 0.65rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.04em; }
+        .stat-card .stat-icon { font-size: 1.2rem; margin-bottom: 0.1rem; display: block; }
+        .stat-card .stat-icon.blue { color: #3b82f6; }
+        .stat-card .stat-icon.green { color: #22c55e; }
+        .stat-card .stat-icon.purple { color: #8b5cf6; }
+        .stat-card .stat-icon.orange { color: #f97316; }
+        .stat-card .stat-icon.red { color: #ef4444; }
+        .stat-card .stat-icon.yellow { color: #f59e0b; }
+        .dashboard-layout { display: flex; gap: 1.8rem; align-items: flex-start; }
+        .sidebar { width: 260px; flex-shrink: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: 1.8rem; padding: 1.2rem 0.8rem; border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 30px rgba(0,0,0,0.04); position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow-y: auto; }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .sidebar .sidebar-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; padding: 0.5rem 1rem 0.8rem; }
+        .sidebar .nav-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 1rem; border-radius: 1rem; cursor: pointer; transition: all 0.2s ease; color: #64748b; font-weight: 500; font-size: 0.85rem; border: none; background: transparent; width: 100%; font-family: 'Inter', sans-serif; }
+        .sidebar .nav-item:hover { background: #eef2ff; color: #1e293b; }
+        .sidebar .nav-item.active { background: #dbeafe; color: #1e3a8a; font-weight: 600; box-shadow: 0 2px 8px rgba(37,99,235,0.06); }
+        .sidebar .nav-item i { width: 20px; text-align: center; font-size: 1rem; }
+        .sidebar .nav-item .badge { margin-left: auto; background: #e2e8f0; padding: 0.05rem 0.5rem; border-radius: 60px; font-size: 0.6rem; font-weight: 700; color: #64748b; }
+        .sidebar .nav-item.active .badge { background: #2563eb; color: #fff; }
+        .content-area { flex: 1; min-width: 0; }
+        .section-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: 1.8rem; padding: 1.8rem 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border: 1px solid rgba(255,255,255,0.6); margin-bottom: 1.8rem; display: none; }
+        .section-card.active { display: block; animation: fadeSlide 0.3s ease; }
+        @keyframes fadeSlide { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        .section-card .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
+        .section-card .section-header h3 { font-size: 1.2rem; font-weight: 700; color: #0b1e3a; display: flex; align-items: center; gap: 0.6rem; }
+        .section-card .section-header h3 i { color: #2563eb; }
+        .section-card .section-header .sub-text { font-size: 0.8rem; color: #94a3b8; font-weight: 500; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-grid .full-width { grid-column: 1 / -1; }
+        .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+        .form-group label { font-size: 0.8rem; font-weight: 600; color: #1e293b; }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.6rem 1rem; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.85rem; font-family: 'Inter', sans-serif; background: #f8fafc; transition: border-color 0.2s; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #2563eb; background: #fff; }
+        .form-group textarea { resize: vertical; min-height: 70px; }
+        .form-group .helper-text { font-size: 0.7rem; color: #94a3b8; margin-top: 0.1rem; }
+        .btn-primary { padding: 0.6rem 1.8rem; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border: none; border-radius: 60px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.25); }
+        .btn-success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .btn-success:hover { box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .btn-danger:hover { box-shadow: 0 8px 24px rgba(239,68,68,0.25); }
+        .btn-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .btn-orange:hover { box-shadow: 0 8px 24px rgba(249,115,22,0.25); }
+        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .btn-purple:hover { box-shadow: 0 8px 24px rgba(139,92,246,0.25); }
+        .btn-sm { padding: 0.3rem 1rem; font-size: 0.75rem; }
+        .btn-sm2 { padding: 0.2rem 0.8rem; font-size: 0.7rem; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .data-table th { text-align: left; padding: 0.6rem 0.8rem; background: #f1f5f9; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; }
+        .data-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid #eef2f6; }
+        .data-table tr:hover td { background: #f8fafc; }
+        .data-table .actions { display: flex; gap: 0.3rem; }
+        .data-table .actions button { background: none; border: none; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 4px; transition: all 0.2s ease; color: #94a3b8; }
+        .data-table .actions button:hover { background: #eef2ff; color: #2563eb; }
+        .data-table .actions button.danger:hover { background: #fef2f2; color: #ef4444; }
+        .empty-state { text-align: center; color: #94a3b8; padding: 2rem 0; }
+        .empty-state i { font-size: 2.5rem; color: #cbd5e1; display: block; margin-bottom: 0.5rem; }
+        .student-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .student-list-item { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: #f8fafc; border-radius: 10px; border: 1px solid #eef2f6; font-size: 0.85rem; }
+        .student-list-item .student-info .name { font-weight: 600; color: #0b1e3a; }
+        .student-list-item .student-info .class { font-size: 0.7rem; color: #94a3b8; }
+        .student-list-item .student-actions { display: flex; gap: 0.3rem; }
+        .student-list-item .student-actions button { background: none; border: none; cursor: pointer; color: #94a3b8; padding: 0.2rem 0.4rem; border-radius: 4px; transition: all 0.2s ease; }
+        .student-list-item .student-actions button:hover { background: #fef2f2; color: #ef4444; }
+        .teacher-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .teacher-list-item { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: #f8fafc; border-radius: 10px; border: 1px solid #eef2f6; font-size: 0.85rem; }
+        .teacher-list-item .teacher-info .name { font-weight: 600; color: #0b1e3a; }
+        .teacher-list-item .teacher-info .role { font-size: 0.7rem; color: #94a3b8; }
+        .teacher-list-item .teacher-actions { display: flex; gap: 0.3rem; }
+        .teacher-list-item .teacher-actions button { background: none; border: none; cursor: pointer; color: #94a3b8; padding: 0.2rem 0.4rem; border-radius: 4px; transition: all 0.2s ease; }
+        .teacher-list-item .teacher-actions button:hover { background: #fef2f2; color: #ef4444; }
+        .toast { position: fixed; bottom: 2rem; right: 2rem; background: #1e293b; color: #fff; padding: 0.8rem 1.5rem; border-radius: 60px; font-size: 0.85rem; font-weight: 500; box-shadow: 0 12px 40px rgba(0,0,0,0.15); z-index: 999; display: flex; align-items: center; gap: 0.6rem; transform: translateY(120px); opacity: 0; transition: all 0.4s cubic-bezier(0.22,1,0.36,1); max-width: 90%; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; }
+        .toast.success i { color: #4ade80; }
+        .toast.error i { color: #f87171; }
+        .toast.info i { color: #60a5fa; }
+        .notice-item { padding: 0.8rem 1rem; background: #f8fafc; border-radius: 12px; border-left: 4px solid #2563eb; margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+        .notice-item .notice-content { flex: 1; }
+        .notice-item .notice-content .notice-title { font-weight: 600; color: #0b1e3a; }
+        .notice-item .notice-content .notice-text { font-size: 0.85rem; color: #475569; margin-top: 0.1rem; }
+        .notice-item .notice-content .notice-meta { font-size: 0.65rem; color: #94a3b8; margin-top: 0.2rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .notice-item .notice-actions button { background: none; border: none; cursor: pointer; color: #94a3b8; padding: 0.2rem 0.4rem; border-radius: 4px; transition: all 0.2s ease; }
+        .notice-item .notice-actions button:hover { background: #fef2f2; color: #ef4444; }
+        @media (max-width: 1024px) { .dashboard-layout { flex-direction: column; } .sidebar { width: 100%; position: static; max-height: none; display: flex; flex-wrap: wrap; gap: 0.3rem; padding: 0.8rem; border-radius: 1.4rem; } .sidebar .sidebar-title { display: none; } .sidebar .nav-item { padding: 0.5rem 0.8rem; font-size: 0.8rem; width: auto; border-radius: 60px; } .sidebar .nav-item .badge { display: none; } .form-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .site-wrapper { padding: 1rem; } .top-nav { padding: 0.6rem 1.2rem; border-radius: 1.5rem; gap: 0.5rem; } .brand h1 { font-size: 1rem; } .brand .tagline-small { display: none; } .hero-banner { padding: 1.2rem 1.2rem; border-radius: 1.5rem; } .hero-banner h2 { font-size: 1.2rem; } .hero-banner p { font-size: 0.8rem; } .stats-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; } .stat-card { padding: 0.6rem 0.3rem; } .stat-card .stat-number { font-size: 1.2rem; } .section-card { padding: 1.2rem 1rem; border-radius: 1.4rem; } .section-card .section-header h3 { font-size: 1rem; } .data-table { font-size: 0.75rem; } .data-table th, .data-table td { padding: 0.4rem 0.5rem; } .user-section .greeting { font-size: 0.7rem; } .btn-logout span { display: none; } .btn-logout i { font-size: 1rem; } .btn-logout { padding: 0.4rem 0.8rem; } .student-list-grid { grid-template-columns: 1fr; } .toast { bottom: 1rem; right: 1rem; left: 1rem; border-radius: 1rem; justify-content: center; font-size: 0.8rem; padding: 0.7rem 1.2rem; } }
+        @media (max-width: 480px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .sidebar .nav-item { font-size: 0.7rem; padding: 0.4rem 0.6rem; } }
     </style>
 </head>
 <body>
@@ -823,19 +254,27 @@
                         <div class="form-group"><label>Full Name *</label><input type="text" id="studentName" placeholder="e.g. Rahul Sharma" /></div>
                         <div class="form-group"><label>Email *</label><input type="email" id="studentEmail" placeholder="student@example.com" /></div>
                         <div class="form-group"><label>Password *</label><input type="text" id="studentPassword" placeholder="Min 6 characters" /></div>
-                        <div class="form-group"><label>Class *</label><select id="studentClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Class *</label>
+                            <select id="studentClass">
+                                <option value="">Select Class</option>
+                                <option value="6">Class 6</option><option value="7">Class 7</option>
+                                <option value="8">Class 8</option><option value="9">Class 9</option>
+                                <option value="10">Class 10</option><option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select>
+                        </div>
                         <div class="form-group"><label>Parent Contact</label><input type="text" id="studentParentContact" placeholder="e.g. 9876543210" /></div>
                         <div class="form-group"><label>Address</label><input type="text" id="studentAddress" placeholder="Student's address" /></div>
                         <div class="form-group full-width">
                             <button class="btn-primary" id="addStudentBtn"><i class="fas fa-plus"></i> Add Student</button>
-                            <button class="btn-primary btn-sm" id="refreshStudentsBtn" style="margin-top:0.5rem;"><i class="fas fa-sync-alt"></i> Refresh List</button>
+                            <button class="btn-primary btn-sm" id="refreshStudentsBtn" style="margin-top:0.5rem; margin-left:0.5rem;"><i class="fas fa-sync-alt"></i> Refresh List</button>
                         </div>
                     </div>
 
                     <!-- Student List -->
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Students</h4>
-                        <div id="studentListContainer"><div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div></div>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Students (<span id="studentCount">0</span>)</h4>
+                        <div id="studentListContainer"><div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet. Add a student above.</div></div>
                     </div>
                 </div>
 
@@ -862,7 +301,7 @@
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Teachers</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Teachers (<span id="teacherCount">0</span>)</h4>
                         <div id="teacherListContainer"><div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div></div>
                     </div>
                 </div>
@@ -878,14 +317,29 @@
 
                     <div class="form-grid">
                         <div class="form-group"><label>Student</label><select id="feeStudentSelect"><option value="">Select Student</option></select></div>
-                        <div class="form-group"><label>Month</label><select id="feeMonth"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select></div>
+                        <div class="form-group"><label>Month</label>
+                            <select id="feeMonth">
+                                <option value="January">January</option><option value="February">February</option>
+                                <option value="March">March</option><option value="April">April</option>
+                                <option value="May">May</option><option value="June">June</option>
+                                <option value="July">July</option><option value="August">August</option>
+                                <option value="September">September</option><option value="October">October</option>
+                                <option value="November">November</option><option value="December">December</option>
+                            </select>
+                        </div>
                         <div class="form-group"><label>Amount (₹)</label><input type="number" id="feeAmount" placeholder="e.g. 2500" /></div>
-                        <div class="form-group"><label>Status</label><select id="feeStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select></div>
+                        <div class="form-group"><label>Status</label>
+                            <select id="feeStatus">
+                                <option value="Paid">Paid</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Partial">Partial</option>
+                            </select>
+                        </div>
                         <div class="form-group full-width"><button class="btn-primary" id="addFeeBtn"><i class="fas fa-plus"></i> Add Fee Record</button></div>
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Fee Records</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Fee Records (<span id="feeCount">0</span>)</h4>
                         <div id="feeRecordsContainer"><div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div></div>
                     </div>
                 </div>
@@ -900,15 +354,32 @@
                     </div>
 
                     <div class="form-grid">
-                        <div class="form-group"><label>Class</label><select id="materialClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                        <div class="form-group"><label>Subject</label><select id="materialSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group"><label>Class</label>
+                            <select id="materialClass">
+                                <option value="">Select Class</option>
+                                <option value="6">Class 6</option><option value="7">Class 7</option>
+                                <option value="8">Class 8</option><option value="9">Class 9</option>
+                                <option value="10">Class 10</option><option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Subject</label>
+                            <select id="materialSubject">
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="Social Studies">Social Studies</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Computer Science">Computer Science</option>
+                            </select>
+                        </div>
                         <div class="form-group full-width"><label>Title *</label><input type="text" id="materialTitle" placeholder="e.g. Chapter 6 - Lines & Angles" /></div>
                         <div class="form-group full-width"><label>Content / Link</label><textarea id="materialContent" placeholder="Enter notes content or paste a link to a PDF/Video..."></textarea></div>
                         <div class="form-group full-width"><button class="btn-orange" id="addMaterialBtn"><i class="fas fa-plus"></i> Add Study Material</button></div>
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Materials</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Materials (<span id="materialCount">0</span>)</h4>
                         <div id="materialListContainer"><div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div></div>
                     </div>
                 </div>
@@ -940,7 +411,7 @@
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notices</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notices (<span id="noticeCount">0</span>)</h4>
                         <div id="noticeListContainer"><div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div></div>
                     </div>
                 </div>
@@ -955,22 +426,35 @@
                     </div>
 
                     <div class="form-grid">
-                        <div class="form-group"><label>Student</label><select id="hwStudentSelect"><option value="">Select Student</option></select></div>
-                        <div class="form-group"><label>Subject</label><select id="hwSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                        <div class="form-group full-width"><label>Title *</label><input type="text" id="hwTitle" placeholder="e.g. Exercise 8.2" /></div>
-                        <div class="form-group full-width"><label>Description</label><textarea id="hwDescription"></textarea></div>
-                        <div class="form-group"><label>Due Date</label><input type="date" id="hwDueDate" /></div>
-                        <div class="form-group"><label>Assign to</label>
+                        <div class="form-group"><label>Student/Class</label>
+                            <select id="hwStudentSelect">
+                                <option value="">Select Student or Class</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Assign Type</label>
                             <select id="hwAssignType">
                                 <option value="individual">Individual</option>
                                 <option value="class">Entire Class</option>
                             </select>
                         </div>
+                        <div class="form-group"><label>Subject</label>
+                            <select id="hwSubject">
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="Social Studies">Social Studies</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Computer Science">Computer Science</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Due Date</label><input type="date" id="hwDueDate" /></div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="hwTitle" placeholder="e.g. Exercise 8.2" /></div>
+                        <div class="form-group full-width"><label>Description</label><textarea id="hwDescription"></textarea></div>
                         <div class="form-group full-width"><button class="btn-primary" id="addHomeworkBtn"><i class="fas fa-plus"></i> Assign Homework</button></div>
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Homework Assignments</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Homework Assignments (<span id="hwCount">0</span>)</h4>
                         <div id="homeworkListContainer"><div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div></div>
                     </div>
                 </div>
@@ -985,23 +469,36 @@
                     </div>
 
                     <div class="form-grid">
-                        <div class="form-group"><label>Student</label><select id="testStudentSelect"><option value="">Select Student</option></select></div>
-                        <div class="form-group"><label>Subject</label><select id="testSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                        <div class="form-group"><label>Test Name *</label><input type="text" id="testName" placeholder="e.g. Weekly Test 1" /></div>
-                        <div class="form-group"><label>Date</label><input type="date" id="testDate" /></div>
-                        <div class="form-group"><label>Marks Obtained</label><input type="number" id="testMarks" placeholder="e.g. 18" min="0" /></div>
-                        <div class="form-group"><label>Max Marks</label><input type="number" id="testMaxMarks" placeholder="e.g. 20" min="1" value="20" /></div>
-                        <div class="form-group"><label>Assign to</label>
+                        <div class="form-group"><label>Student/Class</label>
+                            <select id="testStudentSelect">
+                                <option value="">Select Student or Class</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Assign Type</label>
                             <select id="testAssignType">
                                 <option value="individual">Individual</option>
                                 <option value="class">Entire Class</option>
                             </select>
                         </div>
+                        <div class="form-group"><label>Subject</label>
+                            <select id="testSubject">
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="Social Studies">Social Studies</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Computer Science">Computer Science</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Date</label><input type="date" id="testDate" /></div>
+                        <div class="form-group"><label>Test Name *</label><input type="text" id="testName" placeholder="e.g. Weekly Test 1" /></div>
+                        <div class="form-group"><label>Marks Obtained</label><input type="number" id="testMarks" placeholder="e.g. 18" min="0" /></div>
+                        <div class="form-group"><label>Max Marks</label><input type="number" id="testMaxMarks" placeholder="e.g. 20" min="1" value="20" /></div>
                         <div class="form-group full-width"><button class="btn-purple" id="addTestBtn"><i class="fas fa-plus"></i> Add Test</button></div>
                     </div>
 
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Test Records</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Test Records (<span id="testCount">0</span>)</h4>
                         <div id="testListContainer"><div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div></div>
                     </div>
                 </div>
@@ -1070,6 +567,7 @@
             let allMaterials = [];
 
             let currentTeacherId = null;
+            let dataLoaded = false;
 
             // ---------- TOAST ----------
             let toastTimeout = null;
@@ -1105,7 +603,6 @@
             auth.onAuthStateChanged(user => {
                 if (user) {
                     currentTeacherId = user.uid;
-                    // Load teacher profile
                     db.collection('teachers').doc(user.uid).get()
                         .then(doc => {
                             if (doc.exists) {
@@ -1144,8 +641,11 @@
             function loadAllData() {
                 if (!currentTeacherId) return;
 
-                // Students
-                db.collection('students').get()
+                let loadingPromises = [];
+
+                // Load Students
+                loadingPromises.push(
+                    db.collection('students').get()
                     .then(snapshot => {
                         allStudents = [];
                         snapshot.forEach(doc => {
@@ -1153,97 +653,115 @@
                         });
                         renderStudentList();
                         updateStudentDropdowns();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allStudents.length + ' students');
                     })
-                    .catch(err => console.error('Error loading students:', err));
+                    .catch(err => {
+                        console.error('Error loading students:', err);
+                        showToast('Error loading students: ' + err.message, 'error');
+                    })
+                );
 
-                // Teachers
-                db.collection('teachers').get()
+                // Load Teachers
+                loadingPromises.push(
+                    db.collection('teachers').get()
                     .then(snapshot => {
                         allTeachers = [];
                         snapshot.forEach(doc => {
                             allTeachers.push({ uid: doc.id, ...doc.data() });
                         });
                         renderTeacherList();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allTeachers.length + ' teachers');
                     })
-                    .catch(err => console.error('Error loading teachers:', err));
+                    .catch(err => console.error('Error loading teachers:', err))
+                );
 
-                // Fees
-                db.collection('fees').get()
+                // Load Fees
+                loadingPromises.push(
+                    db.collection('fees').get()
                     .then(snapshot => {
                         allFees = [];
                         snapshot.forEach(doc => {
                             allFees.push({ id: doc.id, ...doc.data() });
                         });
                         renderFeeRecords();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allFees.length + ' fee records');
                     })
-                    .catch(err => console.error('Error loading fees:', err));
+                    .catch(err => console.error('Error loading fees:', err))
+                );
 
-                // Homework
-                db.collection('homework').get()
+                // Load Homework
+                loadingPromises.push(
+                    db.collection('homework').get()
                     .then(snapshot => {
                         allHomework = [];
                         snapshot.forEach(doc => {
                             allHomework.push({ id: doc.id, ...doc.data() });
                         });
                         renderHomeworkList();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allHomework.length + ' homework assignments');
                     })
-                    .catch(err => console.error('Error loading homework:', err));
+                    .catch(err => console.error('Error loading homework:', err))
+                );
 
-                // Tests
-                db.collection('tests').get()
+                // Load Tests
+                loadingPromises.push(
+                    db.collection('tests').get()
                     .then(snapshot => {
                         allTests = [];
                         snapshot.forEach(doc => {
                             allTests.push({ id: doc.id, ...doc.data() });
                         });
                         renderTestList();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allTests.length + ' tests');
                     })
-                    .catch(err => console.error('Error loading tests:', err));
+                    .catch(err => console.error('Error loading tests:', err))
+                );
 
-                // Notices
-                db.collection('notices').get()
+                // Load Notices
+                loadingPromises.push(
+                    db.collection('notices').get()
                     .then(snapshot => {
                         allNotices = [];
                         snapshot.forEach(doc => {
                             allNotices.push({ id: doc.id, ...doc.data() });
                         });
                         renderNoticeList();
-                        updateStats();
-                        updateBadges();
-                        updateDashboard();
+                        console.log('✅ Loaded ' + allNotices.length + ' notices');
                     })
-                    .catch(err => console.error('Error loading notices:', err));
+                    .catch(err => console.error('Error loading notices:', err))
+                );
 
-                // Study Materials
-                db.collection('materials').get()
+                // Load Materials
+                loadingPromises.push(
+                    db.collection('materials').get()
                     .then(snapshot => {
                         allMaterials = [];
                         snapshot.forEach(doc => {
                             allMaterials.push({ id: doc.id, ...doc.data() });
                         });
                         renderMaterialList();
+                        console.log('✅ Loaded ' + allMaterials.length + ' materials');
                     })
-                    .catch(err => console.error('Error loading materials:', err));
+                    .catch(err => console.error('Error loading materials:', err))
+                );
+
+                // Update stats after all data is loaded
+                Promise.all(loadingPromises)
+                    .then(() => {
+                        updateStats();
+                        updateBadges();
+                        updateDashboard();
+                        dataLoaded = true;
+                        console.log('✅ All data loaded successfully');
+                    })
+                    .catch(err => {
+                        console.error('Error loading data:', err);
+                    });
             }
 
             // ---------- UPDATE STUDENT DROPDOWNS ----------
             function updateStudentDropdowns() {
-                const selects = ['feeStudentSelect', 'hwStudentSelect', 'testStudentSelect', 'noticeTargetValue'];
+                const selects = ['feeStudentSelect', 'noticeTargetValue'];
                 selects.forEach(id => {
                     const select = document.getElementById(id);
                     if (!select) return;
@@ -1257,22 +775,79 @@
                     });
                     if (currentVal) select.value = currentVal;
                 });
+
+                // Homework student select (with class option)
+                const hwSelect = document.getElementById('hwStudentSelect');
+                if (hwSelect) {
+                    const currentVal = hwSelect.value;
+                    hwSelect.innerHTML = '<option value="">Select Student or Class</option>';
+                    // Add classes first
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = 'class_' + c;
+                        opt.textContent = '📚 Class ' + c + ' (All Students)';
+                        opt.setAttribute('data-type', 'class');
+                        hwSelect.appendChild(opt);
+                    });
+                    // Then add individual students
+                    allStudents.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.uid;
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                        opt.setAttribute('data-type', 'student');
+                        hwSelect.appendChild(opt);
+                    });
+                    if (currentVal) hwSelect.value = currentVal;
+                }
+
+                // Test student select (with class option)
+                const testSelect = document.getElementById('testStudentSelect');
+                if (testSelect) {
+                    const currentVal = testSelect.value;
+                    testSelect.innerHTML = '<option value="">Select Student or Class</option>';
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = 'class_' + c;
+                        opt.textContent = '📚 Class ' + c + ' (All Students)';
+                        testSelect.appendChild(opt);
+                    });
+                    allStudents.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.uid;
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                        testSelect.appendChild(opt);
+                    });
+                    if (currentVal) testSelect.value = currentVal;
+                }
             }
 
             // ---------- RENDER STUDENT LIST ----------
             function renderStudentList() {
                 const container = document.getElementById('studentListContainer');
+                const countEl = document.getElementById('studentCount');
                 if (!container) return;
+
                 if (allStudents.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div>';
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet. Add a student above.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
-                let html = '<div class="student-list-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:0.8rem;">';
+
+                if (countEl) countEl.textContent = allStudents.length;
+
+                let html = '<div class="student-list-grid">';
                 allStudents.forEach(s => {
                     html += `
-                            <div class="student-list-item" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; background:#f8fafc; border-radius:10px; border:1px solid #eef2f6;">
-                                <div><div style="font-weight:600; color:#0b1e3a;">${s.name || 'N/A'}</div><div style="font-size:0.7rem; color:#94a3b8;">${s.class ? 'Class '+s.class : 'N/A'} · ${s.email || 'No email'}</div></div>
-                                <div><button class="delete-student" data-uid="${s.uid}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button></div>
+                            <div class="student-list-item">
+                                <div class="student-info">
+                                    <div class="name">${s.name || 'N/A'}</div>
+                                    <div class="class">${s.class ? 'Class '+s.class : 'N/A'} · ${s.email || 'No email'}</div>
+                                </div>
+                                <div class="student-actions">
+                                    <button class="delete-student" data-uid="${s.uid}" title="Delete Student"><i class="fas fa-trash-alt"></i></button>
+                                </div>
                             </div>
                         `;
                 });
@@ -1290,7 +865,6 @@
             }
 
             function deleteStudent(uid) {
-                // Remove from Firestore
                 db.collection('students').doc(uid).delete()
                     .then(() => {
                         allStudents = allStudents.filter(s => s.uid !== uid);
@@ -1307,17 +881,28 @@
             // ---------- RENDER TEACHER LIST ----------
             function renderTeacherList() {
                 const container = document.getElementById('teacherListContainer');
+                const countEl = document.getElementById('teacherCount');
                 if (!container) return;
+
                 if (allTeachers.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
-                let html = '<div class="student-list-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:0.8rem;">';
+
+                if (countEl) countEl.textContent = allTeachers.length;
+
+                let html = '<div class="teacher-list-grid">';
                 allTeachers.forEach(t => {
                     html += `
-                            <div class="student-list-item" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; background:#f8fafc; border-radius:10px; border:1px solid #eef2f6;">
-                                <div><div style="font-weight:600; color:#0b1e3a;">${t.name || 'N/A'}</div><div style="font-size:0.7rem; color:#94a3b8;">${t.role || 'Teacher'} · ${t.email || 'No email'}</div></div>
-                                <div><button class="delete-teacher" data-uid="${t.uid}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button></div>
+                            <div class="teacher-list-item">
+                                <div class="teacher-info">
+                                    <div class="name">${t.name || 'N/A'}</div>
+                                    <div class="role">${t.role || 'Teacher'} · ${t.email || 'No email'}</div>
+                                </div>
+                                <div class="teacher-actions">
+                                    ${t.uid !== currentTeacherId ? `<button class="delete-teacher" data-uid="${t.uid}" title="Delete Teacher"><i class="fas fa-trash-alt"></i></button>` : '<span style="font-size:0.6rem; color:#94a3b8;">You</span>'}
+                                </div>
                             </div>
                         `;
                 });
@@ -1327,10 +912,6 @@
                 container.querySelectorAll('.delete-teacher').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const uid = this.dataset.uid;
-                        if (uid === currentTeacherId) {
-                            showToast('You cannot delete yourself.', 'error');
-                            return;
-                        }
                         if (confirm('Delete this teacher?')) {
                             deleteTeacher(uid);
                         }
@@ -1354,11 +935,17 @@
             // ---------- RENDER FEE RECORDS ----------
             function renderFeeRecords() {
                 const container = document.getElementById('feeRecordsContainer');
+                const countEl = document.getElementById('feeCount');
                 if (!container) return;
+
                 if (allFees.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
+
+                if (countEl) countEl.textContent = allFees.length;
+
                 const studentMap = {};
                 allStudents.forEach(s => studentMap[s.uid] = s.name);
                 let html = '<table class="data-table"><thead><tr><th>Student</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>';
@@ -1395,11 +982,17 @@
             // ---------- RENDER HOMEWORK ----------
             function renderHomeworkList() {
                 const container = document.getElementById('homeworkListContainer');
+                const countEl = document.getElementById('hwCount');
                 if (!container) return;
+
                 if (allHomework.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
+
+                if (countEl) countEl.textContent = allHomework.length;
+
                 const studentMap = {};
                 allStudents.forEach(s => studentMap[s.uid] = s.name);
                 let html = '<table class="data-table"><thead><tr><th>Student</th><th>Title</th><th>Subject</th><th>Due</th><th>Action</th></tr></thead><tbody>';
@@ -1434,11 +1027,17 @@
             // ---------- RENDER TESTS ----------
             function renderTestList() {
                 const container = document.getElementById('testListContainer');
+                const countEl = document.getElementById('testCount');
                 if (!container) return;
+
                 if (allTests.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
+
+                if (countEl) countEl.textContent = allTests.length;
+
                 const studentMap = {};
                 allStudents.forEach(s => studentMap[s.uid] = s.name);
                 let html = '<table class="data-table"><thead><tr><th>Student</th><th>Test</th><th>Subject</th><th>Marks</th><th>Date</th><th>Action</th></tr></thead><tbody>';
@@ -1476,11 +1075,17 @@
             // ---------- RENDER NOTICES ----------
             function renderNoticeList() {
                 const container = document.getElementById('noticeListContainer');
+                const countEl = document.getElementById('noticeCount');
                 if (!container) return;
+
                 if (allNotices.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
+
+                if (countEl) countEl.textContent = allNotices.length;
+
                 let html = '';
                 allNotices.forEach(n => {
                     const targetDisplay = n.targetType === 'all' ? 'All Students' :
@@ -1488,17 +1093,17 @@
                         allStudents.find(s => s.uid === n.targetId)?.name || 'Individual';
                     const date = n.createdAt ? new Date(n.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
                     html += `
-                            <div class="notice-item" style="padding:0.8rem 1rem; background:#f8fafc; border-radius:12px; border-left:4px solid #2563eb; margin-bottom:0.6rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
-                                <div class="notice-content" style="flex:1;">
-                                    <div class="notice-title" style="font-weight:600; color:#0b1e3a;">${n.title}</div>
-                                    <div class="notice-text" style="font-size:0.85rem; color:#475569; margin-top:0.1rem;">${n.message}</div>
-                                    <div class="notice-meta" style="font-size:0.65rem; color:#94a3b8; margin-top:0.2rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+                            <div class="notice-item">
+                                <div class="notice-content">
+                                    <div class="notice-title">${n.title}</div>
+                                    <div class="notice-text">${n.message}</div>
+                                    <div class="notice-meta">
                                         <span><i class="fas fa-users"></i> ${targetDisplay}</span>
                                         <span><i class="far fa-calendar-alt"></i> ${date}</span>
                                     </div>
                                 </div>
                                 <div class="notice-actions">
-                                    <button class="delete-notice" data-id="${n.id}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="delete-notice" data-id="${n.id}"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         `;
@@ -1521,11 +1126,17 @@
             // ---------- RENDER STUDY MATERIAL ----------
             function renderMaterialList() {
                 const container = document.getElementById('materialListContainer');
+                const countEl = document.getElementById('materialCount');
                 if (!container) return;
+
                 if (allMaterials.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div>';
+                    if (countEl) countEl.textContent = '0';
                     return;
                 }
+
+                if (countEl) countEl.textContent = allMaterials.length;
+
                 let html = '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Title</th><th>Content</th><th>Action</th></tr></thead><tbody>';
                 allMaterials.forEach(m => {
                     html += `
@@ -1587,9 +1198,7 @@
                 noticeBadge.textContent = allNotices.length;
             }
 
-            function updateDashboard() {
-                // Already updated via stats
-            }
+            function updateDashboard() {}
 
             // ---------- CRUD OPERATIONS ----------
 
@@ -1611,6 +1220,13 @@
                     return;
                 }
 
+                // Check if student already exists in Firestore
+                const existingStudent = allStudents.find(s => s.email === email);
+                if (existingStudent) {
+                    showToast('A student with this email already exists in the system.', 'error');
+                    return;
+                }
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         const user = userCredential.user;
@@ -1624,11 +1240,15 @@
                             role: 'student',
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            db.collection('users').doc(user.uid).set({ role: 'student', email, name });
+                            return db.collection('users').doc(user.uid).set({
+                                role: 'student',
+                                email,
+                                name
+                            });
                         });
                     })
                     .then(() => {
-                        showToast('Student added successfully!', 'success');
+                        showToast('Student added successfully! They can now log in.', 'success');
                         document.getElementById('studentName').value = '';
                         document.getElementById('studentEmail').value = '';
                         document.getElementById('studentPassword').value = '';
@@ -1639,9 +1259,22 @@
                     })
                     .catch(err => {
                         let msg = err.message;
-                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
+                        if (err.code === 'auth/email-already-in-use') {
+                            msg = 'This email is already registered. The student may already exist.';
+                            // Check if student exists in Firestore but not in auth
+                            const existing = allStudents.find(s => s.email === email);
+                            if (existing) {
+                                msg = 'A student with this email already exists in the system. Please use a different email.';
+                            }
+                        }
                         showToast('Error: ' + msg, 'error');
                     });
+            });
+
+            // Refresh Students
+            document.getElementById('refreshStudentsBtn').addEventListener('click', function() {
+                showToast('Refreshing data...', 'info');
+                loadAllData();
             });
 
             // Add Teacher
@@ -1660,6 +1293,13 @@
                     return;
                 }
 
+                // Check if teacher already exists
+                const existing = allTeachers.find(t => t.email === email);
+                if (existing) {
+                    showToast('A teacher with this email already exists.', 'error');
+                    return;
+                }
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         const user = userCredential.user;
@@ -1669,7 +1309,11 @@
                             role,
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            db.collection('users').doc(user.uid).set({ role: 'teacher', email, name });
+                            return db.collection('users').doc(user.uid).set({
+                                role: 'teacher',
+                                email,
+                                name
+                            });
                         });
                     })
                     .then(() => {
@@ -1681,7 +1325,9 @@
                     })
                     .catch(err => {
                         let msg = err.message;
-                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
+                        if (err.code === 'auth/email-already-in-use') {
+                            msg = 'This email is already registered.';
+                        }
                         showToast('Error: ' + msg, 'error');
                     });
             });
@@ -1772,26 +1418,52 @@
 
             // Add Homework
             document.getElementById('addHomeworkBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('hwStudentSelect').value;
+                const targetValue = document.getElementById('hwStudentSelect').value;
+                const assignType = document.getElementById('hwAssignType').value;
                 const subject = document.getElementById('hwSubject').value;
                 const title = document.getElementById('hwTitle').value.trim();
                 const description = document.getElementById('hwDescription').value.trim();
                 const dueDate = document.getElementById('hwDueDate').value;
-                const assignType = document.getElementById('hwAssignType').value;
 
                 if (!title) { showToast('Please enter a title.', 'error'); return; }
+                if (!targetValue) { showToast('Please select a student or class.', 'error'); return; }
 
-                if (assignType === 'class') {
-                    // Assign to all students
-                    const classVal = studentId; // studentId is actually class if we set it properly
-                    // We'll use a different approach: if assignType is class, we'll use a separate field
-                    // For simplicity, we'll just assign to individual or class based on selection
-                    // Let's use a hidden field or just assign to individual for now
-                    showToast('Class-wide assignment coming soon. Use individual for now.', 'info');
+                let studentId = targetValue;
+                let isClass = false;
+
+                // Check if it's a class selection
+                if (targetValue.startsWith('class_')) {
+                    isClass = true;
+                    studentId = targetValue.replace('class_', '');
+                    // Assign to all students in this class
+                    const classStudents = allStudents.filter(s => s.class == studentId);
+                    if (classStudents.length === 0) {
+                        showToast('No students in this class.', 'error');
+                        return;
+                    }
+                    let added = 0;
+                    const promises = classStudents.map(s => {
+                        return db.collection('homework').add({
+                            studentId: s.uid,
+                            title,
+                            subject,
+                            description,
+                            dueDate,
+                            isClass: true,
+                            classAssigned: studentId,
+                            teacherId: currentTeacherId,
+                            done: false,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => added++);
+                    });
+                    Promise.all(promises).then(() => {
+                        showToast(`Homework assigned to ${added} students.`, 'success');
+                        document.getElementById('hwTitle').value = '';
+                        document.getElementById('hwDescription').value = '';
+                        loadAllData();
+                    }).catch(err => showToast('Error: ' + err.message, 'error'));
                     return;
                 }
-
-                if (!studentId) { showToast('Please select a student.', 'error'); return; }
 
                 db.collection('homework').add({
                     studentId,
@@ -1799,7 +1471,7 @@
                     subject,
                     description,
                     dueDate,
-                    isClass: assignType === 'class',
+                    isClass: false,
                     teacherId: currentTeacherId,
                     done: false,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1813,28 +1485,60 @@
 
             // Add Test
             document.getElementById('addTestBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('testStudentSelect').value;
+                const targetValue = document.getElementById('testStudentSelect').value;
+                const assignType = document.getElementById('testAssignType').value;
                 const subject = document.getElementById('testSubject').value;
                 const name = document.getElementById('testName').value.trim();
                 const date = document.getElementById('testDate').value;
                 const marks = document.getElementById('testMarks').value;
                 const maxMarks = document.getElementById('testMaxMarks').value;
-                const assignType = document.getElementById('testAssignType').value;
 
                 if (!name) { showToast('Please enter a test name.', 'error'); return; }
-                if (!studentId && assignType === 'individual') {
-                    showToast('Please select a student.', 'error');
+                if (!targetValue) { showToast('Please select a student or class.', 'error'); return; }
+
+                let studentId = targetValue;
+                let isClass = false;
+
+                if (targetValue.startsWith('class_')) {
+                    isClass = true;
+                    studentId = targetValue.replace('class_', '');
+                    const classStudents = allStudents.filter(s => s.class == studentId);
+                    if (classStudents.length === 0) {
+                        showToast('No students in this class.', 'error');
+                        return;
+                    }
+                    let added = 0;
+                    const promises = classStudents.map(s => {
+                        return db.collection('tests').add({
+                            studentId: s.uid,
+                            name,
+                            subject,
+                            marks: null,
+                            maxMarks: parseFloat(maxMarks) || 20,
+                            date: date || '',
+                            isClass: true,
+                            classAssigned: studentId,
+                            teacherId: currentTeacherId,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => added++);
+                    });
+                    Promise.all(promises).then(() => {
+                        showToast(`Test assigned to ${added} students.`, 'success');
+                        document.getElementById('testName').value = '';
+                        document.getElementById('testMarks').value = '';
+                        loadAllData();
+                    }).catch(err => showToast('Error: ' + err.message, 'error'));
                     return;
                 }
 
                 db.collection('tests').add({
-                    studentId: assignType === 'individual' ? studentId : null,
+                    studentId,
                     name,
                     subject,
                     marks: marks ? parseFloat(marks) : null,
                     maxMarks: parseFloat(maxMarks) || 20,
                     date: date || '',
-                    isClass: assignType === 'class',
+                    isClass: false,
                     teacherId: currentTeacherId,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 }).then(() => {
@@ -1843,12 +1547,6 @@
                     document.getElementById('testMarks').value = '';
                     loadAllData();
                 }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // ---------- REFRESH BUTTONS ----------
-            document.getElementById('refreshStudentsBtn').addEventListener('click', function() {
-                loadAllData();
-                showToast('Refreshed!', 'success');
             });
 
             // ---------- NOTICE TARGET DYNAMIC ----------
@@ -1860,53 +1558,37 @@
                     targetSelect.innerHTML = '<option value="all">All Students</option>';
                 } else if (target === 'class') {
                     const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
-                    classes.forEach(c => {
-                        const opt = document.createElement('option');
-                        opt.value = c;
-                        opt.textContent = 'Class ' + c;
-                        targetSelect.appendChild(opt);
-                    });
+                    if (classes.length === 0) {
+                        targetSelect.innerHTML = '<option value="">No classes available</option>';
+                    } else {
+                        classes.forEach(c => {
+                            const opt = document.createElement('option');
+                            opt.value = c;
+                            opt.textContent = 'Class ' + c;
+                            targetSelect.appendChild(opt);
+                        });
+                    }
                 } else if (target === 'individual') {
-                    allStudents.forEach(s => {
-                        const opt = document.createElement('option');
-                        opt.value = s.uid;
-                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
-                        targetSelect.appendChild(opt);
-                    });
+                    if (allStudents.length === 0) {
+                        targetSelect.innerHTML = '<option value="">No students available</option>';
+                    } else {
+                        allStudents.forEach(s => {
+                            const opt = document.createElement('option');
+                            opt.value = s.uid;
+                            opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                            targetSelect.appendChild(opt);
+                        });
+                    }
                 }
             });
 
             // ---------- TOGGLE HOMEWORK ASSIGN TYPE ----------
             document.getElementById('hwAssignType').addEventListener('change', function() {
-                const hwStudentSelect = document.getElementById('hwStudentSelect');
-                if (this.value === 'class') {
-                    hwStudentSelect.innerHTML = '<option value="">Select Class</option>';
-                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
-                    classes.forEach(c => {
-                        const opt = document.createElement('option');
-                        opt.value = c;
-                        opt.textContent = 'Class ' + c;
-                        hwStudentSelect.appendChild(opt);
-                    });
-                } else {
-                    updateStudentDropdowns();
-                }
+                updateStudentDropdowns();
             });
 
             document.getElementById('testAssignType').addEventListener('change', function() {
-                const testStudentSelect = document.getElementById('testStudentSelect');
-                if (this.value === 'class') {
-                    testStudentSelect.innerHTML = '<option value="">Select Class</option>';
-                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
-                    classes.forEach(c => {
-                        const opt = document.createElement('option');
-                        opt.value = c;
-                        opt.textContent = 'Class ' + c;
-                        testStudentSelect.appendChild(opt);
-                    });
-                } else {
-                    updateStudentDropdowns();
-                }
+                updateStudentDropdowns();
             });
 
             // ---------- ESCAPE TOAST ----------
@@ -1921,6 +1603,14 @@
             // ---------- INIT ----------
             console.log('👨‍🏫 Knowledge Nexus — Teacher Dashboard');
             console.log('📌 Complete management: Students, Teachers, Fees, Materials, Notices, Homework, Tests');
+
+            // Force refresh after 2 seconds to ensure all data is loaded
+            setTimeout(() => {
+                if (!dataLoaded) {
+                    console.log('⚠️ Data not loaded, retrying...');
+                    loadAllData();
+                }
+            }, 3000);
 
         })();
     </script>
