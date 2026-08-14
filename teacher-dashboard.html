@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ---------- Same styles as earlier teacher dashboard ---------- */
+        /* ---------- RESET & BASE ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -63,6 +63,8 @@
             margin: 0 auto;
             padding: 1.5rem;
         }
+
+        /* ---------- TOP NAV ---------- */
         .top-nav {
             background: rgba(255, 255, 255, 0.80);
             backdrop-filter: blur(14px);
@@ -156,6 +158,8 @@
             border-color: #ef4444;
             color: #b91c1c;
         }
+
+        /* ---------- HERO BANNER ---------- */
         .hero-banner {
             background: linear-gradient(135deg, #1e3a8a, #2563eb);
             border-radius: 2rem;
@@ -192,6 +196,8 @@
             opacity: 0.85;
             max-width: 550px;
         }
+
+        /* ---------- STATS ROW ---------- */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -247,13 +253,17 @@
         .stat-card .stat-icon.yellow {
             color: #f59e0b;
         }
+
+        /* ---------- LAYOUT ---------- */
         .dashboard-layout {
             display: flex;
             gap: 1.8rem;
             align-items: flex-start;
         }
+
+        /* ---------- SIDEBAR ---------- */
         .sidebar {
-            width: 240px;
+            width: 260px;
             flex-shrink: 0;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
@@ -329,10 +339,14 @@
             background: #2563eb;
             color: #fff;
         }
+
+        /* ---------- CONTENT AREA ---------- */
         .content-area {
             flex: 1;
             min-width: 0;
         }
+
+        /* ---------- SECTION CARDS ---------- */
         .section-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
@@ -357,6 +371,7 @@
                 transform: translateY(0);
             }
         }
+
         .section-card .section-header {
             display: flex;
             align-items: center;
@@ -381,6 +396,8 @@
             color: #94a3b8;
             font-weight: 500;
         }
+
+        /* ---------- FORM ELEMENTS ---------- */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -426,6 +443,7 @@
             color: #94a3b8;
             margin-top: 0.1rem;
         }
+
         .btn-primary {
             padding: 0.6rem 1.8rem;
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -477,6 +495,8 @@
             padding: 0.2rem 0.8rem;
             font-size: 0.7rem;
         }
+
+        /* ---------- TABLES ---------- */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -529,139 +549,8 @@
             display: block;
             margin-bottom: 0.5rem;
         }
-        .target-toggle {
-            display: flex;
-            gap: 0.5rem;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 60px;
-            margin-bottom: 1.2rem;
-        }
-        .target-toggle button {
-            padding: 0.4rem 1.2rem;
-            border: none;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            background: transparent;
-            color: #64748b;
-        }
-        .target-toggle button.active {
-            background: #fff;
-            color: #0b1e3a;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-        .target-toggle button:hover:not(.active) {
-            color: #1e293b;
-        }
-        .target-select {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .target-select select {
-            padding: 0.5rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            min-width: 160px;
-            outline: none;
-        }
-        .target-select select:focus {
-            border-color: #2563eb;
-        }
-        .student-list-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-        .student-list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.6rem 1rem;
-            background: #f8fafc;
-            border-radius: 10px;
-            border: 1px solid #eef2f6;
-            font-size: 0.85rem;
-        }
-        .student-list-item .student-info .name {
-            font-weight: 600;
-            color: #0b1e3a;
-        }
-        .student-list-item .student-info .class {
-            font-size: 0.7rem;
-            color: #94a3b8;
-        }
-        .student-list-item .student-actions {
-            display: flex;
-            gap: 0.3rem;
-        }
-        .student-list-item .student-actions button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #94a3b8;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-        .student-list-item .student-actions button:hover {
-            background: #fef2f2;
-            color: #ef4444;
-        }
-        .notice-item {
-            padding: 0.8rem 1rem;
-            background: #f8fafc;
-            border-radius: 12px;
-            border-left: 4px solid #2563eb;
-            margin-bottom: 0.6rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        .notice-item .notice-content {
-            flex: 1;
-        }
-        .notice-item .notice-content .notice-title {
-            font-weight: 600;
-            color: #0b1e3a;
-        }
-        .notice-item .notice-content .notice-text {
-            font-size: 0.85rem;
-            color: #475569;
-            margin-top: 0.1rem;
-        }
-        .notice-item .notice-content .notice-meta {
-            font-size: 0.65rem;
-            color: #94a3b8;
-            margin-top: 0.2rem;
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        .notice-item .notice-actions button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #94a3b8;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-        .notice-item .notice-actions button:hover {
-            background: #fef2f2;
-            color: #ef4444;
-        }
+
+        /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -698,6 +587,8 @@
         .toast.info i {
             color: #60a5fa;
         }
+
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 1024px) {
             .dashboard-layout {
                 flex-direction: column;
@@ -789,9 +680,6 @@
             .btn-logout {
                 padding: 0.4rem 0.8rem;
             }
-            .student-list-grid {
-                grid-template-columns: 1fr;
-            }
             .toast {
                 bottom: 1rem;
                 right: 1rem;
@@ -823,13 +711,11 @@
     <div class="floating-bubble" style="width:60px;height:60px;left:70%;background:rgba(236,72,153,0.08);animation-duration:28s;animation-delay:2s;"></div>
 
     <div class="site-wrapper">
+        <!-- ===== TOP NAV ===== -->
         <nav class="top-nav">
             <a href="#" class="brand">
                 <div class="brand-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                <div>
-                    <h1>Knowledge <span>Nexus</span></h1>
-                    <span class="tagline-small">Teacher Dashboard</span>
-                </div>
+                <div><h1>Knowledge <span>Nexus</span></h1><span class="tagline-small">Teacher Dashboard</span></div>
             </a>
             <div class="user-section">
                 <span class="greeting"><i class="fas fa-user-tie" style="color:#f59e0b;"></i> <span id="teacherName">Teacher</span></span>
@@ -838,60 +724,70 @@
             </div>
         </nav>
 
+        <!-- ===== HERO BANNER ===== -->
         <div class="hero-banner">
             <h2><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h2>
-            <p>Manage students, attendance, homework, tests, notes, chapters, subjects, fees, and notices — all in one place.</p>
+            <p>Manage students, teachers, fees, study materials, notifications, homework, and tests — all in one place.</p>
         </div>
 
+        <!-- ===== STATS ROW ===== -->
         <div class="stats-row" id="statsRow">
             <div class="stat-card"><span class="stat-icon blue"><i class="fas fa-user-graduate"></i></span><div class="stat-number" id="statStudents">0</div><div class="stat-label">Students</div></div>
-            <div class="stat-card"><span class="stat-icon green"><i class="fas fa-check-circle"></i></span><div class="stat-number" id="statPresent">0</div><div class="stat-label">Present Today</div></div>
+            <div class="stat-card"><span class="stat-icon green"><i class="fas fa-user-tie"></i></span><div class="stat-number" id="statTeachers">0</div><div class="stat-label">Teachers</div></div>
+            <div class="stat-card"><span class="stat-icon yellow"><i class="fas fa-rupee-sign"></i></span><div class="stat-number" id="statFees">0</div><div class="stat-label">Fees</div></div>
             <div class="stat-card"><span class="stat-icon purple"><i class="fas fa-pencil-alt"></i></span><div class="stat-number" id="statTests">0</div><div class="stat-label">Tests</div></div>
             <div class="stat-card"><span class="stat-icon orange"><i class="fas fa-book"></i></span><div class="stat-number" id="statHomework">0</div><div class="stat-label">Homework</div></div>
-            <div class="stat-card"><span class="stat-icon yellow"><i class="fas fa-sticky-note"></i></span><div class="stat-number" id="statNotes">0</div><div class="stat-label">Notes</div></div>
             <div class="stat-card"><span class="stat-icon red"><i class="fas fa-bullhorn"></i></span><div class="stat-number" id="statNotices">0</div><div class="stat-label">Notices</div></div>
         </div>
 
+        <!-- ===== DASHBOARD LAYOUT ===== -->
         <div class="dashboard-layout">
+
+            <!-- ===== SIDEBAR ===== -->
             <nav class="sidebar" id="sidebar">
                 <div class="sidebar-title">MENU</div>
                 <button class="nav-item active" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
-                <button class="nav-item" data-section="add-student"><i class="fas fa-user-plus"></i> Add Student <span class="badge" id="studentBadge">0</span></button>
-                <button class="nav-item" data-section="attendance"><i class="fas fa-clipboard-check"></i> Attendance</button>
-                <button class="nav-item" data-section="fee"><i class="fas fa-rupee-sign"></i> Fee</button>
-                <button class="nav-item" data-section="homework"><i class="fas fa-book"></i> Homework <span class="badge" id="hwBadge">0</span></button>
-                <button class="nav-item" data-section="tests"><i class="fas fa-pencil-alt"></i> Tests <span class="badge" id="testBadge">0</span></button>
-                <button class="nav-item" data-section="notes"><i class="fas fa-sticky-note"></i> Notes <span class="badge" id="notesBadge">0</span></button>
-                <button class="nav-item" data-section="chapters"><i class="fas fa-layer-group"></i> Chapters</button>
-                <button class="nav-item" data-section="subjects"><i class="fas fa-th-list"></i> Subjects</button>
-                <button class="nav-item" data-section="notice-board"><i class="fas fa-bullhorn"></i> Notice Board <span class="badge" id="noticeBadge">0</span></button>
+                <button class="nav-item" data-section="student-management"><i class="fas fa-user-graduate"></i> Student Management <span class="badge" id="studentBadge">0</span></button>
+                <button class="nav-item" data-section="teacher-management"><i class="fas fa-user-tie"></i> Teacher Management <span class="badge" id="teacherBadge">0</span></button>
+                <button class="nav-item" data-section="fee-management"><i class="fas fa-rupee-sign"></i> Fee Management <span class="badge" id="feeBadge">0</span></button>
+                <button class="nav-item" data-section="study-material"><i class="fas fa-book-open"></i> Study Material</button>
+                <button class="nav-item" data-section="notification-management"><i class="fas fa-bullhorn"></i> Notifications <span class="badge" id="noticeBadge">0</span></button>
+                <button class="nav-item" data-section="homework-management"><i class="fas fa-book"></i> Homework <span class="badge" id="hwBadge">0</span></button>
+                <button class="nav-item" data-section="test-management"><i class="fas fa-pencil-alt"></i> Tests <span class="badge" id="testBadge">0</span></button>
             </nav>
 
+            <!-- ===== CONTENT AREA ===== -->
             <div class="content-area">
-                <!-- ===== DASHBOARD ===== -->
+
+                <!-- ============================================================ -->
+                <!-- SECTION: DASHBOARD -->
+                <!-- ============================================================ -->
                 <div class="section-card active" id="section-dashboard">
-                    <div class="section-header"><h3><i class="fas fa-th-large"></i> Dashboard</h3><span class="sub-text"><i class="far fa-calendar-alt"></i> <span id="dashDate"></span></span></div>
+                    <div class="section-header">
+                        <h3><i class="fas fa-th-large"></i> Dashboard</h3>
+                        <span class="sub-text"><i class="far fa-calendar-alt"></i> <span id="dashDate"></span></span>
+                    </div>
                     <div id="dashboardContent">
-                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:1rem; margin-bottom:1.5rem;">
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:1rem; margin-bottom:1.5rem;">
                             <div style="background:#eef2ff; border-radius:1rem; padding:1.2rem; text-align:center;">
                                 <div style="font-size:2rem; color:#2563eb;"><i class="fas fa-user-graduate"></i></div>
                                 <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashStudents">0</div>
                                 <div style="font-size:0.8rem; color:#94a3b8;">Total Students</div>
                             </div>
                             <div style="background:#f0fdf4; border-radius:1rem; padding:1.2rem; text-align:center;">
-                                <div style="font-size:2rem; color:#22c55e;"><i class="fas fa-check-circle"></i></div>
-                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashPresent">0</div>
-                                <div style="font-size:0.8rem; color:#94a3b8;">Present Today</div>
+                                <div style="font-size:2rem; color:#22c55e;"><i class="fas fa-user-tie"></i></div>
+                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashTeachers">0</div>
+                                <div style="font-size:0.8rem; color:#94a3b8;">Teachers</div>
                             </div>
                             <div style="background:#fef3c7; border-radius:1rem; padding:1.2rem; text-align:center;">
-                                <div style="font-size:2rem; color:#f59e0b;"><i class="fas fa-clock"></i></div>
-                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashPartial">0</div>
-                                <div style="font-size:0.8rem; color:#94a3b8;">Partial</div>
+                                <div style="font-size:2rem; color:#f59e0b;"><i class="fas fa-rupee-sign"></i></div>
+                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashFees">0</div>
+                                <div style="font-size:0.8rem; color:#94a3b8;">Fee Records</div>
                             </div>
                             <div style="background:#fef2f2; border-radius:1rem; padding:1.2rem; text-align:center;">
-                                <div style="font-size:2rem; color:#ef4444;"><i class="fas fa-times-circle"></i></div>
-                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashAbsent">0</div>
-                                <div style="font-size:0.8rem; color:#94a3b8;">Absent</div>
+                                <div style="font-size:2rem; color:#ef4444;"><i class="fas fa-bullhorn"></i></div>
+                                <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashNotices">0</div>
+                                <div style="font-size:0.8rem; color:#94a3b8;">Notices</div>
                             </div>
                             <div style="background:#f5f3ff; border-radius:1rem; padding:1.2rem; text-align:center;">
                                 <div style="font-size:2rem; color:#8b5cf6;"><i class="fas fa-pencil-alt"></i></div>
@@ -905,274 +801,208 @@
                             </div>
                         </div>
                         <div style="background:#f8fafc; border-radius:1rem; padding:1rem;">
-                            <p style="color:#64748b; font-size:0.9rem;"><i class="fas fa-info-circle" style="color:#2563eb;"></i> Welcome to your teacher dashboard. Use the sidebar to manage everything.</p>
+                            <p style="color:#64748b; font-size:0.9rem;"><i class="fas fa-info-circle" style="color:#2563eb;"></i> Welcome to your teacher dashboard. Use the sidebar to manage all aspects of your coaching.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- ===== ADD STUDENT ===== -->
-                <div class="section-card" id="section-add-student">
-                    <div class="section-header"><h3><i class="fas fa-user-plus"></i> Add Student</h3><span class="sub-text">Create student accounts with password</span></div>
+                <!-- ============================================================ -->
+                <!-- SECTION: STUDENT MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-student-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-user-graduate"></i> Student Management</h3>
+                        <span class="sub-text">Add, edit, or remove students</span>
+                    </div>
 
+                    <!-- Add Student Form -->
                     <div style="background:#f0fdf4; border-radius:1rem; padding:1rem; margin-bottom:1.2rem; border:1px solid #bbf7d0;">
-                        <p style="font-size:0.85rem; color:#166534;"><i class="fas fa-info-circle"></i> When you add a student, their account is created in Firebase Auth with the email and password you provide. They can log in using these credentials.</p>
+                        <p style="font-size:0.85rem; color:#166534;"><i class="fas fa-info-circle"></i> Add a new student. They will receive login credentials via email.</p>
                     </div>
-
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Full Name *</label>
-                            <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" />
-                        </div>
-                        <div class="form-group">
-                            <label>Email *</label>
-                            <input type="email" id="studentEmail" placeholder="student@example.com" />
-                            <span class="helper-text">This will be the student's login ID</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Password *</label>
-                            <input type="text" id="studentPassword" placeholder="Min 6 characters" />
-                            <span class="helper-text">Student will use this to log in</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Class *</label>
-                            <select id="studentClass">
-                                <option value="">Select Class</option>
-                                <option value="6">Class 6</option><option value="7">Class 7</option>
-                                <option value="8">Class 8</option><option value="9">Class 9</option>
-                                <option value="10">Class 10</option><option value="11">Class 11</option>
-                                <option value="12">Class 12</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Parent / Guardian Contact</label>
-                            <input type="text" id="studentParentContact" placeholder="e.g. 9876543210" />
-                        </div>
+                    <div class="form-grid" id="studentForm">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="studentName" placeholder="e.g. Rahul Sharma" /></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="studentEmail" placeholder="student@example.com" /></div>
+                        <div class="form-group"><label>Password *</label><input type="text" id="studentPassword" placeholder="Min 6 characters" /></div>
+                        <div class="form-group"><label>Class *</label><select id="studentClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Parent Contact</label><input type="text" id="studentParentContact" placeholder="e.g. 9876543210" /></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="studentAddress" placeholder="Student's address" /></div>
                         <div class="form-group full-width">
-                            <label>Address</label>
-                            <input type="text" id="studentAddress" placeholder="Student's address" />
-                        </div>
-                        <div class="form-group full-width">
-                            <button class="btn-primary" id="addStudentBtn"><i class="fas fa-plus"></i> Create Student Account</button>
+                            <button class="btn-primary" id="addStudentBtn"><i class="fas fa-plus"></i> Add Student</button>
+                            <button class="btn-primary btn-sm" id="refreshStudentsBtn" style="margin-top:0.5rem;"><i class="fas fa-sync-alt"></i> Refresh List</button>
                         </div>
                     </div>
 
+                    <!-- Student List -->
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; flex-wrap:wrap; gap:0.5rem;">
-                            <h4 style="font-size:0.95rem; color:#1e293b;"><i class="fas fa-list"></i> All Students</h4>
-                            <button class="btn-primary btn-sm" id="refreshStudentsBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
-                        </div>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Students</h4>
                         <div id="studentListContainer"><div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div></div>
                     </div>
                 </div>
 
-                <!-- ===== ATTENDANCE ===== -->
-                <div class="section-card" id="section-attendance">
-                    <div class="section-header"><h3><i class="fas fa-clipboard-check"></i> Attendance</h3><span class="sub-text">Mark attendance</span></div>
-                    <div class="target-toggle" id="attendanceTargetToggle">
-                        <button class="active" data-target="individual">Individual</button>
-                        <button data-target="class">By Class</button>
+                <!-- ============================================================ -->
+                <!-- SECTION: TEACHER MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-teacher-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-user-tie"></i> Teacher Management</h3>
+                        <span class="sub-text">Add or remove teachers</span>
                     </div>
-                    <div id="attendanceIndividualForm">
-                        <div class="target-select">
-                            <select id="attendanceStudentSelect"><option value="">Select Student</option></select>
-                            <input type="date" id="attendanceDate" />
-                            <button class="btn-success btn-sm" id="attPresentBtn"><i class="fas fa-check"></i> Present</button>
-                            <button class="btn-danger btn-sm" id="attAbsentBtn"><i class="fas fa-times"></i> Absent</button>
-                            <button class="btn-orange btn-sm" id="attPartialBtn"><i class="fas fa-clock"></i> Partial</button>
+
+                    <div style="background:#f0fdf4; border-radius:1rem; padding:1rem; margin-bottom:1.2rem; border:1px solid #bbf7d0;">
+                        <p style="font-size:0.85rem; color:#166534;"><i class="fas fa-info-circle"></i> Add a new teacher. They will get a separate login and can manage students.</p>
+                    </div>
+                    <div class="form-grid" id="teacherForm">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="teacherNameInput" placeholder="e.g. Mr. Sharma" /></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="teacherEmailInput" placeholder="teacher@example.com" /></div>
+                        <div class="form-group"><label>Password *</label><input type="text" id="teacherPasswordInput" placeholder="Min 6 characters" /></div>
+                        <div class="form-group"><label>Role</label><select id="teacherRole"><option value="teacher">Teacher</option><option value="admin">Admin</option></select></div>
+                        <div class="form-group full-width">
+                            <button class="btn-primary" id="addTeacherBtn"><i class="fas fa-plus"></i> Add Teacher</button>
                         </div>
                     </div>
-                    <div id="attendanceClassForm" style="display:none;">
-                        <div class="target-select">
-                            <select id="attendanceClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select>
-                            <input type="date" id="attendanceClassDate" />
-                            <button class="btn-primary btn-sm" id="loadClassAttendanceBtn"><i class="fas fa-search"></i> Load</button>
-                        </div>
-                        <div id="classAttendanceList"></div>
+
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Teachers</h4>
+                        <div id="teacherListContainer"><div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div></div>
                     </div>
                 </div>
 
-                <!-- ===== FEE ===== -->
-                <div class="section-card" id="section-fee">
-                    <div class="section-header"><h3><i class="fas fa-rupee-sign"></i> Fee Management</h3><span class="sub-text">Add fee records</span></div>
-                    <div class="target-toggle" id="feeTargetToggle">
-                        <button class="active" data-target="individual">Individual</button>
-                        <button data-target="class">By Class</button>
+                <!-- ============================================================ -->
+                <!-- SECTION: FEE MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-fee-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-rupee-sign"></i> Fee Management</h3>
+                        <span class="sub-text">Track student fee payments</span>
                     </div>
-                    <div id="feeIndividualForm">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Student</label><select id="feeStudentSelect"><option value="">Select Student</option></select></div>
-                            <div class="form-group"><label>Month</label><select id="feeMonth"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select></div>
-                            <div class="form-group"><label>Amount (₹)</label><input type="number" id="feeAmount" placeholder="e.g. 2500" /></div>
-                            <div class="form-group"><label>Status</label><select id="feeStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select></div>
-                            <div class="form-group full-width"><button class="btn-primary" id="addFeeBtn"><i class="fas fa-plus"></i> Add Fee</button></div>
-                        </div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="feeStudentSelect"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Month</label><select id="feeMonth"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select></div>
+                        <div class="form-group"><label>Amount (₹)</label><input type="number" id="feeAmount" placeholder="e.g. 2500" /></div>
+                        <div class="form-group"><label>Status</label><select id="feeStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="addFeeBtn"><i class="fas fa-plus"></i> Add Fee Record</button></div>
                     </div>
-                    <div id="feeClassForm" style="display:none;">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Class</label><select id="feeClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                            <div class="form-group"><label>Month</label><select id="feeClassMonth"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select></div>
-                            <div class="form-group"><label>Amount per Student (₹)</label><input type="number" id="feeClassAmount" placeholder="e.g. 2500" /></div>
-                            <div class="form-group"><label>Status</label><select id="feeClassStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select></div>
-                            <div class="form-group full-width"><button class="btn-primary" id="addClassFeeBtn"><i class="fas fa-users"></i> Apply to All</button></div>
-                        </div>
-                    </div>
+
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
                         <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Fee Records</h4>
                         <div id="feeRecordsContainer"><div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div></div>
                     </div>
                 </div>
 
-                <!-- ===== HOMEWORK ===== -->
-                <div class="section-card" id="section-homework">
-                    <div class="section-header"><h3><i class="fas fa-book"></i> Add Homework</h3><span class="sub-text">Assign homework</span></div>
-                    <div class="target-toggle" id="hwTargetToggle">
-                        <button class="active" data-target="individual">Individual</button>
-                        <button data-target="class">By Class</button>
+                <!-- ============================================================ -->
+                <!-- SECTION: STUDY MATERIAL -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-study-material">
+                    <div class="section-header">
+                        <h3><i class="fas fa-book-open"></i> Study Material</h3>
+                        <span class="sub-text">Upload notes, chapters, and resources</span>
                     </div>
-                    <div id="hwIndividualForm">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Student</label><select id="hwStudentSelect"><option value="">Select Student</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="hwSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group full-width"><label>Title *</label><input type="text" id="hwTitle" placeholder="e.g. Exercise 8.2" /></div>
-                            <div class="form-group full-width"><label>Description</label><textarea id="hwDescription"></textarea></div>
-                            <div class="form-group"><label>Due Date</label><input type="date" id="hwDueDate" /></div>
-                            <div class="form-group full-width"><button class="btn-primary" id="addHomeworkBtn"><i class="fas fa-plus"></i> Add Homework</button></div>
-                        </div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Class</label><select id="materialClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="materialSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="materialTitle" placeholder="e.g. Chapter 6 - Lines & Angles" /></div>
+                        <div class="form-group full-width"><label>Content / Link</label><textarea id="materialContent" placeholder="Enter notes content or paste a link to a PDF/Video..."></textarea></div>
+                        <div class="form-group full-width"><button class="btn-orange" id="addMaterialBtn"><i class="fas fa-plus"></i> Add Study Material</button></div>
                     </div>
-                    <div id="hwClassForm" style="display:none;">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Class</label><select id="hwClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="hwClassSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group full-width"><label>Title *</label><input type="text" id="hwClassTitle" placeholder="e.g. Exercise 8.2" /></div>
-                            <div class="form-group full-width"><label>Description</label><textarea id="hwClassDescription"></textarea></div>
-                            <div class="form-group"><label>Due Date</label><input type="date" id="hwClassDueDate" /></div>
-                            <div class="form-group full-width"><button class="btn-primary" id="addClassHomeworkBtn"><i class="fas fa-users"></i> Assign to All</button></div>
-                        </div>
-                    </div>
+
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Homework</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Materials</h4>
+                        <div id="materialListContainer"><div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- SECTION: NOTIFICATION MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-notification-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-bullhorn"></i> Notification Management</h3>
+                        <span class="sub-text">Post notices to students</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Target</label>
+                            <select id="noticeTargetSelect">
+                                <option value="all">All Students</option>
+                                <option value="class">By Class</option>
+                                <option value="individual">Individual Student</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="noticeTargetGroup">
+                            <label>Select Target</label>
+                            <select id="noticeTargetValue"><option value="all">All Students</option></select>
+                        </div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="noticeTitle" placeholder="e.g. Holiday Notice" /></div>
+                        <div class="form-group full-width"><label>Message *</label><textarea id="noticeMessage" placeholder="Write the notice here..."></textarea></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="addNoticeBtn"><i class="fas fa-plus"></i> Post Notice</button></div>
+                    </div>
+
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notices</h4>
+                        <div id="noticeListContainer"><div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ============================================================ -->
+                <!-- SECTION: HOMEWORK MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-homework-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-book"></i> Homework Management</h3>
+                        <span class="sub-text">Assign and track homework</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="hwStudentSelect"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="hwSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="hwTitle" placeholder="e.g. Exercise 8.2" /></div>
+                        <div class="form-group full-width"><label>Description</label><textarea id="hwDescription"></textarea></div>
+                        <div class="form-group"><label>Due Date</label><input type="date" id="hwDueDate" /></div>
+                        <div class="form-group"><label>Assign to</label>
+                            <select id="hwAssignType">
+                                <option value="individual">Individual</option>
+                                <option value="class">Entire Class</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width"><button class="btn-primary" id="addHomeworkBtn"><i class="fas fa-plus"></i> Assign Homework</button></div>
+                    </div>
+
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Homework Assignments</h4>
                         <div id="homeworkListContainer"><div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div></div>
                     </div>
                 </div>
 
-                <!-- ===== TESTS ===== -->
-                <div class="section-card" id="section-tests">
-                    <div class="section-header"><h3><i class="fas fa-pencil-alt"></i> Add Test</h3><span class="sub-text">Add test records</span></div>
-                    <div class="target-toggle" id="testTargetToggle">
-                        <button class="active" data-target="individual">Individual</button>
-                        <button data-target="class">By Class</button>
+                <!-- ============================================================ -->
+                <!-- SECTION: TEST MANAGEMENT -->
+                <!-- ============================================================ -->
+                <div class="section-card" id="section-test-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-pencil-alt"></i> Test Management</h3>
+                        <span class="sub-text">Create and manage tests</span>
                     </div>
-                    <div id="testIndividualForm">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Student</label><select id="testStudentSelect"><option value="">Select Student</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="testSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group"><label>Test Name *</label><input type="text" id="testName" placeholder="e.g. Weekly Test 1" /></div>
-                            <div class="form-group"><label>Date</label><input type="date" id="testDate" /></div>
-                            <div class="form-group"><label>Marks</label><input type="number" id="testMarks" placeholder="e.g. 18" min="0" /></div>
-                            <div class="form-group"><label>Max Marks</label><input type="number" id="testMaxMarks" placeholder="e.g. 20" min="1" value="20" /></div>
-                            <div class="form-group full-width"><button class="btn-purple" id="addTestBtn"><i class="fas fa-plus"></i> Add Test</button></div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="testStudentSelect"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="testSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group"><label>Test Name *</label><input type="text" id="testName" placeholder="e.g. Weekly Test 1" /></div>
+                        <div class="form-group"><label>Date</label><input type="date" id="testDate" /></div>
+                        <div class="form-group"><label>Marks Obtained</label><input type="number" id="testMarks" placeholder="e.g. 18" min="0" /></div>
+                        <div class="form-group"><label>Max Marks</label><input type="number" id="testMaxMarks" placeholder="e.g. 20" min="1" value="20" /></div>
+                        <div class="form-group"><label>Assign to</label>
+                            <select id="testAssignType">
+                                <option value="individual">Individual</option>
+                                <option value="class">Entire Class</option>
+                            </select>
                         </div>
+                        <div class="form-group full-width"><button class="btn-purple" id="addTestBtn"><i class="fas fa-plus"></i> Add Test</button></div>
                     </div>
-                    <div id="testClassForm" style="display:none;">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Class</label><select id="testClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="testClassSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group"><label>Test Name *</label><input type="text" id="testClassName" placeholder="e.g. Weekly Test 1" /></div>
-                            <div class="form-group"><label>Date</label><input type="date" id="testClassDate" /></div>
-                            <div class="form-group"><label>Max Marks</label><input type="number" id="testClassMaxMarks" placeholder="e.g. 20" min="1" value="20" /></div>
-                            <div class="form-group full-width"><button class="btn-purple" id="addClassTestBtn"><i class="fas fa-users"></i> Assign to All</button></div>
-                        </div>
-                    </div>
+
                     <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Tests</h4>
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Test Records</h4>
                         <div id="testListContainer"><div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div></div>
-                    </div>
-                </div>
-
-                <!-- ===== NOTES ===== -->
-                <div class="section-card" id="section-notes">
-                    <div class="section-header"><h3><i class="fas fa-sticky-note"></i> Add Notes</h3><span class="sub-text">Share study notes</span></div>
-                    <div class="target-toggle" id="notesTargetToggle">
-                        <button class="active" data-target="individual">Individual</button>
-                        <button data-target="class">By Class</button>
-                    </div>
-                    <div id="notesIndividualForm">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Student</label><select id="notesStudentSelect"><option value="">Select Student</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="notesSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group full-width"><label>Title *</label><input type="text" id="notesTitle" placeholder="e.g. Chapter 6 - Lines & Angles" /></div>
-                            <div class="form-group full-width"><label>Content</label><textarea id="notesContent"></textarea></div>
-                            <div class="form-group full-width"><button class="btn-orange" id="addNoteBtn"><i class="fas fa-plus"></i> Add Note</button></div>
-                        </div>
-                    </div>
-                    <div id="notesClassForm" style="display:none;">
-                        <div class="form-grid">
-                            <div class="form-group"><label>Class</label><select id="notesClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                            <div class="form-group"><label>Subject</label><select id="notesClassSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                            <div class="form-group full-width"><label>Title *</label><input type="text" id="notesClassTitle" placeholder="e.g. Chapter 6 - Lines & Angles" /></div>
-                            <div class="form-group full-width"><label>Content</label><textarea id="notesClassContent"></textarea></div>
-                            <div class="form-group full-width"><button class="btn-orange" id="addClassNoteBtn"><i class="fas fa-users"></i> Share with All</button></div>
-                        </div>
-                    </div>
-                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notes</h4>
-                        <div id="notesListContainer"><div class="empty-state"><i class="fas fa-sticky-note"></i> No notes added yet.</div></div>
-                    </div>
-                </div>
-
-                <!-- ===== CHAPTERS ===== -->
-                <div class="section-card" id="section-chapters">
-                    <div class="section-header"><h3><i class="fas fa-layer-group"></i> Add Chapter</h3><span class="sub-text">Add chapters by subject and class</span></div>
-                    <div class="form-grid">
-                        <div class="form-group"><label>Class *</label><select id="chapterClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                        <div class="form-group"><label>Subject *</label><select id="chapterSubjectSelect"><option value="">Select Subject</option><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
-                        <div class="form-group"><label>Chapter Number</label><input type="text" id="chapterNumber" placeholder="e.g. 6" /></div>
-                        <div class="form-group"><label>Chapter Name *</label><input type="text" id="chapterName" placeholder="e.g. Lines & Angles" /></div>
-                        <div class="form-group full-width"><label>Description</label><textarea id="chapterDescription"></textarea></div>
-                        <div class="form-group full-width"><button class="btn-primary" id="addChapterBtn"><i class="fas fa-plus"></i> Add Chapter</button></div>
-                    </div>
-                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Chapters</h4>
-                        <div id="chapterListContainer"><div class="empty-state"><i class="fas fa-layer-group"></i> No chapters added yet.</div></div>
-                    </div>
-                </div>
-
-                <!-- ===== SUBJECTS ===== -->
-                <div class="section-card" id="section-subjects">
-                    <div class="section-header"><h3><i class="fas fa-th-list"></i> Manage Subjects</h3><span class="sub-text">Add subjects by class</span></div>
-                    <div class="form-grid">
-                        <div class="form-group"><label>Class *</label><select id="subjectClassSelect"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
-                        <div class="form-group"><label>Subject Name *</label><input type="text" id="subjectName" placeholder="e.g. Physics" /></div>
-                        <div class="form-group"><label>Subject Code</label><input type="text" id="subjectCode" placeholder="e.g. PHY101" /></div>
-                        <div class="form-group"><label>Teacher</label><input type="text" id="subjectTeacher" placeholder="e.g. Mr. Sharma" /></div>
-                        <div class="form-group full-width"><button class="btn-primary" id="addSubjectBtn"><i class="fas fa-plus"></i> Add Subject</button></div>
-                    </div>
-                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Subjects</h4>
-                        <div id="subjectListContainer"><div class="empty-state"><i class="fas fa-th-list"></i> No subjects added yet.</div></div>
-                    </div>
-                </div>
-
-                <!-- ===== NOTICE BOARD ===== -->
-                <div class="section-card" id="section-notice-board">
-                    <div class="section-header"><h3><i class="fas fa-bullhorn"></i> Notice Board</h3><span class="sub-text">Post notices for students</span></div>
-                    <div class="target-toggle" id="noticeTargetToggle">
-                        <button class="active" data-target="all">All Students</button>
-                        <button data-target="class">By Class</button>
-                        <button data-target="individual">Individual</button>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group" id="noticeTargetGroup">
-                            <label>Target</label>
-                            <select id="noticeTargetSelect"><option value="all">All Students</option></select>
-                        </div>
-                        <div class="form-group"><label>Title *</label><input type="text" id="noticeTitle" placeholder="e.g. Holiday Notice" /></div>
-                        <div class="form-group full-width"><label>Message *</label><textarea id="noticeMessage"></textarea></div>
-                        <div class="form-group full-width"><button class="btn-primary" id="addNoticeBtn"><i class="fas fa-plus"></i> Post Notice</button></div>
-                    </div>
-                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
-                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notices</h4>
-                        <div id="noticeListContainer"><div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div></div>
                     </div>
                 </div>
 
@@ -1187,10 +1017,14 @@
 
     <div class="toast" id="toast"><i class="fas fa-circle-info"></i><span id="toastMessage">Message</span></div>
 
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================ -->
     <script>
         (function() {
             'use strict';
 
+            // ---------- FIREBASE CONFIG ----------
             const firebaseConfig = {
                 apiKey: "AIzaSyBL2OiW6f1PCbiFMSqyPuhPnfa1d0ywGKc",
                 authDomain: "knowledgenexusacademy-a2550.firebaseapp.com",
@@ -1205,22 +1039,39 @@
             const auth = firebase.auth();
             const db = firebase.firestore();
 
-            // DOM refs (shortened for brevity - full code would have all)
+            // ---------- DOM REFS ----------
             const teacherName = document.getElementById('teacherName');
             const teacherAvatar = document.getElementById('teacherAvatar');
             const logoutBtn = document.getElementById('logoutBtn');
 
-            let currentTeacherId = null;
-            let students = [];
-            let attendanceRecords = {};
-            let homeworkList = [];
-            let testList = [];
-            let notesList = [];
-            let chapterList = [];
-            let subjectList = [];
-            let feeRecords = [];
-            let noticeList = [];
+            // Stats
+            const statStudents = document.getElementById('statStudents');
+            const statTeachers = document.getElementById('statTeachers');
+            const statFees = document.getElementById('statFees');
+            const statTests = document.getElementById('statTests');
+            const statHomework = document.getElementById('statHomework');
+            const statNotices = document.getElementById('statNotices');
 
+            // Badges
+            const studentBadge = document.getElementById('studentBadge');
+            const teacherBadge = document.getElementById('teacherBadge');
+            const feeBadge = document.getElementById('feeBadge');
+            const hwBadge = document.getElementById('hwBadge');
+            const testBadge = document.getElementById('testBadge');
+            const noticeBadge = document.getElementById('noticeBadge');
+
+            // Data stores
+            let allStudents = [];
+            let allTeachers = [];
+            let allFees = [];
+            let allHomework = [];
+            let allTests = [];
+            let allNotices = [];
+            let allMaterials = [];
+
+            let currentTeacherId = null;
+
+            // ---------- TOAST ----------
             let toastTimeout = null;
 
             function showToast(message, type = 'info') {
@@ -1237,16 +1088,7 @@
                 toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
             }
 
-            // --- Helper functions ---
-            function formatDateKey(year, month, day) { return year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0'); }
-
-            function getTodayKey() { const d = new Date(); return formatDateKey(d.getFullYear(), d.getMonth(), d.getDate()); }
-
-            function getTodayStr() { const d = new Date(); return d.toISOString().split('T')[0]; }
-
-            function getClassDisplay(val) { return val ? 'Class ' + val : 'N/A'; }
-
-            // --- Navigation ---
+            // ---------- NAVIGATION ----------
             const navItems = document.querySelectorAll('.nav-item');
             const sections = document.querySelectorAll('.section-card');
 
@@ -1259,28 +1101,30 @@
                 });
             });
 
-            // --- Auth ---
+            // ---------- AUTH ----------
             auth.onAuthStateChanged(user => {
                 if (user) {
                     currentTeacherId = user.uid;
+                    // Load teacher profile
                     db.collection('teachers').doc(user.uid).get()
                         .then(doc => {
                             if (doc.exists) {
                                 const name = doc.data().name || 'Teacher';
                                 teacherName.textContent = name;
-                                const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                                const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2)
+                                    .toUpperCase();
                                 teacherAvatar.textContent = initials;
                             } else {
                                 teacherName.textContent = user.displayName || 'Teacher';
-                                const initials = (user.displayName || 'Teacher').split(' ').map(n => n[0]).join('')
-                                    .substring(0, 2).toUpperCase();
+                                const initials = (user.displayName || 'Teacher').split(' ').map(n => n[0])
+                                    .join('').substring(0, 2).toUpperCase();
                                 teacherAvatar.textContent = initials;
                             }
                         })
                         .catch(() => {
                             teacherName.textContent = user.displayName || 'Teacher';
-                            const initials = (user.displayName || 'Teacher').split(' ').map(n => n[0]).join('')
-                                .substring(0, 2).toUpperCase();
+                            const initials = (user.displayName || 'Teacher').split(' ').map(n => n[0]).join(
+                                '').substring(0, 2).toUpperCase();
                             teacherAvatar.textContent = initials;
                         });
                     loadAllData();
@@ -1296,175 +1140,149 @@
                 }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
-            // --- Load all data ---
+            // ---------- LOAD ALL DATA ----------
             function loadAllData() {
                 if (!currentTeacherId) return;
-                // Load students
+
+                // Students
                 db.collection('students').get()
                     .then(snapshot => {
-                        students = [];
+                        allStudents = [];
                         snapshot.forEach(doc => {
-                            students.push({ uid: doc.id, ...doc.data() });
+                            allStudents.push({ uid: doc.id, ...doc.data() });
                         });
-                        updateStudentDropdowns();
                         renderStudentList();
+                        updateStudentDropdowns();
                         updateStats();
+                        updateBadges();
+                        updateDashboard();
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => console.error('Error loading students:', err));
 
-                // Load homework
+                // Teachers
+                db.collection('teachers').get()
+                    .then(snapshot => {
+                        allTeachers = [];
+                        snapshot.forEach(doc => {
+                            allTeachers.push({ uid: doc.id, ...doc.data() });
+                        });
+                        renderTeacherList();
+                        updateStats();
+                        updateBadges();
+                        updateDashboard();
+                    })
+                    .catch(err => console.error('Error loading teachers:', err));
+
+                // Fees
+                db.collection('fees').get()
+                    .then(snapshot => {
+                        allFees = [];
+                        snapshot.forEach(doc => {
+                            allFees.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderFeeRecords();
+                        updateStats();
+                        updateBadges();
+                        updateDashboard();
+                    })
+                    .catch(err => console.error('Error loading fees:', err));
+
+                // Homework
                 db.collection('homework').get()
                     .then(snapshot => {
-                        homeworkList = [];
+                        allHomework = [];
                         snapshot.forEach(doc => {
-                            homeworkList.push({ id: doc.id, ...doc.data() });
+                            allHomework.push({ id: doc.id, ...doc.data() });
                         });
                         renderHomeworkList();
                         updateStats();
                         updateBadges();
+                        updateDashboard();
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => console.error('Error loading homework:', err));
 
-                // Load tests
+                // Tests
                 db.collection('tests').get()
                     .then(snapshot => {
-                        testList = [];
+                        allTests = [];
                         snapshot.forEach(doc => {
-                            testList.push({ id: doc.id, ...doc.data() });
+                            allTests.push({ id: doc.id, ...doc.data() });
                         });
                         renderTestList();
                         updateStats();
                         updateBadges();
+                        updateDashboard();
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => console.error('Error loading tests:', err));
 
-                // Load notes
-                db.collection('notes').get()
-                    .then(snapshot => {
-                        notesList = [];
-                        snapshot.forEach(doc => {
-                            notesList.push({ id: doc.id, ...doc.data() });
-                        });
-                        renderNotesList();
-                        updateStats();
-                        updateBadges();
-                    })
-                    .catch(err => console.error(err));
-
-                // Load chapters
-                db.collection('chapters').get()
-                    .then(snapshot => {
-                        chapterList = [];
-                        snapshot.forEach(doc => {
-                            chapterList.push({ id: doc.id, ...doc.data() });
-                        });
-                        renderChapterList();
-                    })
-                    .catch(err => console.error(err));
-
-                // Load subjects
-                db.collection('subjects').get()
-                    .then(snapshot => {
-                        subjectList = [];
-                        snapshot.forEach(doc => {
-                            subjectList.push({ id: doc.id, ...doc.data() });
-                        });
-                        renderSubjectList();
-                    })
-                    .catch(err => console.error(err));
-
-                // Load fees
-                db.collection('fees').get()
-                    .then(snapshot => {
-                        feeRecords = [];
-                        snapshot.forEach(doc => {
-                            feeRecords.push({ id: doc.id, ...doc.data() });
-                        });
-                        renderFeeRecords();
-                    })
-                    .catch(err => console.error(err));
-
-                // Load notices
+                // Notices
                 db.collection('notices').get()
                     .then(snapshot => {
-                        noticeList = [];
+                        allNotices = [];
                         snapshot.forEach(doc => {
-                            noticeList.push({ id: doc.id, ...doc.data() });
+                            allNotices.push({ id: doc.id, ...doc.data() });
                         });
                         renderNoticeList();
                         updateStats();
                         updateBadges();
-                    })
-                    .catch(err => console.error(err));
-
-                // Load attendance
-                db.collection('attendance').get()
-                    .then(snapshot => {
-                        attendanceRecords = {};
-                        snapshot.forEach(doc => {
-                            attendanceRecords[doc.id] = doc.data();
-                        });
-                        updateStats();
                         updateDashboard();
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => console.error('Error loading notices:', err));
+
+                // Study Materials
+                db.collection('materials').get()
+                    .then(snapshot => {
+                        allMaterials = [];
+                        snapshot.forEach(doc => {
+                            allMaterials.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderMaterialList();
+                    })
+                    .catch(err => console.error('Error loading materials:', err));
             }
 
+            // ---------- UPDATE STUDENT DROPDOWNS ----------
             function updateStudentDropdowns() {
-                const selects = ['attendanceStudentSelect', 'feeStudentSelect', 'hwStudentSelect',
-                    'testStudentSelect', 'notesStudentSelect'
-                ];
+                const selects = ['feeStudentSelect', 'hwStudentSelect', 'testStudentSelect', 'noticeTargetValue'];
                 selects.forEach(id => {
                     const select = document.getElementById(id);
                     if (!select) return;
                     const currentVal = select.value;
                     select.innerHTML = '<option value="">Select Student</option>';
-                    students.forEach(s => {
+                    allStudents.forEach(s => {
                         const opt = document.createElement('option');
                         opt.value = s.uid;
-                        opt.textContent = s.name + ' (' + getClassDisplay(s.class) + ')';
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
                         select.appendChild(opt);
                     });
                     if (currentVal) select.value = currentVal;
                 });
-                // Notice target dropdown
-                const noticeSelect = document.getElementById('noticeTargetSelect');
-                if (noticeSelect) {
-                    noticeSelect.innerHTML = '<option value="all">All Students</option>';
-                    students.forEach(s => {
-                        const opt = document.createElement('option');
-                        opt.value = s.uid;
-                        opt.textContent = s.name + ' (' + getClassDisplay(s.class) + ')';
-                        noticeSelect.appendChild(opt);
-                    });
-                }
             }
 
-            // --- RENDER FUNCTIONS ---
+            // ---------- RENDER STUDENT LIST ----------
             function renderStudentList() {
                 const container = document.getElementById('studentListContainer');
                 if (!container) return;
-                if (students.length === 0) {
+                if (allStudents.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div>';
                     return;
                 }
-                let html = '<div class="student-list-grid">';
-                students.forEach(s => {
+                let html = '<div class="student-list-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:0.8rem;">';
+                allStudents.forEach(s => {
                     html += `
-                            <div class="student-list-item">
-                                <div class="student-info"><span class="name">${s.name || 'N/A'}</span><span class="class">${getClassDisplay(s.class)} · ${s.email || 'No email'}</span></div>
-                                <div class="student-actions">
-                                    <button class="delete-student" data-uid="${s.uid}"><i class="fas fa-trash-alt"></i></button>
-                                </div>
+                            <div class="student-list-item" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; background:#f8fafc; border-radius:10px; border:1px solid #eef2f6;">
+                                <div><div style="font-weight:600; color:#0b1e3a;">${s.name || 'N/A'}</div><div style="font-size:0.7rem; color:#94a3b8;">${s.class ? 'Class '+s.class : 'N/A'} · ${s.email || 'No email'}</div></div>
+                                <div><button class="delete-student" data-uid="${s.uid}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button></div>
                             </div>
                         `;
                 });
                 html += '</div>';
                 container.innerHTML = html;
+
                 container.querySelectorAll('.delete-student').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const uid = this.dataset.uid;
-                        if (confirm('Delete this student? This will remove their account and all data.')) {
+                        if (confirm('Delete this student and all their data?')) {
                             deleteStudent(uid);
                         }
                     });
@@ -1472,33 +1290,120 @@
             }
 
             function deleteStudent(uid) {
-                // Delete from Firestore
+                // Remove from Firestore
                 db.collection('students').doc(uid).delete()
                     .then(() => {
-                        // Delete from Auth
-                        // Note: Deleting users from Auth requires admin SDK, so we'll just remove from Firestore
-                        // and disable the account by removing the role
-                        students = students.filter(s => s.uid !== uid);
+                        allStudents = allStudents.filter(s => s.uid !== uid);
                         renderStudentList();
                         updateStudentDropdowns();
                         updateStats();
                         updateBadges();
+                        updateDashboard();
                         showToast('Student removed.', 'info');
                     })
                     .catch(err => showToast('Error: ' + err.message, 'error'));
             }
 
+            // ---------- RENDER TEACHER LIST ----------
+            function renderTeacherList() {
+                const container = document.getElementById('teacherListContainer');
+                if (!container) return;
+                if (allTeachers.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div>';
+                    return;
+                }
+                let html = '<div class="student-list-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:0.8rem;">';
+                allTeachers.forEach(t => {
+                    html += `
+                            <div class="student-list-item" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; background:#f8fafc; border-radius:10px; border:1px solid #eef2f6;">
+                                <div><div style="font-weight:600; color:#0b1e3a;">${t.name || 'N/A'}</div><div style="font-size:0.7rem; color:#94a3b8;">${t.role || 'Teacher'} · ${t.email || 'No email'}</div></div>
+                                <div><button class="delete-teacher" data-uid="${t.uid}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button></div>
+                            </div>
+                        `;
+                });
+                html += '</div>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.delete-teacher').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const uid = this.dataset.uid;
+                        if (uid === currentTeacherId) {
+                            showToast('You cannot delete yourself.', 'error');
+                            return;
+                        }
+                        if (confirm('Delete this teacher?')) {
+                            deleteTeacher(uid);
+                        }
+                    });
+                });
+            }
+
+            function deleteTeacher(uid) {
+                db.collection('teachers').doc(uid).delete()
+                    .then(() => {
+                        allTeachers = allTeachers.filter(t => t.uid !== uid);
+                        renderTeacherList();
+                        updateStats();
+                        updateBadges();
+                        updateDashboard();
+                        showToast('Teacher removed.', 'info');
+                    })
+                    .catch(err => showToast('Error: ' + err.message, 'error'));
+            }
+
+            // ---------- RENDER FEE RECORDS ----------
+            function renderFeeRecords() {
+                const container = document.getElementById('feeRecordsContainer');
+                if (!container) return;
+                if (allFees.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div>';
+                    return;
+                }
+                const studentMap = {};
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
+                let html = '<table class="data-table"><thead><tr><th>Student</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+                allFees.forEach(f => {
+                    const name = studentMap[f.studentId] || 'Unknown';
+                    const statusColor = f.status === 'Paid' ? '#22c55e' : f.status === 'Partial' ? '#f59e0b' :
+                        '#ef4444';
+                    html += `
+                            <tr>
+                                <td>${name}</td>
+                                <td>${f.month}</td>
+                                <td>₹${f.amount}</td>
+                                <td style="font-weight:600; color:${statusColor};">${f.status}</td>
+                                <td><button class="delete-fee" data-id="${f.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.delete-fee').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this fee record?')) {
+                            db.collection('fees').doc(id).delete()
+                                .then(() => { showToast('Fee record deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ---------- RENDER HOMEWORK ----------
             function renderHomeworkList() {
                 const container = document.getElementById('homeworkListContainer');
                 if (!container) return;
-                if (homeworkList.length === 0) {
+                if (allHomework.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div>';
                     return;
                 }
                 const studentMap = {};
-                students.forEach(s => studentMap[s.uid] = s.name);
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
                 let html = '<table class="data-table"><thead><tr><th>Student</th><th>Title</th><th>Subject</th><th>Due</th><th>Action</th></tr></thead><tbody>';
-                homeworkList.forEach(h => {
+                allHomework.forEach(h => {
                     const name = studentMap[h.studentId] || (h.isClass ? 'Class' : 'Unknown');
                     html += `
                             <tr>
@@ -1512,6 +1417,7 @@
                 });
                 html += '</tbody></table>';
                 container.innerHTML = html;
+
                 container.querySelectorAll('.delete-hw').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.dataset.id;
@@ -1525,17 +1431,18 @@
                 });
             }
 
+            // ---------- RENDER TESTS ----------
             function renderTestList() {
                 const container = document.getElementById('testListContainer');
                 if (!container) return;
-                if (testList.length === 0) {
+                if (allTests.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div>';
                     return;
                 }
                 const studentMap = {};
-                students.forEach(s => studentMap[s.uid] = s.name);
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
                 let html = '<table class="data-table"><thead><tr><th>Student</th><th>Test</th><th>Subject</th><th>Marks</th><th>Date</th><th>Action</th></tr></thead><tbody>';
-                testList.forEach(t => {
+                allTests.forEach(t => {
                     const name = studentMap[t.studentId] || (t.isClass ? 'Class' : 'Unknown');
                     const marksDisplay = t.marks !== null && t.marks !== undefined ? t.marks + '/' + t.maxMarks :
                         'Pending';
@@ -1552,6 +1459,7 @@
                 });
                 html += '</tbody></table>';
                 container.innerHTML = html;
+
                 container.querySelectorAll('.delete-test').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.dataset.id;
@@ -1565,176 +1473,38 @@
                 });
             }
 
-            function renderNotesList() {
-                const container = document.getElementById('notesListContainer');
-                if (!container) return;
-                if (notesList.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-sticky-note"></i> No notes added yet.</div>';
-                    return;
-                }
-                const studentMap = {};
-                students.forEach(s => studentMap[s.uid] = s.name);
-                let html = '<table class="data-table"><thead><tr><th>Student</th><th>Title</th><th>Subject</th><th>Action</th></tr></thead><tbody>';
-                notesList.forEach(n => {
-                    const name = studentMap[n.studentId] || (n.isClass ? 'Class' : 'Unknown');
-                    html += `
-                            <tr>
-                                <td>${name}</td>
-                                <td>${n.title}</td>
-                                <td>${n.subject}</td>
-                                <td><button class="delete-note" data-id="${n.id}"><i class="fas fa-trash-alt"></i></button></td>
-                            </tr>
-                        `;
-                });
-                html += '</tbody></table>';
-                container.innerHTML = html;
-                container.querySelectorAll('.delete-note').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        if (confirm('Delete this note?')) {
-                            db.collection('notes').doc(id).delete()
-                                .then(() => { showToast('Note deleted.', 'info');
-                                    loadAllData(); })
-                                .catch(err => showToast('Error: ' + err.message, 'error'));
-                        }
-                    });
-                });
-            }
-
-            function renderChapterList() {
-                const container = document.getElementById('chapterListContainer');
-                if (!container) return;
-                if (chapterList.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-layer-group"></i> No chapters added yet.</div>';
-                    return;
-                }
-                let html = '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Chapter</th><th>Action</th></tr></thead><tbody>';
-                chapterList.forEach(c => {
-                    html += `
-                            <tr>
-                                <td>Class ${c.class}</td>
-                                <td>${c.subject}</td>
-                                <td>${c.number ? 'Ch.' + c.number + ' ' : ''}${c.name}</td>
-                                <td><button class="delete-chapter" data-id="${c.id}"><i class="fas fa-trash-alt"></i></button></td>
-                            </tr>
-                        `;
-                });
-                html += '</tbody></table>';
-                container.innerHTML = html;
-                container.querySelectorAll('.delete-chapter').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        if (confirm('Delete this chapter?')) {
-                            db.collection('chapters').doc(id).delete()
-                                .then(() => { showToast('Chapter deleted.', 'info');
-                                    loadAllData(); })
-                                .catch(err => showToast('Error: ' + err.message, 'error'));
-                        }
-                    });
-                });
-            }
-
-            function renderSubjectList() {
-                const container = document.getElementById('subjectListContainer');
-                if (!container) return;
-                if (subjectList.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-th-list"></i> No subjects added yet.</div>';
-                    return;
-                }
-                let html = '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Code</th><th>Teacher</th><th>Action</th></tr></thead><tbody>';
-                subjectList.forEach(s => {
-                    html += `
-                            <tr>
-                                <td>Class ${s.class}</td>
-                                <td>${s.name}</td>
-                                <td>${s.code || '-'}</td>
-                                <td>${s.teacher || '-'}</td>
-                                <td><button class="delete-subject" data-id="${s.id}"><i class="fas fa-trash-alt"></i></button></td>
-                            </tr>
-                        `;
-                });
-                html += '</tbody></table>';
-                container.innerHTML = html;
-                container.querySelectorAll('.delete-subject').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        if (confirm('Delete this subject?')) {
-                            db.collection('subjects').doc(id).delete()
-                                .then(() => { showToast('Subject deleted.', 'info');
-                                    loadAllData(); })
-                                .catch(err => showToast('Error: ' + err.message, 'error'));
-                        }
-                    });
-                });
-            }
-
-            function renderFeeRecords() {
-                const container = document.getElementById('feeRecordsContainer');
-                if (!container) return;
-                if (feeRecords.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div>';
-                    return;
-                }
-                const studentMap = {};
-                students.forEach(s => studentMap[s.uid] = s.name);
-                let html = '<table class="data-table"><thead><tr><th>Student</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>';
-                feeRecords.forEach(f => {
-                    const name = studentMap[f.studentId] || 'Unknown';
-                    html += `
-                            <tr>
-                                <td>${name}</td>
-                                <td>${f.month}</td>
-                                <td>₹${f.amount}</td>
-                                <td style="color:${f.status === 'Paid' ? '#22c55e' : f.status === 'Partial' ? '#f59e0b' : '#ef4444'}; font-weight:600;">${f.status}</td>
-                                <td><button class="delete-fee" data-id="${f.id}"><i class="fas fa-trash-alt"></i></button></td>
-                            </tr>
-                        `;
-                });
-                html += '</tbody></table>';
-                container.innerHTML = html;
-                container.querySelectorAll('.delete-fee').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        if (confirm('Delete this fee record?')) {
-                            db.collection('fees').doc(id).delete()
-                                .then(() => { showToast('Fee record deleted.', 'info');
-                                    loadAllData(); })
-                                .catch(err => showToast('Error: ' + err.message, 'error'));
-                        }
-                    });
-                });
-            }
-
+            // ---------- RENDER NOTICES ----------
             function renderNoticeList() {
                 const container = document.getElementById('noticeListContainer');
                 if (!container) return;
-                if (noticeList.length === 0) {
+                if (allNotices.length === 0) {
                     container.innerHTML = '<div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div>';
                     return;
                 }
                 let html = '';
-                noticeList.forEach(n => {
+                allNotices.forEach(n => {
                     const targetDisplay = n.targetType === 'all' ? 'All Students' :
                         n.targetType === 'class' ? 'Class ' + n.targetId :
-                        students.find(s => s.uid === n.targetId)?.name || 'Individual';
+                        allStudents.find(s => s.uid === n.targetId)?.name || 'Individual';
                     const date = n.createdAt ? new Date(n.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
                     html += `
-                            <div class="notice-item">
-                                <div class="notice-content">
-                                    <div class="notice-title">${n.title}</div>
-                                    <div class="notice-text">${n.message}</div>
-                                    <div class="notice-meta">
+                            <div class="notice-item" style="padding:0.8rem 1rem; background:#f8fafc; border-radius:12px; border-left:4px solid #2563eb; margin-bottom:0.6rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+                                <div class="notice-content" style="flex:1;">
+                                    <div class="notice-title" style="font-weight:600; color:#0b1e3a;">${n.title}</div>
+                                    <div class="notice-text" style="font-size:0.85rem; color:#475569; margin-top:0.1rem;">${n.message}</div>
+                                    <div class="notice-meta" style="font-size:0.65rem; color:#94a3b8; margin-top:0.2rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
                                         <span><i class="fas fa-users"></i> ${targetDisplay}</span>
                                         <span><i class="far fa-calendar-alt"></i> ${date}</span>
                                     </div>
                                 </div>
                                 <div class="notice-actions">
-                                    <button class="delete-notice" data-id="${n.id}"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="delete-notice" data-id="${n.id}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem; border-radius:4px;"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         `;
                 });
                 container.innerHTML = html;
+
                 container.querySelectorAll('.delete-notice').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.dataset.id;
@@ -1748,48 +1518,82 @@
                 });
             }
 
-            // --- UPDATE STATS ---
-            function updateStats() {
-                document.getElementById('statStudents').textContent = students.length;
-                document.getElementById('statTests').textContent = testList.length;
-                document.getElementById('statHomework').textContent = homeworkList.length;
-                document.getElementById('statNotes').textContent = notesList.length;
-                document.getElementById('statNotices').textContent = noticeList.length;
-
-                const todayKey = getTodayKey();
-                let present = 0,
-                    absent = 0;
-                students.forEach(s => {
-                    const key = todayKey + '_' + s.uid;
-                    const record = attendanceRecords[key];
-                    if (record) {
-                        if (record.status === 'present') present++;
-                        else if (record.status === 'absent') absent++;
-                    }
+            // ---------- RENDER STUDY MATERIAL ----------
+            function renderMaterialList() {
+                const container = document.getElementById('materialListContainer');
+                if (!container) return;
+                if (allMaterials.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div>';
+                    return;
+                }
+                let html = '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Title</th><th>Content</th><th>Action</th></tr></thead><tbody>';
+                allMaterials.forEach(m => {
+                    html += `
+                            <tr>
+                                <td>Class ${m.class}</td>
+                                <td>${m.subject}</td>
+                                <td>${m.title}</td>
+                                <td>${m.content ? m.content.substring(0, 60) + (m.content.length > 60 ? '...' : '') : '-'}</td>
+                                <td><button class="delete-material" data-id="${m.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
                 });
-                document.getElementById('statPresent').textContent = present;
-                document.getElementById('dashPresent').textContent = present;
-                document.getElementById('dashAbsent').textContent = absent;
-                document.getElementById('dashStudents').textContent = students.length;
-                document.getElementById('dashTests').textContent = testList.length;
-                document.getElementById('dashHomework').textContent = homeworkList.length;
-                document.getElementById('dashDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short',
-                    month: 'short', day: 'numeric', year: 'numeric' });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.delete-material').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this material?')) {
+                            db.collection('materials').doc(id).delete()
+                                .then(() => { showToast('Material deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ---------- UPDATE STATS & DASHBOARD ----------
+            function updateStats() {
+                statStudents.textContent = allStudents.length;
+                statTeachers.textContent = allTeachers.length;
+                statFees.textContent = allFees.length;
+                statTests.textContent = allTests.length;
+                statHomework.textContent = allHomework.length;
+                statNotices.textContent = allNotices.length;
+
+                document.getElementById('dashStudents').textContent = allStudents.length;
+                document.getElementById('dashTeachers').textContent = allTeachers.length;
+                document.getElementById('dashFees').textContent = allFees.length;
+                document.getElementById('dashTests').textContent = allTests.length;
+                document.getElementById('dashHomework').textContent = allHomework.length;
+                document.getElementById('dashNotices').textContent = allNotices.length;
+
+                document.getElementById('dashDate').textContent = new Date().toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
             }
 
             function updateBadges() {
-                document.getElementById('studentBadge').textContent = students.length;
-                document.getElementById('hwBadge').textContent = homeworkList.length;
-                document.getElementById('testBadge').textContent = testList.length;
-                document.getElementById('notesBadge').textContent = notesList.length;
-                document.getElementById('noticeBadge').textContent = noticeList.length;
+                studentBadge.textContent = allStudents.length;
+                teacherBadge.textContent = allTeachers.length;
+                feeBadge.textContent = allFees.length;
+                hwBadge.textContent = allHomework.length;
+                testBadge.textContent = allTests.length;
+                noticeBadge.textContent = allNotices.length;
             }
 
             function updateDashboard() {
-                updateStats();
+                // Already updated via stats
             }
 
-            // --- ADD STUDENT (with Firebase Auth) ---
+            // ---------- CRUD OPERATIONS ----------
+
+            // Add Student (with Firebase Auth)
             document.getElementById('addStudentBtn').addEventListener('click', function() {
                 const name = document.getElementById('studentName').value.trim();
                 const email = document.getElementById('studentEmail').value.trim();
@@ -1807,11 +1611,9 @@
                     return;
                 }
 
-                // Create user in Firebase Auth
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         const user = userCredential.user;
-                        // Save student data in Firestore
                         return db.collection('students').doc(user.uid).set({
                             name,
                             email,
@@ -1822,411 +1624,80 @@
                             role: 'student',
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                            // Also create a user record for role
-                            return db.collection('users').doc(user.uid).set({
-                                role: 'student',
-                                email: email,
-                                name: name
-                            });
-                        }).then(() => {
-                            showToast('Student account created successfully! They can now log in with their email and password.',
-                                'success');
-                            document.getElementById('studentName').value = '';
-                            document.getElementById('studentEmail').value = '';
-                            document.getElementById('studentPassword').value = '';
-                            document.getElementById('studentClass').value = '';
-                            document.getElementById('studentParentContact').value = '';
-                            document.getElementById('studentAddress').value = '';
-                            loadAllData();
+                            db.collection('users').doc(user.uid).set({ role: 'student', email, name });
                         });
+                    })
+                    .then(() => {
+                        showToast('Student added successfully!', 'success');
+                        document.getElementById('studentName').value = '';
+                        document.getElementById('studentEmail').value = '';
+                        document.getElementById('studentPassword').value = '';
+                        document.getElementById('studentClass').value = '';
+                        document.getElementById('studentParentContact').value = '';
+                        document.getElementById('studentAddress').value = '';
+                        loadAllData();
                     })
                     .catch(err => {
                         let msg = err.message;
-                        if (err.code === 'auth/email-already-in-use') {
-                            msg = 'This email is already registered.';
-                        }
+                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
                         showToast('Error: ' + msg, 'error');
                     });
             });
 
-            // --- ATTENDANCE ---
-            document.getElementById('attPresentBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('attendanceStudentSelect').value;
-                const date = document.getElementById('attendanceDate').value || getTodayStr();
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                markAttendance(studentId, date, 'present');
-            });
-            document.getElementById('attAbsentBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('attendanceStudentSelect').value;
-                const date = document.getElementById('attendanceDate').value || getTodayStr();
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                markAttendance(studentId, date, 'absent');
-            });
-            document.getElementById('attPartialBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('attendanceStudentSelect').value;
-                const date = document.getElementById('attendanceDate').value || getTodayStr();
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                markAttendance(studentId, date, 'partial');
-            });
+            // Add Teacher
+            document.getElementById('addTeacherBtn').addEventListener('click', function() {
+                const name = document.getElementById('teacherNameInput').value.trim();
+                const email = document.getElementById('teacherEmailInput').value.trim();
+                const password = document.getElementById('teacherPasswordInput').value.trim();
+                const role = document.getElementById('teacherRole').value;
 
-            function markAttendance(studentId, date, status) {
-                const key = date + '_' + studentId;
-                db.collection('attendance').doc(key).set({
-                    studentId,
-                    date,
-                    status,
-                    teacherId: currentTeacherId,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast(`Attendance marked as ${status}`, 'success');
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            }
-
-            document.getElementById('loadClassAttendanceBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('attendanceClassSelect').value;
-                const date = document.getElementById('attendanceClassDate').value || getTodayStr();
-                if (!classVal) { showToast('Select a class.', 'error'); return; }
-                const classStudents = students.filter(s => s.class == classVal);
-                if (classStudents.length === 0) {
-                    document.getElementById('classAttendanceList').innerHTML =
-                        '<div class="empty-state"><i class="fas fa-users"></i> No students in this class.</div>';
+                if (!name || !email || !password) {
+                    showToast('Please fill in all required fields.', 'error');
                     return;
                 }
-                let html =
-                    '<table class="data-table"><thead><tr><th>Student</th><th>Status</th><th>Action</th></tr></thead><tbody>';
-                classStudents.forEach(s => {
-                    const key = date + '_' + s.uid;
-                    const record = attendanceRecords[key];
-                    const status = record ? record.status : 'Not marked';
-                    html += `
-                            <tr>
-                                <td>${s.name}</td>
-                                <td style="font-weight:600; color:${status === 'present' ? '#22c55e' : status === 'absent' ? '#ef4444' : status === 'partial' ? '#f59e0b' : '#94a3b8'}">${status}</td>
-                                <td>
-                                    <button class="btn-success btn-sm2" onclick="markAttendanceClass('${s.uid}','present')"><i class="fas fa-check"></i></button>
-                                    <button class="btn-danger btn-sm2" onclick="markAttendanceClass('${s.uid}','absent')"><i class="fas fa-times"></i></button>
-                                    <button class="btn-orange btn-sm2" onclick="markAttendanceClass('${s.uid}','partial')"><i class="fas fa-clock"></i></button>
-                                </td>
-                            </tr>
-                        `;
-                });
-                html += '</tbody></table>';
-                document.getElementById('classAttendanceList').innerHTML = html;
-            });
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters.', 'error');
+                    return;
+                }
 
-            window.markAttendanceClass = function(studentId, status) {
-                const date = document.getElementById('attendanceClassDate').value || getTodayStr();
-                const key = date + '_' + studentId;
-                db.collection('attendance').doc(key).set({
-                    studentId,
-                    date,
-                    status,
-                    teacherId: currentTeacherId,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Attendance marked', 'success');
-                    loadAllData();
-                    document.getElementById('loadClassAttendanceBtn').click();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            };
-
-            // Set default dates
-            document.getElementById('attendanceDate').value = getTodayStr();
-            document.getElementById('attendanceClassDate').value = getTodayStr();
-
-            // --- TOGGLE TARGETS ---
-            function setupToggle(containerId, individualId, classId) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-                const btns = container.querySelectorAll('button');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        btns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        const target = this.dataset.target;
-                        const indiv = document.getElementById(individualId);
-                        const cls = document.getElementById(classId);
-                        if (indiv) indiv.style.display = target === 'individual' ? 'block' : 'none';
-                        if (cls) cls.style.display = target === 'class' ? 'block' : 'none';
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        return db.collection('teachers').doc(user.uid).set({
+                            name,
+                            email,
+                            role,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            db.collection('users').doc(user.uid).set({ role: 'teacher', email, name });
+                        });
+                    })
+                    .then(() => {
+                        showToast('Teacher added successfully!', 'success');
+                        document.getElementById('teacherNameInput').value = '';
+                        document.getElementById('teacherEmailInput').value = '';
+                        document.getElementById('teacherPasswordInput').value = '';
+                        loadAllData();
+                    })
+                    .catch(err => {
+                        let msg = err.message;
+                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
+                        showToast('Error: ' + msg, 'error');
                     });
-                });
-            }
-
-            setupToggle('attendanceTargetToggle', 'attendanceIndividualForm', 'attendanceClassForm');
-            setupToggle('feeTargetToggle', 'feeIndividualForm', 'feeClassForm');
-            setupToggle('hwTargetToggle', 'hwIndividualForm', 'hwClassForm');
-            setupToggle('testTargetToggle', 'testIndividualForm', 'testClassForm');
-            setupToggle('notesTargetToggle', 'notesIndividualForm', 'notesClassForm');
-
-            // Notice target toggle
-            const noticeToggle = document.getElementById('noticeTargetToggle');
-            if (noticeToggle) {
-                const btns = noticeToggle.querySelectorAll('button');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        btns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        const target = this.dataset.target;
-                        const select = document.getElementById('noticeTargetSelect');
-                        if (select) {
-                            if (target === 'all') {
-                                select.innerHTML = '<option value="all">All Students</option>';
-                            } else if (target === 'class') {
-                                const classes = [...new Set(students.map(s => s.class).filter(Boolean))].sort();
-                                select.innerHTML = '<option value="">Select Class</option>';
-                                classes.forEach(c => {
-                                    const opt = document.createElement('option');
-                                    opt.value = 'class_' + c;
-                                    opt.textContent = 'Class ' + c;
-                                    select.appendChild(opt);
-                                });
-                            } else {
-                                select.innerHTML = '<option value="">Select Student</option>';
-                                students.forEach(s => {
-                                    const opt = document.createElement('option');
-                                    opt.value = s.uid;
-                                    opt.textContent = s.name + ' (' + getClassDisplay(s.class) + ')';
-                                    select.appendChild(opt);
-                                });
-                            }
-                        }
-                    });
-                });
-            }
-
-            // --- ADD HOMEWORK ---
-            document.getElementById('addHomeworkBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('hwStudentSelect').value;
-                const title = document.getElementById('hwTitle').value.trim();
-                const subject = document.getElementById('hwSubject').value;
-                const description = document.getElementById('hwDescription').value.trim();
-                const dueDate = document.getElementById('hwDueDate').value;
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                if (!title) { showToast('Enter a title.', 'error'); return; }
-                db.collection('homework').add({
-                    studentId,
-                    title,
-                    subject,
-                    description,
-                    dueDate,
-                    teacherId: currentTeacherId,
-                    isClass: false,
-                    done: false,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Homework added!', 'success');
-                    document.getElementById('hwTitle').value = '';
-                    document.getElementById('hwDescription').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
-            document.getElementById('addClassHomeworkBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('hwClassSelect').value;
-                const title = document.getElementById('hwClassTitle').value.trim();
-                const subject = document.getElementById('hwClassSubject').value;
-                const description = document.getElementById('hwClassDescription').value.trim();
-                const dueDate = document.getElementById('hwClassDueDate').value;
-                if (!classVal) { showToast('Select a class.', 'error'); return; }
-                if (!title) { showToast('Enter a title.', 'error'); return; }
-                const classStudents = students.filter(s => s.class == classVal);
-                if (classStudents.length === 0) { showToast('No students in this class.', 'error'); return; }
-                let added = 0;
-                const promises = classStudents.map(s => {
-                    return db.collection('homework').add({
-                        studentId: s.uid,
-                        title,
-                        subject,
-                        description,
-                        dueDate,
-                        teacherId: currentTeacherId,
-                        isClass: true,
-                        done: false,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => added++);
-                });
-                Promise.all(promises).then(() => {
-                    showToast(`Homework assigned to ${added} students.`, 'success');
-                    document.getElementById('hwClassTitle').value = '';
-                    document.getElementById('hwClassDescription').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // --- ADD TEST ---
-            document.getElementById('addTestBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('testStudentSelect').value;
-                const name = document.getElementById('testName').value.trim();
-                const subject = document.getElementById('testSubject').value;
-                const marks = document.getElementById('testMarks').value;
-                const maxMarks = document.getElementById('testMaxMarks').value;
-                const date = document.getElementById('testDate').value;
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                if (!name) { showToast('Enter a test name.', 'error'); return; }
-                db.collection('tests').add({
-                    studentId,
-                    name,
-                    subject,
-                    marks: parseFloat(marks) || null,
-                    maxMarks: parseFloat(maxMarks) || 20,
-                    date: date || getTodayStr(),
-                    teacherId: currentTeacherId,
-                    isClass: false,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Test added!', 'success');
-                    document.getElementById('testName').value = '';
-                    document.getElementById('testMarks').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            document.getElementById('addClassTestBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('testClassSelect').value;
-                const name = document.getElementById('testClassName').value.trim();
-                const subject = document.getElementById('testClassSubject').value;
-                const maxMarks = document.getElementById('testClassMaxMarks').value;
-                const date = document.getElementById('testClassDate').value;
-                if (!classVal) { showToast('Select a class.', 'error'); return; }
-                if (!name) { showToast('Enter a test name.', 'error'); return; }
-                const classStudents = students.filter(s => s.class == classVal);
-                if (classStudents.length === 0) { showToast('No students in this class.', 'error'); return; }
-                let added = 0;
-                const promises = classStudents.map(s => {
-                    return db.collection('tests').add({
-                        studentId: s.uid,
-                        name,
-                        subject,
-                        marks: null,
-                        maxMarks: parseFloat(maxMarks) || 20,
-                        date: date || getTodayStr(),
-                        teacherId: currentTeacherId,
-                        isClass: true,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => added++);
-                });
-                Promise.all(promises).then(() => {
-                    showToast(`Test assigned to ${added} students.`, 'success');
-                    document.getElementById('testClassName').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // --- ADD NOTE ---
-            document.getElementById('addNoteBtn').addEventListener('click', function() {
-                const studentId = document.getElementById('notesStudentSelect').value;
-                const title = document.getElementById('notesTitle').value.trim();
-                const subject = document.getElementById('notesSubject').value;
-                const content = document.getElementById('notesContent').value.trim();
-                if (!studentId) { showToast('Select a student.', 'error'); return; }
-                if (!title) { showToast('Enter a title.', 'error'); return; }
-                db.collection('notes').add({
-                    studentId,
-                    title,
-                    subject,
-                    content,
-                    teacherId: currentTeacherId,
-                    isClass: false,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Note added!', 'success');
-                    document.getElementById('notesTitle').value = '';
-                    document.getElementById('notesContent').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            document.getElementById('addClassNoteBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('notesClassSelect').value;
-                const title = document.getElementById('notesClassTitle').value.trim();
-                const subject = document.getElementById('notesClassSubject').value;
-                const content = document.getElementById('notesClassContent').value.trim();
-                if (!classVal) { showToast('Select a class.', 'error'); return; }
-                if (!title) { showToast('Enter a title.', 'error'); return; }
-                const classStudents = students.filter(s => s.class == classVal);
-                if (classStudents.length === 0) { showToast('No students in this class.', 'error'); return; }
-                let added = 0;
-                const promises = classStudents.map(s => {
-                    return db.collection('notes').add({
-                        studentId: s.uid,
-                        title,
-                        subject,
-                        content,
-                        teacherId: currentTeacherId,
-                        isClass: true,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => added++);
-                });
-                Promise.all(promises).then(() => {
-                    showToast(`Notes shared with ${added} students.`, 'success');
-                    document.getElementById('notesClassTitle').value = '';
-                    document.getElementById('notesClassContent').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // --- ADD CHAPTER ---
-            document.getElementById('addChapterBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('chapterClassSelect').value;
-                const subject = document.getElementById('chapterSubjectSelect').value;
-                const number = document.getElementById('chapterNumber').value.trim();
-                const name = document.getElementById('chapterName').value.trim();
-                const description = document.getElementById('chapterDescription').value.trim();
-                if (!classVal || !subject || !name) {
-                    showToast('Please fill in Class, Subject, and Chapter Name.', 'error');
-                    return;
-                }
-                db.collection('chapters').add({
-                    class: classVal,
-                    subject,
-                    number,
-                    name,
-                    description,
-                    teacherId: currentTeacherId,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Chapter added!', 'success');
-                    document.getElementById('chapterName').value = '';
-                    document.getElementById('chapterNumber').value = '';
-                    document.getElementById('chapterDescription').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // --- ADD SUBJECT ---
-            document.getElementById('addSubjectBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('subjectClassSelect').value;
-                const name = document.getElementById('subjectName').value.trim();
-                const code = document.getElementById('subjectCode').value.trim();
-                const teacher = document.getElementById('subjectTeacher').value.trim();
-                if (!classVal || !name) {
-                    showToast('Please select a class and enter a subject name.', 'error');
-                    return;
-                }
-                db.collection('subjects').add({
-                    class: classVal,
-                    name,
-                    code,
-                    teacher,
-                    teacherId: currentTeacherId,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showToast('Subject added!', 'success');
-                    document.getElementById('subjectName').value = '';
-                    document.getElementById('subjectCode').value = '';
-                    document.getElementById('subjectTeacher').value = '';
-                    loadAllData();
-                }).catch(err => showToast('Error: ' + err.message, 'error'));
-            });
-
-            // --- ADD FEE ---
+            // Add Fee
             document.getElementById('addFeeBtn').addEventListener('click', function() {
                 const studentId = document.getElementById('feeStudentSelect').value;
                 const month = document.getElementById('feeMonth').value;
                 const amount = document.getElementById('feeAmount').value;
                 const status = document.getElementById('feeStatus').value;
-                if (!studentId || !amount) { showToast('Select a student and enter amount.', 'error'); return; }
+
+                if (!studentId || !amount) {
+                    showToast('Please select a student and enter amount.', 'error');
+                    return;
+                }
+
                 db.collection('fees').add({
                     studentId,
                     month,
@@ -2241,42 +1712,49 @@
                 }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
-            document.getElementById('addClassFeeBtn').addEventListener('click', function() {
-                const classVal = document.getElementById('feeClassSelect').value;
-                const month = document.getElementById('feeClassMonth').value;
-                const amount = document.getElementById('feeClassAmount').value;
-                const status = document.getElementById('feeClassStatus').value;
-                if (!classVal || !amount) { showToast('Select a class and enter amount.', 'error'); return; }
-                const classStudents = students.filter(s => s.class == classVal);
-                if (classStudents.length === 0) { showToast('No students in this class.', 'error'); return; }
-                let added = 0;
-                const promises = classStudents.map(s => {
-                    return db.collection('fees').add({
-                        studentId: s.uid,
-                        month,
-                        amount: parseFloat(amount),
-                        status,
-                        teacherId: currentTeacherId,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => added++);
-                });
-                Promise.all(promises).then(() => {
-                    showToast(`Fee records added for ${added} students.`, 'success');
+            // Add Study Material
+            document.getElementById('addMaterialBtn').addEventListener('click', function() {
+                const classVal = document.getElementById('materialClass').value;
+                const subject = document.getElementById('materialSubject').value;
+                const title = document.getElementById('materialTitle').value.trim();
+                const content = document.getElementById('materialContent').value.trim();
+
+                if (!classVal || !title) {
+                    showToast('Please select a class and enter a title.', 'error');
+                    return;
+                }
+
+                db.collection('materials').add({
+                    class: classVal,
+                    subject,
+                    title,
+                    content,
+                    teacherId: currentTeacherId,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Study material added!', 'success');
+                    document.getElementById('materialTitle').value = '';
+                    document.getElementById('materialContent').value = '';
                     loadAllData();
                 }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
-            // --- ADD NOTICE ---
+            // Add Notice
             document.getElementById('addNoticeBtn').addEventListener('click', function() {
-                const target = document.getElementById('noticeTargetSelect').value;
+                const targetType = document.getElementById('noticeTargetSelect').value;
+                const targetValue = document.getElementById('noticeTargetValue').value;
                 const title = document.getElementById('noticeTitle').value.trim();
                 const message = document.getElementById('noticeMessage').value.trim();
-                if (!title || !message) { showToast('Please enter title and message.', 'error'); return; }
-                let targetType = 'all',
-                    targetId = null;
-                if (target.startsWith('class_')) { targetType = 'class';
-                    targetId = target.replace('class_', ''); } else if (target !== 'all') { targetType = 'individual';
-                    targetId = target; }
+
+                if (!title || !message) {
+                    showToast('Please enter title and message.', 'error');
+                    return;
+                }
+
+                let targetId = null;
+                if (targetType === 'class') targetId = targetValue;
+                else if (targetType === 'individual') targetId = targetValue;
+
                 db.collection('notices').add({
                     targetType,
                     targetId,
@@ -2292,13 +1770,146 @@
                 }).catch(err => showToast('Error: ' + err.message, 'error'));
             });
 
-            // --- REFRESH ---
+            // Add Homework
+            document.getElementById('addHomeworkBtn').addEventListener('click', function() {
+                const studentId = document.getElementById('hwStudentSelect').value;
+                const subject = document.getElementById('hwSubject').value;
+                const title = document.getElementById('hwTitle').value.trim();
+                const description = document.getElementById('hwDescription').value.trim();
+                const dueDate = document.getElementById('hwDueDate').value;
+                const assignType = document.getElementById('hwAssignType').value;
+
+                if (!title) { showToast('Please enter a title.', 'error'); return; }
+
+                if (assignType === 'class') {
+                    // Assign to all students
+                    const classVal = studentId; // studentId is actually class if we set it properly
+                    // We'll use a different approach: if assignType is class, we'll use a separate field
+                    // For simplicity, we'll just assign to individual or class based on selection
+                    // Let's use a hidden field or just assign to individual for now
+                    showToast('Class-wide assignment coming soon. Use individual for now.', 'info');
+                    return;
+                }
+
+                if (!studentId) { showToast('Please select a student.', 'error'); return; }
+
+                db.collection('homework').add({
+                    studentId,
+                    title,
+                    subject,
+                    description,
+                    dueDate,
+                    isClass: assignType === 'class',
+                    teacherId: currentTeacherId,
+                    done: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Homework assigned!', 'success');
+                    document.getElementById('hwTitle').value = '';
+                    document.getElementById('hwDescription').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Test
+            document.getElementById('addTestBtn').addEventListener('click', function() {
+                const studentId = document.getElementById('testStudentSelect').value;
+                const subject = document.getElementById('testSubject').value;
+                const name = document.getElementById('testName').value.trim();
+                const date = document.getElementById('testDate').value;
+                const marks = document.getElementById('testMarks').value;
+                const maxMarks = document.getElementById('testMaxMarks').value;
+                const assignType = document.getElementById('testAssignType').value;
+
+                if (!name) { showToast('Please enter a test name.', 'error'); return; }
+                if (!studentId && assignType === 'individual') {
+                    showToast('Please select a student.', 'error');
+                    return;
+                }
+
+                db.collection('tests').add({
+                    studentId: assignType === 'individual' ? studentId : null,
+                    name,
+                    subject,
+                    marks: marks ? parseFloat(marks) : null,
+                    maxMarks: parseFloat(maxMarks) || 20,
+                    date: date || '',
+                    isClass: assignType === 'class',
+                    teacherId: currentTeacherId,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Test added!', 'success');
+                    document.getElementById('testName').value = '';
+                    document.getElementById('testMarks').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // ---------- REFRESH BUTTONS ----------
             document.getElementById('refreshStudentsBtn').addEventListener('click', function() {
                 loadAllData();
                 showToast('Refreshed!', 'success');
             });
 
-            // --- ESCAPE TOAST ---
+            // ---------- NOTICE TARGET DYNAMIC ----------
+            document.getElementById('noticeTargetSelect').addEventListener('change', function() {
+                const target = this.value;
+                const targetSelect = document.getElementById('noticeTargetValue');
+                targetSelect.innerHTML = '';
+                if (target === 'all') {
+                    targetSelect.innerHTML = '<option value="all">All Students</option>';
+                } else if (target === 'class') {
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = 'Class ' + c;
+                        targetSelect.appendChild(opt);
+                    });
+                } else if (target === 'individual') {
+                    allStudents.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.uid;
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                        targetSelect.appendChild(opt);
+                    });
+                }
+            });
+
+            // ---------- TOGGLE HOMEWORK ASSIGN TYPE ----------
+            document.getElementById('hwAssignType').addEventListener('change', function() {
+                const hwStudentSelect = document.getElementById('hwStudentSelect');
+                if (this.value === 'class') {
+                    hwStudentSelect.innerHTML = '<option value="">Select Class</option>';
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = 'Class ' + c;
+                        hwStudentSelect.appendChild(opt);
+                    });
+                } else {
+                    updateStudentDropdowns();
+                }
+            });
+
+            document.getElementById('testAssignType').addEventListener('change', function() {
+                const testStudentSelect = document.getElementById('testStudentSelect');
+                if (this.value === 'class') {
+                    testStudentSelect.innerHTML = '<option value="">Select Class</option>';
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = 'Class ' + c;
+                        testStudentSelect.appendChild(opt);
+                    });
+                } else {
+                    updateStudentDropdowns();
+                }
+            });
+
+            // ---------- ESCAPE TOAST ----------
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     const toast = document.getElementById('toast');
@@ -2307,12 +1918,11 @@
                 }
             });
 
-            // --- INIT ---
+            // ---------- INIT ----------
             console.log('👨‍🏫 Knowledge Nexus — Teacher Dashboard');
-            console.log('📌 Teachers can create student accounts with email & password');
+            console.log('📌 Complete management: Students, Teachers, Fees, Materials, Notices, Homework, Tests');
 
         })();
     </script>
-
 </body>
 </html>
