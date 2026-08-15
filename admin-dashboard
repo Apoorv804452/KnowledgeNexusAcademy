@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Knowledge Nexus</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* Same base styles as teacher dashboard */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4ff;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+        .site-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .top-nav {
+            background: rgba(255, 255, 255, 0.80);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            padding: 0.7rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #1e3a8a, #2563eb);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.20);
+        }
+        .brand h1 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0b1e3a;
+        }
+        .brand h1 span {
+            color: #2563eb;
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .btn-logout {
+            background: transparent;
+            border: 1.5px solid #e2e8f0;
+            color: #64748b;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-logout:hover {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+        .hero-banner {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            border-radius: 2rem;
+            padding: 1.6rem 2.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+        .hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+        .hero-banner h2 i {
+            color: #fcd34d;
+            margin-right: 0.4rem;
+        }
+        .hero-banner p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        .hero-banner .admin-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .stat-card .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b1e3a;
+        }
+        .stat-card .stat-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+        .stat-card .stat-icon {
+            font-size: 1.2rem;
+            display: block;
+        }
+        .stat-card .stat-icon.blue {
+            color: #3b82f6;
+        }
+        .stat-card .stat-icon.green {
+            color: #22c55e;
+        }
+        .stat-card .stat-icon.purple {
+            color: #8b5cf6;
+        }
+        .stat-card .stat-icon.orange {
+            color: #f97316;
+        }
+        .stat-card .stat-icon.red {
+            color: #ef4444;
+        }
+        .stat-card .stat-icon.yellow {
+            color: #f59e0b;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            gap: 1.8rem;
+            align-items: flex-start;
+        }
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.2rem 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: sticky;
+            top: 1.5rem;
+            max-height: calc(100vh - 3rem);
+            overflow-y: auto;
+        }
+        .sidebar .sidebar-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #94a3b8;
+            padding: 0.5rem 1rem 0.8rem;
+        }
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar .nav-item:hover {
+            background: #eef2ff;
+            color: #1e293b;
+        }
+        .sidebar .nav-item.active {
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+        .sidebar .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+        .sidebar .nav-item .badge {
+            margin-left: auto;
+            background: #e2e8f0;
+            padding: 0.05rem 0.5rem;
+            border-radius: 60px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+        .sidebar .nav-item.active .badge {
+            background: #2563eb;
+            color: #fff;
+        }
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
+        .section-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.8rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.8rem;
+            display: none;
+        }
+        .section-card.active {
+            display: block;
+            animation: fadeSlide 0.3s ease;
+        }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .section-card .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .section-card .section-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0b1e3a;
+        }
+        .section-card .section-header h3 i {
+            color: #2563eb;
+            margin-right: 0.6rem;
+        }
+        .section-card .section-header .sub-text {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.6rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            background: #fff;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        .btn-primary {
+            padding: 0.6rem 1.8rem;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        .btn-success:hover {
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .btn-danger:hover {
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+        }
+        .btn-orange {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+        }
+        .btn-orange:hover {
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
+        }
+        .btn-purple {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        .btn-purple:hover {
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+        }
+        .btn-sm {
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 0.6rem 0.8rem;
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .data-table tr:hover td {
+            background: #f8fafc;
+        }
+        .data-table .actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        .data-table .actions button:hover {
+            background: #eef2ff;
+            color: #2563eb;
+        }
+        .data-table .actions button.danger:hover {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+        .empty-state {
+            text-align: center;
+            color: #94a3b8;
+            padding: 2rem 0;
+        }
+        .empty-state i {
+            font-size: 2.5rem;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .local-notice {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .local-notice i {
+            color: #d97706;
+            font-size: 1.2rem;
+        }
+        .local-notice p {
+            color: #92400e;
+            font-size: 0.9rem;
+        }
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-width: 90%;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast i {
+            font-size: 1.1rem;
+        }
+        .toast.success i {
+            color: #4ade80;
+        }
+        .toast.error i {
+            color: #f87171;
+        }
+        .toast.info i {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+                max-height: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                padding: 0.8rem;
+                border-radius: 1.4rem;
+            }
+            .sidebar .sidebar-title {
+                display: none;
+            }
+            .sidebar .nav-item {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+                width: auto;
+                border-radius: 60px;
+            }
+            .sidebar .nav-item .badge {
+                display: none;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .site-wrapper {
+                padding: 1rem;
+            }
+            .top-nav {
+                padding: 0.6rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            .brand h1 {
+                font-size: 1rem;
+            }
+            .hero-banner {
+                padding: 1.2rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            .hero-banner h2 {
+                font-size: 1.2rem;
+            }
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            .stat-card {
+                padding: 0.6rem 0.3rem;
+            }
+            .stat-card .stat-number {
+                font-size: 1.2rem;
+            }
+            .section-card {
+                padding: 1.2rem 1rem;
+                border-radius: 1.4rem;
+            }
+            .data-table {
+                font-size: 0.75rem;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 0.4rem 0.5rem;
+            }
+            .user-section .greeting {
+                font-size: 0.7rem;
+            }
+            .btn-logout span {
+                display: none;
+            }
+            .btn-logout i {
+                font-size: 1rem;
+            }
+            .btn-logout {
+                padding: 0.4rem 0.8rem;
+            }
+            .toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                border-radius: 1rem;
+                justify-content: center;
+                font-size: 0.8rem;
+                padding: 0.7rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="site-wrapper">
+
+        <!-- ===== LOCAL ACCESS ONLY NOTICE ===== -->
+        <div class="local-notice">
+            <i class="fas fa-laptop"></i>
+            <p><strong>🔒 Admin Panel</strong> — This page is designed to run locally on your laptop. It will not work if accessed from the internet.</p>
+        </div>
+
+        <!-- ===== TOP NAV ===== -->
+        <nav class="top-nav">
+            <a href="#" class="brand">
+                <div class="brand-icon"><i class="fas fa-user-shield"></i></div>
+                <div><h1>Knowledge <span>Nexus</span></h1></div>
+            </a>
+            <div class="user-section">
+                <span class="greeting"><i class="fas fa-user-tie" style="color:#f59e0b;"></i> <span id="adminName">Admin</span></span>
+                <div class="avatar" id="adminAvatar">AD</div>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
+            </div>
+        </nav>
+
+        <!-- ===== HERO BANNER ===== -->
+        <div class="hero-banner">
+            <h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2>
+            <p>Complete control over your coaching institute — manage teachers, students, and all content.</p>
+            <div class="admin-badge"><i class="fas fa-crown"></i> Administrator</div>
+        </div>
+
+        <!-- ===== STATS ROW ===== -->
+        <div class="stats-row" id="statsRow">
+            <div class="stat-card"><span class="stat-icon blue"><i class="fas fa-user-graduate"></i></span><div class="stat-number" id="statStudents">0</div><div class="stat-label">Students</div></div>
+            <div class="stat-card"><span class="stat-icon green"><i class="fas fa-user-tie"></i></span><div class="stat-number" id="statTeachers">0</div><div class="stat-label">Teachers</div></div>
+            <div class="stat-card"><span class="stat-icon yellow"><i class="fas fa-rupee-sign"></i></span><div class="stat-number" id="statFees">0</div><div class="stat-label">Fee Records</div></div>
+            <div class="stat-card"><span class="stat-icon purple"><i class="fas fa-pencil-alt"></i></span><div class="stat-number" id="statTests">0</div><div class="stat-label">Tests</div></div>
+            <div class="stat-card"><span class="stat-icon orange"><i class="fas fa-book"></i></span><div class="stat-number" id="statHomework">0</div><div class="stat-label">Homework</div></div>
+            <div class="stat-card"><span class="stat-icon red"><i class="fas fa-bullhorn"></i></span><div class="stat-number" id="statNotices">0</div><div class="stat-label">Notices</div></div>
+        </div>
+
+        <!-- ===== DASHBOARD LAYOUT ===== -->
+        <div class="dashboard-layout">
+
+            <!-- ===== SIDEBAR ===== -->
+            <nav class="sidebar" id="sidebar">
+                <div class="sidebar-title">MENU</div>
+                <button class="nav-item active" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
+                <button class="nav-item" data-section="teacher-management"><i class="fas fa-user-tie"></i> Teachers <span class="badge" id="teacherBadge">0</span></button>
+                <button class="nav-item" data-section="student-management"><i class="fas fa-user-graduate"></i> Students <span class="badge" id="studentBadge">0</span></button>
+                <button class="nav-item" data-section="fee-management"><i class="fas fa-rupee-sign"></i> Fees <span class="badge" id="feeBadge">0</span></button>
+                <button class="nav-item" data-section="study-material"><i class="fas fa-book-open"></i> Study Material</button>
+                <button class="nav-item" data-section="notification-management"><i class="fas fa-bullhorn"></i> Notices <span class="badge" id="noticeBadge">0</span></button>
+                <button class="nav-item" data-section="homework-management"><i class="fas fa-book"></i> Homework <span class="badge" id="hwBadge">0</span></button>
+                <button class="nav-item" data-section="test-management"><i class="fas fa-pencil-alt"></i> Tests <span class="badge" id="testBadge">0</span></button>
+                <button class="nav-item" data-section="subjects"><i class="fas fa-th-list"></i> Subjects</button>
+                <button class="nav-item" data-section="chapters"><i class="fas fa-layer-group"></i> Chapters</button>
+            </nav>
+
+            <!-- ===== CONTENT AREA ===== -->
+            <div class="content-area">
+
+                <!-- ===== DASHBOARD ===== -->
+                <div class="section-card active" id="section-dashboard">
+                    <div class="section-header">
+                        <h3><i class="fas fa-th-large"></i> Dashboard</h3>
+                        <span class="sub-text"><i class="far fa-calendar-alt"></i> <span id="dashDate"></span></span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:1rem; margin-bottom:1.5rem;">
+                        <div style="background:#eef2ff; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#2563eb;"><i class="fas fa-user-graduate"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashStudents">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Students</div>
+                        </div>
+                        <div style="background:#f0fdf4; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#22c55e;"><i class="fas fa-user-tie"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashTeachers">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Teachers</div>
+                        </div>
+                        <div style="background:#fef3c7; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#f59e0b;"><i class="fas fa-rupee-sign"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashFees">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Fee Records</div>
+                        </div>
+                        <div style="background:#fef2f2; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#ef4444;"><i class="fas fa-bullhorn"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashNotices">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Notices</div>
+                        </div>
+                        <div style="background:#f5f3ff; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#8b5cf6;"><i class="fas fa-pencil-alt"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashTests">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Tests</div>
+                        </div>
+                        <div style="background:#fff7ed; border-radius:1rem; padding:1.2rem; text-align:center;">
+                            <div style="font-size:2rem; color:#f97316;"><i class="fas fa-book"></i></div>
+                            <div style="font-size:1.3rem; font-weight:800; color:#0b1e3a;" id="dashHomework">0</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Homework</div>
+                        </div>
+                    </div>
+                    <div style="background:#f8fafc; border-radius:1rem; padding:1rem;">
+                        <p style="color:#64748b; font-size:0.9rem;"><i class="fas fa-info-circle" style="color:#2563eb;"></i> Welcome, Admin! You have full control over all users and content.</p>
+                    </div>
+                </div>
+
+                <!-- ===== TEACHER MANAGEMENT ===== -->
+                <div class="section-card" id="section-teacher-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-user-tie"></i> Teacher Management</h3>
+                        <span class="sub-text">Add, edit, or remove teachers</span>
+                    </div>
+                    <div style="background:#f0fdf4; border-radius:1rem; padding:1rem; margin-bottom:1.2rem; border:1px solid #bbf7d0;">
+                        <p style="font-size:0.85rem; color:#166534;"><i class="fas fa-info-circle"></i> Teachers can log in and manage students, homework, tests, and notices.</p>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="adminTeacherName" placeholder="e.g. Mr. Sharma" /></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="adminTeacherEmail" placeholder="teacher@example.com" /></div>
+                        <div class="form-group"><label>Password *</label><input type="text" id="adminTeacherPassword" placeholder="Min 6 characters" /></div>
+                        <div class="form-group"><label>Role</label><select id="adminTeacherRole"><option value="teacher">Teacher</option><option value="admin">Admin</option></select></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddTeacherBtn"><i class="fas fa-plus"></i> Add Teacher</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Teachers</h4>
+                        <div id="adminTeacherList"><div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== STUDENT MANAGEMENT ===== -->
+                <div class="section-card" id="section-student-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-user-graduate"></i> Student Management</h3>
+                        <span class="sub-text">Add, edit, or remove students</span>
+                    </div>
+                    <div style="background:#f0fdf4; border-radius:1rem; padding:1rem; margin-bottom:1.2rem; border:1px solid #bbf7d0;">
+                        <p style="font-size:0.85rem; color:#166534;"><i class="fas fa-info-circle"></i> Students can log in with their email and password to view their dashboard.</p>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="adminStudentName" placeholder="e.g. Rahul Sharma" /></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="adminStudentEmail" placeholder="student@example.com" /></div>
+                        <div class="form-group"><label>Password *</label><input type="text" id="adminStudentPassword" placeholder="Min 6 characters" /></div>
+                        <div class="form-group"><label>Class *</label><select id="adminStudentClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Parent Contact</label><input type="text" id="adminStudentParent" placeholder="e.g. 9876543210" /></div>
+                        <div class="form-group"><label>Address</label><input type="text" id="adminStudentAddress" placeholder="Student's address" /></div>
+                        <div class="form-group full-width"><button class="btn-success" id="adminAddStudentBtn"><i class="fas fa-plus"></i> Add Student</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Students</h4>
+                        <div id="adminStudentList"><div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== FEE MANAGEMENT ===== -->
+                <div class="section-card" id="section-fee-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-rupee-sign"></i> Fee Management</h3>
+                        <span class="sub-text">Track student fee payments</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="adminFeeStudent"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Month</label><select id="adminFeeMonth"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select></div>
+                        <div class="form-group"><label>Amount (₹)</label><input type="number" id="adminFeeAmount" placeholder="e.g. 2500" /></div>
+                        <div class="form-group"><label>Status</label><select id="adminFeeStatus"><option value="Paid">Paid</option><option value="Pending">Pending</option><option value="Partial">Partial</option></select></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddFeeBtn"><i class="fas fa-plus"></i> Add Fee Record</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Fee Records</h4>
+                        <div id="adminFeeList"><div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== STUDY MATERIAL ===== -->
+                <div class="section-card" id="section-study-material">
+                    <div class="section-header">
+                        <h3><i class="fas fa-book-open"></i> Study Material</h3>
+                        <span class="sub-text">Upload notes, chapters, and resources</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Class</label><select id="adminMaterialClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="adminMaterialSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="adminMaterialTitle" placeholder="e.g. Chapter 6 - Lines & Angles" /></div>
+                        <div class="form-group full-width"><label>Content / Link</label><textarea id="adminMaterialContent" placeholder="Enter notes content or paste a link..."></textarea></div>
+                        <div class="form-group full-width"><button class="btn-orange" id="adminAddMaterialBtn"><i class="fas fa-plus"></i> Add Study Material</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> All Materials</h4>
+                        <div id="adminMaterialList"><div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== NOTICE MANAGEMENT ===== -->
+                <div class="section-card" id="section-notification-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-bullhorn"></i> Notification Management</h3>
+                        <span class="sub-text">Post notices to students</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Target</label>
+                            <select id="adminNoticeTarget"><option value="all">All Students</option><option value="class">By Class</option><option value="individual">Individual</option></select>
+                        </div>
+                        <div class="form-group" id="adminNoticeTargetGroup">
+                            <label>Select Target</label>
+                            <select id="adminNoticeTargetValue"><option value="all">All Students</option></select>
+                        </div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="adminNoticeTitle" placeholder="e.g. Holiday Notice" /></div>
+                        <div class="form-group full-width"><label>Message *</label><textarea id="adminNoticeMessage" placeholder="Write the notice here..."></textarea></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddNoticeBtn"><i class="fas fa-plus"></i> Post Notice</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Notices</h4>
+                        <div id="adminNoticeList"><div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== HOMEWORK ===== -->
+                <div class="section-card" id="section-homework-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-book"></i> Homework Management</h3>
+                        <span class="sub-text">Assign homework</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="adminHomeworkStudent"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="adminHomeworkSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group full-width"><label>Title *</label><input type="text" id="adminHomeworkTitle" placeholder="e.g. Exercise 8.2" /></div>
+                        <div class="form-group full-width"><label>Description</label><textarea id="adminHomeworkDesc"></textarea></div>
+                        <div class="form-group"><label>Due Date</label><input type="date" id="adminHomeworkDue" /></div>
+                        <div class="form-group"><label>Assign to</label>
+                            <select id="adminHomeworkAssign"><option value="individual">Individual</option><option value="class">Entire Class</option></select>
+                        </div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddHomeworkBtn"><i class="fas fa-plus"></i> Assign Homework</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Homework</h4>
+                        <div id="adminHomeworkList"><div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== TESTS ===== -->
+                <div class="section-card" id="section-test-management">
+                    <div class="section-header">
+                        <h3><i class="fas fa-pencil-alt"></i> Test Management</h3>
+                        <span class="sub-text">Create and manage tests</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Student</label><select id="adminTestStudent"><option value="">Select Student</option></select></div>
+                        <div class="form-group"><label>Subject</label><select id="adminTestSubject"><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group"><label>Test Name *</label><input type="text" id="adminTestName" placeholder="e.g. Weekly Test 1" /></div>
+                        <div class="form-group"><label>Date</label><input type="date" id="adminTestDate" /></div>
+                        <div class="form-group"><label>Marks</label><input type="number" id="adminTestMarks" placeholder="e.g. 18" min="0" /></div>
+                        <div class="form-group"><label>Max Marks</label><input type="number" id="adminTestMax" placeholder="e.g. 20" min="1" value="20" /></div>
+                        <div class="form-group"><label>Assign to</label>
+                            <select id="adminTestAssign"><option value="individual">Individual</option><option value="class">Entire Class</option></select>
+                        </div>
+                        <div class="form-group full-width"><button class="btn-purple" id="adminAddTestBtn"><i class="fas fa-plus"></i> Add Test</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Tests</h4>
+                        <div id="adminTestList"><div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== SUBJECTS ===== -->
+                <div class="section-card" id="section-subjects">
+                    <div class="section-header">
+                        <h3><i class="fas fa-th-list"></i> Manage Subjects</h3>
+                        <span class="sub-text">Add subjects by class</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Class *</label><select id="adminSubjectClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Subject Name *</label><input type="text" id="adminSubjectName" placeholder="e.g. Physics" /></div>
+                        <div class="form-group"><label>Subject Code</label><input type="text" id="adminSubjectCode" placeholder="e.g. PHY101" /></div>
+                        <div class="form-group"><label>Teacher</label><input type="text" id="adminSubjectTeacher" placeholder="e.g. Mr. Sharma" /></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddSubjectBtn"><i class="fas fa-plus"></i> Add Subject</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Subjects</h4>
+                        <div id="adminSubjectList"><div class="empty-state"><i class="fas fa-th-list"></i> No subjects added yet.</div></div>
+                    </div>
+                </div>
+
+                <!-- ===== CHAPTERS ===== -->
+                <div class="section-card" id="section-chapters">
+                    <div class="section-header">
+                        <h3><i class="fas fa-layer-group"></i> Manage Chapters</h3>
+                        <span class="sub-text">Add chapters by subject and class</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Class *</label><select id="adminChapterClass"><option value="">Select Class</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option></select></div>
+                        <div class="form-group"><label>Subject *</label><select id="adminChapterSubject"><option value="">Select Subject</option><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Social Studies">Social Studies</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Computer Science">Computer Science</option></select></div>
+                        <div class="form-group"><label>Chapter Number</label><input type="text" id="adminChapterNumber" placeholder="e.g. 6" /></div>
+                        <div class="form-group"><label>Chapter Name *</label><input type="text" id="adminChapterName" placeholder="e.g. Lines & Angles" /></div>
+                        <div class="form-group full-width"><label>Description</label><textarea id="adminChapterDesc"></textarea></div>
+                        <div class="form-group full-width"><button class="btn-primary" id="adminAddChapterBtn"><i class="fas fa-plus"></i> Add Chapter</button></div>
+                    </div>
+                    <div style="margin-top:1.5rem; border-top:1px solid #eef2f6; padding-top:1.2rem;">
+                        <h4 style="font-size:0.95rem; color:#1e293b; margin-bottom:0.8rem;"><i class="fas fa-list"></i> Chapters</h4>
+                        <div id="adminChapterList"><div class="empty-state"><i class="fas fa-layer-group"></i> No chapters added yet.</div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer style="text-align:center; padding:2rem 0 0.5rem; font-size:0.8rem; color:#94a3b8; border-top:1px solid rgba(0,0,0,0.04); margin-top:1.5rem;">
+            &copy; 2026 <strong style="color:#1e293b;">Knowledge Nexus Academy</strong> · Admin Dashboard
+        </footer>
+    </div>
+
+    <div class="toast" id="toast"><i class="fas fa-circle-info"></i><span id="toastMessage">Message</span></div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== YOUR FIREBASE CONFIG =====
+            const firebaseConfig = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_PROJECT.firebaseapp.com",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_PROJECT.appspot.com",
+                messagingSenderId: "YOUR_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            // ===== DOM REFS =====
+            const adminName = document.getElementById('adminName');
+            const adminAvatar = document.getElementById('adminAvatar');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Stats
+            const statStudents = document.getElementById('statStudents');
+            const statTeachers = document.getElementById('statTeachers');
+            const statFees = document.getElementById('statFees');
+            const statTests = document.getElementById('statTests');
+            const statHomework = document.getElementById('statHomework');
+            const statNotices = document.getElementById('statNotices');
+
+            // Badges
+            const studentBadge = document.getElementById('studentBadge');
+            const teacherBadge = document.getElementById('teacherBadge');
+            const feeBadge = document.getElementById('feeBadge');
+            const hwBadge = document.getElementById('hwBadge');
+            const testBadge = document.getElementById('testBadge');
+            const noticeBadge = document.getElementById('noticeBadge');
+
+            let allStudents = [];
+            let allTeachers = [];
+            let allFees = [];
+            let allHomework = [];
+            let allTests = [];
+            let allNotices = [];
+            let allMaterials = [];
+            let allSubjects = [];
+            let allChapters = [];
+
+            let currentUserId = null;
+
+            // ===== TOAST =====
+            let toastTimeout = null;
+
+            function showToast(message, type = 'info') {
+                const toast = document.getElementById('toast');
+                const toastMsg = document.getElementById('toastMessage');
+                const icon = toast.querySelector('i');
+                toast.className = 'toast ' + type;
+                toastMsg.textContent = message;
+                if (type === 'success') icon.className = 'fas fa-check-circle';
+                else if (type === 'error') icon.className = 'fas fa-exclamation-circle';
+                else icon.className = 'fas fa-circle-info';
+                clearTimeout(toastTimeout);
+                toast.classList.add('show');
+                toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
+            }
+
+            // ===== NAVIGATION =====
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section-card');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(s => s.classList.remove('active'));
+                    document.getElementById('section-' + this.dataset.section).classList.add('active');
+                });
+            });
+
+            // ===== AUTH =====
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    currentUserId = user.uid;
+                    // Check if admin
+                    db.collection('users').doc(user.uid).get()
+                        .then(doc => {
+                            if (doc.exists && doc.data().role === 'admin') {
+                                // Load admin profile
+                                const name = doc.data().name || 'Admin';
+                                adminName.textContent = name;
+                                const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2)
+                                    .toUpperCase();
+                                adminAvatar.textContent = initials;
+                                loadAllData();
+                            } else {
+                                // Not admin - redirect to login
+                                showToast('Access denied. Admin only.', 'error');
+                                setTimeout(() => window.location.href = 'index.html', 1500);
+                            }
+                        })
+                        .catch(() => {
+                            showToast('Access denied. Admin only.', 'error');
+                            setTimeout(() => window.location.href = 'index.html', 1500);
+                        });
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                auth.signOut().then(() => {
+                    showToast('Logged out.', 'info');
+                    setTimeout(() => window.location.href = 'index.html', 500);
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // ===== LOAD ALL DATA =====
+            function loadAllData() {
+                if (!currentUserId) return;
+
+                // Students
+                db.collection('students').get()
+                    .then(snapshot => {
+                        allStudents = [];
+                        snapshot.forEach(doc => {
+                            allStudents.push({ uid: doc.id, ...doc.data() });
+                        });
+                        renderAdminStudentList();
+                        updateAdminDropdowns();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading students:', err));
+
+                // Teachers
+                db.collection('teachers').get()
+                    .then(snapshot => {
+                        allTeachers = [];
+                        snapshot.forEach(doc => {
+                            allTeachers.push({ uid: doc.id, ...doc.data() });
+                        });
+                        renderAdminTeacherList();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading teachers:', err));
+
+                // Fees
+                db.collection('fees').get()
+                    .then(snapshot => {
+                        allFees = [];
+                        snapshot.forEach(doc => {
+                            allFees.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminFeeList();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading fees:', err));
+
+                // Homework
+                db.collection('homework').get()
+                    .then(snapshot => {
+                        allHomework = [];
+                        snapshot.forEach(doc => {
+                            allHomework.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminHomeworkList();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading homework:', err));
+
+                // Tests
+                db.collection('tests').get()
+                    .then(snapshot => {
+                        allTests = [];
+                        snapshot.forEach(doc => {
+                            allTests.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminTestList();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading tests:', err));
+
+                // Notices
+                db.collection('notices').get()
+                    .then(snapshot => {
+                        allNotices = [];
+                        snapshot.forEach(doc => {
+                            allNotices.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminNoticeList();
+                        updateStats();
+                        updateBadges();
+                    })
+                    .catch(err => console.error('Error loading notices:', err));
+
+                // Materials
+                db.collection('materials').get()
+                    .then(snapshot => {
+                        allMaterials = [];
+                        snapshot.forEach(doc => {
+                            allMaterials.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminMaterialList();
+                    })
+                    .catch(err => console.error('Error loading materials:', err));
+
+                // Subjects
+                db.collection('subjects').get()
+                    .then(snapshot => {
+                        allSubjects = [];
+                        snapshot.forEach(doc => {
+                            allSubjects.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminSubjectList();
+                    })
+                    .catch(err => console.error('Error loading subjects:', err));
+
+                // Chapters
+                db.collection('chapters').get()
+                    .then(snapshot => {
+                        allChapters = [];
+                        snapshot.forEach(doc => {
+                            allChapters.push({ id: doc.id, ...doc.data() });
+                        });
+                        renderAdminChapterList();
+                    })
+                    .catch(err => console.error('Error loading chapters:', err));
+            }
+
+            // ===== UPDATE DROPDOWNS =====
+            function updateAdminDropdowns() {
+                const selects = ['adminFeeStudent', 'adminHomeworkStudent', 'adminTestStudent', 'adminNoticeTargetValue'];
+                selects.forEach(id => {
+                    const select = document.getElementById(id);
+                    if (!select) return;
+                    const currentVal = select.value;
+                    select.innerHTML = '<option value="">Select Student</option>';
+                    allStudents.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.uid;
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                        select.appendChild(opt);
+                    });
+                    if (currentVal) select.value = currentVal;
+                });
+            }
+
+            // ===== RENDER TEACHER LIST =====
+            function renderAdminTeacherList() {
+                const container = document.getElementById('adminTeacherList');
+                if (!container) return;
+                if (allTeachers.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-user-tie"></i> No teachers added yet.</div>';
+                    return;
+                }
+                let html =
+                    '<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Action</th></tr></thead><tbody>';
+                allTeachers.forEach(t => {
+                    html += `
+                            <tr>
+                                <td>${t.name || 'N/A'}</td>
+                                <td>${t.email || 'N/A'}</td>
+                                <td>${t.role || 'Teacher'}</td>
+                                <td class="actions">
+                                    ${t.uid !== currentUserId ? `<button class="danger admin-delete-teacher" data-uid="${t.uid}"><i class="fas fa-trash-alt"></i></button>` : '<span style="font-size:0.7rem;color:#94a3b8;">You</span>'}
+                                </td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-teacher').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const uid = this.dataset.uid;
+                        if (confirm('Delete this teacher?')) {
+                            deleteAdminTeacher(uid);
+                        }
+                    });
+                });
+            }
+
+            function deleteAdminTeacher(uid) {
+                db.collection('teachers').doc(uid).delete()
+                    .then(() => {
+                        allTeachers = allTeachers.filter(t => t.uid !== uid);
+                        renderAdminTeacherList();
+                        updateStats();
+                        updateBadges();
+                        showToast('Teacher removed.', 'info');
+                    })
+                    .catch(err => showToast('Error: ' + err.message, 'error'));
+            }
+
+            // ===== RENDER STUDENT LIST =====
+            function renderAdminStudentList() {
+                const container = document.getElementById('adminStudentList');
+                if (!container) return;
+                if (allStudents.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-user-graduate"></i> No students added yet.</div>';
+                    return;
+                }
+                let html =
+                    '<table class="data-table"><thead><tr><th>Name</th><th>Email</th><th>Class</th><th>Parent</th><th>Action</th></tr></thead><tbody>';
+                allStudents.forEach(s => {
+                    html += `
+                            <tr>
+                                <td>${s.name || 'N/A'}</td>
+                                <td>${s.email || 'N/A'}</td>
+                                <td>${s.class ? 'Class '+s.class : 'N/A'}</td>
+                                <td>${s.parentContact || 'N/A'}</td>
+                                <td class="actions"><button class="danger admin-delete-student" data-uid="${s.uid}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-student').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const uid = this.dataset.uid;
+                        if (confirm('Delete this student and all their data?')) {
+                            deleteAdminStudent(uid);
+                        }
+                    });
+                });
+            }
+
+            function deleteAdminStudent(uid) {
+                db.collection('students').doc(uid).delete()
+                    .then(() => {
+                        allStudents = allStudents.filter(s => s.uid !== uid);
+                        renderAdminStudentList();
+                        updateAdminDropdowns();
+                        updateStats();
+                        updateBadges();
+                        showToast('Student removed.', 'info');
+                    })
+                    .catch(err => showToast('Error: ' + err.message, 'error'));
+            }
+
+            // ===== RENDER FEE LIST =====
+            function renderAdminFeeList() {
+                const container = document.getElementById('adminFeeList');
+                if (!container) return;
+                if (allFees.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-rupee-sign"></i> No fee records yet.</div>';
+                    return;
+                }
+                const studentMap = {};
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
+                let html =
+                    '<table class="data-table"><thead><tr><th>Student</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+                allFees.forEach(f => {
+                    const name = studentMap[f.studentId] || 'Unknown';
+                    const statusColor = f.status === 'Paid' ? '#22c55e' : f.status === 'Partial' ? '#f59e0b' :
+                        '#ef4444';
+                    html += `
+                            <tr>
+                                <td>${name}</td>
+                                <td>${f.month}</td>
+                                <td>₹${f.amount}</td>
+                                <td style="font-weight:600; color:${statusColor};">${f.status}</td>
+                                <td class="actions"><button class="danger admin-delete-fee" data-id="${f.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-fee').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this fee record?')) {
+                            db.collection('fees').doc(id).delete()
+                                .then(() => { showToast('Fee record deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER HOMEWORK LIST =====
+            function renderAdminHomeworkList() {
+                const container = document.getElementById('adminHomeworkList');
+                if (!container) return;
+                if (allHomework.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-book"></i> No homework assigned yet.</div>';
+                    return;
+                }
+                const studentMap = {};
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
+                let html =
+                    '<table class="data-table"><thead><tr><th>Student</th><th>Title</th><th>Subject</th><th>Due</th><th>Action</th></tr></thead><tbody>';
+                allHomework.forEach(h => {
+                    const name = studentMap[h.studentId] || (h.isClass ? 'Class' : 'Unknown');
+                    html += `
+                            <tr>
+                                <td>${name}</td>
+                                <td>${h.title}</td>
+                                <td>${h.subject}</td>
+                                <td>${h.dueDate || 'N/A'}</td>
+                                <td class="actions"><button class="danger admin-delete-hw" data-id="${h.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-hw').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this homework?')) {
+                            db.collection('homework').doc(id).delete()
+                                .then(() => { showToast('Homework deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER TEST LIST =====
+            function renderAdminTestList() {
+                const container = document.getElementById('adminTestList');
+                if (!container) return;
+                if (allTests.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-pencil-alt"></i> No tests added yet.</div>';
+                    return;
+                }
+                const studentMap = {};
+                allStudents.forEach(s => studentMap[s.uid] = s.name);
+                let html =
+                    '<table class="data-table"><thead><tr><th>Student</th><th>Test</th><th>Subject</th><th>Marks</th><th>Date</th><th>Action</th></tr></thead><tbody>';
+                allTests.forEach(t => {
+                    const name = studentMap[t.studentId] || (t.isClass ? 'Class' : 'Unknown');
+                    const marksDisplay = t.marks !== null && t.marks !== undefined ? t.marks + '/' + t.maxMarks :
+                        'Pending';
+                    html += `
+                            <tr>
+                                <td>${name}</td>
+                                <td>${t.name}</td>
+                                <td>${t.subject}</td>
+                                <td>${marksDisplay}</td>
+                                <td>${t.date || 'N/A'}</td>
+                                <td class="actions"><button class="danger admin-delete-test" data-id="${t.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-test').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this test?')) {
+                            db.collection('tests').doc(id).delete()
+                                .then(() => { showToast('Test deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER NOTICE LIST =====
+            function renderAdminNoticeList() {
+                const container = document.getElementById('adminNoticeList');
+                if (!container) return;
+                if (allNotices.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-bullhorn"></i> No notices posted yet.</div>';
+                    return;
+                }
+                let html = '';
+                allNotices.forEach(n => {
+                    const targetDisplay = n.targetType === 'all' ? 'All Students' :
+                        n.targetType === 'class' ? 'Class ' + n.targetId :
+                        allStudents.find(s => s.uid === n.targetId)?.name || 'Individual';
+                    const date = n.createdAt ? new Date(n.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
+                    html += `
+                            <div style="padding:0.8rem 1rem; background:#f8fafc; border-radius:12px; border-left:4px solid #2563eb; margin-bottom:0.6rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+                                <div style="flex:1;">
+                                    <div style="font-weight:600; color:#0b1e3a;">${n.title}</div>
+                                    <div style="font-size:0.85rem; color:#475569; margin-top:0.1rem;">${n.message}</div>
+                                    <div style="font-size:0.65rem; color:#94a3b8; margin-top:0.2rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+                                        <span><i class="fas fa-users"></i> ${targetDisplay}</span>
+                                        <span><i class="far fa-calendar-alt"></i> ${date}</span>
+                                    </div>
+                                </div>
+                                <div><button class="admin-delete-notice" data-id="${n.id}" style="background:none; border:none; cursor:pointer; color:#94a3b8; padding:0.2rem 0.4rem;"><i class="fas fa-trash-alt"></i></button></div>
+                            </div>
+                        `;
+                });
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-notice').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this notice?')) {
+                            db.collection('notices').doc(id).delete()
+                                .then(() => { showToast('Notice deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER MATERIAL LIST =====
+            function renderAdminMaterialList() {
+                const container = document.getElementById('adminMaterialList');
+                if (!container) return;
+                if (allMaterials.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-book-open"></i> No study materials added yet.</div>';
+                    return;
+                }
+                let html =
+                    '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Title</th><th>Content</th><th>Action</th></tr></thead><tbody>';
+                allMaterials.forEach(m => {
+                    html += `
+                            <tr>
+                                <td>Class ${m.class}</td>
+                                <td>${m.subject}</td>
+                                <td>${m.title}</td>
+                                <td>${m.content ? m.content.substring(0, 60) + (m.content.length > 60 ? '...' : '') : '-'}</td>
+                                <td class="actions"><button class="danger admin-delete-material" data-id="${m.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-material').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this material?')) {
+                            db.collection('materials').doc(id).delete()
+                                .then(() => { showToast('Material deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER SUBJECT LIST =====
+            function renderAdminSubjectList() {
+                const container = document.getElementById('adminSubjectList');
+                if (!container) return;
+                if (allSubjects.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-th-list"></i> No subjects added yet.</div>';
+                    return;
+                }
+                let html =
+                    '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Code</th><th>Teacher</th><th>Action</th></tr></thead><tbody>';
+                allSubjects.forEach(s => {
+                    html += `
+                            <tr>
+                                <td>Class ${s.class}</td>
+                                <td>${s.name}</td>
+                                <td>${s.code || '-'}</td>
+                                <td>${s.teacher || '-'}</td>
+                                <td class="actions"><button class="danger admin-delete-subject" data-id="${s.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-subject').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this subject?')) {
+                            db.collection('subjects').doc(id).delete()
+                                .then(() => { showToast('Subject deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== RENDER CHAPTER LIST =====
+            function renderAdminChapterList() {
+                const container = document.getElementById('adminChapterList');
+                if (!container) return;
+                if (allChapters.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fas fa-layer-group"></i> No chapters added yet.</div>';
+                    return;
+                }
+                let html =
+                    '<table class="data-table"><thead><tr><th>Class</th><th>Subject</th><th>Chapter</th><th>Description</th><th>Action</th></tr></thead><tbody>';
+                allChapters.forEach(c => {
+                    html += `
+                            <tr>
+                                <td>Class ${c.class}</td>
+                                <td>${c.subject}</td>
+                                <td>${c.number ? 'Ch.' + c.number + ' ' : ''}${c.name}</td>
+                                <td>${c.description || '-'}</td>
+                                <td class="actions"><button class="danger admin-delete-chapter" data-id="${c.id}"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        `;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+
+                container.querySelectorAll('.admin-delete-chapter').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        if (confirm('Delete this chapter?')) {
+                            db.collection('chapters').doc(id).delete()
+                                .then(() => { showToast('Chapter deleted.', 'info');
+                                    loadAllData(); })
+                                .catch(err => showToast('Error: ' + err.message, 'error'));
+                        }
+                    });
+                });
+            }
+
+            // ===== UPDATE STATS =====
+            function updateStats() {
+                statStudents.textContent = allStudents.length;
+                statTeachers.textContent = allTeachers.length;
+                statFees.textContent = allFees.length;
+                statTests.textContent = allTests.length;
+                statHomework.textContent = allHomework.length;
+                statNotices.textContent = allNotices.length;
+
+                document.getElementById('dashStudents').textContent = allStudents.length;
+                document.getElementById('dashTeachers').textContent = allTeachers.length;
+                document.getElementById('dashFees').textContent = allFees.length;
+                document.getElementById('dashTests').textContent = allTests.length;
+                document.getElementById('dashHomework').textContent = allHomework.length;
+                document.getElementById('dashNotices').textContent = allNotices.length;
+
+                document.getElementById('dashDate').textContent = new Date().toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+            }
+
+            function updateBadges() {
+                studentBadge.textContent = allStudents.length;
+                teacherBadge.textContent = allTeachers.length;
+                feeBadge.textContent = allFees.length;
+                hwBadge.textContent = allHomework.length;
+                testBadge.textContent = allTests.length;
+                noticeBadge.textContent = allNotices.length;
+            }
+
+            // ===== CRUD OPERATIONS =====
+
+            // Add Teacher
+            document.getElementById('adminAddTeacherBtn').addEventListener('click', function() {
+                const name = document.getElementById('adminTeacherName').value.trim();
+                const email = document.getElementById('adminTeacherEmail').value.trim();
+                const password = document.getElementById('adminTeacherPassword').value.trim();
+                const role = document.getElementById('adminTeacherRole').value;
+
+                if (!name || !email || !password) {
+                    showToast('Please fill in all required fields.', 'error');
+                    return;
+                }
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters.', 'error');
+                    return;
+                }
+
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        return db.collection('teachers').doc(user.uid).set({
+                            name,
+                            email,
+                            role,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            db.collection('users').doc(user.uid).set({ role, email, name });
+                        });
+                    })
+                    .then(() => {
+                        showToast('Teacher added successfully!', 'success');
+                        document.getElementById('adminTeacherName').value = '';
+                        document.getElementById('adminTeacherEmail').value = '';
+                        document.getElementById('adminTeacherPassword').value = '';
+                        loadAllData();
+                    })
+                    .catch(err => {
+                        let msg = err.message;
+                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
+                        showToast('Error: ' + msg, 'error');
+                    });
+            });
+
+            // Add Student
+            document.getElementById('adminAddStudentBtn').addEventListener('click', function() {
+                const name = document.getElementById('adminStudentName').value.trim();
+                const email = document.getElementById('adminStudentEmail').value.trim();
+                const password = document.getElementById('adminStudentPassword').value.trim();
+                const classVal = document.getElementById('adminStudentClass').value;
+                const parent = document.getElementById('adminStudentParent').value.trim();
+                const address = document.getElementById('adminStudentAddress').value.trim();
+
+                if (!name || !email || !password || !classVal) {
+                    showToast('Please fill in all required fields (Name, Email, Password, Class).', 'error');
+                    return;
+                }
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters.', 'error');
+                    return;
+                }
+
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        return db.collection('students').doc(user.uid).set({
+                            name,
+                            email,
+                            class: classVal,
+                            parentContact: parent,
+                            address,
+                            role: 'student',
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            db.collection('users').doc(user.uid).set({ role: 'student', email, name });
+                        });
+                    })
+                    .then(() => {
+                        showToast('Student added successfully!', 'success');
+                        document.getElementById('adminStudentName').value = '';
+                        document.getElementById('adminStudentEmail').value = '';
+                        document.getElementById('adminStudentPassword').value = '';
+                        document.getElementById('adminStudentClass').value = '';
+                        document.getElementById('adminStudentParent').value = '';
+                        document.getElementById('adminStudentAddress').value = '';
+                        loadAllData();
+                    })
+                    .catch(err => {
+                        let msg = err.message;
+                        if (err.code === 'auth/email-already-in-use') msg = 'Email already in use.';
+                        showToast('Error: ' + msg, 'error');
+                    });
+            });
+
+            // Add Fee
+            document.getElementById('adminAddFeeBtn').addEventListener('click', function() {
+                const studentId = document.getElementById('adminFeeStudent').value;
+                const month = document.getElementById('adminFeeMonth').value;
+                const amount = document.getElementById('adminFeeAmount').value;
+                const status = document.getElementById('adminFeeStatus').value;
+
+                if (!studentId || !amount) {
+                    showToast('Please select a student and enter amount.', 'error');
+                    return;
+                }
+
+                db.collection('fees').add({
+                    studentId,
+                    month,
+                    amount: parseFloat(amount),
+                    status,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Fee record added!', 'success');
+                    document.getElementById('adminFeeAmount').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Material
+            document.getElementById('adminAddMaterialBtn').addEventListener('click', function() {
+                const classVal = document.getElementById('adminMaterialClass').value;
+                const subject = document.getElementById('adminMaterialSubject').value;
+                const title = document.getElementById('adminMaterialTitle').value.trim();
+                const content = document.getElementById('adminMaterialContent').value.trim();
+
+                if (!classVal || !title) {
+                    showToast('Please select a class and enter a title.', 'error');
+                    return;
+                }
+
+                db.collection('materials').add({
+                    class: classVal,
+                    subject,
+                    title,
+                    content,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Study material added!', 'success');
+                    document.getElementById('adminMaterialTitle').value = '';
+                    document.getElementById('adminMaterialContent').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Notice
+            document.getElementById('adminAddNoticeBtn').addEventListener('click', function() {
+                const targetType = document.getElementById('adminNoticeTarget').value;
+                const targetValue = document.getElementById('adminNoticeTargetValue').value;
+                const title = document.getElementById('adminNoticeTitle').value.trim();
+                const message = document.getElementById('adminNoticeMessage').value.trim();
+
+                if (!title || !message) {
+                    showToast('Please enter title and message.', 'error');
+                    return;
+                }
+
+                let targetId = null;
+                if (targetType === 'class') targetId = targetValue;
+                else if (targetType === 'individual') targetId = targetValue;
+
+                db.collection('notices').add({
+                    targetType,
+                    targetId,
+                    title,
+                    message,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Notice posted!', 'success');
+                    document.getElementById('adminNoticeTitle').value = '';
+                    document.getElementById('adminNoticeMessage').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Homework
+            document.getElementById('adminAddHomeworkBtn').addEventListener('click', function() {
+                const studentId = document.getElementById('adminHomeworkStudent').value;
+                const subject = document.getElementById('adminHomeworkSubject').value;
+                const title = document.getElementById('adminHomeworkTitle').value.trim();
+                const desc = document.getElementById('adminHomeworkDesc').value.trim();
+                const dueDate = document.getElementById('adminHomeworkDue').value;
+                const assignType = document.getElementById('adminHomeworkAssign').value;
+
+                if (!title) { showToast('Please enter a title.', 'error'); return; }
+                if (!studentId && assignType === 'individual') {
+                    showToast('Please select a student.', 'error');
+                    return;
+                }
+
+                db.collection('homework').add({
+                    studentId: assignType === 'individual' ? studentId : null,
+                    title,
+                    subject,
+                    description: desc,
+                    dueDate,
+                    isClass: assignType === 'class',
+                    done: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Homework assigned!', 'success');
+                    document.getElementById('adminHomeworkTitle').value = '';
+                    document.getElementById('adminHomeworkDesc').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Test
+            document.getElementById('adminAddTestBtn').addEventListener('click', function() {
+                const studentId = document.getElementById('adminTestStudent').value;
+                const subject = document.getElementById('adminTestSubject').value;
+                const name = document.getElementById('adminTestName').value.trim();
+                const date = document.getElementById('adminTestDate').value;
+                const marks = document.getElementById('adminTestMarks').value;
+                const maxMarks = document.getElementById('adminTestMax').value;
+                const assignType = document.getElementById('adminTestAssign').value;
+
+                if (!name) { showToast('Please enter a test name.', 'error'); return; }
+                if (!studentId && assignType === 'individual') {
+                    showToast('Please select a student.', 'error');
+                    return;
+                }
+
+                db.collection('tests').add({
+                    studentId: assignType === 'individual' ? studentId : null,
+                    name,
+                    subject,
+                    marks: marks ? parseFloat(marks) : null,
+                    maxMarks: parseFloat(maxMarks) || 20,
+                    date: date || '',
+                    isClass: assignType === 'class',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Test added!', 'success');
+                    document.getElementById('adminTestName').value = '';
+                    document.getElementById('adminTestMarks').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Subject
+            document.getElementById('adminAddSubjectBtn').addEventListener('click', function() {
+                const classVal = document.getElementById('adminSubjectClass').value;
+                const name = document.getElementById('adminSubjectName').value.trim();
+                const code = document.getElementById('adminSubjectCode').value.trim();
+                const teacher = document.getElementById('adminSubjectTeacher').value.trim();
+
+                if (!classVal || !name) {
+                    showToast('Please select a class and enter a subject name.', 'error');
+                    return;
+                }
+
+                db.collection('subjects').add({
+                    class: classVal,
+                    name,
+                    code,
+                    teacher,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Subject added!', 'success');
+                    document.getElementById('adminSubjectName').value = '';
+                    document.getElementById('adminSubjectCode').value = '';
+                    document.getElementById('adminSubjectTeacher').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // Add Chapter
+            document.getElementById('adminAddChapterBtn').addEventListener('click', function() {
+                const classVal = document.getElementById('adminChapterClass').value;
+                const subject = document.getElementById('adminChapterSubject').value;
+                const number = document.getElementById('adminChapterNumber').value.trim();
+                const name = document.getElementById('adminChapterName').value.trim();
+                const desc = document.getElementById('adminChapterDesc').value.trim();
+
+                if (!classVal || !subject || !name) {
+                    showToast('Please fill in Class, Subject, and Chapter Name.', 'error');
+                    return;
+                }
+
+                db.collection('chapters').add({
+                    class: classVal,
+                    subject,
+                    number,
+                    name,
+                    description: desc,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showToast('Chapter added!', 'success');
+                    document.getElementById('adminChapterName').value = '';
+                    document.getElementById('adminChapterNumber').value = '';
+                    document.getElementById('adminChapterDesc').value = '';
+                    loadAllData();
+                }).catch(err => showToast('Error: ' + err.message, 'error'));
+            });
+
+            // ===== NOTICE TARGET DYNAMIC =====
+            document.getElementById('adminNoticeTarget').addEventListener('change', function() {
+                const target = this.value;
+                const targetSelect = document.getElementById('adminNoticeTargetValue');
+                targetSelect.innerHTML = '';
+                if (target === 'all') {
+                    targetSelect.innerHTML = '<option value="all">All Students</option>';
+                } else if (target === 'class') {
+                    const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+                    classes.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = 'Class ' + c;
+                        targetSelect.appendChild(opt);
+                    });
+                } else if (target === 'individual') {
+                    allStudents.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.uid;
+                        opt.textContent = s.name + ' (' + (s.class ? 'Class ' + s.class : 'N/A') + ')';
+                        targetSelect.appendChild(opt);
+                    });
+                }
+            });
+
+            // ===== ESCAPE TOAST =====
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const toast = document.getElementById('toast');
+                    toast.classList.remove('show');
+                    clearTimeout(toastTimeout);
+                }
+            });
+
+            console.log('👑 Admin Dashboard loaded');
+            console.log('📌 Only accessible via localhost');
+
+        })();
+    </script>
+</body>
+</html>
